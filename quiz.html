@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiz por temas | Ciencias Naturales 1° año</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/main.js"></script>
+</head>
+<body data-page="Quiz">
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div>
+        <p class="kicker">Ciencias Naturales · 1° año</p>
+        <h1>Quiz por tema</h1>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar modo oscuro">Modo oscuro</button>
+    </div>
+    <nav class="main-nav container" aria-label="Navegación principal">
+      <a href="inicio.html">Inicio</a>
+      <a href="quimica.html">Química</a>
+      <a href="fisica.html">Física</a>
+      <a href="biologia.html">Biología</a>
+      <a href="quiz.html" aria-current="page">Quiz</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav>
+  </div>
+
+  <main id="contenido" class="container">
+    <section class="hero">
+      <h2>Preguntas de cada tema</h2>
+      <p>Responde preguntas por tema y acumula puntos. Puntaje perfecto: <strong>220 puntos</strong>. Desde nivel Oro puedes emitir un certificado estético con nombre, apellido y curso.</p>
+    </section>
+
+    <section class="panel">
+      <div class="quiz-scoreboard" aria-live="polite">
+        <p><strong>Puntos:</strong> <span id="quiz-score-points">0</span></p>
+        <p><strong>Aciertos:</strong> <span id="quiz-score-hits">0</span></p>
+        <p><strong>Intentos:</strong> <span id="quiz-score-attempts">0</span></p>
+        <p><strong>Premio:</strong> <span id="quiz-score-reward">Sin premio aun</span></p>
+      </div>
+      <p id="quiz-score-meta" class="quiz-meta"></p>
+
+      <label class="site-search-label" for="quiz-topic-select">Seleccionar tema</label>
+      <select id="quiz-topic-select" class="site-search-input" aria-label="Seleccionar tema del quiz"></select>
+
+      <div class="quiz-actions">
+        <button id="quiz-next-topic" class="btn" type="button">Siguiente tema</button>
+        <button id="quiz-reset-progress" class="btn" type="button">Reiniciar puntaje</button>
+      </div>
+
+      <div id="quiz-app" class="quiz-app"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Certificado de logro</h2>
+      <p>Completa tus datos para emitir el certificado cuando el sistema lo habilite por puntaje.</p>
+
+      <div class="certificate-form">
+        <label class="site-search-label" for="quiz-student-name">Nombre</label>
+        <input id="quiz-student-name" class="site-search-input" type="text" autocomplete="given-name">
+
+        <label class="site-search-label" for="quiz-student-surname">Apellido</label>
+        <input id="quiz-student-surname" class="site-search-input" type="text" autocomplete="family-name">
+
+        <label class="site-search-label" for="quiz-student-course">Curso</label>
+        <input id="quiz-student-course" class="site-search-input" type="text" placeholder="Ej: 1°1">
+
+        <label class="site-search-label" for="quiz-student-school">Colegio (opcional)</label>
+        <input id="quiz-student-school" class="site-search-input" type="text" placeholder="Ej: Colegio N° 34">
+      </div>
+
+      <p id="quiz-certificate-status" class="quiz-certificate-status"></p>
+      <div class="quiz-actions">
+        <button id="quiz-generate-certificate" class="btn" type="button">Generar certificado PDF</button>
+        <button id="quiz-save-leaderboard" class="btn" type="button">Registrar puntaje en podio</button>
+        <button id="quiz-clear-student" class="btn" type="button">Borrar mis datos</button>
+      </div>
+
+      <article class="certificate-preview">
+        <p class="certificate-preview-kicker">Vista previa</p>
+        <h3>Certificado de Logro</h3>
+        <p>Otorgado a <strong id="quiz-cert-name">Nombre y apellido</strong></p>
+        <p>Curso: <strong id="quiz-cert-course">Curso</strong></p>
+        <p>Colegio: <strong id="quiz-cert-school">No informado</strong></p>
+        <p>Nivel: <strong id="quiz-cert-reward">Sin premio aun</strong></p>
+        <p>Puntaje acumulado: <strong id="quiz-cert-points">0</strong></p>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h2>Podio Top 3</h2>
+      <p>Los tres mejores puntajes registrados en este dispositivo reciben medalla.</p>
+      <div id="quiz-leaderboard"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Seguimiento con fecha</h2>
+      <p>Registro local de actividad del estudiante: intentos por tema y certificados emitidos.</p>
+      <div class="quiz-actions">
+        <button id="quiz-clear-log" class="btn" type="button">Limpiar seguimiento</button>
+      </div>
+      <div id="quiz-activity-log"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Quiz alineado al programa de <code>Ciencias Naturales 1° año</code>.</p>
+    </div>
+  </footer>
+</body>
+</html>

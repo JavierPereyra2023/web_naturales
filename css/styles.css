@@ -41,6 +41,14 @@ body {
     var(--bg);
 }
 
+img,
+svg,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
 html[data-theme="dark"] body {
   background:
     radial-gradient(circle at 10% 8%, rgba(53, 182, 255, 0.22), transparent 34%),
@@ -614,6 +622,212 @@ html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
   margin-top: 0.5rem;
 }
 
+.quiz-app {
+  margin-top: 1rem;
+}
+
+.quiz-scoreboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.quiz-scoreboard p {
+  margin: 0;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 0.7rem;
+  background: var(--surface-2);
+  font-weight: 700;
+}
+
+#quiz-score-reward {
+  color: #39ff14;
+  text-shadow: 0 0 8px rgba(57, 255, 20, 0.72);
+}
+
+.quiz-meta {
+  margin: 0.2rem 0 0.9rem;
+  color: var(--muted);
+}
+
+.quiz-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.7rem;
+}
+
+.quiz-actions .btn {
+  margin-top: 0;
+}
+
+.certificate-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.55rem 0.75rem;
+  margin-top: 0.4rem;
+}
+
+.quiz-certificate-status {
+  margin: 0.8rem 0 0.3rem;
+  font-weight: 700;
+}
+
+.quiz-certificate-status.is-correct {
+  color: #39ff14;
+  text-shadow: 0 0 9px rgba(57, 255, 20, 0.7);
+}
+
+.quiz-certificate-status.is-wrong {
+  color: #ff6767;
+  text-shadow: 0 0 9px rgba(255, 103, 103, 0.62);
+}
+
+.certificate-preview {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #29d8ff;
+  border-radius: 0.95rem;
+  background:
+    linear-gradient(155deg, rgba(8, 30, 48, 0.86), rgba(14, 49, 78, 0.88)),
+    radial-gradient(circle at 90% 10%, rgba(41, 216, 255, 0.2), transparent 40%);
+  box-shadow: 0 0 18px rgba(41, 216, 255, 0.25);
+}
+
+.certificate-preview-kicker {
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8cecff;
+  font-weight: 700;
+}
+
+.certificate-preview h3 {
+  margin: 0 0 0.45rem;
+  color: #66e3ff;
+}
+
+.certificate-preview p {
+  margin: 0.25rem 0;
+}
+
+.quiz-leaderboard-list {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.quiz-leaderboard-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface-2);
+}
+
+.quiz-leaderboard-list li strong {
+  color: #ffd166;
+}
+
+.quiz-log-list {
+  list-style: none;
+  margin: 0.65rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.quiz-log-list li {
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface-2);
+}
+
+.quiz-log-list li p {
+  margin: 0.15rem 0;
+}
+
+.quiz-log-badge {
+  font-weight: 700;
+}
+
+.quiz-log-badge.is-correct {
+  color: #39ff14;
+}
+
+.quiz-log-badge.is-wrong {
+  color: #ff6767;
+}
+
+.quiz-question-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  padding: 1rem;
+}
+
+.quiz-label {
+  margin: 0 0 0.45rem;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.quiz-options {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 0.8rem;
+}
+
+.quiz-option {
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--border);
+  border-radius: 0.7rem;
+  padding: 0.65rem 0.75rem;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.quiz-option:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--primary) 55%, var(--border));
+}
+
+.quiz-option.is-correct {
+  border-color: #39ff14;
+  box-shadow: 0 0 12px rgba(57, 255, 20, 0.8), inset 0 0 10px rgba(57, 255, 20, 0.2);
+}
+
+.quiz-option.is-wrong {
+  border-color: #ff3131;
+  box-shadow: 0 0 12px rgba(255, 49, 49, 0.78), inset 0 0 10px rgba(255, 49, 49, 0.2);
+}
+
+.quiz-feedback {
+  margin: 0.85rem 0 0;
+  font-weight: 700;
+}
+
+.quiz-feedback.is-correct {
+  color: #39ff14;
+  text-shadow: 0 0 9px rgba(57, 255, 20, 0.75);
+}
+
+.quiz-feedback.is-wrong {
+  color: #ff4f4f;
+  text-shadow: 0 0 9px rgba(255, 79, 79, 0.75);
+}
+
 .state-controls {
   display: flex;
   flex-wrap: wrap;
@@ -676,6 +890,34 @@ html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
 
 .unit-card h3 {
   margin-top: 0;
+}
+
+/* En Quimica y Fisica: 4 cards arriba y 3 abajo centradas (solo desktop amplio) */
+@media (min-width: 1200px) {
+  body[data-page="Química"] .unit-grid,
+  body[data-page="Física"] .unit-grid {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+
+  body[data-page="Química"] .unit-grid .unit-card,
+  body[data-page="Física"] .unit-grid .unit-card {
+    grid-column: span 2;
+  }
+
+  body[data-page="Química"] .unit-grid .unit-card:nth-child(5),
+  body[data-page="Física"] .unit-grid .unit-card:nth-child(5) {
+    grid-column: 2 / span 2;
+  }
+
+  body[data-page="Química"] .unit-grid .unit-card:nth-child(6),
+  body[data-page="Física"] .unit-grid .unit-card:nth-child(6) {
+    grid-column: 4 / span 2;
+  }
+
+  body[data-page="Química"] .unit-grid .unit-card:nth-child(7),
+  body[data-page="Física"] .unit-grid .unit-card:nth-child(7) {
+    grid-column: 6 / span 2;
+  }
 }
 
 .study-table {
@@ -934,8 +1176,65 @@ html[data-theme="dark"] strong {
   color: var(--primary);
 }
 
+/* Ajustes de grilla para desktop mediano y tablet grande */
+@media (max-width: 1199px) {
+  .unit-grid,
+  .topic-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Responsive: ajustes para tablets */
+@media (max-width: 1024px) {
+  .header-inner {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .weather-widget {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .weather-text {
+    min-width: 0;
+  }
+
+  .theme-toggle {
+    margin-left: auto;
+  }
+
+  .main-nav {
+    justify-content: center;
+  }
+}
+
+/* Tablet vertical y moviles grandes */
+@media (max-width: 768px) {
+  .cards,
+  .unit-grid,
+  .topic-links {
+    grid-template-columns: 1fr;
+  }
+
+  .panel,
+  .hero,
+  .card {
+    padding: 1rem;
+  }
+}
+
 /* Responsive: mejoras para móviles */
 @media (max-width: 700px) {
+  .container {
+    width: min(1080px, 94%);
+  }
+
   .header-inner {
     flex-direction: column;
     align-items: flex-start;
@@ -950,7 +1249,19 @@ html[data-theme="dark"] strong {
     align-self: flex-end;
   }
 
+  .main-nav a {
+    flex: 1 1 calc(50% - 0.5rem);
+    text-align: center;
+  }
+
+  .weather-line {
+    font-size: 0.74rem;
+  }
+
   table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     font-size: 0.85rem;
   }
 
@@ -972,6 +1283,46 @@ html[data-theme="dark"] strong {
     right: 1rem;
     padding: 0.6rem 0.8rem;
     font-size: 0.9rem;
+  }
+}
+
+/* Responsive: telefonos angostos */
+@media (max-width: 430px) {
+  .container {
+    width: 95%;
+  }
+
+  .header-inner h1 {
+    font-size: 1.2rem;
+  }
+
+  .main-nav a {
+    flex: 1 1 100%;
+  }
+
+  .btn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .panel,
+  .hero,
+  .card,
+  .unit-card,
+  .topic-card {
+    padding: 0.85rem;
+  }
+
+  .quiz-scoreboard {
+    grid-template-columns: 1fr;
+  }
+
+  .quiz-actions .btn {
+    width: 100%;
+  }
+
+  .certificate-form {
+    grid-template-columns: 1fr;
   }
 }
 
