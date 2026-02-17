@@ -1,0 +1,202 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hongos heterótrofos | Biología</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/main.js"></script>
+</head>
+<body data-page="Hongos heterótrofos" data-section="Biología" data-section-href="biologia.html">
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div>
+        <p class="kicker">Ciencias Naturales · 1° año</p>
+        <h1>Biología: Hongos heterótrofos por absorción</h1>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar modo oscuro">Modo oscuro</button>
+    </div>
+    <nav class="main-nav container" aria-label="Navegación principal">
+      <a href="inicio.html">Inicio</a>
+      <a href="quimica.html">Química</a>
+      <a href="fisica.html">Física</a>
+      <a href="biologia.html" aria-current="page">Biología</a>
+    </nav>
+  </header>
+
+  <div class="container"><nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav></div>
+
+  <main id="contenido" class="container">
+    <section class="panel">
+      <h2>Nutrición por absorción</h2>
+      <p class="tag">Programa representado: hongos como sistemas heterótrofos por absorción; estructuras de nutrición, relación y reproducción; importancia para la actividad humana y el ambiente.</p>
+      <p>Los hongos no ingieren alimento como los animales. Liberan enzimas sobre el sustrato y luego absorben moléculas simples. Por eso se los considera heterótrofos por absorción.</p>
+      <p>Este tipo de nutrición explica su papel como descomponedores y su impacto en alimentos, salud y ambiente.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Estructura básica de los hongos</h2>
+      <ul>
+        <li><strong>Hifas:</strong> filamentos que forman el cuerpo del hongo.</li>
+        <li><strong>Micelio:</strong> red de hifas que crece en el sustrato.</li>
+        <li><strong>Cuerpo fructífero:</strong> parte visible en algunos hongos (setas).</li>
+        <li><strong>Esporas:</strong> células reproductivas de dispersión.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Tipos de vida de los hongos</h2>
+      <table class="study-table">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Descripción</th>
+            <th>Ejemplo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Saprófitos</td>
+            <td>Se alimentan de materia orgánica muerta.</td>
+            <td>Hongos del suelo o troncos en descomposición.</td>
+          </tr>
+          <tr>
+            <td>Parásitos</td>
+            <td>Obtienen nutrientes de un hospedador vivo.</td>
+            <td>Hongos que causan micosis o enfermedades de plantas.</td>
+          </tr>
+          <tr>
+            <td>Simbiontes</td>
+            <td>Relación de beneficio mutuo con otro organismo.</td>
+            <td>Micorrizas y líquenes.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>Reproducción en hongos</h2>
+      <p>Puede ser asexual (fragmentación, gemación, esporas asexuales) y sexual (esporas sexuales). La dispersión por aire, agua o animales facilita su expansión.</p>
+      <p>Cuando el ambiente presenta humedad y temperatura adecuadas, el crecimiento fúngico puede ser muy rápido.</p>
+    </section>
+
+    <section class="panel">
+      <h2>SVG dinámico: roles de los hongos</h2>
+      <div class="diagram-switcher" data-switcher data-initial="descomponedor">
+        <div class="state-controls" role="group" aria-label="Rol de los hongos">
+          <button class="chip-btn" type="button" data-target="descomponedor" data-description="Descomponedor: transforma materia orgánica." aria-pressed="false">Descomponedor</button>
+          <button class="chip-btn" type="button" data-target="beneficio" data-description="Puede ser útil para actividades humanas." aria-pressed="false">Beneficio</button>
+          <button class="chip-btn" type="button" data-target="perjuicio" data-description="También puede causar efectos perjudiciales." aria-pressed="false">Perjuicio</button>
+        </div>
+        <div class="state-figure">
+          <svg viewBox="0 0 640 260" width="100%" role="img" aria-label="Roles de hongos">
+            <rect x="12" y="12" width="616" height="236" rx="12" fill="none" stroke="currentColor"/>
+            <g data-panel="descomponedor">
+              <ellipse cx="130" cy="95" rx="35" ry="18" fill="#9be4b8"/>
+              <rect x="120" y="95" width="20" height="60" fill="#2e8b57"/>
+              <line x1="130" y1="155" x2="95" y2="190" stroke="#2e8b57"/>
+              <line x1="130" y1="155" x2="165" y2="190" stroke="#2e8b57"/>
+            </g>
+            <g data-panel="beneficio" visibility="hidden">
+              <ellipse cx="130" cy="95" rx="35" ry="18" fill="#9be4b8"/>
+              <rect x="120" y="95" width="20" height="60" fill="#2e8b57"/>
+              <circle cx="205" cy="130" r="22" fill="#f6b73c"/>
+            </g>
+            <g data-panel="perjuicio" visibility="hidden">
+              <ellipse cx="130" cy="95" rx="35" ry="18" fill="#9be4b8"/>
+              <rect x="120" y="95" width="20" height="60" fill="#2e8b57"/>
+              <polygon points="190,110 220,160 160,160" fill="#163b28"/>
+            </g>
+            <text x="280" y="115" fill="currentColor">Los hongos cumplen funciones clave</text>
+            <text x="280" y="145" fill="currentColor">en ambiente y actividad humana.</text>
+          </svg>
+        </div>
+        <p class="diagram-caption" data-status aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Importancia ecológica y social</h2>
+      <div class="unit-grid">
+        <article class="unit-card">
+          <h3>Importancia ecológica</h3>
+          <ul>
+            <li>Reciclan materia orgánica y nutrientes.</li>
+            <li>Contribuyen al equilibrio de suelos y ecosistemas.</li>
+            <li>Participan en asociaciones simbióticas con plantas.</li>
+          </ul>
+        </article>
+        <article class="unit-card">
+          <h3>Importancia para las personas</h3>
+          <ul>
+            <li>Producción de pan, quesos y otros alimentos.</li>
+            <li>Obtención de antibióticos y compuestos útiles.</li>
+            <li>También pueden causar enfermedades y pérdidas agrícolas.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Prevención de riesgos por hongos</h2>
+      <ul>
+        <li>Evitar humedad persistente en ambientes cerrados.</li>
+        <li>Conservar alimentos en condiciones adecuadas.</li>
+        <li>No consumir alimentos con moho visible sin evaluación adecuada.</li>
+        <li>Consultar al sistema de salud ante sospecha de micosis.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <div class="activity">
+        <h4>Actividad breve</h4>
+        <p>Escribí un ejemplo de acción beneficiosa y otra perjudicial de hongos en la vida diaria.</p>
+      </div>
+
+      <div class="activity">
+        <h4>Actividad de observación</h4>
+        <p>Registrá durante una semana en qué lugares de tu casa o escuela aparece moho y proponé medidas para prevenir su crecimiento.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Actividades didácticas del tema</h2>
+
+      <h3>1) Cuadro a completar: hongos</h3>
+      <table class="study-table">
+        <thead>
+          <tr>
+            <th>Aspecto</th>
+            <th>Respuesta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Tipo de nutrición</td><td>________</td></tr>
+          <tr><td>Efecto beneficioso</td><td>________</td></tr>
+          <tr><td>Efecto perjudicial</td><td>________</td></tr>
+          <tr><td>Rol ecológico</td><td>________</td></tr>
+        </tbody>
+      </table>
+
+      <h3>2) Verdadero o Falso</h3>
+      <ol>
+        <li>Los hongos se nutren por absorción. (V/F)</li>
+        <li>No tienen importancia ambiental. (V/F)</li>
+        <li>Pueden generar efectos positivos y negativos. (V/F)</li>
+        <li>Todos los hongos son parásitos. (V/F)</li>
+      </ol>
+
+      <h3>3) Cuestionario breve</h3>
+      <ol>
+        <li>¿Cómo participan los hongos en la materia orgánica?</li>
+        <li>Da un ejemplo de su impacto en actividad humana.</li>
+        <li>¿Qué diferencia hay entre saprófito, parásito y simbionte?</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container"><p>Tema de Biología basado en <code>programa_1anio.txt</code>.</p></div></footer>
+</body>
+</html>

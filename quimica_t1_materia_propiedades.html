@@ -1,0 +1,153 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>La materia y sus propiedades | Química</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/main.js"></script>
+</head>
+<body data-page="Materia y propiedades" data-section="Química" data-section-href="quimica.html">
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div><p class="kicker">Ciencias Naturales · 1° año</p><h1>Química: La materia y sus propiedades</h1></div>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar modo oscuro">Modo oscuro</button>
+    </div>
+    <nav class="main-nav container" aria-label="Navegación principal">
+      <a href="inicio.html">Inicio</a><a href="quimica.html" aria-current="page">Química</a><a href="fisica.html">Física</a><a href="biologia.html">Biología</a>
+    </nav>
+  </header>
+  <div class="container"><nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav></div>
+
+  <main id="contenido" class="container">
+    <section class="panel">
+      <h2>¿Qué significa estudiar propiedades?</h2>
+      <p class="tag">Programa representado: propiedades organolépticas, físicas y químicas: color, olor, dureza, masa, volumen, solubilidad, conductividad térmica y eléctrica.</p>
+      <p>Cuando en Química hablamos de <strong>materia</strong>, nos referimos a todo aquello que tiene masa y ocupa un lugar en el espacio. Desde tu mochila hasta el aire que respirás, ¡todo es materia! Pero para estudiarla científicamente, no alcanza con simplemente "mirar" un objeto: necesitamos describirlo con criterios claros y comparables que cualquier persona pueda entender de la misma manera. Esos criterios son las <strong>propiedades</strong>.</p>
+
+      <h3>Los tres tipos de propiedades</h3>
+
+      <h4>1. Propiedades organolépticas</h4>
+      <p>Son las que percibimos directamente con nuestros sentidos. Incluyen el <strong>color</strong> (¿es rojo, transparente, plateado?), el <strong>olor</strong> (¿tiene aroma a menta, a vinagre, o es inodoro?), el <strong>sabor</strong> y la <strong>textura</strong>. Por ejemplo, sabemos que el azúcar es blanca y dulce, mientras que la sal es blanca y salada. Aunque ambas parecen iguales a simple vista, el sabor nos ayuda a distinguirlas.</p>
+      <p><em>Importante:</em> En el laboratorio escolar NUNCA probamos ni olemos directamente las sustancias sin autorización del docente, por cuestiones de seguridad.</p>
+
+      <h4>2. Propiedades físicas</h4>
+      <p>Son las que podemos <strong>medir con instrumentos</strong> y expresar con números y unidades. Las más importantes son:</p>
+      <ul>
+        <li><strong>Masa:</strong> cantidad de materia que tiene un objeto. Se mide con balanza (en gramos o kilogramos).</li>
+        <li><strong>Volumen:</strong> espacio que ocupa un objeto. Se mide en litros (L), mililitros (mL) o centímetros cúbicos (cm³).</li>
+        <li><strong>Dureza:</strong> resistencia de un material a ser rayado. Por ejemplo, el diamante es extremadamente duro, mientras que la tiza es blanda.</li>
+        <li><strong>Solubilidad:</strong> capacidad de una sustancia para disolverse en otra (generalmente en agua). El azúcar es soluble en agua, pero la arena no.</li>
+        <li><strong>Conductividad térmica:</strong> capacidad de transmitir calor. Los metales son buenos conductores; por eso la cuchara de metal se calienta cuando la dejás en el mate caliente.</li>
+        <li><strong>Conductividad eléctrica:</strong> capacidad de permitir el paso de la corriente eléctrica. Los cables son de cobre porque conduce muy bien la electricidad.</li>
+      </ul>
+
+      <h4>3. Propiedades químicas</h4>
+      <p>Describen la capacidad de una sustancia para <strong>transformarse en otras sustancias nuevas</strong> mediante reacciones químicas. Por ejemplo, el hierro puede oxidarse (formar óxido de hierro o "herrumbre"), la madera puede quemarse, el bicarbonato reacciona con el vinagre produciendo burbujas de gas. Estas transformaciones no solo cambian la apariencia, sino que crean sustancias completamente diferentes con propiedades distintas.</p>
+
+      <p><strong>¿Por qué es importante conocer las propiedades?</strong> Porque nos permiten identificar sustancias, compararlas y elegir los materiales adecuados para cada uso. Cuando dos estudiantes observan el mismo material y utilizan estas propiedades, llegarán a descripciones muy parecidas, lo cual mejora la comunicación científica.</p>
+    </section>
+
+    <section class="panel">
+      <h2>SVG dinámico: tipos de propiedades</h2>
+      <div class="diagram-switcher" data-switcher data-initial="organolepticas">
+        <div class="state-controls" role="group" aria-label="Seleccionar tipo de propiedad">
+          <button class="chip-btn" type="button" data-target="organolepticas" data-description="Organolépticas: se reconocen con los sentidos, como color y olor." aria-pressed="false">Organolépticas</button>
+          <button class="chip-btn" type="button" data-target="fisicas" data-description="Físicas: se miden, como masa, volumen, dureza, solubilidad y conductividad." aria-pressed="false">Físicas</button>
+          <button class="chip-btn" type="button" data-target="quimicas" data-description="Químicas: describen cómo una sustancia puede cambiar y formar otra." aria-pressed="false">Químicas</button>
+        </div>
+        <div class="state-figure">
+          <svg viewBox="0 0 620 240" width="100%" role="img" aria-label="Diagrama de tipos de propiedades">
+            <rect x="12" y="12" width="596" height="216" rx="12" fill="none" stroke="currentColor" />
+            <g data-panel="organolepticas">
+              <circle cx="120" cy="120" r="44" fill="#83cfa2" /><text x="95" y="126" fill="#102115">Sentidos</text>
+              <text x="210" y="100" fill="currentColor">Color</text><text x="210" y="130" fill="currentColor">Olor</text>
+            </g>
+            <g data-panel="fisicas" visibility="hidden">
+              <rect x="70" y="75" width="95" height="95" fill="#6dbb8d" /><text x="82" y="128" fill="#102115">Medible</text>
+              <text x="210" y="78" fill="currentColor">Masa y volumen</text><text x="210" y="108" fill="currentColor">Dureza</text><text x="210" y="138" fill="currentColor">Solubilidad</text><text x="210" y="168" fill="currentColor">Conductividad</text>
+            </g>
+            <g data-panel="quimicas" visibility="hidden">
+              <polygon points="95,165 145,65 195,165" fill="#59a57a" /><text x="106" y="195" fill="#102115">Cambio</text>
+              <text x="230" y="110" fill="currentColor">Capacidad de transformarse</text><text x="230" y="140" fill="currentColor">en nuevas sustancias</text>
+            </g>
+          </svg>
+        </div>
+        <p class="diagram-caption" data-status aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Ejemplos cotidianos argentinos</h2>
+
+      <h3>En la cocina</h3>
+      <p>🧉 <strong>El mate:</strong> La pava (generalmente de metal) conduce el calor rápidamente, por eso el agua hierve más rápido. El mango de plástico o madera conduce menos el calor y te protege de quemarte. Esta diferencia se debe a la <strong>conductividad térmica</strong>.</p>
+      <p>🧂 <strong>Sal y azúcar:</strong> Cuando preparás agua con sal para las pastas o agregás azúcar al mate, ambas desaparecen a la vista. Esto se debe a la <strong>solubilidad</strong>: ambas sustancias se disuelven en agua. En cambio, si tirás arena en agua, no se disuelve: es insoluble.</p>
+      <p>🍋 <strong>El limón y el bicarbonato:</strong> Si mezclás jugo de limón (ácido cítrico) con bicarbonato de sodio, se produce una reacción química que genera burbujas de gas (dióxido de carbono). Esta es una <strong>propiedad química</strong>: se forman sustancias nuevas.</p>
+
+      <h3>En la escuela</h3>
+      <p>✏️ <strong>Lápiz y goma:</strong> La mina del lápiz (grafito) deja marca en el papel porque es blanda y se desprende fácilmente. La goma borra porque tiene la textura adecuada para "atrapar" las partículas de grafito sin romper la hoja. Aquí intervienen la <strong>dureza</strong> y la <strong>textura</strong>.</p>
+      <p>📏 <strong>Regla de plástico y regla de metal:</strong> La regla de plástico es aislante eléctrico (no conduce electricidad), mientras que una regla de aluminio sí conduciría. Por eso los cables eléctricos tienen un recubrimiento de plástico.</p>
+
+      <h3>En la vida diaria</h3>
+      <p>🚲 <strong>Bicicletas y oxidación:</strong> Las bicicletas que se dejan a la intemperie se oxidan (se ponen marrones y se descascaran) porque el hierro reacciona con el oxígeno del aire y la humedad. Esta es una <strong>propiedad química</strong> del hierro. Por eso se pintan: la pintura actúa como barrera protectora.</p>
+      <p>💡 <strong>Cables de cobre:</strong> Los cables eléctricos son de cobre porque este metal tiene excelente <strong>conductividad eléctrica</strong>. El cobre permite que la electricidad llegue desde el medidor hasta tus enchufes con poca pérdida de energía.</p>
+
+      <div class="activity">
+        <h4>Actividad práctica N°1: Tabla de propiedades</h4>
+        <p><strong>Materiales necesarios:</strong> Tres objetos de tu casa (por ejemplo: cuchara de metal, lápiz de madera, botella de plástico).</p>
+        <p><strong>Consigna:</strong> Completá una tabla con las siguientes columnas para cada material:</p>
+        <ul>
+          <li>Nombre del objeto</li>
+          <li>Color (describe lo que ves)</li>
+          <li>¿Tiene olor? (sí/no, y si tiene, ¿a qué huele?)</li>
+          <li>Textura al tacto (liso, rugoso, áspero...)</li>
+          <li>¿Es duro o blando? (probá hacerle una marca con la uña)</li>
+          <li>¿Conduce el calor? (acercalo a algo tibio y sentí si se calienta rápido)</li>
+          <li>¿Se disolvería en agua? (pensalo y anotá tu hipótesis)</li>
+        </ul>
+        <p><strong>Reflexión:</strong> ¿Qué propiedades te ayudarían a identificar el material si tuvieras los ojos vendados? ¿Por qué cada objeto está hecho de ese material y no de otro?</p>
+      </div>
+
+      <div class="activity">
+        <h4>Actividad práctica N°2: Experimento de solubilidad</h4>
+        <p><strong>Materiales:</strong> 4 vasos con agua, sal, azúcar, aceite, arena.</p>
+        <p><strong>Procedimiento:</strong></p>
+        <ol>
+          <li>Agregá una cucharada de sal en el primer vaso y revolvé. ¿Qué observás?</li>
+          <li>Hacé lo mismo con azúcar en el segundo vaso.</li>
+          <li>Agregá una cucharada de aceite en el tercer vaso.</li>
+          <li>Agregá arena en el cuarto vaso.</li>
+        </ol>
+        <p><strong>Preguntas:</strong></p>
+        <ul>
+          <li>¿Cuáles sustancias son solubles en agua? ¿Cuáles son insolubles?</li>
+          <li>¿El aceite se mezcla con el agua o queda separado?</li>
+          <li>¿Qué propiedad estás estudiando en este experimento?</li>
+        </ul>
+      </div>
+
+      <div class="activity">
+        <h4>Desafío para investigar</h4>
+        <p>🔍 <strong>Pregunta problema:</strong> ¿Por qué el alcohol se usa para limpiar heridas y el agua no tiene el mismo efecto desinfectante?</p>
+        <p><em>Pista:</em> Pensá en las propiedades químicas del alcohol (su capacidad para destruir microorganismos) versus las propiedades del agua.</p>
+      </div>
+    </section>
+      <section class="panel">
+      <!-- actividades-didacticas -->
+      <h2>Actividades didacticas del tema</h2>
+      <h3>1) Cuadro a completar: propiedades de materiales</h3>
+      <table class="study-table"><thead><tr><th>Material</th><th>Propiedad organoleptica</th><th>Propiedad fisica</th><th>Observacion</th></tr></thead><tbody><tr><td>________</td><td>________</td><td>________</td><td>________</td></tr><tr><td>________</td><td>________</td><td>________</td><td>________</td></tr></tbody></table>
+      <h3>2) Verdadero o Falso</h3>
+      <ol><li>La masa y el volumen son propiedades utiles para describir materia. (V/F)</li><li>Color y olor son propiedades organolepticas. (V/F)</li><li>Todas las sustancias conducen igual el calor. (V/F)</li></ol>
+      <h3>3) Cuestionario breve</h3>
+      <ol><li>¿Por que sirve medir propiedades para comparar materiales?</li><li>Da un ejemplo cotidiano de conductividad termica.</li></ol>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container"><p>Tema de Química basado en <code>programa_1anio.txt</code>.</p></div></footer>
+</body>
+</html>
+
+

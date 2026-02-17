@@ -1,0 +1,221 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ESI: alimentación saludable | Biología</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/main.js"></script>
+</head>
+<body data-page="ESI alimentación" data-section="Biología" data-section-href="biologia.html">
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div>
+        <p class="kicker">Ciencias Naturales · 1° año</p>
+        <h1>Biología: ESI y alimentación saludable</h1>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar modo oscuro">Modo oscuro</button>
+    </div>
+    <nav class="main-nav container" aria-label="Navegación principal">
+      <a href="inicio.html">Inicio</a>
+      <a href="quimica.html">Química</a>
+      <a href="fisica.html">Física</a>
+      <a href="biologia.html" aria-current="page">Biología</a>
+    </nav>
+  </header>
+
+  <div class="container"><nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav></div>
+
+  <main id="contenido" class="container">
+    <section class="panel">
+      <h2>Alimentos, nutrientes y calorías vacías</h2>
+      <p class="tag">Programa representado: diferencia entre alimentos y nutrientes; alimentación saludable; calorías vacías.</p>
+      <p><strong>Alimento</strong> es lo que comemos. <strong>Nutriente</strong> es la sustancia que ese alimento aporta al cuerpo para crecer, moverse, reparar tejidos y mantener funciones vitales.</p>
+      <p>Cuando hablamos de <strong>calorías vacías</strong>, nos referimos a productos con mucha energía pero con escaso aporte de nutrientes de calidad.</p>
+    </section>
+
+    <section class="panel">
+      <h2>¿Qué necesita el cuerpo para funcionar?</h2>
+      <table class="study-table">
+        <thead>
+          <tr>
+            <th>Tipo de nutriente</th>
+            <th>Función principal</th>
+            <th>Ejemplos de alimentos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Hidratos de carbono</td>
+            <td>Aporte energético rápido.</td>
+            <td>Pan, arroz, papa, frutas.</td>
+          </tr>
+          <tr>
+            <td>Proteínas</td>
+            <td>Construcción y reparación de tejidos.</td>
+            <td>Huevos, legumbres, carnes, lácteos.</td>
+          </tr>
+          <tr>
+            <td>Lípidos</td>
+            <td>Reserva energética y funciones estructurales.</td>
+            <td>Aceites, frutos secos, palta.</td>
+          </tr>
+          <tr>
+            <td>Vitaminas y minerales</td>
+            <td>Regulación de procesos del organismo.</td>
+            <td>Frutas, verduras, semillas.</td>
+          </tr>
+          <tr>
+            <td>Agua</td>
+            <td>Transporte de sustancias y regulación térmica.</td>
+            <td>Agua segura y alimentos con alto contenido hídrico.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>Criterios de alimentación saludable</h2>
+      <ul>
+        <li>Variedad de grupos de alimentos.</li>
+        <li>Presencia diaria de frutas y verduras.</li>
+        <li>Preferencia por agua como bebida habitual.</li>
+        <li>Disminución de ultraprocesados con azúcares, grasas y sodio en exceso.</li>
+        <li>Porciones acordes a edad, actividad y contexto.</li>
+      </ul>
+      <p>Desde ESI, hablar de alimentación también implica respeto por la diversidad corporal, hábitos sin estigmas y toma de decisiones informadas.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Teoría aplicada: calidad nutricional en la vida diaria</h2>
+      <p>Mejorar la alimentación no requiere cambios extremos de un día para otro. Se puede avanzar con estrategias realistas:</p>
+      <ul>
+        <li>Agregar una fruta a la merienda.</li>
+        <li>Reemplazar bebidas azucaradas por agua en parte de la semana.</li>
+        <li>Incluir colores variados en el plato para sumar micronutrientes.</li>
+      </ul>
+      <p>La clave es sostener hábitos posibles en el tiempo.</p>
+    </section>
+
+    <section class="panel">
+      <h2>SVG dinámico: comparar elecciones</h2>
+      <div class="diagram-switcher" data-switcher data-initial="balanceada">
+        <div class="state-controls" role="group" aria-label="Tipo de colación">
+          <button class="chip-btn" type="button" data-target="balanceada" data-description="Colación con mejor calidad nutricional." aria-pressed="false">Balanceada</button>
+          <button class="chip-btn" type="button" data-target="vacias" data-description="Predominio de calorías vacías." aria-pressed="false">Calorías vacías</button>
+          <button class="chip-btn" type="button" data-target="mixta" data-description="Combinación: se puede mejorar con cambios graduales." aria-pressed="false">Mixta</button>
+        </div>
+        <div class="state-figure">
+          <svg viewBox="0 0 640 260" width="100%" role="img" aria-label="Elecciones alimentarias">
+            <rect x="12" y="12" width="616" height="236" rx="12" fill="none" stroke="currentColor"/>
+            <g data-panel="balanceada">
+              <rect x="85" y="95" width="50" height="70" fill="#9be4b8"/>
+              <circle cx="170" cy="130" r="25" fill="#2e8b57"/>
+            </g>
+            <g data-panel="vacias" visibility="hidden">
+              <rect x="85" y="95" width="50" height="70" fill="#f6b73c"/>
+              <rect x="150" y="95" width="50" height="70" fill="#f6b73c"/>
+            </g>
+            <g data-panel="mixta" visibility="hidden">
+              <rect x="85" y="95" width="50" height="70" fill="#9be4b8"/>
+              <rect x="150" y="95" width="50" height="70" fill="#f6b73c"/>
+            </g>
+            <text x="280" y="105" fill="currentColor">Pequeños cambios sostenidos</text>
+            <text x="280" y="132" fill="currentColor">mejoran la calidad alimentaria.</text>
+            <text x="280" y="159" fill="currentColor">La variedad de colores ayuda</text>
+            <text x="280" y="186" fill="currentColor">a sumar diferentes nutrientes.</text>
+          </svg>
+        </div>
+        <p class="diagram-caption" data-status aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Lectura crítica de elecciones alimentarias</h2>
+      <ul>
+        <li>¿Aporta solo energía o también nutrientes importantes?</li>
+        <li>¿Incluye fibra, vitaminas o minerales?</li>
+        <li>¿Es una elección ocasional o habitual?</li>
+      </ul>
+      <p>Estas preguntas ayudan a tomar decisiones más saludables sin caer en ideas extremas de "prohibido" o "perfecto".</p>
+    </section>
+
+    <section class="panel">
+      <div class="activity">
+        <h4>Actividad breve</h4>
+        <p>Proponé una mejora realista para tu merienda diaria, justificando por qué sería más saludable.</p>
+      </div>
+
+      <div class="activity">
+        <h4>Actividad de planificación</h4>
+        <p>Diseñá un menú escolar de un día (desayuno, colación, almuerzo y merienda) que combine variedad, hidratación y calidad nutricional.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Resumen integrador del tema</h2>
+      <ul>
+        <li>Alimento y nutriente no son sinónimos: uno contiene al otro.</li>
+        <li>La calidad nutricional importa más que solo contar calorías.</li>
+        <li>Los cambios realistas y sostenidos mejoran hábitos a largo plazo.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Actividades didácticas del tema</h2>
+
+      <h3>1) Cuadro a completar: alimentos y nutrientes</h3>
+      <table class="study-table">
+        <thead>
+          <tr>
+            <th>Alimento</th>
+            <th>Nutrientes principales (según lo estudiado)</th>
+            <th>¿Calorías vacías? (sí/no)</th>
+            <th>Color principal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>________</td><td>________</td><td>________</td><td>________</td></tr>
+          <tr><td>________</td><td>________</td><td>________</td><td>________</td></tr>
+          <tr><td>________</td><td>________</td><td>________</td><td>________</td></tr>
+        </tbody>
+      </table>
+
+      <h3>2) Cuadro a completar: plato con colores</h3>
+      <table class="study-table">
+        <thead>
+          <tr>
+            <th>Color del alimento</th>
+            <th>Ejemplo de alimento</th>
+            <th>¿Aporta variedad al plato? (sí/no)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Rojo / naranja</td><td>________</td><td>________</td></tr>
+          <tr><td>Verde</td><td>________</td><td>________</td></tr>
+          <tr><td>Violeta / otro</td><td>________</td><td>________</td></tr>
+        </tbody>
+      </table>
+
+      <h3>3) Verdadero o Falso</h3>
+      <ol>
+        <li>Alimento y nutriente significan exactamente lo mismo. (V/F)</li>
+        <li>Las calorías vacías tienen mucha energía y poco aporte nutricional. (V/F)</li>
+        <li>Incluir distintos colores puede ayudar a mayor variedad nutricional. (V/F)</li>
+        <li>Tomar agua no forma parte de hábitos saludables. (V/F)</li>
+      </ol>
+
+      <h3>4) Cuestionario breve</h3>
+      <ol>
+        <li>Explicá con tus palabras la diferencia entre alimento y nutriente.</li>
+        <li>Da un ejemplo de colación con predominio de calorías vacías y una versión mejorada.</li>
+        <li>Armá una merienda escolar con al menos dos colores de alimentos y justificá por qué mejora la calidad nutricional.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container"><p>Tema de Biología basado en <code>programa_1anio.txt</code>.</p></div></footer>
+</body>
+</html>

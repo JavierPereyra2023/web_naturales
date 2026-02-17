@@ -1,0 +1,187 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Animales heterótrofos | Biología</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/main.js"></script>
+</head>
+<body data-page="Animales heterótrofos" data-section="Biología" data-section-href="biologia.html">
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div>
+        <p class="kicker">Ciencias Naturales · 1° año</p>
+        <h1>Biología: Animales heterótrofos por ingestión</h1>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar modo oscuro">Modo oscuro</button>
+    </div>
+    <nav class="main-nav container" aria-label="Navegación principal">
+      <a href="inicio.html">Inicio</a>
+      <a href="quimica.html">Química</a>
+      <a href="fisica.html">Física</a>
+      <a href="biologia.html" aria-current="page">Biología</a>
+    </nav>
+  </header>
+
+  <div class="container"><nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav></div>
+
+  <main id="contenido" class="container">
+    <section class="panel">
+      <h2>Nutrición por ingestión</h2>
+      <p class="tag">Programa representado: animales heterótrofos por ingestión; estructuras implicadas en nutrición, relación y reproducción; tipos de alimentación en vertebrados e invertebrados.</p>
+      <p>Los animales son heterótrofos: incorporan materia y energía comiendo otros organismos o sus productos. La estructura de su cuerpo se relaciona con su dieta y su forma de vida.</p>
+      <p>Estudiar esta diversidad permite comprender por qué no todos los animales comen lo mismo ni usan los mismos órganos de alimentación.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Vertebrados e invertebrados</h2>
+      <table class="study-table">
+        <thead>
+          <tr>
+            <th>Grupo</th>
+            <th>Características generales</th>
+            <th>Ejemplos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Vertebrados</td>
+            <td>Poseen columna vertebral y esqueleto interno.</td>
+            <td>Peces, anfibios, reptiles, aves y mamíferos.</td>
+          </tr>
+          <tr>
+            <td>Invertebrados</td>
+            <td>No poseen columna vertebral; algunos tienen exoesqueleto.</td>
+            <td>Insectos, moluscos, arácnidos, anélidos.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>Tipos de alimentación</h2>
+      <ul>
+        <li><strong>Herbívoros:</strong> se alimentan principalmente de vegetales.</li>
+        <li><strong>Carnívoros:</strong> se alimentan de otros animales.</li>
+        <li><strong>Omnívoros:</strong> combinan alimentos de origen vegetal y animal.</li>
+        <li><strong>Detritívoros:</strong> consumen materia orgánica en descomposición.</li>
+      </ul>
+
+      <h3>Adaptaciones estructurales</h3>
+      <p>La forma de dientes, pico, mandíbula o aparato digestivo se relaciona con el tipo de dieta. Por ejemplo, los herbívoros suelen tener superficies de molienda y los carnívoros estructuras para desgarrar.</p>
+    </section>
+
+    <section class="panel">
+      <h2>SVG dinámico: tipos de alimentación</h2>
+      <div class="diagram-switcher" data-switcher data-initial="herbivoro">
+        <div class="state-controls" role="group" aria-label="Tipo de dieta">
+          <button class="chip-btn" type="button" data-target="herbivoro" data-description="Herbívoro: se alimenta de vegetales." aria-pressed="false">Herbívoro</button>
+          <button class="chip-btn" type="button" data-target="carnivoro" data-description="Carnívoro: se alimenta de otros animales." aria-pressed="false">Carnívoro</button>
+          <button class="chip-btn" type="button" data-target="omnivoro" data-description="Omnívoro: combina distintos tipos de alimento." aria-pressed="false">Omnívoro</button>
+        </div>
+        <div class="state-figure">
+          <svg viewBox="0 0 640 260" width="100%" role="img" aria-label="Alimentación animal">
+            <rect x="12" y="12" width="616" height="236" rx="12" fill="none" stroke="currentColor"/>
+            <g data-panel="herbivoro">
+              <ellipse cx="130" cy="150" rx="45" ry="28" fill="#9be4b8"/>
+              <rect x="175" y="130" width="25" height="40" fill="#2e8b57"/>
+            </g>
+            <g data-panel="carnivoro" visibility="hidden">
+              <ellipse cx="130" cy="150" rx="45" ry="28" fill="#2e8b57"/>
+              <polygon points="185,130 205,145 185,160" fill="#163b28"/>
+            </g>
+            <g data-panel="omnivoro" visibility="hidden">
+              <ellipse cx="130" cy="150" rx="45" ry="28" fill="#6dbb8d"/>
+              <rect x="175" y="130" width="22" height="35" fill="#2e8b57"/>
+              <polygon points="200,135 215,146 200,157" fill="#163b28"/>
+            </g>
+            <text x="290" y="115" fill="currentColor">Estructuras y dietas se relacionan</text>
+            <text x="290" y="145" fill="currentColor">con el ambiente y el modo de vida.</text>
+          </svg>
+        </div>
+        <p class="diagram-caption" data-status aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Relación y reproducción en animales</h2>
+      <h3>Función de relación</h3>
+      <p>Permite captar estímulos y responder al ambiente. Incluye órganos sensoriales, sistema nervioso y sistema locomotor.</p>
+
+      <h3>Reproducción</h3>
+      <p>Puede ser sexual (la más frecuente en animales) y, en algunos grupos, asexual. También varía el desarrollo: ovíparo, vivíparo u ovovivíparo.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Ejemplos cotidianos y regionales</h2>
+      <ul>
+        <li><strong>Vaca (herbívora, vertebrado):</strong> digestión adaptada a dieta vegetal.</li>
+        <li><strong>Puma (carnívoro, vertebrado):</strong> estructuras para caza y desgarro.</li>
+        <li><strong>Ñandú (omnívoro, vertebrado):</strong> consume semillas, brotes e invertebrados.</li>
+        <li><strong>Hormiga (omnívora/detritívora, invertebrado):</strong> variedad de recursos alimenticios.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <div class="activity">
+        <h4>Actividad breve</h4>
+        <p>Elegí un vertebrado y un invertebrado y compará su tipo de alimentación.</p>
+      </div>
+
+      <div class="activity">
+        <h4>Actividad de análisis</h4>
+        <p>Seleccioná tres animales de ambientes distintos (acuático, terrestre, aéreo) y explicá cómo su estructura se relaciona con su dieta y desplazamiento.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Resumen integrador del tema</h2>
+      <ul>
+        <li>Los animales son heterótrofos por ingestión y presentan gran diversidad de dietas.</li>
+        <li>Vertebrados e invertebrados muestran estructuras distintas, adaptadas al ambiente.</li>
+        <li>Nutrición, relación y reproducción se coordinan para sostener la vida del organismo.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Actividades didácticas del tema</h2>
+
+      <h3>1) Cuadro a completar: alimentación animal</h3>
+      <table class="study-table">
+        <thead>
+          <tr>
+            <th>Animal</th>
+            <th>Vertebrado/Invertebrado</th>
+            <th>Tipo de alimentación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>________</td><td>________</td><td>________</td></tr>
+          <tr><td>________</td><td>________</td><td>________</td></tr>
+          <tr><td>________</td><td>________</td><td>________</td></tr>
+        </tbody>
+      </table>
+
+      <h3>2) Verdadero o Falso</h3>
+      <ol>
+        <li>Los animales obtienen nutrientes por ingestión. (V/F)</li>
+        <li>Todos los animales tienen el mismo tipo de dieta. (V/F)</li>
+        <li>La estructura corporal se relaciona con su alimentación. (V/F)</li>
+        <li>Vertebrados e invertebrados son equivalentes. (V/F)</li>
+      </ol>
+
+      <h3>3) Cuestionario breve</h3>
+      <ol>
+        <li>Diferenciá un herbívoro de un omnívoro con ejemplos.</li>
+        <li>¿Por qué es útil comparar vertebrados e invertebrados?</li>
+        <li>Explicá una adaptación corporal vinculada a la dieta.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container"><p>Tema de Biología basado en <code>programa_1anio.txt</code>.</p></div></footer>
+</body>
+</html>

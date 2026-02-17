@@ -1,0 +1,207 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plantas autótrofas | Biología</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/main.js"></script>
+</head>
+<body data-page="Plantas autótrofas" data-section="Biología" data-section-href="biologia.html">
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div>
+        <p class="kicker">Ciencias Naturales · 1° año</p>
+        <h1>Biología: Plantas como sistemas autótrofos</h1>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar modo oscuro">Modo oscuro</button>
+    </div>
+    <nav class="main-nav container" aria-label="Navegación principal">
+      <a href="inicio.html">Inicio</a>
+      <a href="quimica.html">Química</a>
+      <a href="fisica.html">Física</a>
+      <a href="biologia.html" aria-current="page">Biología</a>
+    </nav>
+  </header>
+
+  <div class="container"><nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav></div>
+
+  <main id="contenido" class="container">
+    <section class="panel">
+      <h2>Estructuras y funciones vegetales</h2>
+      <p class="tag">Programa representado: estructuras vegetales en nutrición, relación y reproducción; observación del ciclo de vida; factores de nutrición vegetal.</p>
+      <p>Las plantas son autótrofas: fabrican materia orgánica a partir de agua, dióxido de carbono y energía lumínica. Para hacerlo, cada estructura cumple una función específica.</p>
+      <p>Comprender sus funciones permite explicar por qué una planta crece, se orienta a la luz, florece y se reproduce.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Partes de una planta y su función</h2>
+      <table class="study-table">
+        <thead>
+          <tr>
+            <th>Estructura</th>
+            <th>Función principal</th>
+            <th>Ejemplo de observación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Raíz</td>
+            <td>Absorbe agua y sales minerales; fija la planta al sustrato.</td>
+            <td>Raíces más desarrolladas en suelos sueltos y húmedos.</td>
+          </tr>
+          <tr>
+            <td>Tallo</td>
+            <td>Sostén y transporte de savia.</td>
+            <td>Tallo más largo cuando compite por luz.</td>
+          </tr>
+          <tr>
+            <td>Hoja</td>
+            <td>Fotosíntesis e intercambio gaseoso.</td>
+            <td>Hojas verdes y orientadas hacia la luz.</td>
+          </tr>
+          <tr>
+            <td>Flor, fruto y semilla</td>
+            <td>Reproducción y dispersión de la especie.</td>
+            <td>Aparición de flores en época favorable.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>Fotosíntesis y nutrición vegetal</h2>
+      <p>La fotosíntesis transforma energía lumínica en energía química almacenada en glucosa.</p>
+      <p><code>Agua + dióxido de carbono + luz → glucosa + oxígeno</code></p>
+      <ul>
+        <li><strong>Agua y sales:</strong> ingresan por raíces.</li>
+        <li><strong>Dióxido de carbono:</strong> entra por estomas de las hojas.</li>
+        <li><strong>Luz:</strong> es captada por la clorofila.</li>
+      </ul>
+      <p>Además del proceso fotosintético, las plantas transportan <strong>savia bruta</strong> (desde raíces) y <strong>savia elaborada</strong> (desde hojas al resto de la planta).</p>
+    </section>
+
+    <section class="panel">
+      <h2>Relación con el ambiente</h2>
+      <p>Aunque no se desplazan como animales, las plantas responden a estímulos.</p>
+      <ul>
+        <li><strong>Fototropismo:</strong> crecimiento orientado a la luz.</li>
+        <li><strong>Geotropismo:</strong> respuesta a la gravedad (raíces hacia abajo).</li>
+        <li><strong>Hidrotropismo:</strong> crecimiento orientado al agua.</li>
+      </ul>
+      <p>Estas respuestas mejoran la obtención de recursos y aumentan la probabilidad de supervivencia.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Reproducción y ciclo de vida</h2>
+      <h3>Reproducción sexual</h3>
+      <p>Intervienen flores, polinización, fecundación, fruto y semilla.</p>
+
+      <h3>Reproducción asexual</h3>
+      <p>Se forman nuevos individuos sin fecundación, por ejemplo por estolones, tubérculos o esquejes.</p>
+
+      <h3>Ciclo básico</h3>
+      <p>Semilla → germinación → planta joven → planta adulta → floración/fructificación → nueva semilla.</p>
+    </section>
+
+    <section class="panel">
+      <h2>SVG dinámico: ciclo y factores</h2>
+      <div class="diagram-switcher" data-switcher data-initial="ciclo">
+        <div class="state-controls" role="group" aria-label="Aspecto vegetal">
+          <button class="chip-btn" type="button" data-target="ciclo" data-description="Ciclo de vida: cambios observables en el tiempo." aria-pressed="false">Ciclo</button>
+          <button class="chip-btn" type="button" data-target="nutricion" data-description="Nutrición: interacción con agua, luz y suelo." aria-pressed="false">Nutrición</button>
+          <button class="chip-btn" type="button" data-target="reproduccion" data-description="Reproducción: continuidad de la especie." aria-pressed="false">Reproducción</button>
+        </div>
+        <div class="state-figure">
+          <svg viewBox="0 0 640 260" width="100%" role="img" aria-label="Plantas">
+            <rect x="12" y="12" width="616" height="236" rx="12" fill="none" stroke="currentColor"/>
+            <g data-panel="ciclo">
+              <circle cx="100" cy="175" r="12" fill="#9be4b8"/>
+              <line x1="112" y1="175" x2="175" y2="150" stroke="currentColor"/>
+              <rect x="190" y="105" width="20" height="70" fill="#2e8b57"/>
+              <circle cx="200" cy="95" r="22" fill="#9be4b8"/>
+            </g>
+            <g data-panel="nutricion" visibility="hidden">
+              <rect x="170" y="110" width="20" height="80" fill="#2e8b57"/>
+              <circle cx="180" cy="95" r="22" fill="#9be4b8"/>
+              <circle cx="100" cy="70" r="20" fill="#f6b73c"/>
+              <line x1="118" y1="78" x2="165" y2="95" stroke="#f6b73c"/>
+            </g>
+            <g data-panel="reproduccion" visibility="hidden">
+              <rect x="170" y="115" width="20" height="75" fill="#2e8b57"/>
+              <circle cx="180" cy="100" r="22" fill="#9be4b8"/>
+              <circle cx="230" cy="85" r="10" fill="#f6b73c"/>
+            </g>
+            <text x="300" y="110" fill="currentColor">Registrar cambios en plantas</text>
+            <text x="300" y="140" fill="currentColor">permite relacionar estructura,</text>
+            <text x="300" y="170" fill="currentColor">función y ambiente.</text>
+          </svg>
+        </div>
+        <p class="diagram-caption" data-status aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Factores que influyen en el crecimiento</h2>
+      <ul>
+        <li>Luz (cantidad e intensidad).</li>
+        <li>Disponibilidad de agua.</li>
+        <li>Nutrientes del suelo.</li>
+        <li>Temperatura ambiente.</li>
+        <li>Espacio y competencia con otras plantas.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <div class="activity">
+        <h4>Actividad breve</h4>
+        <p>Observá una planta durante una semana y anotá cambios y condiciones ambientales.</p>
+      </div>
+
+      <div class="activity">
+        <h4>Actividad experimental simple</h4>
+        <p>Germiná semillas en dos condiciones de luz (con luz / sin luz) y compará color, altura y firmeza del tallo luego de varios días.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Actividades didácticas del tema</h2>
+
+      <h3>1) Cuadro a completar: plantas</h3>
+      <table class="study-table">
+        <thead>
+          <tr>
+            <th>Estructura o factor</th>
+            <th>Relación con función</th>
+            <th>Cambio observado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>________</td><td>Nutrición</td><td>________</td></tr>
+          <tr><td>________</td><td>Relación</td><td>________</td></tr>
+          <tr><td>________</td><td>Reproducción</td><td>________</td></tr>
+        </tbody>
+      </table>
+
+      <h3>2) Verdadero o Falso</h3>
+      <ol>
+        <li>Las plantas son sistemas autótrofos. (V/F)</li>
+        <li>El ambiente influye en su nutrición y crecimiento. (V/F)</li>
+        <li>La fotosíntesis no requiere luz. (V/F)</li>
+        <li>Observar el ciclo de vida no aporta información científica. (V/F)</li>
+      </ol>
+
+      <h3>3) Cuestionario breve</h3>
+      <ol>
+        <li>Explicá la función de raíz, tallo y hoja.</li>
+        <li>¿Qué factores del ambiente influyen en plantas?</li>
+        <li>¿Por qué conviene registrar cambios con fecha?</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container"><p>Tema de Biología basado en <code>programa_1anio.txt</code>.</p></div></footer>
+</body>
+</html>

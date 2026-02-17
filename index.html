@@ -1,0 +1,44 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ciencias Naturales</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="welcome-page" data-page="Bienvenida">
+  <main class="welcome-main" aria-label="Portada de Ciencias Naturales">
+    <div class="starfield" id="starfield" aria-hidden="true"></div>
+    <section class="welcome-content">
+      <p class="welcome-kicker">Portal educativo</p>
+      <h1>Ciencias Naturales</h1>
+      <p class="welcome-subtitle">Un lugar para el aprendizaje cientifico escolar</p>
+      <a class="welcome-btn" href="inicio.html">Entrar al contenido</a>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      requestAnimationFrame(function () {
+        document.body.classList.add('welcome-animate');
+      });
+
+      const root = document.getElementById('starfield');
+      if (!root) return;
+
+      const count = 85;
+      for (let i = 0; i < count; i += 1) {
+        const star = document.createElement('span');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.width = (Math.random() * 2.6 + 1) + 'px';
+        star.style.height = star.style.width;
+        star.style.animationDelay = (Math.random() * 6) + 's';
+        star.style.animationDuration = (Math.random() * 5 + 3.5) + 's';
+        root.appendChild(star);
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Estados de la materia | Química</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/main.js"></script>
+</head>
+<body data-page="Estados de la materia" data-section="Química" data-section-href="quimica.html">
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div>
+        <p class="kicker">Ciencias Naturales · 1° año</p>
+        <h1>Química: Estados de la materia</h1>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar modo oscuro">Modo oscuro</button>
+    </div>
+    <nav class="main-nav container" aria-label="Navegación principal">
+      <a href="inicio.html">Inicio</a>
+      <a href="quimica.html" aria-current="page">Química</a>
+      <a href="fisica.html">Física</a>
+      <a href="biologia.html">Biología</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav>
+  </div>
+
+  <main id="contenido" class="container">
+    <section class="panel">
+      <h2>Estados y modelo corpuscular</h2>
+      <p class="tag">Programa representado: estado sólido, líquido y gaseoso; cambios de estado; modelo corpuscular de la materia.</p>
+      <p>El modelo corpuscular propone que la materia está formada por partículas en movimiento. La distancia y el orden entre partículas ayudan a explicar los estados de la materia.</p>
+    </section>
+
+    <section class="panel">
+      <h2>SVG dinámico de estados</h2>
+      <p>Usá los botones para ver cómo se representan las partículas en cada estado.</p>
+
+      <div class="state-controls" role="group" aria-label="Cambiar estado de la materia">
+        <button type="button" class="chip-btn" data-state-target="solido" aria-pressed="false">Sólido</button>
+        <button type="button" class="chip-btn" data-state-target="liquido" aria-pressed="false">Líquido</button>
+        <button type="button" class="chip-btn" data-state-target="gaseoso" aria-pressed="false">Gaseoso</button>
+      </div>
+
+      <div class="state-figure">
+        <svg viewBox="0 0 560 240" width="100%" role="img" aria-label="Representación de partículas en diferentes estados">
+          <rect x="10" y="10" width="540" height="220" rx="12" fill="none" stroke="currentColor" stroke-width="2" />
+
+          <g id="state-solido" class="particle-group">
+            <circle cx="120" cy="80" r="10" fill="#1c6b47" />
+            <circle cx="150" cy="80" r="10" fill="#1c6b47" />
+            <circle cx="180" cy="80" r="10" fill="#1c6b47" />
+            <circle cx="120" cy="110" r="10" fill="#1c6b47" />
+            <circle cx="150" cy="110" r="10" fill="#1c6b47" />
+            <circle cx="180" cy="110" r="10" fill="#1c6b47" />
+            <circle cx="120" cy="140" r="10" fill="#1c6b47" />
+            <circle cx="150" cy="140" r="10" fill="#1c6b47" />
+            <circle cx="180" cy="140" r="10" fill="#1c6b47" />
+          </g>
+
+          <g id="state-liquido" class="particle-group" visibility="hidden">
+            <circle cx="110" cy="140" r="10" fill="#2e8b57" />
+            <circle cx="140" cy="120" r="10" fill="#2e8b57" />
+            <circle cx="170" cy="145" r="10" fill="#2e8b57" />
+            <circle cx="200" cy="125" r="10" fill="#2e8b57" />
+            <circle cx="230" cy="145" r="10" fill="#2e8b57" />
+            <circle cx="130" cy="170" r="10" fill="#2e8b57" />
+            <circle cx="165" cy="175" r="10" fill="#2e8b57" />
+            <circle cx="200" cy="165" r="10" fill="#2e8b57" />
+          </g>
+
+          <g id="state-gaseoso" class="particle-group" visibility="hidden">
+            <circle cx="95" cy="65" r="10" fill="#58a37a" />
+            <circle cx="190" cy="55" r="10" fill="#58a37a" />
+            <circle cx="260" cy="95" r="10" fill="#58a37a" />
+            <circle cx="120" cy="185" r="10" fill="#58a37a" />
+            <circle cx="220" cy="160" r="10" fill="#58a37a" />
+            <circle cx="300" cy="130" r="10" fill="#58a37a" />
+            <circle cx="155" cy="115" r="10" fill="#58a37a" />
+          </g>
+
+          <line x1="350" y1="40" x2="520" y2="40" stroke="currentColor" stroke-width="1.5" />
+          <text x="355" y="60" font-size="15" fill="currentColor">Sólido: partículas juntas</text>
+          <text x="355" y="90" font-size="15" fill="currentColor">Líquido: juntas pero móviles</text>
+          <text x="355" y="120" font-size="15" fill="currentColor">Gas: muy separadas</text>
+        </svg>
+      </div>
+
+      <p id="state-status" class="state-status" aria-live="polite"></p>
+    </section>
+
+    <section class="panel">
+      <h2>Cambios de estado</h2>
+      <p>Cuando cambian temperatura o presión, las partículas modifican su movimiento y separación. Así se producen cambios de estado como fusión, evaporación y condensación.</p>
+      <p><strong>Ejemplo cotidiano:</strong> el hielo se derrite al calentarse y el vapor de una olla puede condensar en una tapa fría.</p>
+      <div class="activity">
+        <h4>Actividad</h4>
+        <p>Elegí un ejemplo de tu vida diaria para cada cambio: fusión, evaporación y condensación.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Conexión con otros temas</h2>
+      <p>Comprender estados de la materia ayuda luego a estudiar soluciones, mezclas y métodos de separación.</p>
+      <p><a class="btn" href="quimica_propiedades.html">Volver a Propiedades de la materia</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Módulo de Química basado en <code>programa_1anio.txt</code>.</p>
+    </div>
+  </footer>
+</body>
+</html>
+

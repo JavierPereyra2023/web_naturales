@@ -1,0 +1,833 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Los movimientos | Física</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/main.js"></script>
+</head>
+<body data-page="Los movimientos" data-section="Física" data-section-href="fisica.html">
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div><p class="kicker">Ciencias Naturales · 1° año</p><h1>Física: Fuerzas y Movimientos</h1></div>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar modo oscuro">Modo oscuro</button>
+    </div>
+    <nav class="main-nav container" aria-label="Navegación principal">
+      <a href="inicio.html">Inicio</a>
+      <a href="quimica.html">Química</a>
+      <a href="fisica.html" aria-current="page">Física</a>
+      <a href="biologia.html">Biología</a>
+    </nav>
+  </header>
+  <div class="container"><nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav></div>
+
+  <main id="contenido" class="container">
+    <section class="panel">
+      <h2>¿Qué es el movimiento?</h2>
+      <p class="tag">Programa representado: descripción y representación de movimientos, variaciones temporales, gráficos y tablas, velocidad, fuerzas, magnitudes escalares y vectoriales, unidades.</p>
+
+      <p>El <strong>movimiento</strong> es el cambio de posición de un objeto con respecto a un punto de referencia en el transcurso del tiempo. Todo lo que nos rodea está en movimiento: vos caminando, un colectivo, las nubes, la Tierra girando. Pero para estudiar científicamente el movimiento, necesitamos conceptos precisos y herramientas matemáticas.</p>
+
+      <h3>Conceptos fundamentales</h3>
+
+      <h4>1. Sistema de referencia</h4>
+      <p>Para decir que algo se mueve, necesitamos un <strong>punto de referencia</strong>. El movimiento es <strong>relativo</strong>: depende desde dónde lo observás.</p>
+      <p><em>Ejemplo:</em> Si estás sentado en un colectivo en movimiento, para vos el asiento está quieto (tu sistema de referencia es el colectivo). Pero para alguien en la vereda, el asiento se está moviendo (su sistema de referencia es la Tierra).</p>
+
+      <h4>2. Trayectoria</h4>
+      <p>La <strong>trayectoria</strong> es el camino o línea imaginaria que sigue un objeto en movimiento. Puede ser:</p>
+      <ul>
+        <li><strong>Rectilínea:</strong> en línea recta (un auto en autopista recta)</li>
+        <li><strong>Curvilínea:</strong> curva (una bicicleta doblando en una esquina)</li>
+        <li><strong>Circular:</strong> círculo o arco (calesita, rueda de la fortuna)</li>
+        <li><strong>Parabólica:</strong> forma de parábola (pelota lanzada al aire)</li>
+        <li><strong>Irregular:</strong> sin patrón definido (mosca volando)</li>
+      </ul>
+
+      <h4>3. Desplazamiento</h4>
+      <p>El <strong>desplazamiento</strong> es la distancia en línea recta desde el punto inicial hasta el punto final, sin importar el camino recorrido. Es una <strong>magnitud vectorial</strong> (tiene dirección y sentido).</p>
+      <p><em>Diferencia clave:</em> Si caminás 100 metros hacia el norte y luego 100 metros hacia el sur, volvés al punto inicial. Tu <strong>distancia recorrida</strong> es 200 m, pero tu <strong>desplazamiento</strong> es 0 m (porque terminaste donde empezaste).</p>
+
+      <h4>4. Distancia recorrida</h4>
+      <p>Es la longitud total del camino que recorrió el objeto, siguiendo toda la trayectoria. Es una <strong>magnitud escalar</strong> (solo tiene valor numérico).</p>
+
+      <h3>Magnitudes: escalares vs. vectoriales</h3>
+
+      <h4>Magnitudes escalares</h4>
+      <p>Son las que se describen completamente con un <strong>número y una unidad</strong>. No tienen dirección.</p>
+      <p><strong>Ejemplos:</strong></p>
+      <ul>
+        <li><strong>Distancia:</strong> 50 metros, 3 kilómetros</li>
+        <li><strong>Tiempo:</strong> 10 segundos, 2 horas</li>
+        <li><strong>Rapidez:</strong> 80 km/h</li>
+        <li><strong>Masa:</strong> 5 kilogramos</li>
+        <li><strong>Temperatura:</strong> 25°C</li>
+      </ul>
+
+      <h4>Magnitudes vectoriales</h4>
+      <p>Son las que necesitan <strong>número, unidad, dirección y sentido</strong> para ser completamente descriptas. Se representan con flechas (vectores).</p>
+      <p><strong>Componentes de un vector:</strong></p>
+      <ul>
+        <li><strong>Módulo (magnitud):</strong> el "tamaño" o valor numérico (longitud de la flecha)</li>
+        <li><strong>Dirección:</strong> la línea sobre la que actúa (horizontal, vertical, diagonal)</li>
+        <li><strong>Sentido:</strong> hacia dónde apunta (norte/sur, arriba/abajo, derecha/izquierda)</li>
+      </ul>
+      <p><strong>Ejemplos:</strong></p>
+      <ul>
+        <li><strong>Desplazamiento:</strong> 50 m hacia el norte</li>
+        <li><strong>Velocidad:</strong> 80 km/h hacia el este</li>
+        <li><strong>Fuerza:</strong> 10 Newton hacia arriba</li>
+        <li><strong>Aceleración:</strong> 2 m/s² hacia abajo</li>
+      </ul>
+      <p>💡 <strong>Regla práctica:</strong> Si la pregunta "¿hacia dónde?" tiene sentido, es vectorial.</p>
+    </section>
+
+    <section class="panel">
+      <h2>SVG: Escalar vs Vectorial</h2>
+      <div class="diagram-switcher" data-switcher data-initial="escalar">
+        <div class="state-controls" role="group" aria-label="Tipo de magnitud">
+          <button class="chip-btn" type="button" data-target="escalar" data-description="Magnitud escalar: solo valor y unidad (distancia: 50 m)" aria-pressed="false">Escalar</button>
+          <button class="chip-btn" type="button" data-target="vectorial" data-description="Magnitud vectorial: valor, unidad, dirección y sentido (desplazamiento: 50 m Norte)" aria-pressed="false">Vectorial</button>
+        </div>
+        <div class="state-figure">
+          <svg viewBox="0 0 620 260" width="100%" role="img" aria-label="Magnitudes escalares y vectoriales">
+            <rect x="12" y="12" width="596" height="236" rx="12" fill="none" stroke="currentColor"/>
+            <g data-panel="escalar">
+              <circle cx="160" cy="130" r="35" fill="#7ed39f" stroke="#1c6b47" stroke-width="3"/>
+              <text x="138" y="138" fill="#102115" font-size="24" font-weight="bold">50 m</text>
+              <text x="280" y="100" fill="currentColor" font-size="16">Solo necesita:</text>
+              <text x="280" y="125" fill="currentColor" font-size="14">✓ Valor numérico (50)</text>
+              <text x="280" y="150" fill="currentColor" font-size="14">✓ Unidad (metros)</text>
+              <text x="280" y="180" fill="currentColor" font-size="14" font-weight="bold">Ejemplo: distancia recorrida</text>
+            </g>
+            <g data-panel="vectorial" visibility="hidden">
+              <line x1="80" y1="130" x2="240" y2="130" stroke="#1c6b47" stroke-width="5" marker-end="url(#arrowhead)"/>
+              <polygon points="240,130 220,120 220,140" fill="#1c6b47"/>
+              <text x="120" y="115" fill="currentColor" font-size="16" font-weight="bold">50 m Norte</text>
+              <text x="280" y="85" fill="currentColor" font-size="16">Necesita:</text>
+              <text x="280" y="110" fill="currentColor" font-size="14">✓ Módulo/magnitud (50 m)</text>
+              <text x="280" y="135" fill="currentColor" font-size="14">✓ Dirección (horizontal)</text>
+              <text x="280" y="160" fill="currentColor" font-size="14">✓ Sentido (hacia →)</text>
+              <text x="280" y="190" fill="currentColor" font-size="14" font-weight="bold">Ejemplo: desplazamiento</text>
+            </g>
+          </svg>
+        </div>
+        <p class="diagram-caption" data-status aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Velocidad y Aceleración</h2>
+
+      <h3>Rapidez (magnitud escalar)</h3>
+      <p>La <strong>rapidez</strong> mide qué tan rápido se mueve un objeto, sin importar la dirección. Es la distancia recorrida dividida por el tiempo.</p>
+      <p><strong>Fórmula:</strong> Rapidez = Distancia ÷ Tiempo</p>
+      <p><strong>Unidades:</strong> metros por segundo (m/s), kilómetros por hora (km/h)</p>
+      <p><em>Ejemplo:</em> Un auto recorre 100 km en 2 horas → Rapidez = 100 km ÷ 2 h = 50 km/h</p>
+
+      <h3>Velocidad (magnitud vectorial)</h3>
+      <p>La <strong>velocidad</strong> es la rapidez con dirección y sentido. Es el desplazamiento dividido por el tiempo.</p>
+      <p><strong>Fórmula:</strong> Velocidad = Desplazamiento ÷ Tiempo</p>
+      <p><strong>Ejemplo:</strong> Un ciclista se desplaza 100 m hacia el este en 20 segundos → Velocidad = 5 m/s hacia el este</p>
+      <p>💡 <strong>Diferencia clave:</strong> Dos autos pueden tener la misma rapidez (80 km/h) pero diferentes velocidades si van en direcciones opuestas (uno al norte, otro al sur).</p>
+
+      <h3>Aceleración (magnitud vectorial)</h3>
+      <p>La <strong>aceleración</strong> mide qué tan rápido cambia la velocidad de un objeto. Hay aceleración cuando:</p>
+      <ul>
+        <li>El objeto va cada vez más rápido (acelera)</li>
+        <li>El objeto va cada vez más lento (desacelera o frena)</li>
+        <li>El objeto cambia de dirección (aunque mantenga la misma rapidez)</li>
+      </ul>
+      <p><strong>Fórmula:</strong> Aceleración = Cambio de velocidad ÷ Tiempo</p>
+      <p><strong>Unidades:</strong> metros por segundo al cuadrado (m/s²)</p>
+      <p><em>Ejemplo:</em> Un auto arranca desde el reposo (0 m/s) y alcanza 20 m/s en 10 segundos → Aceleración = (20 - 0) ÷ 10 = 2 m/s²</p>
+      <p>Esto significa que cada segundo, el auto aumenta su velocidad en 2 m/s.</p>
+
+      <h3>Tipos de movimiento según la velocidad</h3>
+
+      <h4>Movimiento Rectilíneo Uniforme (MRU)</h4>
+      <p>El objeto se mueve en línea recta con <strong>velocidad constante</strong> (no cambia).</p>
+      <ul>
+        <li>La rapidez es siempre la misma</li>
+        <li>La dirección no cambia</li>
+        <li>La aceleración es CERO</li>
+      </ul>
+      <p><em>Ejemplo:</em> Un auto en autopista con control de crucero a 100 km/h constantes.</p>
+
+      <h4>Movimiento Rectilíneo Uniformemente Variado (MRUV)</h4>
+      <p>El objeto se mueve en línea recta con <strong>aceleración constante</strong> (la velocidad cambia uniformemente).</p>
+      <ul>
+        <li>La velocidad aumenta o disminuye de forma constante</li>
+        <li>La aceleración es constante (no cero)</li>
+      </ul>
+      <p><em>Ejemplo:</em> Un auto acelerando desde el semáforo, un objeto cayendo por gravedad.</p>
+    </section>
+
+    <section class="panel">
+      <h2>SVG: Tipos de movimiento</h2>
+      <div class="diagram-switcher" data-switcher data-initial="mru">
+        <div class="state-controls" role="group" aria-label="Tipo de movimiento">
+          <button class="chip-btn" type="button" data-target="mru" data-description="MRU: velocidad constante, recorre distancias iguales en tiempos iguales" aria-pressed="false">MRU</button>
+          <button class="chip-btn" type="button" data-target="mruv" data-description="MRUV: velocidad cambia, aceleración constante" aria-pressed="false">MRUV</button>
+        </div>
+        <div class="state-figure">
+          <svg viewBox="0 0 620 280" width="100%" role="img" aria-label="Gráficos de movimiento">
+            <rect x="12" y="12" width="596" height="256" rx="12" fill="none" stroke="currentColor"/>
+            <g data-panel="mru">
+              <!-- Gráfico MRU: línea recta horizontal (velocidad constante) -->
+              <text x="50" y="35" fill="currentColor" font-size="14" font-weight="bold">Velocidad constante</text>
+              <line x1="60" y1="220" x2="280" y2="220" stroke="currentColor" stroke-width="2"/>
+              <line x1="60" y1="220" x2="60" y2="80" stroke="currentColor" stroke-width="2"/>
+              <text x="25" y="145" fill="currentColor" font-size="12">v (m/s)</text>
+              <text x="155" y="245" fill="currentColor" font-size="12">t (s)</text>
+              <line x1="60" y1="130" x2="270" y2="130" stroke="#1c6b47" stroke-width="4"/>
+              <circle cx="60" cy="130" r="4" fill="#1c6b47"/>
+              <circle cx="165" cy="130" r="4" fill="#1c6b47"/>
+              <circle cx="270" cy="130" r="4" fill="#1c6b47"/>
+              <text x="320" y="130" fill="currentColor" font-size="13">La velocidad NO cambia</text>
+              <text x="320" y="155" fill="currentColor" font-size="13">→ Aceleración = 0</text>
+              <text x="320" y="180" fill="currentColor" font-size="13">→ Recorre distancias</text>
+              <text x="335" y="200" fill="currentColor" font-size="13">iguales en tiempos</text>
+              <text x="335" y="220" fill="currentColor" font-size="13">iguales</text>
+            </g>
+            <g data-panel="mruv" visibility="hidden">
+              <!-- Gráfico MRUV: línea inclinada (velocidad aumenta) -->
+              <text x="50" y="35" fill="currentColor" font-size="14" font-weight="bold">Velocidad aumenta</text>
+              <line x1="60" y1="220" x2="280" y2="220" stroke="currentColor" stroke-width="2"/>
+              <line x1="60" y1="220" x2="60" y2="80" stroke="currentColor" stroke-width="2"/>
+              <text x="25" y="145" fill="currentColor" font-size="12">v (m/s)</text>
+              <text x="155" y="245" fill="currentColor" font-size="12">t (s)</text>
+              <line x1="60" y1="210" x2="270" y2="90" stroke="#1c6b47" stroke-width="4"/>
+              <circle cx="60" cy="210" r="4" fill="#1c6b47"/>
+              <circle cx="165" cy="150" r="4" fill="#1c6b47"/>
+              <circle cx="270" cy="90" r="4" fill="#1c6b47"/>
+              <text x="320" y="120" fill="currentColor" font-size="13">La velocidad aumenta</text>
+              <text x="320" y="145" fill="currentColor" font-size="13">constantemente</text>
+              <text x="320" y="170" fill="currentColor" font-size="13">→ Aceleración constante</text>
+              <text x="320" y="195" fill="currentColor" font-size="13">→ Cada vez recorre</text>
+              <text x="335" y="215" fill="currentColor" font-size="13">más distancia en el</text>
+              <text x="335" y="235" fill="currentColor" font-size="13">mismo tiempo</text>
+            </g>
+          </svg>
+        </div>
+        <p class="diagram-caption" data-status aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Cómo leer gráficos: MRU vs MRUV</h2>
+      <p>Para diferenciar bien cada tipo de movimiento, conviene mirar siempre estos tres gráficos juntos:</p>
+      <ul>
+        <li><strong>Posición-tiempo (x-t):</strong> muestra dónde está el objeto en cada instante.</li>
+        <li><strong>Velocidad-tiempo (v-t):</strong> muestra si la velocidad se mantiene o cambia.</li>
+        <li><strong>Aceleración-tiempo (a-t):</strong> muestra si hay cambio de velocidad.</li>
+      </ul>
+
+      <div class="diagram-switcher" data-switcher data-initial="graficos-mru">
+        <div class="state-controls" role="group" aria-label="Comparar graficos de MRU y MRUV">
+          <button class="chip-btn" type="button" data-target="graficos-mru" data-description="MRU: x-t recta (pendiente constante), v=5 m/s constante y a=0 m/s²." aria-pressed="false">Gráficos MRU</button>
+          <button class="chip-btn" type="button" data-target="graficos-mruv" data-description="MRUV: x-t curva, v-t recta con pendiente y a=2 m/s² constante." aria-pressed="false">Gráficos MRUV</button>
+        </div>
+
+        <h3>Gráficos del MRU (ejemplo resuelto)</h3>
+        <p>Ejemplo: un móvil recorre 30 m en 6 s con velocidad constante de 5 m/s.</p>
+
+        <div class="state-figure">
+          <svg class="kinematics-graphs" viewBox="0 0 920 250" width="100%" role="img" aria-label="Graficos completos de MRU">
+            <rect x="10" y="10" width="900" height="230" rx="12" fill="none" stroke="currentColor"/>
+
+            <rect x="30" y="40" width="270" height="185" rx="10" fill="#e8f2e4" stroke="#1c6b47"/>
+            <text x="130" y="62" fill="currentColor" font-size="14" font-weight="bold">MRU: x vs t</text>
+            <line x1="60" y1="200" x2="260" y2="200" stroke="currentColor" stroke-width="2"/>
+            <line x1="60" y1="200" x2="60" y2="78" stroke="currentColor" stroke-width="2"/>
+            <line x1="60" y1="200" x2="260" y2="78" stroke="#1c6b47" stroke-width="4"/>
+            <circle cx="60" cy="200" r="3.5" fill="#1c6b47"/>
+            <circle cx="127" cy="159" r="3.5" fill="#1c6b47"/>
+            <circle cx="194" cy="118" r="3.5" fill="#1c6b47"/>
+            <circle cx="260" cy="78" r="3.5" fill="#1c6b47"/>
+            <text x="212" y="220" fill="currentColor" font-size="12">t [s]</text>
+            <text x="34" y="72" fill="currentColor" font-size="12">x [m]</text>
+            <text x="54" y="213" fill="currentColor" font-size="10">0</text>
+            <text x="120" y="213" fill="currentColor" font-size="10">2</text>
+            <text x="187" y="213" fill="currentColor" font-size="10">4</text>
+            <text x="253" y="213" fill="currentColor" font-size="10">6</text>
+            <text x="34" y="203" fill="currentColor" font-size="10">0</text>
+            <text x="28" y="162" fill="currentColor" font-size="10">10</text>
+            <text x="28" y="121" fill="currentColor" font-size="10">20</text>
+            <text x="28" y="80" fill="currentColor" font-size="10">30</text>
+
+            <rect x="325" y="40" width="270" height="185" rx="10" fill="#e8f2e4" stroke="#1c6b47"/>
+            <text x="425" y="62" fill="currentColor" font-size="14" font-weight="bold">MRU: v vs t</text>
+            <line x1="355" y1="200" x2="555" y2="200" stroke="currentColor" stroke-width="2"/>
+            <line x1="355" y1="200" x2="355" y2="78" stroke="currentColor" stroke-width="2"/>
+            <line x1="355" y1="98" x2="555" y2="98" stroke="#1c6b47" stroke-width="4"/>
+            <text x="507" y="220" fill="currentColor" font-size="12">t [s]</text>
+            <text x="320" y="72" fill="currentColor" font-size="12">v [m/s]</text>
+            <text x="349" y="213" fill="currentColor" font-size="10">0</text>
+            <text x="416" y="213" fill="currentColor" font-size="10">2</text>
+            <text x="483" y="213" fill="currentColor" font-size="10">4</text>
+            <text x="548" y="213" fill="currentColor" font-size="10">6</text>
+            <text x="339" y="203" fill="currentColor" font-size="10">0</text>
+            <text x="339" y="153" fill="currentColor" font-size="10">2.5</text>
+            <text x="339" y="103" fill="currentColor" font-size="10">5</text>
+
+            <rect x="620" y="40" width="270" height="185" rx="10" fill="#e8f2e4" stroke="#1c6b47"/>
+            <text x="720" y="62" fill="currentColor" font-size="14" font-weight="bold">MRU: a vs t</text>
+            <line x1="650" y1="200" x2="850" y2="200" stroke="currentColor" stroke-width="2"/>
+            <line x1="650" y1="200" x2="650" y2="78" stroke="currentColor" stroke-width="2"/>
+            <line x1="650" y1="200" x2="850" y2="200" stroke="#1c6b47" stroke-width="4"/>
+            <text x="802" y="220" fill="currentColor" font-size="12">t [s]</text>
+            <text x="614" y="72" fill="currentColor" font-size="12">a [m/s²]</text>
+            <text x="644" y="213" fill="currentColor" font-size="10">0</text>
+            <text x="711" y="213" fill="currentColor" font-size="10">2</text>
+            <text x="778" y="213" fill="currentColor" font-size="10">4</text>
+            <text x="843" y="213" fill="currentColor" font-size="10">6</text>
+            <text x="632" y="203" fill="currentColor" font-size="10">0</text>
+          </svg>
+        </div>
+
+        <p><strong>Lectura del MRU:</strong> la recta de <code>x-t</code> tiene pendiente constante (5 m/s), <code>v-t</code> se mantiene horizontal en 5 m/s y <code>a-t</code> está en cero todo el tiempo.</p>
+        <p><strong>Ejes y datos (MRU):</strong></p>
+        <ul>
+          <li><strong>x-t:</strong> abscisa <code>t [s]</code> = 0, 2, 4, 6; ordenada <code>x [m]</code> = 0, 10, 20, 30.</li>
+          <li><strong>v-t:</strong> abscisa <code>t [s]</code> = 0, 2, 4, 6; ordenada <code>v [m/s]</code> = 0, 2.5, 5 (constante en 5).</li>
+          <li><strong>a-t:</strong> abscisa <code>t [s]</code> = 0, 2, 4, 6; ordenada <code>a [m/s²]</code> = 0 (línea sobre el eje).</li>
+        </ul>
+
+        <h3>Gráficos del MRUV (ejemplo resuelto)</h3>
+        <p>Ejemplo: un móvil parte del reposo y acelera de forma constante con <strong>a = 2 m/s²</strong> durante 6 s.</p>
+
+        <div class="state-figure">
+          <svg class="kinematics-graphs" viewBox="0 0 920 250" width="100%" role="img" aria-label="Graficos completos de MRUV">
+            <rect x="10" y="10" width="900" height="230" rx="12" fill="none" stroke="currentColor"/>
+
+            <rect x="30" y="40" width="270" height="185" rx="10" fill="#e8f2e4" stroke="#1c6b47"/>
+            <text x="125" y="62" fill="currentColor" font-size="14" font-weight="bold">MRUV: x vs t</text>
+            <line x1="60" y1="200" x2="260" y2="200" stroke="currentColor" stroke-width="2"/>
+            <line x1="60" y1="200" x2="60" y2="78" stroke="currentColor" stroke-width="2"/>
+            <path d="M60 200 Q110 192 145 171 Q190 139 260 78" fill="none" stroke="#1c6b47" stroke-width="4"/>
+            <circle cx="60" cy="200" r="3.5" fill="#1c6b47"/>
+            <circle cx="127" cy="183" r="3.5" fill="#1c6b47"/>
+            <circle cx="194" cy="133" r="3.5" fill="#1c6b47"/>
+            <circle cx="260" cy="78" r="3.5" fill="#1c6b47"/>
+            <text x="212" y="220" fill="currentColor" font-size="12">t [s]</text>
+            <text x="34" y="72" fill="currentColor" font-size="12">x [m]</text>
+            <text x="54" y="213" fill="currentColor" font-size="10">0</text>
+            <text x="120" y="213" fill="currentColor" font-size="10">2</text>
+            <text x="187" y="213" fill="currentColor" font-size="10">4</text>
+            <text x="253" y="213" fill="currentColor" font-size="10">6</text>
+            <text x="34" y="203" fill="currentColor" font-size="10">0</text>
+            <text x="28" y="162" fill="currentColor" font-size="10">10</text>
+            <text x="28" y="121" fill="currentColor" font-size="10">20</text>
+            <text x="28" y="80" fill="currentColor" font-size="10">30+</text>
+
+            <rect x="325" y="40" width="270" height="185" rx="10" fill="#e8f2e4" stroke="#1c6b47"/>
+            <text x="420" y="62" fill="currentColor" font-size="14" font-weight="bold">MRUV: v vs t</text>
+            <line x1="355" y1="200" x2="555" y2="200" stroke="currentColor" stroke-width="2"/>
+            <line x1="355" y1="200" x2="355" y2="78" stroke="currentColor" stroke-width="2"/>
+            <line x1="355" y1="200" x2="555" y2="80" stroke="#1c6b47" stroke-width="4"/>
+            <circle cx="355" cy="200" r="3.5" fill="#1c6b47"/>
+            <circle cx="422" cy="160" r="3.5" fill="#1c6b47"/>
+            <circle cx="489" cy="120" r="3.5" fill="#1c6b47"/>
+            <circle cx="555" cy="80" r="3.5" fill="#1c6b47"/>
+            <text x="507" y="220" fill="currentColor" font-size="12">t [s]</text>
+            <text x="320" y="72" fill="currentColor" font-size="12">v [m/s]</text>
+            <text x="349" y="213" fill="currentColor" font-size="10">0</text>
+            <text x="416" y="213" fill="currentColor" font-size="10">2</text>
+            <text x="483" y="213" fill="currentColor" font-size="10">4</text>
+            <text x="548" y="213" fill="currentColor" font-size="10">6</text>
+            <text x="339" y="203" fill="currentColor" font-size="10">0</text>
+            <text x="339" y="163" fill="currentColor" font-size="10">4</text>
+            <text x="339" y="123" fill="currentColor" font-size="10">8</text>
+            <text x="339" y="83" fill="currentColor" font-size="10">12</text>
+
+            <rect x="620" y="40" width="270" height="185" rx="10" fill="#e8f2e4" stroke="#1c6b47"/>
+            <text x="715" y="62" fill="currentColor" font-size="14" font-weight="bold">MRUV: a vs t</text>
+            <line x1="650" y1="200" x2="850" y2="200" stroke="currentColor" stroke-width="2"/>
+            <line x1="650" y1="200" x2="650" y2="78" stroke="currentColor" stroke-width="2"/>
+            <line x1="650" y1="160" x2="850" y2="160" stroke="#1c6b47" stroke-width="4"/>
+            <text x="802" y="220" fill="currentColor" font-size="12">t [s]</text>
+            <text x="614" y="72" fill="currentColor" font-size="12">a [m/s²]</text>
+            <text x="644" y="213" fill="currentColor" font-size="10">0</text>
+            <text x="711" y="213" fill="currentColor" font-size="10">2</text>
+            <text x="778" y="213" fill="currentColor" font-size="10">4</text>
+            <text x="843" y="213" fill="currentColor" font-size="10">6</text>
+            <text x="632" y="203" fill="currentColor" font-size="10">0</text>
+            <text x="632" y="163" fill="currentColor" font-size="10">2</text>
+          </svg>
+        </div>
+
+        <p><strong>Lectura del MRUV:</strong> en <code>v-t</code> la pendiente es constante (sube 2 m/s por cada segundo), en <code>a-t</code> aparece una línea horizontal en 2 m/s² y en <code>x-t</code> la curva se abre porque cada segundo recorre más distancia.</p>
+        <p><strong>Ejes y datos (MRUV):</strong></p>
+        <ul>
+          <li><strong>x-t:</strong> abscisa <code>t [s]</code> = 0, 2, 4, 6; ordenada <code>x [m]</code> = 0, 10, 20, 30+ (curva creciente).</li>
+          <li><strong>v-t:</strong> abscisa <code>t [s]</code> = 0, 2, 4, 6; ordenada <code>v [m/s]</code> = 0, 4, 8, 12.</li>
+          <li><strong>a-t:</strong> abscisa <code>t [s]</code> = 0, 2, 4, 6; ordenada <code>a [m/s²]</code> = 2 (constante).</li>
+        </ul>
+
+        <div class="state-figure">
+          <svg class="kinematics-graphs" viewBox="0 0 920 360" width="100%" role="img" aria-label="Comparacion de graficos de MRU y MRUV con ejes y valores">
+            <rect x="10" y="10" width="900" height="340" rx="12" fill="none" stroke="currentColor"/>
+
+            <g data-panel="graficos-mru">
+              <text x="34" y="40" fill="#eef7ee" font-size="18" font-weight="bold">MRU (velocidad constante, aceleración nula)</text>
+
+              <rect x="30" y="60" width="270" height="265" rx="10" fill="#e8f2e4" stroke="#1c6b47"/>
+              <text x="130" y="84" fill="currentColor" font-size="14" font-weight="bold">x vs t</text>
+              <line x1="60" y1="285" x2="260" y2="285" stroke="currentColor" stroke-width="2"/>
+              <line x1="60" y1="285" x2="60" y2="105" stroke="currentColor" stroke-width="2"/>
+              <line x1="60" y1="285" x2="260" y2="105" stroke="#1c6b47" stroke-width="4"/>
+              <line x1="127" y1="281" x2="127" y2="289" stroke="currentColor" stroke-width="2"/>
+              <line x1="194" y1="281" x2="194" y2="289" stroke="currentColor" stroke-width="2"/>
+              <line x1="56" y1="225" x2="64" y2="225" stroke="currentColor" stroke-width="2"/>
+              <line x1="56" y1="165" x2="64" y2="165" stroke="currentColor" stroke-width="2"/>
+              <text x="54" y="304" fill="currentColor" font-size="11">0</text>
+              <text x="121" y="304" fill="currentColor" font-size="11">2</text>
+              <text x="188" y="304" fill="currentColor" font-size="11">4</text>
+              <text x="253" y="304" fill="currentColor" font-size="11">6</text>
+              <text x="38" y="289" fill="currentColor" font-size="11">0</text>
+              <text x="28" y="229" fill="currentColor" font-size="11">10</text>
+              <text x="28" y="169" fill="currentColor" font-size="11">20</text>
+              <text x="28" y="109" fill="currentColor" font-size="11">30</text>
+              <text x="210" y="320" fill="currentColor" font-size="12">t [s]</text>
+              <text x="30" y="98" fill="currentColor" font-size="12">x [m]</text>
+
+              <rect x="325" y="60" width="270" height="265" rx="10" fill="#e8f2e4" stroke="#1c6b47"/>
+              <text x="425" y="84" fill="currentColor" font-size="14" font-weight="bold">v vs t</text>
+              <line x1="355" y1="285" x2="555" y2="285" stroke="currentColor" stroke-width="2"/>
+              <line x1="355" y1="285" x2="355" y2="105" stroke="currentColor" stroke-width="2"/>
+              <line x1="355" y1="195" x2="545" y2="195" stroke="#1c6b47" stroke-width="4"/>
+              <line x1="422" y1="281" x2="422" y2="289" stroke="currentColor" stroke-width="2"/>
+              <line x1="489" y1="281" x2="489" y2="289" stroke="currentColor" stroke-width="2"/>
+              <line x1="351" y1="240" x2="359" y2="240" stroke="currentColor" stroke-width="2"/>
+              <line x1="351" y1="195" x2="359" y2="195" stroke="currentColor" stroke-width="2"/>
+              <text x="349" y="304" fill="currentColor" font-size="11">0</text>
+              <text x="416" y="304" fill="currentColor" font-size="11">2</text>
+              <text x="483" y="304" fill="currentColor" font-size="11">4</text>
+              <text x="548" y="304" fill="currentColor" font-size="11">6</text>
+              <text x="338" y="289" fill="currentColor" font-size="11">0</text>
+              <text x="338" y="244" fill="currentColor" font-size="11">2.5</text>
+              <text x="338" y="199" fill="currentColor" font-size="11">5</text>
+              <text x="505" y="320" fill="currentColor" font-size="12">t [s]</text>
+              <text x="320" y="98" fill="currentColor" font-size="12">v [m/s]</text>
+
+              <rect x="620" y="60" width="270" height="265" rx="10" fill="#e8f2e4" stroke="#1c6b47"/>
+              <text x="720" y="84" fill="currentColor" font-size="14" font-weight="bold">a vs t</text>
+              <line x1="650" y1="285" x2="850" y2="285" stroke="currentColor" stroke-width="2"/>
+              <line x1="650" y1="285" x2="650" y2="105" stroke="currentColor" stroke-width="2"/>
+              <line x1="650" y1="285" x2="845" y2="285" stroke="#1c6b47" stroke-width="4"/>
+              <line x1="717" y1="281" x2="717" y2="289" stroke="currentColor" stroke-width="2"/>
+              <line x1="784" y1="281" x2="784" y2="289" stroke="currentColor" stroke-width="2"/>
+              <text x="644" y="304" fill="currentColor" font-size="11">0</text>
+              <text x="711" y="304" fill="currentColor" font-size="11">2</text>
+              <text x="778" y="304" fill="currentColor" font-size="11">4</text>
+              <text x="843" y="304" fill="currentColor" font-size="11">6</text>
+              <text x="632" y="289" fill="currentColor" font-size="11">0</text>
+              <text x="800" y="320" fill="currentColor" font-size="12">t [s]</text>
+              <text x="612" y="98" fill="currentColor" font-size="12">a [m/s²]</text>
+            </g>
+
+            <g data-panel="graficos-mruv" visibility="hidden">
+              <text x="34" y="40" fill="#eef7ee" font-size="18" font-weight="bold">MRUV (aceleración constante distinta de cero)</text>
+
+              <rect x="30" y="60" width="270" height="265" rx="10" fill="#e8f2e4" stroke="#1c6b47"/>
+              <text x="130" y="84" fill="currentColor" font-size="14" font-weight="bold">x vs t</text>
+              <line x1="60" y1="285" x2="260" y2="285" stroke="currentColor" stroke-width="2"/>
+              <line x1="60" y1="285" x2="60" y2="105" stroke="currentColor" stroke-width="2"/>
+              <path d="M60 285 Q120 276 160 240 Q210 190 260 105" fill="none" stroke="#1c6b47" stroke-width="4"/>
+              <line x1="127" y1="281" x2="127" y2="289" stroke="currentColor" stroke-width="2"/>
+              <line x1="194" y1="281" x2="194" y2="289" stroke="currentColor" stroke-width="2"/>
+              <line x1="56" y1="225" x2="64" y2="225" stroke="currentColor" stroke-width="2"/>
+              <line x1="56" y1="165" x2="64" y2="165" stroke="currentColor" stroke-width="2"/>
+              <text x="54" y="304" fill="currentColor" font-size="11">0</text>
+              <text x="121" y="304" fill="currentColor" font-size="11">2</text>
+              <text x="188" y="304" fill="currentColor" font-size="11">4</text>
+              <text x="253" y="304" fill="currentColor" font-size="11">6</text>
+              <text x="38" y="289" fill="currentColor" font-size="11">0</text>
+              <text x="28" y="229" fill="currentColor" font-size="11">10</text>
+              <text x="28" y="169" fill="currentColor" font-size="11">20</text>
+              <text x="28" y="109" fill="currentColor" font-size="11">30</text>
+              <text x="210" y="320" fill="currentColor" font-size="12">t [s]</text>
+              <text x="30" y="98" fill="currentColor" font-size="12">x [m]</text>
+
+              <rect x="325" y="60" width="270" height="265" rx="10" fill="#e8f2e4" stroke="#1c6b47"/>
+              <text x="425" y="84" fill="currentColor" font-size="14" font-weight="bold">v vs t</text>
+              <line x1="355" y1="285" x2="555" y2="285" stroke="currentColor" stroke-width="2"/>
+              <line x1="355" y1="285" x2="355" y2="105" stroke="currentColor" stroke-width="2"/>
+              <line x1="355" y1="285" x2="555" y2="135" stroke="#1c6b47" stroke-width="4"/>
+              <line x1="422" y1="281" x2="422" y2="289" stroke="currentColor" stroke-width="2"/>
+              <line x1="489" y1="281" x2="489" y2="289" stroke="currentColor" stroke-width="2"/>
+              <line x1="351" y1="255" x2="359" y2="255" stroke="currentColor" stroke-width="2"/>
+              <line x1="351" y1="225" x2="359" y2="225" stroke="currentColor" stroke-width="2"/>
+              <line x1="351" y1="195" x2="359" y2="195" stroke="currentColor" stroke-width="2"/>
+              <text x="349" y="304" fill="currentColor" font-size="11">0</text>
+              <text x="416" y="304" fill="currentColor" font-size="11">2</text>
+              <text x="483" y="304" fill="currentColor" font-size="11">4</text>
+              <text x="548" y="304" fill="currentColor" font-size="11">6</text>
+              <text x="338" y="289" fill="currentColor" font-size="11">0</text>
+              <text x="338" y="259" fill="currentColor" font-size="11">2</text>
+              <text x="338" y="229" fill="currentColor" font-size="11">4</text>
+              <text x="338" y="199" fill="currentColor" font-size="11">6</text>
+              <text x="505" y="320" fill="currentColor" font-size="12">t [s]</text>
+              <text x="320" y="98" fill="currentColor" font-size="12">v [m/s]</text>
+
+              <rect x="620" y="60" width="270" height="265" rx="10" fill="#e8f2e4" stroke="#1c6b47"/>
+              <text x="720" y="84" fill="currentColor" font-size="14" font-weight="bold">a vs t</text>
+              <line x1="650" y1="285" x2="850" y2="285" stroke="currentColor" stroke-width="2"/>
+              <line x1="650" y1="285" x2="650" y2="105" stroke="currentColor" stroke-width="2"/>
+              <line x1="650" y1="225" x2="845" y2="225" stroke="#1c6b47" stroke-width="4"/>
+              <line x1="717" y1="281" x2="717" y2="289" stroke="currentColor" stroke-width="2"/>
+              <line x1="784" y1="281" x2="784" y2="289" stroke="currentColor" stroke-width="2"/>
+              <line x1="646" y1="255" x2="654" y2="255" stroke="currentColor" stroke-width="2"/>
+              <line x1="646" y1="225" x2="654" y2="225" stroke="currentColor" stroke-width="2"/>
+              <text x="644" y="304" fill="currentColor" font-size="11">0</text>
+              <text x="711" y="304" fill="currentColor" font-size="11">2</text>
+              <text x="778" y="304" fill="currentColor" font-size="11">4</text>
+              <text x="843" y="304" fill="currentColor" font-size="11">6</text>
+              <text x="632" y="289" fill="currentColor" font-size="11">0</text>
+              <text x="632" y="259" fill="currentColor" font-size="11">1</text>
+              <text x="632" y="229" fill="currentColor" font-size="11">2</text>
+              <text x="800" y="320" fill="currentColor" font-size="12">t [s]</text>
+              <text x="612" y="98" fill="currentColor" font-size="12">a [m/s²]</text>
+            </g>
+          </svg>
+        </div>
+        <p class="diagram-caption" data-status aria-live="polite"></p>
+      </div>
+
+      <p><strong>Qué indican estos gráficos (ejemplo numérico):</strong></p>
+      <ul>
+        <li><strong>MRU:</strong> la pendiente de <code>x-t</code> es constante (recorre 30 m en 6 s), por eso <code>v-t</code> queda en 5 m/s y <code>a-t</code> es 0.</li>
+        <li><strong>MRUV:</strong> en <code>v-t</code> la velocidad sube linealmente de 0 a 6 m/s en 6 s; su pendiente es 1 m/s² (aceleración constante).</li>
+        <li><strong>MRUV:</strong> como la velocidad aumenta, en <code>x-t</code> la curva se hace cada vez más inclinada (cada segundo avanza más metros).</li>
+      </ul>
+
+      <div class="activity">
+        <h4>Actividad guiada: identificar MRU o MRUV con gráficos</h4>
+        <ol>
+          <li>Si <strong>v-t</strong> es una línea horizontal, clasificá el movimiento y justificá usando <strong>a-t</strong>.</li>
+          <li>Si <strong>v-t</strong> es una recta inclinada hacia arriba, decí si acelera o desacelera.</li>
+          <li>Mirá el gráfico <strong>x-t</strong>: si es recta, ¿cómo es la velocidad? Si es curva, ¿qué podés concluir?</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Movimiento circular y parabólico</h2>
+      <p>No todo movimiento es rectilíneo. En la vida diaria aparecen trayectorias curvas que también podemos describir con Física.</p>
+
+      <div class="diagram-switcher" data-switcher data-initial="mov-circular">
+        <div class="state-controls" role="group" aria-label="Tipo de trayectoria curvilinea">
+          <button class="chip-btn" type="button" data-target="mov-circular" data-description="Movimiento circular: trayectoria en circunferencia y cambio continuo de direccion." aria-pressed="false">Circular</button>
+          <button class="chip-btn" type="button" data-target="mov-parabolico" data-description="Movimiento parabolico: combinacion de movimiento horizontal y caida vertical por gravedad." aria-pressed="false">Parabólico</button>
+        </div>
+
+        <div class="state-figure">
+          <svg viewBox="0 0 860 320" width="100%" role="img" aria-label="Movimiento circular y parabolico">
+            <rect x="10" y="10" width="840" height="300" rx="12" fill="none" stroke="currentColor"/>
+
+            <g data-panel="mov-circular">
+              <text x="40" y="38" fill="currentColor" font-size="18" font-weight="bold">Movimiento circular</text>
+              <circle cx="230" cy="170" r="95" fill="none" stroke="#1c6b47" stroke-width="4"/>
+              <circle cx="230" cy="170" r="8" fill="#1c6b47"/>
+              <circle cx="325" cy="170" r="9" fill="#69bd89"/>
+              <line x1="230" y1="170" x2="325" y2="170" stroke="#14543a" stroke-width="3"/>
+              <line x1="325" y1="170" x2="325" y2="120" stroke="#14543a" stroke-width="3"/>
+              <polygon points="325,120 319,132 331,132" fill="#14543a"/>
+              <text x="336" y="128" fill="currentColor" font-size="13">v tangencial</text>
+              <line x1="325" y1="170" x2="283" y2="170" stroke="#1c6b47" stroke-width="3"/>
+              <polygon points="283,170 295,164 295,176" fill="#1c6b47"/>
+              <text x="286" y="158" fill="currentColor" font-size="12">hacia el centro</text>
+              <text x="430" y="110" fill="currentColor" font-size="15">Ejemplos cotidianos:</text>
+              <text x="430" y="136" fill="currentColor" font-size="14">• Rueda de bicicleta girando</text>
+              <text x="430" y="160" fill="currentColor" font-size="14">• Calesita o rueda de la fortuna</text>
+              <text x="430" y="184" fill="currentColor" font-size="14">• Ventilador en funcionamiento</text>
+              <text x="430" y="220" fill="currentColor" font-size="14" font-weight="bold">Aunque la rapidez sea constante, cambia la dirección:</text>
+              <text x="430" y="242" fill="currentColor" font-size="14">por eso hay aceleración centripeta.</text>
+            </g>
+
+            <g data-panel="mov-parabolico" visibility="hidden">
+              <text x="40" y="38" fill="currentColor" font-size="18" font-weight="bold">Movimiento parabólico</text>
+              <line x1="50" y1="245" x2="810" y2="245" stroke="currentColor" stroke-width="2"/>
+              <text x="58" y="265" fill="currentColor" font-size="12">suelo</text>
+              <path d="M90 245 Q280 40 560 245" fill="none" stroke="#1c6b47" stroke-width="4"/>
+              <circle cx="90" cy="245" r="8" fill="#69bd89"/>
+              <circle cx="280" cy="110" r="8" fill="#69bd89"/>
+              <circle cx="560" cy="245" r="8" fill="#69bd89"/>
+              <line x1="90" y1="245" x2="170" y2="205" stroke="#14543a" stroke-width="3"/>
+              <polygon points="170,205 157,203 163,214" fill="#14543a"/>
+              <text x="174" y="208" fill="currentColor" font-size="13">componente horizontal</text>
+              <line x1="280" y1="110" x2="280" y2="155" stroke="#14543a" stroke-width="3"/>
+              <polygon points="280,155 274,143 286,143" fill="#14543a"/>
+              <text x="286" y="150" fill="currentColor" font-size="13">gravedad</text>
+              <text x="430" y="100" fill="currentColor" font-size="15">Ejemplos aplicables:</text>
+              <text x="430" y="126" fill="currentColor" font-size="14">• Tiro al aro en básquet</text>
+              <text x="430" y="150" fill="currentColor" font-size="14">• Pase largo en fútbol</text>
+              <text x="430" y="174" fill="currentColor" font-size="14">• Chorro de agua de una manguera</text>
+              <text x="430" y="210" fill="currentColor" font-size="14" font-weight="bold">Se combina MRU horizontal + MRUV vertical.</text>
+            </g>
+          </svg>
+        </div>
+        <p class="diagram-caption" data-status aria-live="polite"></p>
+      </div>
+
+      <div class="activity">
+        <h4>Actividad de aplicación cotidiana</h4>
+        <p>Elegí dos situaciones reales y clasificá cada una como rectilínea, circular o parabólica. Explicá qué variable cambia: rapidez, dirección o ambas.</p>
+        <ul>
+          <li>Una bici en línea recta por una avenida.</li>
+          <li>Una calesita girando en la plaza.</li>
+          <li>Una pelota pateada hacia el arco.</li>
+          <li>El agua que sale de una fuente.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Fuerzas: la causa del cambio en el movimiento</h2>
+
+      <h3>¿Qué es una fuerza?</h3>
+      <p>Una <strong>fuerza</strong> es una interacción que puede:</p>
+      <ul>
+        <li><strong>Poner en movimiento</strong> algo que está quieto (empujar una silla)</li>
+        <li><strong>Frenar o detener</strong> algo que está en movimiento (frenar la bici)</li>
+        <li><strong>Cambiar la dirección</strong> del movimiento (doblar en una esquina)</li>
+        <li><strong>Deformar</strong> un objeto (estirar un resorte, aplastar plasticina)</li>
+      </ul>
+      <p>La fuerza es una <strong>magnitud vectorial</strong>: tiene intensidad (módulo), dirección y sentido.</p>
+      <p><strong>Unidad:</strong> Newton (N), en honor a Isaac Newton.</p>
+
+      <h3>Tipos de fuerzas según su contacto</h3>
+
+      <h4>Fuerzas de contacto</h4>
+      <p>Actúan cuando dos objetos se tocan físicamente.</p>
+      <ul>
+        <li><strong>Fuerza normal (N):</strong> la que ejerce una superficie sobre un objeto que apoya en ella (la mesa sostiene el libro).</li>
+        <li><strong>Fuerza de rozamiento o fricción (Fr):</strong> se opone al movimiento cuando dos superficies se rozan (por eso es más difícil empujar un objeto pesado).</li>
+        <li><strong>Tensión (T):</strong> fuerza que ejerce una soga, cable o cadena cuando se estira (la soga que sostiene una hamaca).</li>
+        <li><strong>Fuerza muscular:</strong> la que ejercés con tus músculos (empujar, levantar, tirar).</li>
+        <li><strong>Fuerza elástica:</strong> la que ejerce un resorte o una banda elástica cuando se estira o comprime.</li>
+      </ul>
+
+      <h4>Fuerzas a distancia (sin contacto)</h4>
+      <p>Actúan aunque los objetos no se toquen.</p>
+      <ul>
+        <li><strong>Fuerza gravitatoria (Peso, P):</strong> atracción que ejerce la Tierra (u otro planeta/estrella) sobre los objetos. Por eso caen las cosas.</li>
+        <li><strong>Fuerza magnética:</strong> atracción o repulsión entre imanes o materiales magnéticos (imán en la heladera).</li>
+        <li><strong>Fuerza eléctrica:</strong> atracción o repulsión entre cargas eléctricas (el globo frotado atrae papelitos).</li>
+      </ul>
+
+      <h3>Las 4 fuerzas fundamentales de la naturaleza</h3>
+      <p>Toda interacción en el universo se puede explicar con estas cuatro fuerzas fundamentales:</p>
+
+      <h4>1. Fuerza Gravitatoria</h4>
+      <p>Es la atracción entre objetos con masa. Siempre es atractiva (nunca repulsiva).</p>
+      <ul>
+        <li><strong>Ejemplo a escala humana:</strong> La Tierra te atrae hacia abajo (tu peso).</li>
+        <li><strong>Ejemplo cósmico:</strong> La Tierra orbita el Sol, la Luna orbita la Tierra, las galaxias se atraen entre sí.</li>
+        <li><strong>Características:</strong> Es la más débil de las 4, pero actúa a grandes distancias y nunca se "apaga".</li>
+      </ul>
+
+      <h4>2. Fuerza Electromagnética</h4>
+      <p>Incluye las fuerzas eléctricas y magnéticas. Actúa entre partículas con carga eléctrica. Puede ser atractiva o repulsiva.</p>
+      <ul>
+        <li><strong>Ejemplos:</strong> Electricidad, magnetismo, luz, ondas de radio, rayos X.</li>
+        <li><strong>En la vida diaria:</strong> Mantiene unidos los átomos y moléculas, hace funcionar motores eléctricos, permite la visión (la luz es electromagnética).</li>
+        <li><strong>Características:</strong> Mucho más intensa que la gravitatoria, pero se puede "cancelar" (cargas + y - se neutralizan).</li>
+      </ul>
+
+      <h4>3. Fuerza Nuclear Fuerte</h4>
+      <p>Mantiene unidos los protones y neutrones dentro del núcleo atómico. Es la fuerza más intensa de las 4.</p>
+      <ul>
+        <li><strong>Ejemplo:</strong> Sin ella, los núcleos atómicos se desintegrarían (los protones se repelerían porque tienen la misma carga +).</li>
+        <li><strong>Aplicación:</strong> Fisión nuclear (centrales nucleares, bomba atómica), fusión nuclear (el Sol).</li>
+        <li><strong>Características:</strong> Actúa solo a distancias extremadamente cortas (dentro del núcleo).</li>
+      </ul>
+
+      <h4>4. Fuerza Nuclear Débil</h4>
+      <p>Responsable de ciertos tipos de desintegración radiactiva y reacciones nucleares.</p>
+      <ul>
+        <li><strong>Ejemplo:</strong> Permite que el Sol brille (interviene en la fusión nuclear).</li>
+        <li><strong>Características:</strong> Actúa a distancias aún más cortas que la fuerte, es más débil que ella pero más fuerte que la gravedad.</li>
+      </ul>
+
+      <p>💡 <strong>Importante:</strong> El 99,9% de las fuerzas que experimentamos en la vida diaria (peso, fricción, tensión, normal, etc.) son manifestaciones de la <strong>fuerza gravitatoria</strong> y la <strong>fuerza electromagnética</strong>.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Leyes de Newton (introducción)</h2>
+
+      <h3>Primera Ley (Ley de Inercia)</h3>
+      <p>"Un objeto en reposo permanece en reposo, y un objeto en movimiento continúa moviéndose con velocidad constante, a menos que una fuerza neta actúe sobre él."</p>
+      <p><strong>En criollo:</strong> Las cosas no cambian su estado de movimiento por sí solas. Si algo está quieto, se queda quieto. Si algo se mueve, sigue moviéndose igual (misma velocidad y dirección) hasta que una fuerza lo modifique.</p>
+      <p><em>Ejemplo:</em> Cuando el colectivo frena bruscamente, tu cuerpo "sigue hacia adelante" porque tiende a mantener el movimiento que tenía.</p>
+
+      <h3>Segunda Ley (Fuerza = masa × aceleración)</h3>
+      <p>"La aceleración de un objeto es directamente proporcional a la fuerza neta que actúa sobre él e inversamente proporcional a su masa."</p>
+      <p><strong>Fórmula:</strong> F = m × a</p>
+      <ul>
+        <li>F = Fuerza (en Newtons, N)</li>
+        <li>m = masa (en kilogramos, kg)</li>
+        <li>a = aceleración (en m/s²)</li>
+      </ul>
+      <p><strong>En criollo:</strong> Cuanto mayor es la fuerza, mayor es la aceleración. Cuanto mayor es la masa, más difícil es acelerarlo.</p>
+      <p><em>Ejemplo:</em> Es más fácil empujar una bicicleta (poca masa) que un auto (mucha masa) con la misma fuerza.</p>
+
+      <h3>Tercera Ley (Acción y Reacción)</h3>
+      <p>"Cuando un objeto ejerce una fuerza sobre otro, el segundo ejerce una fuerza igual en magnitud pero opuesta en dirección sobre el primero."</p>
+      <p><strong>En criollo:</strong> Las fuerzas siempre vienen de a pares. Si empujás la pared, la pared te empuja a vos con la misma fuerza.</p>
+      <p><em>Ejemplo:</em> Cuando saltás, empujás el piso hacia abajo; el piso te empuja a vos hacia arriba (por eso subís).</p>
+    </section>
+
+    <section class="panel">
+      <h2>Ejemplos cotidianos argentinos</h2>
+
+      <h3>🚌 Movimiento de un colectivo</h3>
+      <ul>
+        <li><strong>Trayectoria:</strong> Sigue las calles (curvilínea en las esquinas, rectilínea en cuadras rectas).</li>
+        <li><strong>Velocidad:</strong> Cambia constantemente (acelera desde la parada, viaja a ~40-60 km/h, frena en semáforos).</li>
+        <li><strong>Fuerzas:</strong> Motor (fuerza hacia adelante), rozamiento con el asiento y el aire, peso (hacia abajo), normal del piso (hacia arriba).</li>
+        <li><strong>Inercia:</strong> Cuando frena, los pasajeros "siguen hacia adelante" (por eso hay que agarrarse).</li>
+      </ul>
+
+      <h3>⚽ Pelota en un partido de fútbol</h3>
+      <ul>
+        <li><strong>Trayectoria:</strong> Parabólica cuando la patean al aire, rectilínea cuando rueda en el piso.</li>
+        <li><strong>Velocidad:</strong> Va disminuyendo por la fricción con el piso y el aire.</li>
+        <li><strong>Fuerzas:</strong> Pie del jugador (patea = fuerza), gravedad (baja), rozamiento con el aire y el piso (frena).</li>
+        <li><strong>Sin fuerzas:</strong> Si no hubiera gravedad ni fricción, la pelota seguiría en línea recta para siempre (1era Ley).</li>
+      </ul>
+
+      <h3>🚴 Andar en bicicleta</h3>
+      <ul>
+        <li><strong>Fuerzas:</strong> Tus piernas aplican fuerza en los pedales, la cadena transmite esa fuerza a la rueda trasera, la rueda empuja el piso hacia atrás, el piso empuja la bici hacia adelante (3era Ley).</li>
+        <li><strong>Fricción:</strong> El rozamiento con el aire y el piso te frena. Por eso es más fácil andar en bici en bajada (gravedad ayuda) que en subida (gravedad se opone).</li>
+        <li><strong>Equilibrio:</strong> Para doblar, inclinás la bici cambiando la dirección de la fuerza (cambio de velocidad = aceleración, aunque la rapidez sea constante).</li>
+      </ul>
+
+      <h3>🪂 Paracaidista cayendo</h3>
+      <ul>
+        <li><strong>Al principio:</strong> Solo gravedad (acelera hacia abajo cada vez más rápido).</li>
+        <li><strong>Después de abrir el paracaídas:</strong> La resistencia del aire aumenta muchísimo, oponiéndose a la gravedad. Eventualmente se equilibran → velocidad constante (MRU), llamada "velocidad terminal".</li>
+      </ul>
+
+      <div class="activity">
+        <h4>Actividad práctica N°1: Midiendo velocidades</h4>
+        <p><strong>Materiales:</strong> Cinta métrica o regla larga, cronómetro (celular).</p>
+        <p><strong>Procedimiento:</strong></p>
+        <ol>
+          <li>Marcá una distancia de 10 metros en un pasillo o patio.</li>
+          <li>Caminá normalmente esa distancia y medí el tiempo que tardás.</li>
+          <li>Repetí corriendo.</li>
+          <li>Calculá tu velocidad en ambos casos: v = distancia ÷ tiempo</li>
+        </ol>
+        <p><strong>Preguntas:</strong></p>
+        <ul>
+          <li>¿Cuál fue tu velocidad caminando? ¿Y corriendo?</li>
+          <li>¿La velocidad fue constante o cambiaba mientras te movías?</li>
+          <li>Si hubieras doblado en una esquina, ¿habrías tenido aceleración aunque la rapidez fuera constante? ¿Por qué?</li>
+        </ul>
+      </div>
+
+      <div class="activity">
+        <h4>Actividad práctica N°2: Gráfico de movimiento</h4>
+        <p><strong>Consigna:</strong> Un auto se mueve así:</p>
+        <ul>
+          <li>0-5 segundos: acelera desde 0 hasta 20 m/s</li>
+          <li>5-15 segundos: mantiene velocidad constante de 20 m/s</li>
+          <li>15-20 segundos: frena hasta detenerse (0 m/s)</li>
+        </ul>
+        <p>Dibujá un gráfico de velocidad (eje Y) vs. tiempo (eje X). Identificá en qué tramos hay MRU y en cuáles hay MRUV.</p>
+        <p><strong>Ayuda:</strong> MRU = línea horizontal (velocidad constante). MRUV = línea inclinada (velocidad cambia).</p>
+      </div>
+
+      <div class="activity">
+        <h4>Actividad práctica N°3: Identificando fuerzas</h4>
+        <p><strong>Situación:</strong> Un libro está apoyado en una mesa.</p>
+        <p><strong>Consigna:</strong> Identificá todas las fuerzas que actúan sobre el libro y dibujá un diagrama con flechas (vectores) representando cada fuerza.</p>
+        <p><strong>Pistas:</strong></p>
+        <ul>
+          <li>¿La Tierra lo atrae? → Peso (P), hacia abajo</li>
+          <li>¿La mesa lo sostiene? → Normal (N), hacia arriba</li>
+          <li>¿Están equilibradas? (el libro no se mueve)</li>
+        </ul>
+        <p><strong>Extra:</strong> ¿Qué pasaría si empujás el libro horizontalmente con tu mano? Agregá esa fuerza al diagrama y pensá: ¿aparece fricción?</p>
+      </div>
+
+      <div class="activity">
+        <h4>Actividad práctica N°4: Experimento con fuerzas</h4>
+        <p><strong>Materiales:</strong> Un carrito de juguete (o caja pequeña), superficie lisa (mesa), libros para hacer rampa.</p>
+        <p><strong>Procedimiento:</strong></p>
+        <ol>
+          <li>Empujá el carrito en la mesa plana. Observá cuánto tarda en detenerse.</li>
+          <li>Hacé una rampa con libros y soltá el carrito desde arriba. Observá cómo acelera.</li>
+          <li>Compará las distancias recorridas.</li>
+        </ol>
+        <p><strong>Preguntas:</strong></p>
+        <ul>
+          <li>¿Por qué el carrito se detiene en la mesa plana? (pista: fricción)</li>
+          <li>¿Qué fuerza hace que acelere en la rampa? (pista: componente de la gravedad)</li>
+          <li>Si no hubiera fricción, ¿el carrito en la mesa seguiría para siempre? (1era Ley de Newton)</li>
+        </ul>
+      </div>
+
+      <div class="activity">
+        <h4>Proyecto de investigación: Transporte en Argentina</h4>
+        <p><strong>Consigna:</strong> Investigá sobre UN medio de transporte argentino y analizalo desde la física.</p>
+        <p><strong>Opciones:</strong> Subte de Buenos Aires, Tren Belgrano Norte, Colectivo urbano, Tren de alta velocidad (proyecto).</p>
+        <p><strong>Información a buscar:</strong></p>
+        <ul>
+          <li>Velocidad máxima (km/h)</li>
+          <li>Aceleración típica al arrancar</li>
+          <li>Distancia de frenado</li>
+          <li>Fuerzas involucradas (motor, fricción, peso)</li>
+          <li>Tipo de movimiento (MRU en tramos rectos, MRUV al acelerar/frenar)</li>
+        </ul>
+      </div>
+
+      <div class="activity">
+        <h4>Desafío de cálculo</h4>
+        <p>🧮 Un colectivo arranca desde el reposo y alcanza 54 km/h en 10 segundos.</p>
+        <p><strong>Preguntas:</strong></p>
+        <ol>
+          <li>Convertí 54 km/h a m/s (pista: 54 km/h = 54.000 m / 3.600 s = 15 m/s)</li>
+          <li>Calculá la aceleración: a = (velocidad final - velocidad inicial) ÷ tiempo</li>
+          <li>Si la masa del colectivo es 10.000 kg, ¿qué fuerza neta ejerció el motor? (F = m × a)</li>
+        </ol>
+      </div>
+
+      <div class="activity">
+        <h4>Para pensar y debatir</h4>
+        <p>💭 <strong>Paradoja del movimiento:</strong> Cuando estás sentado en tu silla leyendo esto, ¿estás en movimiento o en reposo?</p>
+        <p><strong>Pistas para reflexionar:</strong></p>
+        <ul>
+          <li>Desde tu perspectiva (sistema de referencia: la silla), estás en reposo.</li>
+          <li>Desde el sistema de referencia del Sol, la Tierra gira sobre su eje a ~1.600 km/h (en el ecuador) y orbita el Sol a ~107.000 km/h.</li>
+          <li>El Sol se mueve en la galaxia, la galaxia se mueve en el universo...</li>
+        </ul>
+        <p><strong>Pregunta:</strong> ¿Existe el "reposo absoluto"? ¿O todo movimiento es relativo al sistema de referencia que elijas?</p>
+      </div>
+    </section>
+      <section class="panel">
+      <!-- actividades-didacticas -->
+      <h2>Actividades didacticas del tema</h2>
+      <h3>1) Cuadro a completar: movimiento</h3>
+      <table class="study-table"><thead><tr><th>Tiempo (s)</th><th>Distancia (m)</th><th>Velocidad promedio</th></tr></thead><tbody><tr><td>________</td><td>________</td><td>________</td></tr><tr><td>________</td><td>________</td><td>________</td></tr></tbody></table>
+      <h3>2) Verdadero o Falso</h3>
+      <ol><li>La velocidad relaciona distancia y tiempo. (V/F)</li><li>Una magnitud vectorial tiene solo valor numerico. (V/F)</li><li>La fuerza puede producir cambios en el movimiento. (V/F)</li></ol>
+      <h3>3) Cuestionario breve</h3>
+      <ol><li>Diferencia entre magnitud escalar y vectorial con un ejemplo.</li><li>¿Para que sirven tablas y graficos en el estudio del movimiento?</li></ol>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Tema de Física basado en <code>programa_1anio.txt</code>.</p>
+    </div>
+  </footer>
+</body>
+</html>
+
+

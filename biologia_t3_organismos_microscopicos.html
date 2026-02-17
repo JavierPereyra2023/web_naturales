@@ -1,0 +1,215 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Organismos microscópicos | Biología</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/main.js"></script>
+</head>
+<body data-page="Organismos microscópicos" data-section="Biología" data-section-href="biologia.html">
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div>
+        <p class="kicker">Ciencias Naturales · 1° año</p>
+        <h1>Biología: Organismos microscópicos</h1>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar modo oscuro">Modo oscuro</button>
+    </div>
+    <nav class="main-nav container" aria-label="Navegación principal">
+      <a href="inicio.html">Inicio</a>
+      <a href="quimica.html">Química</a>
+      <a href="fisica.html">Física</a>
+      <a href="biologia.html" aria-current="page">Biología</a>
+    </nav>
+  </header>
+
+  <div class="container"><nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav></div>
+
+  <main id="contenido" class="container">
+    <section class="panel">
+      <h2>Bacterias y protistas</h2>
+      <p class="tag">Programa representado: organismos microscópicos autótrofos y heterótrofos; estructuras de nutrición, relación y reproducción; efectos benéficos y perjudiciales.</p>
+      <p>Los microorganismos son seres vivos tan pequeños que, en la mayoría de los casos, no pueden observarse a simple vista. Están presentes en el agua, el suelo, el aire, los alimentos y también en nuestro cuerpo.</p>
+      <p>Estudiarlos permite entender procesos ecológicos, de salud y de producción humana. No todos son "malos": muchos cumplen funciones esenciales para la vida en el planeta.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Características generales de los microorganismos</h2>
+      <ul>
+        <li>Presentan gran diversidad de formas y estrategias de vida.</li>
+        <li>Pueden ser autótrofos (producen su alimento) o heterótrofos (lo obtienen del medio).</li>
+        <li>Se reproducen con rapidez cuando las condiciones son favorables.</li>
+        <li>Algunos son beneficiosos y otros pueden causar enfermedades.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Bacterias y protistas: comparación básica</h2>
+      <table class="study-table">
+        <thead>
+          <tr>
+            <th>Aspecto</th>
+            <th>Bacterias</th>
+            <th>Protistas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tipo celular</td>
+            <td>Procariotas (sin núcleo verdadero)</td>
+            <td>Eucariotas (con núcleo)</td>
+          </tr>
+          <tr>
+            <td>Ejemplos</td>
+            <td>Lactobacillus, Escherichia coli</td>
+            <td>Amebas, paramecios, algas unicelulares</td>
+          </tr>
+          <tr>
+            <td>Nutrición</td>
+            <td>Autótrofa o heterótrofa</td>
+            <td>Autótrofa o heterótrofa</td>
+          </tr>
+          <tr>
+            <td>Reproducción</td>
+            <td>Principalmente fisión binaria</td>
+            <td>Asexual y, en algunos casos, sexual</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>Funciones vitales en microorganismos</h2>
+
+      <h3>Nutrición</h3>
+      <p>Algunos microorganismos producen su alimento mediante fotosíntesis o procesos químicos (autótrofos). Otros se alimentan de materia orgánica del ambiente (heterótrofos).</p>
+
+      <h3>Relación</h3>
+      <p>Responden a estímulos del entorno, por ejemplo movimiento hacia la luz, humedad o nutrientes, y alejamiento de condiciones desfavorables.</p>
+
+      <h3>Reproducción</h3>
+      <p>La reproducción rápida explica por qué las poblaciones microbianas pueden aumentar en poco tiempo si tienen agua, temperatura y nutrientes adecuados.</p>
+    </section>
+
+    <section class="panel">
+      <h2>SVG dinámico: funciones e impacto</h2>
+      <div class="diagram-switcher" data-switcher data-initial="nutricion">
+        <div class="state-controls" role="group" aria-label="Aspecto a observar">
+          <button class="chip-btn" type="button" data-target="nutricion" data-description="Nutrición: formas autótrofas y heterótrofas." aria-pressed="false">Nutrición</button>
+          <button class="chip-btn" type="button" data-target="reproduccion" data-description="Reproducción: permite su rápida expansión." aria-pressed="false">Reproducción</button>
+          <button class="chip-btn" type="button" data-target="impacto" data-description="Impacto: puede ser beneficioso o perjudicial." aria-pressed="false">Impacto</button>
+        </div>
+        <div class="state-figure">
+          <svg viewBox="0 0 640 260" width="100%" role="img" aria-label="Microorganismos">
+            <rect x="12" y="12" width="616" height="236" rx="12" fill="none" stroke="currentColor"/>
+            <g data-panel="nutricion">
+              <circle cx="120" cy="130" r="35" fill="#9be4b8"/>
+              <circle cx="220" cy="130" r="35" fill="#2e8b57"/>
+              <text x="95" y="185" fill="currentColor">Auto</text>
+              <text x="196" y="185" fill="currentColor">Hetero</text>
+            </g>
+            <g data-panel="reproduccion" visibility="hidden">
+              <circle cx="120" cy="130" r="30" fill="#9be4b8"/>
+              <circle cx="185" cy="130" r="24" fill="#9be4b8"/>
+              <circle cx="240" cy="130" r="18" fill="#9be4b8"/>
+            </g>
+            <g data-panel="impacto" visibility="hidden">
+              <circle cx="120" cy="110" r="24" fill="#2e8b57"/>
+              <circle cx="190" cy="150" r="24" fill="#f6b73c"/>
+              <text x="90" y="190" fill="currentColor">Benéfico</text>
+              <text x="170" y="190" fill="currentColor">Perjudicial</text>
+            </g>
+            <text x="320" y="110" fill="currentColor">Microscópicos, pero con gran</text>
+            <text x="320" y="140" fill="currentColor">importancia en ambiente y sociedad.</text>
+          </svg>
+        </div>
+        <p class="diagram-caption" data-status aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Efectos benéficos y perjudiciales</h2>
+      <div class="unit-grid">
+        <article class="unit-card">
+          <h3>Efectos benéficos</h3>
+          <ul>
+            <li>Fermentación para yogur y queso.</li>
+            <li>Descomposición de materia orgánica en ecosistemas.</li>
+            <li>Producción de medicamentos y biotecnología.</li>
+          </ul>
+        </article>
+        <article class="unit-card">
+          <h3>Efectos perjudiciales</h3>
+          <ul>
+            <li>Enfermedades infecciosas en humanos, animales o plantas.</li>
+            <li>Contaminación y deterioro de alimentos.</li>
+            <li>Desequilibrios ecológicos cuando una especie prolifera en exceso.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Prevención y hábitos saludables</h2>
+      <ul>
+        <li>Lavado correcto de manos.</li>
+        <li>Higiene y conservación adecuada de alimentos.</li>
+        <li>Uso responsable de antibióticos (solo con indicación médica).</li>
+        <li>Vacunación y cuidados comunitarios.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <div class="activity">
+        <h4>Actividad breve</h4>
+        <p>Escribí un ejemplo de microorganismo útil y uno perjudicial, explicando su efecto.</p>
+      </div>
+
+      <div class="activity">
+        <h4>Actividad de investigación</h4>
+        <p>Buscá un alimento fermentado de uso cotidiano y explicá qué microorganismos participan y por qué ese proceso es beneficioso.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Actividades didácticas del tema</h2>
+
+      <h3>1) Cuadro a completar: microorganismos</h3>
+      <table class="study-table">
+        <thead>
+          <tr>
+            <th>Organismo</th>
+            <th>Tipo (auto/heterótrofo)</th>
+            <th>Efecto benéfico</th>
+            <th>Efecto perjudicial</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Bacteria</td><td>________</td><td>________</td><td>________</td></tr>
+          <tr><td>Protista</td><td>________</td><td>________</td><td>________</td></tr>
+        </tbody>
+      </table>
+
+      <h3>2) Verdadero o Falso</h3>
+      <ol>
+        <li>Todos los microorganismos son perjudiciales. (V/F)</li>
+        <li>Pueden existir microorganismos autótrofos y heterótrofos. (V/F)</li>
+        <li>También se estudian sus estructuras de nutrición, relación y reproducción. (V/F)</li>
+        <li>La higiene no influye en la prevención de infecciones. (V/F)</li>
+      </ol>
+
+      <h3>3) Cuestionario breve</h3>
+      <ol>
+        <li>Mencioná dos diferencias entre bacterias y protistas.</li>
+        <li>¿Por qué su estudio es importante para salud y ambiente?</li>
+        <li>Explicá un ejemplo de uso benéfico de microorganismos en la vida diaria.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container"><p>Tema de Biología basado en <code>programa_1anio.txt</code>.</p></div></footer>
+</body>
+</html>
