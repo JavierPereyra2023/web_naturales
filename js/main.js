@@ -1724,6 +1724,45 @@
     });
   }
 
+  function addReadingProgressBar() {
+    if (document.body.getAttribute("data-page") === "Inicio" || document.body.getAttribute("data-page") === "Bienvenida") return;
+
+    const container = document.createElement("div");
+    container.className = "reading-progress-container";
+    const bar = document.createElement("div");
+    bar.className = "reading-progress-bar";
+    container.appendChild(bar);
+    document.body.prepend(container);
+
+    window.addEventListener("scroll", function () {
+      const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPosition = window.scrollY;
+      const progress = scrollTotal > 0 ? (scrollPosition / scrollTotal) * 100 : 0;
+      bar.style.width = progress + "%";
+    }, { passive: true });
+  }
+
+  function addBackButton() {
+    if (document.body.getAttribute("data-page") === "Inicio" || document.body.getAttribute("data-page") === "Bienvenida") return;
+
+    // Check if we are in a main section (Química, Física, Biología) -> don't show back button there, or link explicitly to Inicio
+    // But since breadcrumbs exist, a floating back might be specifically helpful to just go `history.back()`
+    const btn = document.createElement("button");
+    btn.className = "floating-back-btn";
+    btn.setAttribute("aria-label", "Volver atrás");
+    btn.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Volver`;
+
+    btn.addEventListener("click", function () {
+      if (document.referrer && document.referrer.includes(window.location.host)) {
+        window.history.back();
+      } else {
+        window.location.href = "inicio.html";
+      }
+    });
+
+    document.body.appendChild(btn);
+  }
+
   function initAll() {
     loadWeatherWidget();
     buildBreadcrumbs();
@@ -1738,6 +1777,8 @@
     observeCards();
     addTooltips();
     highlightKeywords();
+    addReadingProgressBar();
+    addBackButton();
   }
 
   if (document.readyState === "loading") {
