@@ -1,5 +1,6 @@
 ﻿<!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <script defer src="js/main.js"></script>
 </head>
+
 <body data-page="Relaciones tróficas" data-section="Biología" data-section-href="biologia.html">
   <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
 
@@ -16,7 +18,8 @@
         <p class="kicker">Ciencias Naturales · 1° año</p>
         <h1>Biología: Relaciones tróficas</h1>
       </div>
-      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar modo oscuro">Modo oscuro</button>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false"
+        aria-label="Cambiar modo oscuro">Modo oscuro</button>
     </div>
     <nav class="main-nav container" aria-label="Navegación principal">
       <a href="inicio.html">Inicio</a>
@@ -33,16 +36,20 @@
   <main id="contenido" class="container">
     <section class="panel">
       <h2>Redes tróficas y ecosistemas</h2>
-      <p class="tag">Programa representado: relaciones tróficas, modelos de nutrición, factores que alteran ecosistemas, poblaciones y comunidades.</p>
-      <p>Las redes tróficas muestran cómo se conectan los seres vivos por su forma de nutrición. Son una herramienta para entender cómo circula la energía en un ecosistema.</p>
-      <p>Cuando cambia una población, pueden alterarse otras relaciones de la comunidad y modificarse la dinámica ecológica.</p>
+      <p class="tag">Programa representado: relaciones tróficas, modelos de nutrición, factores que alteran ecosistemas,
+        poblaciones y comunidades.</p>
+      <p>Las redes tróficas muestran cómo se conectan los seres vivos por su forma de nutrición. Son una herramienta
+        para entender cómo circula la energía en un ecosistema.</p>
+      <p>Cuando cambia una población, pueden alterarse otras relaciones de la comunidad y modificarse la dinámica
+        ecológica.</p>
     </section>
 
     <section class="panel">
       <h2>Niveles ecológicos clave</h2>
       <ul>
         <li><strong>Individuo:</strong> un solo organismo (por ejemplo, un zorro).</li>
-        <li><strong>Población:</strong> conjunto de individuos de la misma especie en un lugar y tiempo determinados.</li>
+        <li><strong>Población:</strong> conjunto de individuos de la misma especie en un lugar y tiempo determinados.
+        </li>
         <li><strong>Comunidad:</strong> conjunto de poblaciones de distintas especies que conviven e interactúan.</li>
       </ul>
       <p><strong>Densidad poblacional:</strong> cantidad de individuos por unidad de superficie o volumen.</p>
@@ -79,35 +86,177 @@
       <h2>red trófica simple</h2>
       <div class="diagram-switcher" data-switcher data-initial="normal">
         <div class="state-controls" role="group" aria-label="Escenario ecológico">
-          <button class="chip-btn" type="button" data-target="normal" data-description="Red equilibrada: interacciones estables." aria-pressed="false">Equilibrio</button>
-          <button class="chip-btn" type="button" data-target="menos" data-description="Menos consumidores primarios: cambia la red." aria-pressed="false">Menos herbívoros</button>
-          <button class="chip-btn" type="button" data-target="perdida" data-description="Pérdida de un nivel: afecta a toda la comunidad." aria-pressed="false">Pérdida de especie</button>
+          <button class="chip-btn" type="button" data-target="normal"
+            data-description="Red equilibrada: interacciones estables." aria-pressed="false">Equilibrio</button>
+          <button class="chip-btn" type="button" data-target="menos"
+            data-description="Menos consumidores primarios: cambia la red." aria-pressed="false">Menos
+            herbívoros</button>
+          <button class="chip-btn" type="button" data-target="perdida"
+            data-description="Pérdida de un nivel: afecta a toda la comunidad." aria-pressed="false">Pérdida de
+            especie</button>
         </div>
         <div class="state-figure">
-          <svg viewBox="0 0 640 260" width="100%" role="img" aria-label="Red trófica">
-            <rect x="12" y="12" width="616" height="236" rx="12" fill="none" stroke="currentColor"/>
+          <svg viewBox="0 0 640 260" width="100%" role="img" aria-label="Red trófica interactiva">
+            <title>Red trófica: flujo de energía en un ecosistema</title>
+            <rect x="12" y="12" width="616" height="236" rx="12" fill="none" stroke="currentColor" />
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6"
+                orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--text)" />
+              </marker>
+              <marker id="arrow-broken" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6"
+                orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#e57373" />
+              </marker>
+            </defs>
+
+            <!-- PANEL: EQUILIBRIO -->
             <g data-panel="normal">
-              <circle cx="90" cy="190" r="18" fill="#2e8b57"/>
-              <circle cx="230" cy="150" r="18" fill="#9be4b8"/>
-              <circle cx="360" cy="110" r="18" fill="#f6b73c"/>
-              <line x1="108" y1="180" x2="212" y2="160" stroke="currentColor"/>
-              <line x1="248" y1="140" x2="342" y2="120" stroke="currentColor"/>
+              <text x="60" y="30" fill="var(--focus)" font-size="11" font-weight="bold" text-anchor="middle">Flujo de
+                energía →</text>
+              <!-- Flechas con energía fluyendo -->
+              <line x1="118" y1="178" x2="200" y2="155" stroke="var(--focus)" stroke-width="3" stroke-dasharray="6"
+                marker-end="url(#arrow)">
+                <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite" />
+              </line>
+              <line x1="255" y1="133" x2="332" y2="115" stroke="var(--focus)" stroke-width="3" stroke-dasharray="6"
+                marker-end="url(#arrow)">
+                <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite" />
+              </line>
+              <!-- Etiquetas de nivel trófico -->
+              <text x="90" y="232" fill="#2e8b57" font-size="10" text-anchor="middle" font-weight="bold">1°
+                PRODUCTOR</text>
+              <text x="230" y="197" fill="#1b78d6" font-size="10" text-anchor="middle" font-weight="bold">2°
+                CONSUMIDOR</text>
+              <text x="360" y="162" fill="#f6b73c" font-size="10" text-anchor="middle" font-weight="bold">3°
+                CONSUMIDOR</text>
+              <!-- Planta (Productor) -->
+              <g transform="translate(90, 190)">
+                <circle r="28" fill="#e8f5e9" stroke="#2e8b57" stroke-width="2.5" />
+                <path d="M 0 15 Q -15 0 0 -15 Q 15 0 0 15 Z" fill="#2e8b57">
+                  <animateTransform attributeName="transform" type="rotate" values="0; 10; 0" dur="3s"
+                    repeatCount="indefinite" />
+                </path>
+                <path d="M 0 15 Q 20 5 10 -10 Q 0 5 0 15 Z" fill="#3cb371">
+                  <animateTransform attributeName="transform" type="rotate" values="0; -10; 0" dur="2.5s"
+                    repeatCount="indefinite" />
+                </path>
+              </g>
+              <text x="90" y="165" fill="#2e8b57" font-size="11" text-anchor="middle">🌿 Planta</text>
+              <!-- Herbívoro (Conejo) -->
+              <g transform="translate(230, 145)">
+                <circle r="28" fill="#e3f2fd" stroke="#1b78d6" stroke-width="2.5" />
+                <circle cx="-5" cy="-5" r="3" fill="var(--text)" />
+                <circle cx="5" cy="-5" r="3" fill="var(--text)" />
+                <path d="M -5 5 Q 0 10 5 5" fill="none" stroke="var(--text)" stroke-width="1.5" />
+                <ellipse cx="-15" cy="-15" rx="5" ry="13" fill="#1b78d6" transform="rotate(-30 -15 -15)">
+                  <animateTransform attributeName="transform" type="rotate"
+                    values="-30 -15 -15; -15 -15 -15; -30 -15 -15" dur="4s" repeatCount="indefinite" />
+                </ellipse>
+                <ellipse cx="15" cy="-15" rx="5" ry="13" fill="#1b78d6" transform="rotate(30 15 -15)">
+                  <animateTransform attributeName="transform" type="rotate" values="30 15 -15; 15 15 -15; 30 15 -15"
+                    dur="3.5s" repeatCount="indefinite" />
+                </ellipse>
+              </g>
+              <text x="230" y="118" fill="#1b78d6" font-size="11" text-anchor="middle">🐇 Herbívoro</text>
+              <!-- Carnívoro (Zorro/Búho) -->
+              <g transform="translate(360, 110)">
+                <circle r="28" fill="#fff9e6" stroke="#f6b73c" stroke-width="2.5" />
+                <circle cx="-6" cy="-2" r="2.5" fill="var(--text)" />
+                <circle cx="6" cy="-2" r="2.5" fill="var(--text)" />
+                <polygon points="-8,-20 0,-8 -14,-8" fill="#f6b73c" />
+                <polygon points="8,-20 0,-8 14,-8" fill="#f6b73c" />
+                <path d="M -8 10 L -4 6 L 0 10 L 4 6 L 8 10" fill="none" stroke="var(--text)" stroke-width="1.5" />
+              </g>
+              <text x="360" y="83" fill="#f6b73c" font-size="11" text-anchor="middle">🦉 Carnívoro</text>
             </g>
+
+            <!-- PANEL: MENOS HERBÍVOROS -->
             <g data-panel="menos" visibility="hidden">
-              <circle cx="90" cy="190" r="18" fill="#2e8b57"/>
-              <circle cx="230" cy="150" r="10" fill="#9be4b8"/>
-              <circle cx="360" cy="110" r="22" fill="#f6b73c"/>
-              <line x1="108" y1="180" x2="220" y2="154" stroke="currentColor"/>
-              <line x1="240" y1="146" x2="342" y2="120" stroke="currentColor"/>
+              <text x="220" y="30" fill="#e57373" font-size="11" text-anchor="middle" font-weight="bold">⚠️
+                Desequilibrio: pocos herbívoros</text>
+              <line x1="118" y1="178" x2="200" y2="155" stroke="var(--focus)" stroke-width="2" stroke-dasharray="4"
+                marker-end="url(#arrow)">
+                <animate attributeName="stroke-dashoffset" from="8" to="0" dur="2s" repeatCount="indefinite" />
+              </line>
+              <line x1="255" y1="133" x2="332" y2="115" stroke="#e57373" stroke-width="1.5" stroke-dasharray="4"
+                marker-end="url(#arrow-broken)" />
+              <!-- Planta crece mucho (sin herbívoro que la consuma) -->
+              <g transform="translate(90, 190)">
+                <circle r="38" fill="#c8e6c9" stroke="#2e8b57" stroke-width="3" />
+                <path d="M 0 20 Q -22 0 0 -22 Q 22 0 0 20 Z" fill="#2e8b57" />
+                <path d="M 0 20 Q 28 12 18 -18 Q 0 10 0 20 Z" fill="#3cb371" />
+                <path d="M 0 20 Q -28 12 -18 -18 Q 0 10 0 20 Z" fill="#83cfa2" />
+              </g>
+              <text x="90" y="163" fill="#2e8b57" font-size="11" text-anchor="middle">🌿 Planta</text>
+              <text x="90" y="174" fill="#2e8b57" font-size="9" text-anchor="middle">(sin control → crece mucho)</text>
+              <!-- Herbívoro pequeño (disminuyó) -->
+              <g transform="translate(230, 145) scale(0.55)">
+                <circle r="28" fill="#e3f2fd" stroke="#1b78d6" stroke-width="2" />
+                <circle cx="-5" cy="-5" r="3" fill="var(--text)" />
+                <circle cx="5" cy="-5" r="3" fill="var(--text)" />
+                <path d="M -5 5 Q 0 10 5 5" fill="none" stroke="var(--text)" stroke-width="1.5" />
+              </g>
+              <text x="230" y="118" fill="#1b78d6" font-size="11" text-anchor="middle">🐇 Herbívoro</text>
+              <text x="230" y="129" fill="#e57373" font-size="9" text-anchor="middle">(↓ muy pocos)</text>
+              <!-- Carnívoro con hambre -->
+              <g transform="translate(360, 110)">
+                <circle r="28" fill="#fff9e6" stroke="#f6b73c" stroke-width="2" stroke-dasharray="5 3" />
+                <path d="M -8 6 Q 0 12 8 6" fill="none" stroke="var(--text)" stroke-width="1.5" />
+              </g>
+              <text x="360" y="83" fill="#f6b73c" font-size="11" text-anchor="middle">🦉 Carnívoro</text>
+              <text x="360" y="148" fill="#e57373" font-size="10" text-anchor="middle" font-weight="bold">¡Sin
+                alimento!</text>
             </g>
+
+            <!-- PANEL: PÉRDIDA DE ESPECIE -->
             <g data-panel="perdida" visibility="hidden">
-              <circle cx="90" cy="190" r="18" fill="#2e8b57"/>
-              <circle cx="230" cy="150" r="18" fill="#9be4b8"/>
-              <line x1="108" y1="180" x2="212" y2="160" stroke="currentColor"/>
+              <text x="220" y="30" fill="#e57373" font-size="11" text-anchor="middle" font-weight="bold">❌ Extinción
+                local: colapso de la cadena</text>
+              <line x1="118" y1="178" x2="200" y2="155" stroke="var(--focus)" stroke-width="3" stroke-dasharray="6"
+                marker-end="url(#arrow)">
+                <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite" />
+              </line>
+              <!-- Planta -->
+              <g transform="translate(90, 190)">
+                <circle r="28" fill="#e8f5e9" stroke="#2e8b57" stroke-width="2.5" />
+                <path d="M 0 15 Q -15 0 0 -15 Q 15 0 0 15 Z" fill="#2e8b57" />
+              </g>
+              <text x="90" y="163" fill="#2e8b57" font-size="11" text-anchor="middle">🌿 Planta</text>
+              <!-- Herbívoro (aún existe pero debilitado) -->
+              <g transform="translate(230, 145)">
+                <circle r="28" fill="#e3f2fd" stroke="#1b78d6" stroke-width="2" opacity="0.7" />
+                <circle cx="-5" cy="-5" r="3" fill="var(--text)" />
+                <circle cx="5" cy="-5" r="3" fill="var(--text)" />
+              </g>
+              <text x="230" y="118" fill="#1b78d6" font-size="11" text-anchor="middle">🐇 Herbívoro</text>
+              <!-- Carnívoro EXTINTO -->
+              <g transform="translate(360, 110)">
+                <circle r="28" fill="#ffebee" stroke="#e57373" stroke-width="2" opacity="0.5" />
+                <path d="M -14 -14 L 14 14 M -14 14 L 14 -14" stroke="#e57373" stroke-width="4" opacity="0.7" />
+              </g>
+              <text x="360" y="83" fill="#e57373" font-size="11" text-anchor="middle">🦉 Carnívoro</text>
+              <text x="360" y="148" fill="#e57373" font-size="11" text-anchor="middle" font-weight="bold">EXTINTO
+                ❌</text>
+              <text x="360" y="162" fill="currentColor" font-size="9" text-anchor="middle">Sin depredador, el
+                herbívoro</text>
+              <text x="360" y="173" fill="currentColor" font-size="9" text-anchor="middle">superpobla → crisis
+                ecológica</text>
             </g>
-            <text x="410" y="100" fill="currentColor">Productor → consumidor</text>
-            <text x="410" y="130" fill="currentColor">Cambios en una población</text>
-            <text x="410" y="160" fill="currentColor">afectan a las demás.</text>
+
+            <!-- Panel de texto derecho (siempre visible) -->
+            <rect x="430" y="24" width="198" height="210" rx="8" fill="var(--surface-2)" opacity="0.5" />
+            <text x="530" y="45" fill="var(--focus)" font-weight="bold" font-size="13" text-anchor="middle">Dinámica
+              Ecológica</text>
+            <text x="440" y="65" fill="currentColor" font-size="11">Las poblaciones están</text>
+            <text x="440" y="80" fill="currentColor" font-size="11">conectadas entre sí.</text>
+            <text x="440" y="100" fill="currentColor" font-size="11">Si se altera un eslabón,</text>
+            <text x="440" y="115" fill="currentColor" font-size="11">todo el ecosistema</text>
+            <text x="440" y="130" fill="currentColor" font-size="11">se ve afectado.</text>
+            <text x="440" y="155" fill="var(--primary)" font-size="11" font-weight="bold">Cadena trófica:</text>
+            <text x="440" y="170" fill="currentColor" font-size="11">🌿→🐇→🦉</text>
+            <text x="440" y="190" fill="currentColor" font-size="10">Productores → Herbívoros</text>
+            <text x="440" y="205" fill="currentColor" font-size="10">→ Carnívoros</text>
           </svg>
         </div>
         <p class="diagram-caption" data-status aria-live="polite"></p>
@@ -128,34 +277,95 @@
 
     <section class="panel">
       <h2>Crecimiento poblacional: exponencial y logístico</h2>
-      <p>Las poblaciones no crecen siempre igual. Según los recursos y límites del ambiente, pueden mostrar dos patrones típicos.</p>
+      <p>Las poblaciones no crecen siempre igual. Según los recursos y límites del ambiente, pueden mostrar dos patrones
+        típicos.</p>
       <div class="state-figure">
-        <svg viewBox="0 0 760 340" width="100%" role="img" aria-label="Grafico de crecimiento exponencial y logistico">
-          <rect x="12" y="12" width="736" height="316" rx="12" fill="none" stroke="currentColor"/>
+        <svg viewBox="0 0 760 340" width="100%" role="img" aria-label="Gráfico de crecimiento poblacional">
+          <title>Crecimiento exponencial vs logístico</title>
+          <rect x="12" y="12" width="736" height="316" rx="12" fill="none" stroke="currentColor" />
 
-          <line x1="80" y1="280" x2="700" y2="280" stroke="currentColor" stroke-width="2"/>
-          <line x1="80" y1="280" x2="80" y2="70" stroke="currentColor" stroke-width="2"/>
+          <!-- Área de fondo sombreada para zona "sin límites" y "limitada" -->
+          <rect x="80" y="70" width="620" height="210" fill="var(--surface-2)" opacity="0.3" rx="4" />
 
-          <text x="660" y="305" fill="currentColor" font-size="13">Tiempo</text>
-          <text x="26" y="78" fill="currentColor" font-size="13">N° de individuos</text>
+          <!-- Ejes -->
+          <line x1="80" y1="280" x2="710" y2="280" stroke="currentColor" stroke-width="2.5" />
+          <line x1="80" y1="280" x2="80" y2="60" stroke="currentColor" stroke-width="2.5" />
+          <!-- Punta de flecha en eje X -->
+          <polygon points="710,276 718,280 710,284" fill="currentColor" />
+          <!-- Punta de flecha en eje Y -->
+          <polygon points="76,60 80,52 84,60" fill="currentColor" />
 
-          <line x1="130" y1="276" x2="130" y2="284" stroke="currentColor"/>
-          <line x1="250" y1="276" x2="250" y2="284" stroke="currentColor"/>
-          <line x1="370" y1="276" x2="370" y2="284" stroke="currentColor"/>
-          <line x1="490" y1="276" x2="490" y2="284" stroke="currentColor"/>
-          <line x1="610" y1="276" x2="610" y2="284" stroke="currentColor"/>
+          <!-- Etiquetas de ejes -->
+          <text x="660" y="310" fill="currentColor" font-size="13" font-weight="bold">Tiempo →</text>
+          <text x="25" y="175" fill="currentColor" font-size="12" font-weight="bold" transform="rotate(-90 45 175)">N°
+            de individuos</text>
 
-          <line x1="76" y1="230" x2="84" y2="230" stroke="currentColor"/>
-          <line x1="76" y1="180" x2="84" y2="180" stroke="currentColor"/>
-          <line x1="76" y1="130" x2="84" y2="130" stroke="currentColor"/>
+          <!-- Marcas en eje X -->
+          <line x1="130" y1="276" x2="130" y2="284" stroke="currentColor" stroke-width="1.5" />
+          <text x="130" y="298" fill="currentColor" font-size="10" text-anchor="middle">T1</text>
+          <line x1="250" y1="276" x2="250" y2="284" stroke="currentColor" stroke-width="1.5" />
+          <text x="250" y="298" fill="currentColor" font-size="10" text-anchor="middle">T2</text>
+          <line x1="370" y1="276" x2="370" y2="284" stroke="currentColor" stroke-width="1.5" />
+          <text x="370" y="298" fill="currentColor" font-size="10" text-anchor="middle">T3</text>
+          <line x1="490" y1="276" x2="490" y2="284" stroke="currentColor" stroke-width="1.5" />
+          <text x="490" y="298" fill="currentColor" font-size="10" text-anchor="middle">T4</text>
+          <line x1="610" y1="276" x2="610" y2="284" stroke="currentColor" stroke-width="1.5" />
+          <text x="610" y="298" fill="currentColor" font-size="10" text-anchor="middle">T5</text>
 
-          <path d="M90 270 Q180 260 250 240 Q330 210 420 150 Q500 95 620 45" fill="none" stroke="#1b78d6" stroke-width="4"/>
-          <text x="475" y="70" fill="#1b78d6" font-size="13" font-weight="700">Crecimiento exponencial (J)</text>
+          <!-- Marcas en eje Y -->
+          <line x1="76" y1="230" x2="84" y2="230" stroke="currentColor" stroke-width="1.5" />
+          <text x="72" y="234" fill="currentColor" font-size="10" text-anchor="end">bajo</text>
+          <line x1="76" y1="180" x2="84" y2="180" stroke="currentColor" stroke-width="1.5" />
+          <text x="72" y="184" fill="currentColor" font-size="10" text-anchor="end">medio</text>
+          <line x1="76" y1="130" x2="84" y2="130" stroke="currentColor" stroke-width="1.5" />
+          <text x="72" y="134" fill="currentColor" font-size="10" text-anchor="end">alto</text>
 
-          <path d="M90 270 Q180 250 250 220 Q340 175 430 155 Q510 145 620 145" fill="none" stroke="#1c6b47" stroke-width="4"/>
-          <line x1="100" y1="145" x2="640" y2="145" stroke="#1c6b47" stroke-dasharray="6 4"/>
-          <text x="450" y="138" fill="#1c6b47" font-size="13" font-weight="700">Capacidad de carga (K)</text>
-          <text x="430" y="168" fill="#1c6b47" font-size="13" font-weight="700">Crecimiento logístico (S)</text>
+          <!-- Línea de capacidad de carga K -->
+          <line x1="80" y1="145" x2="700" y2="145" stroke="#1c6b47" stroke-dasharray="8 5" stroke-width="2.5"
+            opacity="0.7" />
+          <rect x="82" y="128" width="200" height="18" rx="4" fill="#1c6b47" opacity="0.15" />
+          <text x="90" y="141" fill="#1c6b47" font-size="12" font-weight="700">K = Capacidad de carga (límite de
+            recursos)</text>
+
+          <!-- Curva exponencial (J) -->
+          <path id="exp-curve" d="M90 270 Q180 260 250 240 Q330 210 420 150 Q480 100 520 45" fill="none"
+            stroke="#1b78d6" stroke-width="4" stroke-linecap="round" stroke-dasharray="700" stroke-dashoffset="0">
+            <animate attributeName="stroke-dashoffset" from="700" to="0" dur="3s" fill="freeze" begin="0s"
+              repeatCount="1" />
+          </path>
+          <!-- Etiqueta curva J -->
+          <rect x="445" y="50" width="200" height="35" rx="6" fill="#1b78d6" opacity="0.12" />
+          <text x="455" y="67" fill="#1b78d6" font-size="13" font-weight="700">📈 Exponencial (curva J)</text>
+          <text x="455" y="81" fill="#1b78d6" font-size="10">Recursos ilimitados → crece sin freno</text>
+          <!-- Punto animado sobre curva J -->
+          <circle r="7" fill="#1b78d6" filter="drop-shadow(0 0 5px #1b78d6)">
+            <animateMotion dur="3s" repeatCount="indefinite" begin="0s">
+              <mpath href="#exp-curve" />
+            </animateMotion>
+          </circle>
+
+          <!-- Curva logística (S) -->
+          <path id="log-curve" d="M90 270 Q180 250 250 220 Q340 175 430 155 Q510 145 660 145" fill="none"
+            stroke="#1c6b47" stroke-width="4" stroke-linecap="round" stroke-dasharray="700" stroke-dashoffset="0">
+            <animate attributeName="stroke-dashoffset" from="700" to="0" dur="4s" fill="freeze" begin="0.5s"
+              repeatCount="1" />
+          </path>
+          <!-- Etiqueta curva S -->
+          <rect x="445" y="162" width="210" height="35" rx="6" fill="#1c6b47" opacity="0.12" />
+          <text x="455" y="179" fill="#1c6b47" font-size="13" font-weight="700">📉 Logístico (curva S)</text>
+          <text x="455" y="193" fill="#1c6b47" font-size="10">Recursos limitados → se frena en K</text>
+          <!-- Punto animado sobre curva S -->
+          <circle r="7" fill="#1c6b47" filter="drop-shadow(0 0 5px #1c6b47)">
+            <animateMotion dur="4s" repeatCount="indefinite" begin="0.5s">
+              <mpath href="#log-curve" />
+            </animateMotion>
+          </circle>
+
+          <!-- Leyenda comparativa abajo -->
+          <text x="100" y="325" fill="#1b78d6" font-size="11" font-weight="bold">Exponencial: sin límite
+            (hipotético)</text>
+          <text x="400" y="325" fill="#1c6b47" font-size="11" font-weight="bold">Logístico: con capacidad de carga
+            (real)</text>
         </svg>
       </div>
       <ul>
@@ -211,7 +421,8 @@
       </div>
       <div class="activity">
         <h4>Actividad de aplicación</h4>
-        <p>Elegí una población local (por ejemplo palomas, insectos o plantas de una plaza), estimá su densidad poblacional y explicá qué factores podrían aumentarla o disminuirla en un mes.</p>
+        <p>Elegí una población local (por ejemplo palomas, insectos o plantas de una plaza), estimá su densidad
+          poblacional y explicá qué factores podrían aumentarla o disminuirla en un mes.</p>
       </div>
     </section>
 
@@ -228,9 +439,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>________</td><td>________</td><td>________</td></tr>
-          <tr><td>________</td><td>________</td><td>________</td></tr>
-          <tr><td>________</td><td>________</td><td>________</td></tr>
+          <tr>
+            <td>________</td>
+            <td>________</td>
+            <td>________</td>
+          </tr>
+          <tr>
+            <td>________</td>
+            <td>________</td>
+            <td>________</td>
+          </tr>
+          <tr>
+            <td>________</td>
+            <td>________</td>
+            <td>________</td>
+          </tr>
         </tbody>
       </table>
 
@@ -257,4 +480,5 @@
     </div>
   </footer>
 </body>
+
 </html>

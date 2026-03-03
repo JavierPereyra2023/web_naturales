@@ -98,6 +98,18 @@ html[data-theme="dark"] body {
   color: var(--axis-color);
 }
 
+html[data-theme="dark"] .kinematics-graphs {
+  color: var(--text);
+}
+
+html[data-theme="dark"] .kinematics-graphs [stroke="currentColor"] {
+  stroke: var(--text) !important;
+}
+
+html[data-theme="dark"] .kinematics-graphs [fill="currentColor"] {
+  fill: var(--text) !important;
+}
+
 /* Fuerza visibilidad de ejes/ticks/etiquetas en SVG de cinematica */
 .kinematics-graphs [stroke="currentColor"] {
   stroke: var(--axis-color) !important;

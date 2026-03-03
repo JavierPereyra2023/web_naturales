@@ -1,5 +1,6 @@
 ﻿<!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <script defer src="js/main.js"></script>
 </head>
+
 <body data-page="Organismos microscópicos" data-section="Biología" data-section-href="biologia.html">
   <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
 
@@ -16,7 +18,8 @@
         <p class="kicker">Ciencias Naturales · 1° año</p>
         <h1>Biología: Organismos microscópicos</h1>
       </div>
-      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar modo oscuro">Modo oscuro</button>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false"
+        aria-label="Cambiar modo oscuro">Modo oscuro</button>
     </div>
     <nav class="main-nav container" aria-label="Navegación principal">
       <a href="inicio.html">Inicio</a>
@@ -26,14 +29,19 @@
     </nav>
   </header>
 
-  <div class="container"><nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav></div>
+  <div class="container">
+    <nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav>
+  </div>
 
   <main id="contenido" class="container">
     <section class="panel">
       <h2>Bacterias y protistas</h2>
-      <p class="tag">Programa representado: organismos microscópicos autótrofos y heterótrofos; estructuras de nutrición, relación y reproducción; efectos benéficos y perjudiciales.</p>
-      <p>Los microorganismos son seres vivos tan pequeños que, en la mayoría de los casos, no pueden observarse a simple vista. Están presentes en el agua, el suelo, el aire, los alimentos y también en nuestro cuerpo.</p>
-      <p>Estudiarlos permite entender procesos ecológicos, de salud y de producción humana. No todos son "malos": muchos cumplen funciones esenciales para la vida en el planeta.</p>
+      <p class="tag">Programa representado: organismos microscópicos autótrofos y heterótrofos; estructuras de
+        nutrición, relación y reproducción; efectos benéficos y perjudiciales.</p>
+      <p>Los microorganismos son seres vivos tan pequeños que, en la mayoría de los casos, no pueden observarse a simple
+        vista. Están presentes en el agua, el suelo, el aire, los alimentos y también en nuestro cuerpo.</p>
+      <p>Estudiarlos permite entender procesos ecológicos, de salud y de producción humana. No todos son "malos": muchos
+        cumplen funciones esenciales para la vida en el planeta.</p>
     </section>
 
     <section class="panel">
@@ -85,45 +93,213 @@
       <h2>Funciones vitales en microorganismos</h2>
 
       <h3>Nutrición</h3>
-      <p>Algunos microorganismos producen su alimento mediante fotosíntesis o procesos químicos (autótrofos). Otros se alimentan de materia orgánica del ambiente (heterótrofos).</p>
+      <p>Algunos microorganismos producen su alimento mediante fotosíntesis o procesos químicos (autótrofos). Otros se
+        alimentan de materia orgánica del ambiente (heterótrofos).</p>
 
       <h3>Relación</h3>
-      <p>Responden a estímulos del entorno, por ejemplo movimiento hacia la luz, humedad o nutrientes, y alejamiento de condiciones desfavorables.</p>
+      <p>Responden a estímulos del entorno, por ejemplo movimiento hacia la luz, humedad o nutrientes, y alejamiento de
+        condiciones desfavorables.</p>
 
       <h3>Reproducción</h3>
-      <p>La reproducción rápida explica por qué las poblaciones microbianas pueden aumentar en poco tiempo si tienen agua, temperatura y nutrientes adecuados.</p>
+      <p>La reproducción rápida explica por qué las poblaciones microbianas pueden aumentar en poco tiempo si tienen
+        agua, temperatura y nutrientes adecuados.</p>
     </section>
 
     <section class="panel">
       <h2>funciones e impacto</h2>
       <div class="diagram-switcher" data-switcher data-initial="nutricion">
         <div class="state-controls" role="group" aria-label="Aspecto a observar">
-          <button class="chip-btn" type="button" data-target="nutricion" data-description="Nutrición: formas autótrofas y heterótrofas." aria-pressed="false">Nutrición</button>
-          <button class="chip-btn" type="button" data-target="reproduccion" data-description="Reproducción: permite su rápida expansión." aria-pressed="false">Reproducción</button>
-          <button class="chip-btn" type="button" data-target="impacto" data-description="Impacto: puede ser beneficioso o perjudicial." aria-pressed="false">Impacto</button>
+          <button class="chip-btn" type="button" data-target="nutricion"
+            data-description="Nutrición: formas autótrofas y heterótrofas." aria-pressed="false">Nutrición</button>
+          <button class="chip-btn" type="button" data-target="reproduccion"
+            data-description="Reproducción: permite su rápida expansión." aria-pressed="false">Reproducción</button>
+          <button class="chip-btn" type="button" data-target="impacto"
+            data-description="Impacto: puede ser beneficioso o perjudicial." aria-pressed="false">Impacto</button>
         </div>
         <div class="state-figure">
-          <svg viewBox="0 0 640 260" width="100%" role="img" aria-label="Microorganismos">
-            <rect x="12" y="12" width="616" height="236" rx="12" fill="none" stroke="currentColor"/>
+          <svg viewBox="0 0 640 260" width="100%" role="img" aria-label="Microorganismos y sus funciones">
+            <title>Microorganismos: nutrición, reproducción e impacto</title>
+            <rect x="12" y="12" width="616" height="236" rx="12" fill="none" stroke="currentColor" />
+
+            <!-- PANEL: NUTRICIÓN -->
             <g data-panel="nutricion">
-              <circle cx="120" cy="130" r="35" fill="#9be4b8"/>
-              <circle cx="220" cy="130" r="35" fill="#2e8b57"/>
-              <text x="95" y="185" fill="currentColor">Auto</text>
-              <text x="196" y="185" fill="currentColor">Hetero</text>
+              <text x="230" y="32" fill="var(--focus)" font-weight="bold" font-size="13" text-anchor="middle">Dos formas de obtener nutrientes</text>
+
+              <!-- Área Autótrofo -->
+              <rect x="22" y="42" width="180" height="200" rx="8" fill="#e8f5e9" opacity="0.4" />
+              <text x="112" y="58" fill="#2e8b57" font-size="12" font-weight="bold" text-anchor="middle">🌞 AUTÓTROFA</text>
+              <text x="112" y="70" fill="#2e8b57" font-size="10" text-anchor="middle">Fabrica su propio alimento</text>
+
+              <g transform="translate(112, 145)">
+                <!-- Rayos de luz -->
+                <path d="M -40 -60 L -22 -35 M 0 -65 L 0 -40 M 40 -60 L 22 -35" stroke="#f6b73c" stroke-width="2.5"
+                  stroke-dasharray="5" opacity="0.9">
+                  <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
+                </path>
+                <text x="-1" y="-68" fill="#f6b73c" font-size="9" text-anchor="middle" font-weight="bold">☀️ Luz solar</text>
+                <!-- Cuerpo Euglena -->
+                <ellipse cx="0" cy="10" rx="22" ry="38" fill="#c8e6c9" stroke="#2e8b57" stroke-width="2.5" transform="rotate(15)" />
+                <!-- Flagelo -->
+                <path d="M 5 -22 Q 22 -42 5 -62 T 12 -82" fill="none" stroke="#2e8b57" stroke-width="2">
+                  <animate attributeName="d"
+                    values="M 5 -22 Q 22 -42 5 -62 T 12 -82; M 5 -22 Q -10 -42 5 -62 T 0 -82; M 5 -22 Q 22 -42 5 -62 T 12 -82"
+                    dur="1.5s" repeatCount="indefinite" />
+                </path>
+                <!-- Cloroplastos -->
+                <circle cx="-5" cy="5" r="6" fill="#4caf50">
+                  <animate attributeName="r" values="6;8;6" dur="2s" repeatCount="indefinite" />
+                </circle>
+                <circle cx="9" cy="20" r="5" fill="#4caf50">
+                  <animate attributeName="r" values="5;7;5" dur="2s" begin="0.5s" repeatCount="indefinite" />
+                </circle>
+                <circle cx="-4" cy="27" r="5" fill="#4caf50">
+                  <animate attributeName="r" values="5;7;5" dur="2s" begin="1s" repeatCount="indefinite" />
+                </circle>
+              </g>
+              <text x="112" y="228" fill="#2e8b57" font-size="10" text-anchor="middle" font-weight="bold">Euglena / Alga unicelular</text>
+              <text x="112" y="240" fill="currentColor" font-size="9" text-anchor="middle">Usa luz → Fotosíntesis</text>
+
+              <!-- Área Heterótrofo -->
+              <rect x="212" y="42" width="168" height="200" rx="8" fill="#e3f2fd" opacity="0.4" />
+              <text x="296" y="58" fill="#1b78d6" font-size="12" font-weight="bold" text-anchor="middle">🍽️ HETERÓTROFA</text>
+              <text x="296" y="70" fill="#1b78d6" font-size="10" text-anchor="middle">Come otros organismos</text>
+
+              <g transform="translate(296, 145)">
+                <!-- Ameba con seudópodos -->
+                <path fill="#bbdefb" stroke="#1b78d6" stroke-width="2.5">
+                  <animate attributeName="d"
+                    values="M 0 -28 C 22 -32, 38 -12, 32 10 C 26 32, 6 38, -16 28 C -38 16, -32 -10, -16 -22 C -6 -28, -10 -28, 0 -28;
+                            M 0 -22 C 32 -28, 32 -6, 26 16 C 22 38, 0 32, -22 22 C -42 12, -26 -16, -10 -22 C -5 -28, -10 -22, 0 -22;
+                            M 0 -28 C 22 -32, 38 -12, 32 10 C 26 32, 6 38, -16 28 C -38 16, -32 -10, -16 -22 C -6 -28, -10 -28, 0 -28"
+                    dur="4s" repeatCount="indefinite" />
+                </path>
+                <!-- Núcleo -->
+                <circle cx="0" cy="5" r="10" fill="#1b78d6" opacity="0.7" />
+                <text x="0" y="9" fill="white" font-size="8" text-anchor="middle">N</text>
+                <!-- Vacuola digestiva -->
+                <circle cx="12" cy="-10" r="6" fill="none" stroke="#1b78d6" stroke-width="1.5" stroke-dasharray="2" />
+                <!-- Comida (bacteria) acercándose -->
+                <rect x="0" y="-5" width="8" height="4" rx="2" fill="#f6b73c">
+                  <animate attributeName="x" values="50; 25" dur="2s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="1; 0" dur="2s" repeatCount="indefinite" />
+                </rect>
+                <text x="52" y="-1" fill="#f6b73c" font-size="9">🦠→</text>
+              </g>
+              <text x="296" y="228" fill="#1b78d6" font-size="10" text-anchor="middle" font-weight="bold">Ameba</text>
+              <text x="296" y="240" fill="currentColor" font-size="9" text-anchor="middle">Fagocitosis (engloba alimento)</text>
             </g>
+
+            <!-- PANEL: REPRODUCCIÓN -->
             <g data-panel="reproduccion" visibility="hidden">
-              <circle cx="120" cy="130" r="30" fill="#9be4b8"/>
-              <circle cx="185" cy="130" r="24" fill="#9be4b8"/>
-              <circle cx="240" cy="130" r="18" fill="#9be4b8"/>
+              <text x="230" y="32" fill="var(--focus)" font-weight="bold" font-size="13" text-anchor="middle">Fisión binaria: división rápida</text>
+              <rect x="55" y="42" width="330" height="198" rx="8" fill="#e8f5e9" opacity="0.35" />
+              <g transform="translate(200, 135)">
+                <!-- PASO 1: etiqueta -->
+                <text x="-105" y="-78" fill="var(--focus)" font-size="11" font-weight="bold">PASO 1</text>
+                <text x="-105" y="-65" fill="currentColor" font-size="10">Bacteria original</text>
+                <!-- PASO 2: etiqueta -->
+                <text x="45" y="-78" fill="var(--focus)" font-size="11" font-weight="bold">PASO 2</text>
+                <text x="45" y="-65" fill="currentColor" font-size="10">Se alarga y el ADN</text>
+                <text x="45" y="-53" fill="currentColor" font-size="10">se duplica</text>
+
+                <!-- Bacteria animada dividiéndose -->
+                <path fill="#c8e6c9" stroke="#2e8b57" stroke-width="2.5">
+                  <animate attributeName="d" values="M -28 -15 Q 0 -15 28 -15 A 15 15 0 0 1 28 15 Q 0 15 -28 15 A 15 15 0 0 1 -28 -15;
+                                   M -42 -15 Q 0 -5 42 -15 A 15 15 0 0 1 42 15 Q 0 5 -42 15 A 15 15 0 0 1 -42 -15;
+                                   M -55 -15 Q 0 5 55 -15 A 15 15 0 0 1 55 15 Q 0 -5 -55 15 A 15 15 0 0 1 -55 -15;
+                                   M -28 -15 Q 0 -15 28 -15 A 15 15 0 0 1 28 15 Q 0 15 -28 15 A 15 15 0 0 1 -28 -15"
+                    dur="4s" repeatCount="indefinite" />
+                </path>
+                <!-- ADN (doble hélice simplificada) -->
+                <path fill="none" stroke="#e57373" stroke-width="2.5">
+                  <animate attributeName="d" values="M -15 0 Q -5 -10 5 0 Q 15 10 25 0;
+                                   M -28 0 Q -18 -10 -8 0 M 8 0 Q 18 10 28 0;
+                                   M -42 0 Q -32 -10 -22 0 M 22 0 Q 32 10 42 0;
+                                   M -15 0 Q -5 -10 5 0 Q 15 10 25 0" dur="4s" repeatCount="indefinite" />
+                </path>
+                <!-- Señal de corte en el medio -->
+                <line x1="0" y1="-20" x2="0" y2="20" stroke="#e57373" stroke-width="1.5" stroke-dasharray="3">
+                  <animate attributeName="opacity" values="0;0;1;0" keyTimes="0;0.5;0.8;1" dur="4s" repeatCount="indefinite" />
+                </line>
+              </g>
+              <!-- Resultado: 2 bacterias -->
+              <text x="200" y="210" fill="currentColor" font-size="12" text-anchor="middle" font-weight="bold">1 bacteria → 2 bacterias (duplicación en ~20 minutos)</text>
+              <text x="200" y="226" fill="currentColor" font-size="10" text-anchor="middle">¡Sin reproducción sexual! Cada nueva bacteria es idéntica a la original.</text>
+
+              <!-- Flecha de tiempo -->
+              <text x="200" y="172" fill="var(--focus)" font-size="10" text-anchor="middle">⬇ tiempo</text>
+              <text x="200" y="190" fill="#2e8b57" font-size="11" text-anchor="middle" font-weight="bold">PASO 3: Se divide en dos células hijas</text>
             </g>
+
+            <!-- PANEL: IMPACTO -->
             <g data-panel="impacto" visibility="hidden">
-              <circle cx="120" cy="110" r="24" fill="#2e8b57"/>
-              <circle cx="190" cy="150" r="24" fill="#f6b73c"/>
-              <text x="90" y="190" fill="currentColor">Benéfico</text>
-              <text x="170" y="190" fill="currentColor">Perjudicial</text>
+              <text x="230" y="32" fill="var(--focus)" font-weight="bold" font-size="13" text-anchor="middle">Los microorganismos pueden ser benéficos o dañinos</text>
+
+              <!-- Área Benéficos -->
+              <rect x="22" y="42" width="200" height="200" rx="8" fill="#e8f5e9" opacity="0.4" />
+              <text x="122" y="58" fill="#2e8b57" font-size="12" font-weight="bold" text-anchor="middle">✅ BENÉFICOS</text>
+
+              <g transform="translate(122, 140)">
+                <!-- Lactobacilos (bacterias alargadas) -->
+                <rect x="-35" y="-18" width="22" height="11" rx="5" fill="#9be4b8" stroke="#2e8b57" stroke-width="1.5" />
+                <rect x="-8" y="-8" width="22" height="11" rx="5" fill="#9be4b8" stroke="#2e8b57" stroke-width="1.5" transform="rotate(30)" />
+                <rect x="5" y="-30" width="22" height="11" rx="5" fill="#9be4b8" stroke="#2e8b57" stroke-width="1.5" transform="rotate(-20)" />
+                <!-- Burbujas CO2 -->
+                <circle cx="0" cy="-38" r="4" fill="none" stroke="#2e8b57" stroke-width="1.5">
+                  <animate attributeName="cy" values="-38;-60" dur="2s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="1;0" dur="2s" repeatCount="indefinite" />
+                </circle>
+                <circle cx="-18" cy="-28" r="3" fill="none" stroke="#2e8b57" stroke-width="1.5">
+                  <animate attributeName="cy" values="-28;-50" dur="1.5s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="1;0" dur="1.5s" repeatCount="indefinite" />
+                </circle>
+                <text x="0" y="-68" fill="#2e8b57" font-size="10" text-anchor="middle">CO₂ ↑</text>
+              </g>
+              <text x="122" y="218" fill="#2e8b57" font-size="11" text-anchor="middle" font-weight="bold">Lactobacilos</text>
+              <text x="122" y="230" fill="currentColor" font-size="9" text-anchor="middle">Yogur, queso, fermentación</text>
+              <text x="122" y="242" fill="currentColor" font-size="9" text-anchor="middle">Flora intestinal, ecosistema</text>
+
+              <!-- Área Perjudiciales -->
+              <rect x="232" y="42" width="160" height="200" rx="8" fill="#ffebee" opacity="0.4" />
+              <text x="312" y="58" fill="#e57373" font-size="12" font-weight="bold" text-anchor="middle">⚠️ PERJUDICIALES</text>
+
+              <g transform="translate(312, 140)">
+                <!-- Virus con espinas (rotando) -->
+                <g>
+                  <animateTransform attributeName="transform" type="rotate" values="0; 360" dur="10s" repeatCount="indefinite" />
+                  <circle cx="0" cy="0" r="20" fill="#ffcdd2" stroke="#e57373" stroke-width="2.5" />
+                  <!-- Proteínas de superficie (espinas) -->
+                  <line x1="0" y1="-20" x2="0" y2="-30" stroke="#e57373" stroke-width="2.5" />
+                  <line x1="0" y1="20" x2="0" y2="30" stroke="#e57373" stroke-width="2.5" />
+                  <line x1="-20" y1="0" x2="-30" y2="0" stroke="#e57373" stroke-width="2.5" />
+                  <line x1="20" y1="0" x2="30" y2="0" stroke="#e57373" stroke-width="2.5" />
+                  <line x1="-14" y1="-14" x2="-20" y2="-20" stroke="#e57373" stroke-width="2.5" />
+                  <line x1="14" y1="14" x2="20" y2="20" stroke="#e57373" stroke-width="2.5" />
+                  <line x1="-14" y1="14" x2="-20" y2="20" stroke="#e57373" stroke-width="2.5" />
+                  <line x1="14" y1="-14" x2="20" y2="-20" stroke="#e57373" stroke-width="2.5" />
+                  <!-- ARN/ADN viral -->
+                  <circle cx="0" cy="0" r="8" fill="#e57373" />
+                  <text x="0" y="4" fill="white" font-size="8" text-anchor="middle" font-weight="bold">ARN</text>
+                </g>
+              </g>
+              <text x="312" y="218" fill="#e57373" font-size="11" text-anchor="middle" font-weight="bold">Virus / Bacterias patógenas</text>
+              <text x="312" y="230" fill="currentColor" font-size="9" text-anchor="middle">Enfermedades, infecciones</text>
+              <text x="312" y="242" fill="currentColor" font-size="9" text-anchor="middle">deterioro de alimentos</text>
             </g>
-            <text x="320" y="110" fill="currentColor">Microscópicos, pero con gran</text>
-            <text x="320" y="140" fill="currentColor">importancia en ambiente y sociedad.</text>
+
+            <!-- Panel texto derecho (siempre visible) -->
+            <rect x="400" y="22" width="228" height="215" rx="8" fill="var(--surface-2)" opacity="0.5" />
+            <text x="515" y="44" fill="var(--focus)" font-weight="bold" font-size="13" text-anchor="middle">🔬 Mundo Invisible</text>
+            <text x="410" y="65" fill="currentColor" font-size="11">No se ven a simple vista,</text>
+            <text x="410" y="80" fill="currentColor" font-size="11">pero son esenciales para</text>
+            <text x="410" y="95" fill="currentColor" font-size="11">la vida en la Tierra.</text>
+            <text x="410" y="116" fill="var(--primary)" font-size="11" font-weight="bold">Tipos:</text>
+            <text x="410" y="131" fill="currentColor" font-size="11">🦠 Bacterias (procariotas)</text>
+            <text x="410" y="146" fill="currentColor" font-size="11">🌀 Virus (acelular)</text>
+            <text x="410" y="161" fill="currentColor" font-size="11">🫧 Protistas (eucariotas)</text>
+            <text x="410" y="176" fill="currentColor" font-size="11">🍄 Hongos microscópicos</text>
+            <text x="410" y="197" fill="currentColor" font-size="10" opacity="0.8">Se estudian con microscopio</text>
+            <text x="410" y="212" fill="currentColor" font-size="10" opacity="0.8">óptico o electrónico.</text>
           </svg>
         </div>
         <p class="diagram-caption" data-status aria-live="polite"></p>
@@ -170,7 +346,8 @@
 
       <div class="activity">
         <h4>Actividad de investigación</h4>
-        <p>Buscá un alimento fermentado de uso cotidiano y explicá qué microorganismos participan y por qué ese proceso es beneficioso.</p>
+        <p>Buscá un alimento fermentado de uso cotidiano y explicá qué microorganismos participan y por qué ese proceso
+          es beneficioso.</p>
       </div>
     </section>
 
@@ -188,8 +365,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>Bacteria</td><td>________</td><td>________</td><td>________</td></tr>
-          <tr><td>Protista</td><td>________</td><td>________</td><td>________</td></tr>
+          <tr>
+            <td>Bacteria</td>
+            <td>________</td>
+            <td>________</td>
+            <td>________</td>
+          </tr>
+          <tr>
+            <td>Protista</td>
+            <td>________</td>
+            <td>________</td>
+            <td>________</td>
+          </tr>
         </tbody>
       </table>
 
@@ -210,6 +397,11 @@
     </section>
   </main>
 
-  <footer class="site-footer"><div class="container"><p>Tema de Biología basado en <code>programa_1anio.txt</code>.</p></div></footer>
+  <footer class="site-footer">
+    <div class="container">
+      <p>Tema de Biología basado en <code>programa_1anio.txt</code>.</p>
+    </div>
+  </footer>
 </body>
+
 </html>

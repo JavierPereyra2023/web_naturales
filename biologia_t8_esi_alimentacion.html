@@ -1,5 +1,6 @@
 ﻿<!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <script defer src="js/main.js"></script>
 </head>
+
 <body data-page="ESI alimentación" data-section="Biología" data-section-href="biologia.html">
   <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
 
@@ -16,7 +18,8 @@
         <p class="kicker">Ciencias Naturales · 1° año</p>
         <h1>Biología: ESI y alimentación saludable</h1>
       </div>
-      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar modo oscuro">Modo oscuro</button>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false"
+        aria-label="Cambiar modo oscuro">Modo oscuro</button>
     </div>
     <nav class="main-nav container" aria-label="Navegación principal">
       <a href="inicio.html">Inicio</a>
@@ -26,14 +29,19 @@
     </nav>
   </header>
 
-  <div class="container"><nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav></div>
+  <div class="container">
+    <nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav>
+  </div>
 
   <main id="contenido" class="container">
     <section class="panel">
       <h2>Alimentos, nutrientes y calorías vacías</h2>
-      <p class="tag">Programa representado: diferencia entre alimentos y nutrientes; alimentación saludable; calorías vacías.</p>
-      <p><strong>Alimento</strong> es lo que comemos. <strong>Nutriente</strong> es la sustancia que ese alimento aporta al cuerpo para crecer, moverse, reparar tejidos y mantener funciones vitales.</p>
-      <p>Cuando hablamos de <strong>calorías vacías</strong>, nos referimos a productos con mucha energía pero con escaso aporte de nutrientes de calidad.</p>
+      <p class="tag">Programa representado: diferencia entre alimentos y nutrientes; alimentación saludable; calorías
+        vacías.</p>
+      <p><strong>Alimento</strong> es lo que comemos. <strong>Nutriente</strong> es la sustancia que ese alimento aporta
+        al cuerpo para crecer, moverse, reparar tejidos y mantener funciones vitales.</p>
+      <p>Cuando hablamos de <strong>calorías vacías</strong>, nos referimos a productos con mucha energía pero con
+        escaso aporte de nutrientes de calidad.</p>
     </section>
 
     <section class="panel">
@@ -85,12 +93,14 @@
         <li>Disminución de ultraprocesados con azúcares, grasas y sodio en exceso.</li>
         <li>Porciones acordes a edad, actividad y contexto.</li>
       </ul>
-      <p>Desde ESI, hablar de alimentación también implica respeto por la diversidad corporal, hábitos sin estigmas y toma de decisiones informadas.</p>
+      <p>Desde ESI, hablar de alimentación también implica respeto por la diversidad corporal, hábitos sin estigmas y
+        toma de decisiones informadas.</p>
     </section>
 
     <section class="panel">
       <h2>Teoría aplicada: calidad nutricional en la vida diaria</h2>
-      <p>Mejorar la alimentación no requiere cambios extremos de un día para otro. Se puede avanzar con estrategias realistas:</p>
+      <p>Mejorar la alimentación no requiere cambios extremos de un día para otro. Se puede avanzar con estrategias
+        realistas:</p>
       <ul>
         <li>Agregar una fruta a la merienda.</li>
         <li>Reemplazar bebidas azucaradas por agua en parte de la semana.</li>
@@ -103,29 +113,136 @@
       <h2>comparar elecciones</h2>
       <div class="diagram-switcher" data-switcher data-initial="balanceada">
         <div class="state-controls" role="group" aria-label="Tipo de colación">
-          <button class="chip-btn" type="button" data-target="balanceada" data-description="Colación con mejor calidad nutricional." aria-pressed="false">Balanceada</button>
-          <button class="chip-btn" type="button" data-target="vacias" data-description="Predominio de calorías vacías." aria-pressed="false">Calorías vacías</button>
-          <button class="chip-btn" type="button" data-target="mixta" data-description="Combinación: se puede mejorar con cambios graduales." aria-pressed="false">Mixta</button>
+          <button class="chip-btn" type="button" data-target="balanceada"
+            data-description="Colación con mejor calidad nutricional." aria-pressed="false">Balanceada</button>
+          <button class="chip-btn" type="button" data-target="vacias" data-description="Predominio de calorías vacías."
+            aria-pressed="false">Calorías vacías</button>
+          <button class="chip-btn" type="button" data-target="mixta"
+            data-description="Combinación: se puede mejorar con cambios graduales." aria-pressed="false">Mixta</button>
         </div>
         <div class="state-figure">
           <svg viewBox="0 0 640 260" width="100%" role="img" aria-label="Elecciones alimentarias">
-            <rect x="12" y="12" width="616" height="236" rx="12" fill="none" stroke="currentColor"/>
+            <rect x="12" y="12" width="616" height="236" rx="12" fill="none" stroke="currentColor" />
+
+            <!-- BALANCEADA panel -->
             <g data-panel="balanceada">
-              <rect x="85" y="95" width="50" height="70" fill="#9be4b8"/>
-              <circle cx="170" cy="130" r="25" fill="#2e8b57"/>
+              <rect x="18" y="18" width="250" height="224" rx="8" fill="#e8f5e9" opacity="0.5" />
+              <text x="143" y="37" fill="#2e8b57" font-size="12" font-weight="bold" text-anchor="middle">✅ BALANCEADA</text>
+              <!-- Labels -->
+              <text x="28" y="112" fill="#e57373" font-size="11" font-weight="bold">🍎 Fruta</text>
+              <text x="28" y="124" fill="#888" font-size="9">(vitaminas y fibra)</text>
+              <text x="165" y="95" fill="#1b78d6" font-size="11" font-weight="bold">💧 Agua</text>
+              <text x="165" y="108" fill="#888" font-size="9">(hidratación)</text>
+              <text x="143" y="200" fill="#2e8b57" font-size="10" font-weight="bold" text-anchor="middle">✓ Recomendada: nutrientes variados</text>
+              <g transform="translate(140, 130)">
+                <circle cx="0" cy="0" r="40" fill="#9be4b8" opacity="0.3">
+                  <animate attributeName="r" values="40; 50; 40" dur="2s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0.3; 0.1; 0.3" dur="2s" repeatCount="indefinite" />
+                </circle>
+                <g transform="translate(-25, 10)">
+                  <animateTransform attributeName="transform" type="translate" values="-25,10; -25,5; -25,10" dur="2.5s"
+                    repeatCount="indefinite" />
+                  <path d="M 0 -15 C 10 -20, 20 -5, 15 10 C 10 20, -10 20, -15 10 C -20 -5, -10 -20, 0 -15 Z"
+                    fill="#e57373" />
+                  <path d="M 0 -15 Q 5 -25 15 -20 T -5 -25" fill="none" stroke="#2e8b57" stroke-width="2" />
+                  <path d="M 2 -18 Q 8 -22 10 -15 T 0 -18" fill="#9be4b8" />
+                </g>
+                <g transform="translate(25, -10)">
+                  <animateTransform attributeName="transform" type="translate" values="25,-10; 25,-5; 25,-10" dur="3s"
+                    repeatCount="indefinite" />
+                  <path d="M -10 -10 L 10 -10 L 8 20 L -8 20 Z" fill="var(--surface)" stroke="#1b78d6"
+                    stroke-width="2" />
+                  <path d="M -9 0 L 9 0 L 7 18 L -7 18 Z" fill="#1b78d6" opacity="0.7">
+                    <animate attributeName="d"
+                      values="M -9 0 Q 0 -5 9 0 L 7 18 L -7 18 Z; M -9 0 Q 0 5 9 0 L 7 18 L -7 18 Z; M -9 0 Q 0 -5 9 0 L 7 18 L -7 18 Z"
+                      dur="2s" repeatCount="indefinite" />
+                  </path>
+                </g>
+              </g>
             </g>
+
+            <!-- VACIAS panel -->
             <g data-panel="vacias" visibility="hidden">
-              <rect x="85" y="95" width="50" height="70" fill="#f6b73c"/>
-              <rect x="150" y="95" width="50" height="70" fill="#f6b73c"/>
+              <rect x="18" y="18" width="250" height="224" rx="8" fill="#fff3e0" opacity="0.5" />
+              <text x="143" y="37" fill="#c0392b" font-size="12" font-weight="bold" text-anchor="middle">⚠️ CALORÍAS VACÍAS</text>
+              <!-- Labels -->
+              <text x="28" y="107" fill="#f6b73c" font-size="11" font-weight="bold">🥤 Soda</text>
+              <text x="28" y="119" fill="#888" font-size="9">(azúcar, sin nutrientes)</text>
+              <text x="165" y="120" fill="#f6b73c" font-size="11" font-weight="bold">🍩 Snack</text>
+              <text x="165" y="132" fill="#888" font-size="9">(grasa + azúcar)</text>
+              <text x="143" y="200" fill="#c0392b" font-size="10" font-weight="bold" text-anchor="middle">✗ Aportan energía sin vitaminas ni fibra</text>
+              <g transform="translate(140, 130)">
+                <circle cx="0" cy="0" r="40" fill="#f6b73c" opacity="0.2" />
+                <g transform="translate(-20, 0)">
+                  <animateTransform attributeName="transform" type="translate" values="-20,0; -20,-2; -20,0" dur="0.5s"
+                    repeatCount="indefinite" />
+                  <rect x="-12" y="-20" width="24" height="40" rx="2" fill="var(--surface)" stroke="#f6b73c"
+                    stroke-width="2" />
+                  <rect x="-10" y="0" width="20" height="18" fill="#f6b73c" opacity="0.8" />
+                  <line x1="0" y1="-20" x2="5" y2="-30" stroke="var(--text)" stroke-width="2" stroke-linecap="round" />
+                  <text x="0" y="10" fill="var(--surface)" font-size="10" font-weight="bold"
+                    text-anchor="middle">SODA</text>
+                </g>
+                <g transform="translate(25, 10)">
+                  <animateTransform attributeName="transform" type="rotate" values="0; 10; 0; -10; 0" dur="2s"
+                    repeatCount="indefinite" />
+                  <circle cx="0" cy="0" r="15" fill="#f6b73c" stroke="var(--text)" stroke-width="2" />
+                  <circle cx="0" cy="0" r="5" fill="var(--surface)" />
+                  <path d="M -10 -5 C -5 -10, 5 -10, 10 -5 C 15 5, -15 5, -10 -5 Z" fill="var(--danger, #e57373)"
+                    opacity="0.8" />
+                </g>
+                <text x="0" y="50" fill="var(--danger, #e57373)" text-anchor="middle" font-weight="bold"
+                  font-size="12">¡Solo energía vacía!</text>
+              </g>
             </g>
+
+            <!-- MIXTA panel -->
             <g data-panel="mixta" visibility="hidden">
-              <rect x="85" y="95" width="50" height="70" fill="#9be4b8"/>
-              <rect x="150" y="95" width="50" height="70" fill="#f6b73c"/>
+              <rect x="18" y="18" width="250" height="224" rx="8" fill="#e3f2fd" opacity="0.4" />
+              <text x="143" y="37" fill="#1b78d6" font-size="12" font-weight="bold" text-anchor="middle">🔄 MIXTA (mejorable)</text>
+              <!-- Labels -->
+              <text x="28" y="112" fill="#e57373" font-size="11" font-weight="bold">🍎 Fruta</text>
+              <text x="28" y="124" fill="#888" font-size="9">(algo nutritiva)</text>
+              <text x="165" y="95" fill="#f6b73c" font-size="11" font-weight="bold">🍪 Galleta</text>
+              <text x="165" y="108" fill="#888" font-size="9">(snack procesado)</text>
+              <text x="143" y="200" fill="#1b78d6" font-size="10" font-weight="bold" text-anchor="middle">→ Se puede mejorar con cambios graduales</text>
+              <g transform="translate(140, 130)">
+                <g transform="translate(-25, 10)">
+                  <animateTransform attributeName="transform" type="translate" values="-25,10; -25,5; -25,10" dur="2.5s"
+                    repeatCount="indefinite" />
+                  <path d="M 0 -15 C 10 -20, 20 -5, 15 10 C 10 20, -10 20, -15 10 C -20 -5, -10 -20, 0 -15 Z"
+                    fill="#e57373" />
+                  <path d="M 0 -15 Q 5 -25 15 -20 T -5 -25" fill="none" stroke="#2e8b57" stroke-width="2" />
+                </g>
+                <g transform="translate(25, -10)">
+                  <animateTransform attributeName="transform" type="translate" values="25,-10; 25,-8; 25,-10" dur="1.5s"
+                    repeatCount="indefinite" />
+                  <rect x="-12" y="-12" width="24" height="24" rx="3" fill="#f6b73c" />
+                  <circle cx="-5" cy="-5" r="2" fill="var(--surface)" />
+                  <circle cx="5" cy="5" r="2" fill="var(--surface)" />
+                  <circle cx="-5" cy="5" r="2" fill="var(--surface)" />
+                  <circle cx="5" cy="-5" r="2" fill="var(--surface)" />
+                </g>
+                <path d="M -10 -20 Q 0 -30 10 -20 M -10 20 Q 0 30 10 20" fill="none" stroke="var(--focus)"
+                  stroke-width="2" stroke-dasharray="2">
+                  <animateTransform attributeName="transform" type="rotate" values="0; 360" dur="10s"
+                    repeatCount="indefinite" />
+                </path>
+              </g>
             </g>
-            <text x="280" y="105" fill="currentColor">Pequeños cambios sostenidos</text>
-            <text x="280" y="132" fill="currentColor">mejoran la calidad alimentaria.</text>
-            <text x="280" y="159" fill="currentColor">La variedad de colores ayuda</text>
-            <text x="280" y="186" fill="currentColor">a sumar diferentes nutrientes.</text>
+
+            <!-- Panel derecho (siempre visible) -->
+            <rect x="275" y="22" width="341" height="212" rx="8" fill="var(--surface-2)" opacity="0.4" />
+            <text x="445" y="44" fill="var(--focus)" font-weight="bold" font-size="13" text-anchor="middle">Elecciones Alimentarias</text>
+            <line x1="283" y1="50" x2="608" y2="50" stroke="var(--focus)" stroke-width="1" opacity="0.3"/>
+            <text x="285" y="68" fill="currentColor" font-size="12">✅ Balanceada: frutas, verduras, agua</text>
+            <text x="285" y="86" fill="currentColor" font-size="11">   Vitaminas, fibra, proteínas, minerales</text>
+            <text x="285" y="106" fill="currentColor" font-size="12">⚠️ Calorías vacías: soda, snacks</text>
+            <text x="285" y="124" fill="currentColor" font-size="11">   Energía sin nutrientes esenciales</text>
+            <text x="285" y="144" fill="currentColor" font-size="12">🔄 Mixta: se puede mejorar</text>
+            <text x="285" y="162" fill="currentColor" font-size="11">   Cambios pequeños y sostenidos</text>
+            <text x="285" y="186" fill="var(--focus)" font-size="11" font-weight="bold">La variedad de colores =</text>
+            <text x="285" y="204" fill="currentColor" font-size="11">diferentes nutrientes en el plato</text>
           </svg>
         </div>
         <p class="diagram-caption" data-status aria-live="polite"></p>
@@ -139,7 +256,8 @@
         <li>¿Incluye fibra, vitaminas o minerales?</li>
         <li>¿Es una elección ocasional o habitual?</li>
       </ul>
-      <p>Estas preguntas ayudan a tomar decisiones más saludables sin caer en ideas extremas de "prohibido" o "perfecto".</p>
+      <p>Estas preguntas ayudan a tomar decisiones más saludables sin caer en ideas extremas de "prohibido" o
+        "perfecto".</p>
     </section>
 
     <section class="panel">
@@ -150,7 +268,8 @@
 
       <div class="activity">
         <h4>Actividad de planificación</h4>
-        <p>Diseñá un menú escolar de un día (desayuno, colación, almuerzo y merienda) que combine variedad, hidratación y calidad nutricional.</p>
+        <p>Diseñá un menú escolar de un día (desayuno, colación, almuerzo y merienda) que combine variedad, hidratación
+          y calidad nutricional.</p>
       </div>
     </section>
 
@@ -177,9 +296,24 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>________</td><td>________</td><td>________</td><td>________</td></tr>
-          <tr><td>________</td><td>________</td><td>________</td><td>________</td></tr>
-          <tr><td>________</td><td>________</td><td>________</td><td>________</td></tr>
+          <tr>
+            <td>________</td>
+            <td>________</td>
+            <td>________</td>
+            <td>________</td>
+          </tr>
+          <tr>
+            <td>________</td>
+            <td>________</td>
+            <td>________</td>
+            <td>________</td>
+          </tr>
+          <tr>
+            <td>________</td>
+            <td>________</td>
+            <td>________</td>
+            <td>________</td>
+          </tr>
         </tbody>
       </table>
 
@@ -193,9 +327,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>Rojo / naranja</td><td>________</td><td>________</td></tr>
-          <tr><td>Verde</td><td>________</td><td>________</td></tr>
-          <tr><td>Violeta / otro</td><td>________</td><td>________</td></tr>
+          <tr>
+            <td>Rojo / naranja</td>
+            <td>________</td>
+            <td>________</td>
+          </tr>
+          <tr>
+            <td>Verde</td>
+            <td>________</td>
+            <td>________</td>
+          </tr>
+          <tr>
+            <td>Violeta / otro</td>
+            <td>________</td>
+            <td>________</td>
+          </tr>
         </tbody>
       </table>
 
@@ -211,11 +357,17 @@
       <ol>
         <li>Explicá con tus palabras la diferencia entre alimento y nutriente.</li>
         <li>Da un ejemplo de colación con predominio de calorías vacías y una versión mejorada.</li>
-        <li>Armá una merienda escolar con al menos dos colores de alimentos y justificá por qué mejora la calidad nutricional.</li>
+        <li>Armá una merienda escolar con al menos dos colores de alimentos y justificá por qué mejora la calidad
+          nutricional.</li>
       </ol>
     </section>
   </main>
 
-  <footer class="site-footer"><div class="container"><p>Tema de Biología basado en <code>programa_1anio.txt</code>.</p></div></footer>
+  <footer class="site-footer">
+    <div class="container">
+      <p>Tema de Biología basado en <code>programa_1anio.txt</code>.</p>
+    </div>
+  </footer>
 </body>
+
 </html>
