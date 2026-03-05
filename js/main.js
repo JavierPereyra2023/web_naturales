@@ -38,7 +38,6 @@
   const WEATHER_CACHE_TTL_MS = 20 * 60 * 1000;
   const WEATHER_ENDPOINT =
     "https://api.open-meteo.com/v1/forecast?latitude=-34.5208&longitude=-58.7006&current=temperature_2m,weather_code,is_day&timezone=America%2FArgentina%2FBuenos_Aires";
-  const WIKIPEDIA_SEARCH_ENDPOINT = "https://es.wikipedia.org/w/index.php?search=";
 
   function normalizeText(text) {
     return (text || "")
@@ -920,14 +919,6 @@
       '<p id="search-help" class="site-search-help">Escribi una palabra y selecciona un resultado.</p>' +
       '<div id="search-results" class="search-results" hidden aria-live="polite"></div>' +
       "</div>" +
-      '<form id="external-search-form" class="site-search-block external-search-form" novalidate>' +
-      '<label for="external-search-input" class="site-search-label">Buscar en Wikipedia</label>' +
-      '<div class="external-search-controls">' +
-      '<input id="external-search-input" class="site-search-input external-search-input" type="search" autocomplete="off" placeholder="Ej: sistema solar, celula vegetal..." aria-describedby="external-search-help">' +
-      '<button class="external-search-btn" type="submit">Buscar web</button>' +
-      "</div>" +
-      '<p id="external-search-help" class="site-search-help">Abre Wikipedia en español en una nueva pestaña para ampliar conocimientos.</p>' +
-      "</form>" +
       "</div>" +
       "</div>";
 
@@ -941,8 +932,6 @@
     return {
       input: container.querySelector("#topic-search"),
       results: container.querySelector("#search-results"),
-      externalInput: container.querySelector("#external-search-input"),
-      externalForm: container.querySelector("#external-search-form")
     };
   }
 
@@ -1139,18 +1128,6 @@
       }
     });
 
-    if (ui.externalForm && ui.externalInput) {
-      ui.externalForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        const query = (ui.externalInput.value || "").trim();
-        if (query.length < 2) {
-          ui.externalInput.focus();
-          return;
-        }
-        const url = WIKIPEDIA_SEARCH_ENDPOINT + encodeURIComponent(query);
-        window.open(url, "_blank", "noopener");
-      });
-    }
   }
 
   const DIDACTIC_ACTIVITY_BANK = {

@@ -393,7 +393,7 @@ html[data-theme="dark"] body[data-section] .main-nav a[aria-current="page"] {
 
 .site-search {
   border-top: 1px solid var(--border);
-  padding: 0.75rem 0 0.9rem;
+  padding: 0.55rem 0 0.6rem;
 }
 
 .site-search-inner {
@@ -402,7 +402,7 @@ html[data-theme="dark"] body[data-section] .main-nav a[aria-current="page"] {
 
 .site-search-grid {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.85rem;
   align-items: start;
 }
@@ -411,46 +411,22 @@ html[data-theme="dark"] body[data-section] .main-nav a[aria-current="page"] {
   position: relative;
 }
 
-.external-search-form {
-  border: 1px solid var(--border);
-  border-radius: 0.85rem;
-  padding: 0.7rem;
-  background: color-mix(in srgb, var(--surface) 92%, transparent);
-}
 
-.external-search-controls {
-  display: flex;
-  gap: 0.5rem;
-}
 
-.external-search-btn {
-  border: 1px solid var(--border);
-  border-radius: 0.75rem;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--primary) 16%, var(--surface)), color-mix(in srgb, var(--primary) 8%, var(--surface)));
-  color: var(--text);
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-  padding: 0.65rem 0.88rem;
-  white-space: nowrap;
-}
 
-.external-search-btn:hover {
-  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
-  box-shadow: 0 8px 18px rgba(12, 45, 30, 0.14);
-}
 
 .site-search-label {
   display: block;
   font-weight: 700;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
 }
 
 .site-search-input {
   width: 100%;
   border: 1px solid var(--border);
   border-radius: 0.85rem;
-  padding: 0.72rem 0.82rem;
+  padding: 0.58rem 0.74rem;
   background: var(--surface);
   color: var(--text);
   font: inherit;
@@ -464,9 +440,9 @@ html[data-theme="dark"] body[data-section] .main-nav a[aria-current="page"] {
 }
 
 .site-search-help {
-  margin: 0.45rem 0 0;
+  margin: 0.3rem 0 0;
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: 0.86rem;
 }
 
 .search-results {
@@ -1452,9 +1428,19 @@ html[data-theme="dark"] strong {
 
 /* Responsive: ajustes para tablets */
 @media (max-width: 1024px) {
+  .site-header {
+    padding: 0.65rem 0;
+  }
+
   .header-inner {
     flex-wrap: wrap;
     align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .header-inner h1 {
+    margin: 0;
+    font-size: 1.28rem;
   }
 
   .weather-widget {
@@ -1469,17 +1455,38 @@ html[data-theme="dark"] strong {
 
   .theme-toggle {
     margin-left: auto;
+    padding: 0.45rem 0.75rem;
+    font-size: 0.9rem;
   }
 
   .main-nav {
     justify-content: center;
+    gap: 0.38rem;
+    padding-bottom: 0.45rem;
+  }
+
+  .main-nav a {
+    padding: 0.38rem 0.68rem;
+    font-size: 0.9rem;
   }
 
   .site-search-grid {
     grid-template-columns: 1fr;
   }
-}
 
+  .site-search {
+    padding: 0.45rem 0 0.52rem;
+  }
+
+  .site-search-input {
+    padding: 0.5rem 0.68rem;
+    font-size: 0.95rem;
+  }
+
+  .site-search-help {
+    display: none;
+  }
+}
 /* Tablet vertical y moviles grandes */
 @media (max-width: 768px) {
 
@@ -1502,9 +1509,18 @@ html[data-theme="dark"] strong {
     width: min(1080px, 94%);
   }
 
+  .site-header {
+    padding: 0.5rem 0;
+  }
+
   .header-inner {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.38rem;
+  }
+
+  .header-inner h1 {
+    font-size: 1.15rem;
   }
 
   .weather-widget {
@@ -1514,11 +1530,15 @@ html[data-theme="dark"] strong {
 
   .theme-toggle {
     align-self: flex-end;
+    padding: 0.4rem 0.64rem;
+    font-size: 0.84rem;
   }
 
   .main-nav a {
     flex: 1 1 calc(50% - 0.5rem);
     text-align: center;
+    padding: 0.32rem 0.56rem;
+    font-size: 0.86rem;
   }
 
   .weather-line {
@@ -1552,19 +1572,29 @@ html[data-theme="dark"] strong {
     font-size: 0.9rem;
   }
 
-  .external-search-controls {
-    flex-direction: column;
+  .site-search {
+    padding: 0.35rem 0 0.44rem;
   }
 
-  .external-search-btn {
-    width: 100%;
+  .site-search-label {
+    margin-bottom: 0.2rem;
+    font-size: 0.88rem;
+  }
+
+  .site-search-input {
+    padding: 0.46rem 0.62rem;
+    border-radius: 0.72rem;
+    font-size: 0.9rem;
   }
 }
-
 /* Responsive: telefonos angostos */
 @media (max-width: 430px) {
   .container {
     width: 95%;
+  }
+
+  .site-header {
+    padding: 0.42rem 0;
   }
 
   .header-inner h1 {
@@ -1573,6 +1603,15 @@ html[data-theme="dark"] strong {
 
   .main-nav a {
     flex: 1 1 100%;
+  }
+
+  .site-search {
+    padding: 0.3rem 0 0.36rem;
+  }
+
+  .site-search-input {
+    font-size: 0.88rem;
+    padding: 0.42rem 0.56rem;
   }
 
   .btn {
@@ -1600,7 +1639,6 @@ html[data-theme="dark"] strong {
     grid-template-columns: 1fr;
   }
 }
-
 /* Impresión: optimizar para cuando los estudiantes impriman */
 @media print {
 
@@ -1702,3 +1740,4 @@ html[data-theme="dark"] .floating-back-btn:hover {
   background: rgba(var(--neon-color-rgb, 47, 212, 255), 0.15);
   box-shadow: 0 0 16px rgba(var(--neon-color-rgb, 47, 212, 255), 0.5);
 }
+
