@@ -13,6 +13,7 @@
     "quimica_t1_materia_propiedades.html",
     "quimica_t2_estados_cambios.html",
     "quimica_t3_modelo_corpuscular.html",
+    "moleculas-3d.html",
     "quimica_t4_sistemas_materiales.html",
     "quimica_t5_mezclas.html",
     "quimica_t6_soluciones.html",
@@ -1662,6 +1663,9 @@
 
   function observeCards() {
     if (!("IntersectionObserver" in window)) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    var EASING = "cubic-bezier(0.22, 1, 0.36, 1)";
 
     const observer = new IntersectionObserver(
       function (entries) {
@@ -1669,26 +1673,32 @@
           if (entry.isIntersecting) {
             entry.target.style.opacity = "1";
             entry.target.style.transform = "translateY(0)";
+            observer.unobserve(entry.target);
             setTimeout(function () {
+              entry.target.style.transition = "";
               entry.target.style.transform = "";
-            }, 620);
+              entry.target.style.opacity = "";
+            }, 700);
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.08 }
     );
 
     const panels = document.querySelectorAll(".panel, .card, .topic-card");
+    var staggerIndex = 0;
     panels.forEach(function (panel) {
       // Evita que el transform inline del observer pise el hover de las 3 cards del inicio.
       if (panel.classList.contains("card") && panel.parentElement && panel.parentElement.classList.contains("cards")) {
         return;
       }
 
+      var delay = staggerIndex * 55;
       panel.style.opacity = "0";
-      panel.style.transform = "translateY(20px)";
-      panel.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+      panel.style.transform = "translateY(18px)";
+      panel.style.transition = "opacity 0.58s " + EASING + " " + delay + "ms, transform 0.58s " + EASING + " " + delay + "ms";
       observer.observe(panel);
+      staggerIndex++;
     });
   }
 
@@ -1802,6 +1812,7 @@
   function initAll() {
     loadWeatherWidget();
     buildBreadcrumbs();
+
     ensureQuizNavLink();
     initSwitchers();
     ensureDidacticActivities();
@@ -1823,6 +1834,14 @@
     initAll();
   }
 })();
+
+
+
+
+
+
+
+
 
 
 
