@@ -97,16 +97,25 @@
     .molecule-app .panel-left::-webkit-scrollbar { width: 3px; }
     .molecule-app .panel-left::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
     @media (max-width: 900px) { .molecule-lead { grid-template-columns: 1fr; } }
+    /* ── Mobile: move panel to the bottom so the 3D canvas is visible ── */
     @media (max-width: 768px) {
-      .molecule-app { min-height: 720px; height: auto; }
-      .molecule-app .panel-left { width: calc(100% - 32px); max-height: none; }
+      .molecule-app { min-height: 680px; height: auto; }
+      .molecule-app .panel-left {
+        top: auto;
+        bottom: 58px;
+        left: 12px;
+        right: 12px;
+        width: auto;
+        max-height: 260px;
+        overflow-y: auto;
+      }
       .molecule-app .panel-right { display: none; }
-      .molecule-app .panel-bottom { left: 16px; right: 16px; transform: none; justify-content: center; }
+      .molecule-app .panel-bottom { left: 12px; right: 12px; transform: none; justify-content: center; bottom: 12px; }
     }
     @media (max-width: 640px) {
-      .molecule-app { min-height: 800px; }
-      .molecule-app .panel-left { top: 12px; left: 12px; width: calc(100% - 24px); padding: 12px; }
-      .molecule-app .panel-bottom { bottom: 12px; padding: 8px 14px; }
+      .molecule-app { min-height: 620px; }
+      .molecule-app .panel-left { left: 10px; right: 10px; bottom: 52px; max-height: 210px; padding: 12px; }
+      .molecule-app .panel-bottom { bottom: 10px; padding: 8px 14px; }
     }
   </style>
 </head>
