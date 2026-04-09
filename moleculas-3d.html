@@ -111,6 +111,8 @@
       /* Canvas container: relative in flow, fixed height */
       .molecule-app #canvas-container {
         position: relative;
+        /* override inset:0 from base — use individual props for broader browser support */
+        top: auto; right: auto; bottom: auto; left: auto;
         inset: auto;
         height: 340px;
         flex-shrink: 0;
@@ -800,6 +802,8 @@
       buildPresetLists();
       setMode('add');
       resize();
+      // Re-run resize after first paint in case layout wasn't fully computed yet
+      requestAnimationFrame(resize);
       loadPreset(PRESETS[0]);
       animate();
       if (window.lucide) window.lucide.createIcons();
