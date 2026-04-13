@@ -3,46 +3,151 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Física 3D | Ciencias Naturales 1° año</title>
+  <title>Modelos 3D de Física | Ciencias Naturales 1° año</title>
   <link rel="stylesheet" href="css/styles.css">
   <script defer src="js/main.js"></script>
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  <style>
+    .physics-models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem auto;
+      max-width: 800px;
+      justify-content: center;
+    }
+    a.physics-model-card,
+    a.physics-model-card:link,
+    a.physics-model-card:visited,
+    a.physics-model-card:hover,
+    a.physics-model-card:active {
+      text-decoration: none !important;
+    }
+    .physics-model-card {
+      position: relative;
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+      border: 2px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      color: var(--text);
+      display: block;
+    }
+    .physics-model-card,
+    .physics-model-card *,
+    .physics-model-card h3,
+    .physics-model-card p,
+    .physics-model-card .card-badge {
+      text-decoration: none !important;
+      border-bottom: none !important;
+    }
+    .physics-model-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+      border-color: var(--primary);
+      text-decoration: none !important;
+    }
+    .physics-model-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+    .physics-model-card.mru::before { background: linear-gradient(90deg, #3182ce, #63b3ed); }
+    .physics-model-card.mruv::before { background: linear-gradient(90deg, #ed8936, #fbd38d); }
+    .physics-model-card.parabolic::before { background: linear-gradient(90deg, #38a169, #9ae6b4); }
+    .physics-model-card.orbit::before { background: linear-gradient(90deg, #d69e2e, #fbd38d); }
+    .physics-model-card .card-icon {
+      font-size: 3rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .physics-model-card h3 {
+      font-size: 1.25rem;
+      margin: 0 0 0.5rem;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .physics-model-card p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin: 0 0 1rem;
+      line-height: 1.5;
+      text-decoration: none;
+    }
+    .physics-model-card .card-badge {
+      display: inline-block;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+    }
+    .physics-model-card.mru .card-badge { background: #3182ce; }
+    .physics-model-card.mruv .card-badge { background: #ed8936; }
+    .physics-model-card.parabolic .card-badge { background: #38a169; }
+    .physics-model-card.orbit .card-badge { background: #d69e2e; }
+    .physics-model-card .card-arrow {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      color: var(--primary);
+      transition: transform 0.3s ease;
+    }
+    .physics-model-card:hover .card-arrow {
+      transform: translateX(4px);
+    }
+    .physics-hero {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+      border-radius: 1rem;
+      margin-bottom: 2rem;
+      border: 2px solid #90cdf4;
+    }
+    .physics-hero .hero-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+    .physics-hero h2 {
+      margin: 0 0 0.5rem;
+      color: #1565c0;
+    }
+    .physics-hero p {
+      margin: 0;
+      color: #37474f;
+      font-size: 1.1rem;
+    }
+    @media (max-width: 768px) {
+      .physics-models-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        max-width: 100%;
+      }
+      .physics-model-card {
+        padding: 1rem;
+      }
+      .physics-model-card .card-icon {
+        font-size: 2rem;
+      }
+      .physics-model-card h3 {
+        font-size: 1rem;
+      }
+      .physics-model-card p {
+        font-size: 0.85rem;
+      }
+      .physics-hero {
+        padding: 1.5rem 1rem;
+      }
+      .physics-hero .hero-icon {
+        font-size: 3rem;
       }
     }
-  </script>
-  <style>
-    body[data-page="Física 3D"] main.container{padding-bottom:1.4rem}
-    .sim-note,.sim-card{border:1px solid var(--border);background:color-mix(in srgb,var(--surface) 96%,transparent);border-radius:1rem;box-shadow:var(--shadow);padding:1rem 1.1rem}
-    .sim-lead{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1rem 0}
-    .sim-chips{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.8rem}.sim-chip{display:inline-flex;align-items:center;gap:.45rem;padding:.36rem .72rem;border:1px solid var(--border);border-radius:999px;background:var(--surface-2);font-size:.88rem;font-weight:700}.sim-dot{width:.72rem;height:.72rem;border-radius:50%;display:inline-block}
-    .sim-app{position:relative;min-height:820px;height:min(86vh,860px);margin:1rem 0 1.5rem;overflow:hidden;border-radius:1.3rem;border:1px solid rgba(49,130,206,.22);background:radial-gradient(circle at 16% 12%,rgba(255,255,255,.12),transparent 16%),linear-gradient(180deg,#77c6ff 0%,#b9e7ff 18%,#e7f8ff 34%,#d7eefc 60%,#cae5f7 100%);box-shadow:0 26px 80px rgba(15,39,66,.18)}
-    .sim-app #canvas-container{position:absolute;inset:0;z-index:0}.sim-app canvas{display:block}
-    .sim-app .panel{position:absolute;z-index:10;border-radius:18px;box-shadow:0 16px 36px rgba(8,26,46,.16);transition:transform 0.3s ease,opacity 0.3s ease}
-    .panel-left{top:16px;left:16px;width:320px;padding:18px;max-height:calc(100% - 32px);overflow-y:auto;background:rgba(255,255,255,.96);border:2px solid rgba(112,175,230,.55);color:#13304c}
-    .panel-right{top:16px;right:16px;width:290px;padding:16px;max-height:calc(100% - 32px);overflow-y:auto;background:rgba(250,252,255,.95);border:2px solid rgba(255,214,102,.72);color:#13304c}
-    .panel-bottom{left:50%;bottom:16px;transform:translateX(-50%);padding:10px 20px;display:flex;align-items:center;max-width:min(84%,760px);background:rgba(21,63,106,.92);color:#f5fbff;border:1px solid rgba(255,255,255,.18)}
-    .panel-left.hidden-panel{transform:translateX(-110%) !important;opacity:0 !important;pointer-events:none !important}
-    .panel-right.hidden-panel{transform:translateX(110%) !important;opacity:0 !important;pointer-events:none !important}
-    .panel-bottom.hidden-panel{transform:translateX(-50%) translateY(100px) !important;opacity:0 !important;pointer-events:none !important}
-    .sim-app .panel-toggle{position:absolute;z-index:20;background:rgba(255,255,255,.95);border:2px solid rgba(112,175,230,.55);border-radius:12px;color:#13304c;padding:8px 12px;cursor:pointer;font-size:12px;font-weight:600;display:none;transition:transform 0.2s ease}
-    .sim-app .panel-toggle:hover{transform:scale(1.05)}
-    .sim-app .panel-toggle-left{top:16px;left:16px}
-    .sim-app .panel-toggle-right{top:16px;right:16px}
-    .sim-app .panel-toggle-bottom{left:50%;bottom:16px;transform:translateX(-50%)}
-    .panel-title{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:17px;font-weight:700}.panel-title .dot{width:9px;height:9px;border-radius:50%;background:#3182ce;box-shadow:0 0 0 5px rgba(99,179,237,.15)}
-    .section-label{margin-top:16px;margin-bottom:8px;color:#365b7c;font-size:10px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase}
-    .mode-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.tool-row{display:flex;flex-wrap:wrap;gap:8px}.tool-row .tool-btn{width:auto}
-    .mode-btn,.tool-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:9px 12px;border:2px solid rgba(116,161,207,.55);border-radius:12px;background:linear-gradient(180deg,#fff 0%,#e9f4ff 100%);color:#18446f;cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}.mode-btn:hover,.tool-btn:hover{transform:translateY(-1px);border-color:#3182ce;box-shadow:0 8px 18px rgba(49,130,206,.16)}.mode-btn.active,.tool-btn.active{border-color:#2b6cb0;background:linear-gradient(180deg,#fff8d2 0%,#ffe59a 100%);color:#5c4100;box-shadow:0 0 0 1px rgba(255,209,102,.38),0 10px 20px rgba(255,209,102,.24)}
-    .control-stack{display:grid;gap:12px}.control-block,.concept-box,.reading-box{padding:12px;border:2px solid rgba(116,161,207,.35);border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(238,247,255,.94))}
-    .control-head{display:flex;justify-content:space-between;gap:10px;margin-bottom:6px;font-size:12px;font-weight:700}.control-head span:last-child{color:#1d5d96;font-family:"JetBrains Mono",monospace}input[type="range"]{width:100%;accent-color:#3182ce}
-    .stat-row{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(116,161,207,.28)}.stat-row:last-child{border-bottom:none}.stat-label{color:#476684;font-size:11px}.stat-value{font-size:13px;font-weight:700;text-align:right;color:#143a60}.mono{font-family:"JetBrains Mono",monospace}.hint-list{margin:.7rem 0 0;padding-left:1.1rem;color:#2c4f71;font-size:.9rem}.hint-list li+li{margin-top:.35rem}.status-text{font-size:.9rem;margin:0}
-    @media (max-width:900px){.sim-lead{grid-template-columns:1fr}}
-    @media (max-width:768px){.sim-app{min-height:600px;height:auto}.panel-left,.panel-right{width:calc(100% - 24px);left:12px;right:12px;max-height:none}.panel-left{top:12px;padding:14px}.panel-right{top:376px;padding:14px}.panel-bottom{left:12px;right:12px;bottom:12px;transform:translateX(-50%);max-width:none}.sim-app .panel-toggle{display:block}}
-    @media (max-width:640px){.sim-app{min-height:540px}.mode-grid{grid-template-columns:1fr}.panel-right{top:458px}.tool-row .tool-btn{flex:1 1 calc(50% - 8px)}.panel-left{top:50px;left:8px;width:calc(100% - 16px);max-height:65vh}.sim-app .panel-toggle-left{top:8px;left:8px}.sim-app .panel-toggle-bottom{bottom:8px}}
   </style>
 </head>
 <body data-page="Física 3D" data-section="Física" data-section-href="fisica.html">
@@ -51,7 +156,7 @@
     <div class="container header-inner">
       <div>
         <p class="kicker">Ciencias Naturales · 1° año</p>
-        <h1>Laboratorio interactivo de Física 3D</h1>
+        <h1>Laboratorio de Física 3D</h1>
       </div>
       <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar modo oscuro">Modo oscuro</button>
     </div>
@@ -62,174 +167,74 @@
       <a href="biologia.html">Biología</a>
     </nav>
   </header>
-  <div class="container"><nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav></div>
+  <div class="container">
+    <nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav>
+  </div>
   <main id="contenido" class="container">
-    <section class="sim-note">
-      <h2>Explorar movimientos como en un laboratorio</h2>
-      <p>Esta simulación busca un estilo tipo <strong>PhET</strong>: pocos controles, lectura visual clara y una explicación física inmediata. Elegís el modelo, movés los sliders y comparás cómo cambian la <strong>posición</strong>, la <strong>velocidad</strong>, la <strong>aceleración</strong> y la <strong>trayectoria</strong>.</p>
-      <div class="sim-chips">
-        <span class="sim-chip"><span class="sim-dot" style="background:#3182ce"></span> MRU</span>
-        <span class="sim-chip"><span class="sim-dot" style="background:#ed8936"></span> MRUV</span>
-        <span class="sim-chip"><span class="sim-dot" style="background:#38a169"></span> Parabólico</span>
-        <span class="sim-chip"><span class="sim-dot" style="background:#d69e2e"></span> Tierra-Sol</span>
+    <div class="physics-hero">
+      <span class="hero-icon">🚀</span>
+      <h2>Explorá los movimientos en 3D</h2>
+      <p>Elegí un modelo y observá cómo se comporta en tiempo real. Modificá los parámetros y compará los resultados.</p>
+    </div>
+
+    <section class="panel">
+      <h2>Modelos disponibles</h2>
+      <p class="tag">Cada modelo tiene controles interactivos y explicaciones físicas detalladas.</p>
+      
+      <div class="physics-models-grid">
+        <a href="fisica-mru.html" class="physics-model-card mru">
+          <span class="card-icon">🚗</span>
+          <h3>MRU - Movimiento Rectilíneo Uniforme</h3>
+          <p>Un móvil avanza en línea recta con velocidad constante. Observá cómo las posiciones quedan igualmente espaciadas.</p>
+          <span class="card-badge">Velocidad constante</span>
+          <span class="card-arrow">→</span>
+        </a>
+
+        <a href="fisica-mruv.html" class="physics-model-card mruv">
+          <span class="card-icon">🏎️</span>
+          <h3>MRUV - Movimiento Rectilíneo Uniformemente Variado</h3>
+          <p>Un móvil acelera en línea recta. La velocidad cambia de forma constante y las posiciones se separan cada vez más.</p>
+          <span class="card-badge">Aceleración constante</span>
+          <span class="card-arrow">→</span>
+        </a>
+
+        <a href="fisica-parabolico.html" class="physics-model-card parabolic">
+          <span class="card-icon">⚽</span>
+          <h3>Movimiento Parabólico</h3>
+          <p>Un proyectil lanzado con ángulo. Combinación de movimiento horizontal uniforme y caída libre vertical.</p>
+          <span class="card-badge">Dos dimensiones</span>
+          <span class="card-arrow">→</span>
+        </a>
+
+        <a href="fisica-orbita.html" class="physics-model-card orbit">
+          <span class="card-icon">🌍</span>
+          <h3>Órbita Terrestre - Sol y Tierra</h3>
+          <p>La Tierra girando alrededor del Sol. Visualizá cómo cambia la dirección de la velocidad constantemente.</p>
+          <span class="card-badge">Movimiento circular</span>
+          <span class="card-arrow">→</span>
+        </a>
       </div>
     </section>
-    <section class="sim-lead">
-      <article class="sim-card">
-        <h3>Cómo usarla</h3>
-        <p>Primero elegí un modelo. Después modificá un parámetro y mirá qué cambia en la escena. Finalmente, leé el panel derecho para conectar lo visual con la idea física central.</p>
-      </article>
-      <article class="sim-card">
-        <h3>Qué conviene observar</h3>
-        <p>En MRU importa la constancia de la velocidad. En MRUV la aceleración constante. En el movimiento parabólico se combinan dos ejes. En la órbita terrestre cambia la dirección del movimiento en todo momento.</p>
-      </article>
-    </section>
-    <section class="sim-app" aria-label="Laboratorio de Física 3D">
-      <div id="canvas-container"></div>
-      <button class="panel-toggle panel-toggle-left" id="toggle-left" aria-label="Mostrar/ocultar controles">☰ Controles</button>
-      <button class="panel-toggle panel-toggle-right" id="toggle-right" aria-label="Mostrar/ocultar lectura">📊 Lectura</button>
-      <button class="panel-toggle panel-toggle-bottom" id="toggle-bottom" aria-label="Mostrar/ocultar estado">ℹ️ Estado</button>
-      <aside class="panel panel-left hidden-panel">
-        <div class="panel-title"><span class="dot"></span>Controles del laboratorio</div>
-        <div class="section-label">Elegí un modelo</div>
-        <div class="mode-grid" id="mode-grid">
-          <button class="mode-btn active" data-mode="mru">MRU</button>
-          <button class="mode-btn" data-mode="mruv">MRUV</button>
-          <button class="mode-btn" data-mode="parabolic">Parabólico</button>
-          <button class="mode-btn" data-mode="orbit">Sol-Tierra</button>
-        </div>
-        <div class="section-label">Acciones</div>
-        <div class="tool-row">
-          <button class="tool-btn" id="btn-play">Pausar</button>
-          <button class="tool-btn" id="btn-reset">Reiniciar</button>
-          <button class="tool-btn" id="btn-center">Centrar vista</button>
-        </div>
-        <div class="section-label">Ajustes del modelo</div>
-        <div class="control-stack" id="controls-panel"></div>
-        <div class="section-label">Idea central</div>
-        <div class="concept-box">
-          <strong id="concept-title">MRU</strong>
-          <p id="concept-summary">Movimiento rectilíneo con velocidad constante y aceleración nula.</p>
-          <ul class="hint-list" id="concept-points"></ul>
-        </div>
-      </aside>
-      <aside class="panel panel-right hidden-panel">
-        <div class="section-label" style="margin-top:0;">Lectura física</div>
-        <div class="reading-box">
-          <strong id="reading-title">Qué observar</strong>
-          <p id="reading-description">En este modelo la posición cambia de forma proporcional al tiempo.</p>
-        </div>
-        <div class="section-label">Variables en vivo</div>
-        <div class="reading-box" id="stats-panel"></div>
-        <div class="section-label">Interpretación docente</div>
-        <div class="concept-box">
-          <strong id="model-formula">x = x0 + v · t</strong>
-          <p id="teacher-note">Si recorre distancias iguales en tiempos iguales, la velocidad permanece constante.</p>
-        </div>
-      </aside>
-      <div class="panel panel-bottom hidden-panel"><p class="status-text" id="status-text">MRU: el móvil avanza en línea recta con rapidez constante. Probá cambiar la velocidad y compará las marcas.</p></div>
+
+    <section class="panel">
+      <h2>¿Cómo usar los modelos?</h2>
+      <ol>
+        <li><strong>Elegí un modelo</strong> de los que aparecen arriba tocando la card.</li>
+        <li><strong>Usá los controles</strong> para modificar parámetros como velocidad, ángulo o aceleración.</li>
+        <li><strong>Observá</strong> cómo cambia el movimiento en la escena 3D.</li>
+        <li><strong>Leé las explicaciones</strong> en los paneles laterales para entender la física detrás de cada movimiento.</li>
+        <li><strong>Compará</strong> los diferentes modelos para ver las similitudes y diferencias.</li>
+      </ol>
+      <div style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); border-radius: 0.75rem; padding: 1rem; margin-top: 1rem; border-left: 4px solid #3182ce;">
+        <p style="margin: 0; font-weight: 700; color: #1565c0;">💡 Tip:</p>
+        <p style="margin: 0.5rem 0 0; color: #1a365d;">En cada modelo podés rotar la cámara arrastrando con el mouse o el dedo. Usá la rueda para hacer zoom.</p>
+      </div>
     </section>
   </main>
-  <footer class="site-footer"><div class="container"><p>Recurso interactivo de Física para modelar movimientos y trayectorias.</p></div></footer>
-  <script type="module">
-    import * as THREE from 'three';
-    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-    const defs={mru:{label:'MRU',summary:'Movimiento rectilíneo con velocidad constante y aceleración nula.',points:['La trayectoria es recta.','La velocidad no cambia con el tiempo.','Las marcas de posición quedan igualmente separadas.'],reading:'En MRU la posición cambia linealmente con el tiempo y la aceleración vale cero.',formula:'x = x0 + v · t',note:'Cuando en tiempos iguales se recorren distancias iguales, la velocidad es constante.',status:'MRU: el móvil avanza en línea recta con rapidez constante. Probá cambiar la velocidad y compará las marcas.',controls:[{key:'speed',label:'Velocidad',min:.5,max:6,step:.1,unit:'m/s',value:2.5}],stats:[['time','Tiempo'],['x','Posición x'],['speed','Velocidad'],['acc','Aceleración']]},mruv:{label:'MRUV',summary:'Movimiento rectilíneo con aceleración constante distinta de cero.',points:['La trayectoria sigue siendo recta.','La velocidad cambia de forma uniforme.','Las distancias entre marcas crecen regularmente.'],reading:'En MRUV la aceleración se mantiene constante y la velocidad cambia en cada instante.',formula:'x = x0 + v0·t + 1/2·a·t²',note:'Si la velocidad aumenta de forma regular, la separación entre posiciones también cambia de forma regular.',status:'MRUV: el móvil acelera en línea recta. Observá cómo se separan cada vez más las posiciones.',controls:[{key:'v0',label:'Velocidad inicial',min:0,max:4,step:.1,unit:'m/s',value:.8},{key:'a',label:'Aceleración',min:.2,max:2.4,step:.1,unit:'m/s²',value:.9}],stats:[['time','Tiempo'],['x','Posición x'],['speed','Velocidad'],['acc','Aceleración']]},parabolic:{label:'Parabólico',summary:'Combina un movimiento horizontal uniforme con un movimiento vertical acelerado.',points:['En horizontal la velocidad permanece constante.','En vertical actúa la gravedad.','La trayectoria resultante es una parábola.'],reading:'El tiro parabólico se entiende mejor si se separa en dos ejes: x e y.',formula:'x = vx·t, y = vy·t - 1/2·g·t²',note:'La curva aparece al combinar un eje horizontal uniforme con otro vertical acelerado.',status:'Parabólico: compará el movimiento horizontal con el vertical y mirá la altura máxima.',controls:[{key:'speed',label:'Velocidad inicial',min:6,max:20,step:.5,unit:'m/s',value:12},{key:'angle',label:'Ángulo',min:15,max:75,step:1,unit:'°',value:45}],stats:[['time','Tiempo'],['x','Alcance x'],['y','Altura y'],['vx','Velocidad x'],['vy','Velocidad y'],['g','Gravedad']]},orbit:{label:'Sol-Tierra',summary:'La Tierra se traslada alrededor del Sol cambiando continuamente la dirección de su velocidad.',points:['La trayectoria es cerrada alrededor del Sol.','La rapidez visual puede parecer estable.','Aunque la rapidez se mantenga, la dirección cambia todo el tiempo.'],reading:'La órbita permite discutir que puede haber aceleración aunque la rapidez no cambie demasiado.',formula:'Trayectoria orbital alrededor del Sol',note:'El cambio de dirección del vector velocidad implica aceleración centrípeta.',status:'Sol-Tierra: la Tierra no se mueve en línea recta; cambia de dirección todo el tiempo alrededor del Sol.',controls:[{key:'speed',label:'Velocidad visual orbital',min:.2,max:2.5,step:.1,unit:'x',value:1}],stats:[['time','Tiempo simulado'],['radius','Radio orbital'],['period','Período visual'],['speed','Velocidad visual']]}};
-    const $=s=>document.querySelector(s),container=$('#canvas-container'),controlsPanel=$('#controls-panel'),statsPanel=$('#stats-panel');
-    const scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0xdaf2ff,.016);const camera=new THREE.PerspectiveCamera(50,1,.1,250);camera.position.set(10,7,11);const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;container.appendChild(renderer.domElement);
-    const cam=new OrbitControls(camera,renderer.domElement);cam.enableDamping=true;cam.dampingFactor=.08;cam.minDistance=4;cam.maxDistance=60;cam.target.set(0,1.6,0);
-    scene.add(new THREE.AmbientLight(0xffffff,1.05));const d1=new THREE.DirectionalLight(0xffffff,1.25);d1.position.set(8,12,6);scene.add(d1);const d2=new THREE.DirectionalLight(0x7dc8ff,.55);d2.position.set(-8,5,-6);scene.add(d2);const sunLight=new THREE.PointLight(0xffd166,.5,80);sunLight.position.set(0,9,0);scene.add(sunLight);
-    const starGeo=new THREE.BufferGeometry(),count=220,pos=new Float32Array(count*3);for(let i=0;i<count;i+=1){pos[i*3]=(Math.random()-.5)*70;pos[i*3+1]=Math.random()*36+4;pos[i*3+2]=(Math.random()-.5)*70}starGeo.setAttribute('position',new THREE.BufferAttribute(pos,3));const stars=new THREE.Points(starGeo,new THREE.PointsMaterial({color:0xffffff,size:.08,transparent:true,opacity:.45,sizeAttenuation:true}));scene.add(stars);
-    const group=new THREE.Group();scene.add(group);const state={mode:'mru',paused:false,t:0,params:{},stats:{},objects:{}};const clock=new THREE.Clock();
-    const fmt=(v,u='')=>typeof v==='number'&&!Number.isNaN(v)?((Math.abs(v)>=100?v.toFixed(1):v.toFixed(2))+(u?' '+u:'')):'—';
-    const add=o=>(group.add(o),o);function clearGroup(){while(group.children.length){const c=group.children.pop();c.geometry?.dispose?.();if(Array.isArray(c.material))c.material.forEach(m=>m.dispose?.());else c.material?.dispose?.()}state.objects={}}
-    function sprite(text,color='#143a60'){const cv=document.createElement('canvas');cv.width=256;cv.height=96;const cx=cv.getContext('2d');cx.font='bold 34px Trebuchet MS';cx.textAlign='center';cx.textBaseline='middle';cx.fillStyle=color;cx.shadowColor='rgba(255,255,255,.9)';cx.shadowBlur=10;cx.fillText(text,128,48);const tx=new THREE.CanvasTexture(cv);const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tx,transparent:true,depthTest:false}));sp.scale.set(3.2,1.2,1);return sp}
-    function ground(){const floor=new THREE.Mesh(new THREE.PlaneGeometry(40,40),new THREE.MeshPhysicalMaterial({color:0xc8e8a8,roughness:.95,metalness:0}));floor.rotation.x=-Math.PI/2;add(floor)}
-    function track(){const road=new THREE.Mesh(new THREE.BoxGeometry(18,.16,2.2),new THREE.MeshPhysicalMaterial({color:0x66788a,roughness:.86,metalness:.05}));road.position.y=.08;add(road);const mat=new THREE.MeshBasicMaterial({color:0xfff7c7});for(let i=0;i<7;i+=1){const m=new THREE.Mesh(new THREE.BoxGeometry(.22,.04,.42),mat);m.position.set(-7.2+i*2.4,.17,0);add(m)}}
-    function ghosts(xs,color){xs.forEach((x,i)=>{const g=new THREE.Mesh(new THREE.SphereGeometry(.16,18,16),new THREE.MeshBasicMaterial({color,transparent:true,opacity:Math.max(.18,.68-i*.08)}));g.position.set(x,.85,.95);add(g)})}
-    function car(color){const g=new THREE.Group(),body=new THREE.Mesh(new THREE.BoxGeometry(1.5,.5,.9),new THREE.MeshPhysicalMaterial({color,roughness:.3,metalness:.12,clearcoat:.45}));body.position.y=.8;g.add(body);const top=new THREE.Mesh(new THREE.BoxGeometry(.8,.35,.72),new THREE.MeshPhysicalMaterial({color:0xe6f4ff,roughness:.2,metalness:.03,transparent:true,opacity:.9}));top.position.set(-.1,1.16,0);g.add(top);const wg=new THREE.CylinderGeometry(.18,.18,.16,18),wm=new THREE.MeshBasicMaterial({color:0x111111});[[-.45,.42,.42],[.45,.42,.42],[-.45,.42,-.42],[.45,.42,-.42]].forEach(([x,y,z])=>{const w=new THREE.Mesh(wg,wm);w.rotation.z=Math.PI/2;w.position.set(x,y,z);g.add(w)});return add(g)}
-    function arrow(a,b,color){const d=new THREE.Vector3().subVectors(b,a),ar=new THREE.ArrowHelper(d.normalize(),a,d.length(),color,.5,.24);return add(ar)}
-    function panel(mode){const def=defs[mode];$('#concept-title').textContent=def.label;$('#concept-summary').textContent=def.summary;$('#concept-points').innerHTML=def.points.map(p=>'<li>'+p+'</li>').join('');$('#reading-title').textContent='Qué observar en '+def.label;$('#reading-description').textContent=def.reading;$('#model-formula').textContent=def.formula;$('#teacher-note').textContent=def.note;$('#status-text').textContent=def.status}
-    function buildControls(mode){const def=defs[mode];controlsPanel.innerHTML='';state.params={};def.controls.forEach(c=>{state.params[c.key]=c.value;const el=document.createElement('label');el.className='control-block';el.innerHTML='<div class="control-head"><span>'+c.label+'</span><span id="value-'+c.key+'">'+c.value+' '+c.unit+'</span></div><input type="range" min="'+c.min+'" max="'+c.max+'" step="'+c.step+'" value="'+c.value+'" data-key="'+c.key+'" data-unit="'+c.unit+'">';controlsPanel.appendChild(el)});controlsPanel.querySelectorAll('input').forEach(inp=>inp.addEventListener('input',e=>{const k=e.target.dataset.key,u=e.target.dataset.unit,v=Number(e.target.value);state.params[k]=v;$('#value-'+k).textContent=v+' '+u;resetModel()}))}
-    function buildStats(mode){statsPanel.innerHTML='';state.stats={};defs[mode].stats.forEach(([k,l])=>{const row=document.createElement('div');row.className='stat-row';row.innerHTML='<span class="stat-label">'+l+'</span><span class="stat-value mono" id="stat-'+k+'">—</span>';statsPanel.appendChild(row);state.stats[k]=row.querySelector('.stat-value')})}
-    function setStats(values){Object.keys(state.stats).forEach(k=>{if(values[k]!==undefined)state.stats[k].textContent=values[k]})}
-    function center(mode){if(mode==='orbit'){cam.target.set(0,1.5,0);camera.position.set(0,17,13)}else if(mode==='parabolic'){cam.target.set(-2,2,-4);camera.position.set(5,6,8)}else{cam.target.set(0,1.2,0);camera.position.set(10,6.2,10)}cam.update()}
-    function setupMRU(){ground();track();ghosts(Array.from({length:6},(_,i)=>-7+i*2.4),0x3182ce);const c=car(0x3182ce);c.position.x=-7;state.objects.car=c}
-    function updateMRU(){const tt=state.t%6.4,s=state.params.speed,x=-7+s*tt;state.objects.car.position.x=Math.min(x,7);setStats({time:fmt(tt,'s'),x:fmt(Math.max(0,state.objects.car.position.x+7),'m'),speed:fmt(s,'m/s'),acc:'0.00 m/s²'})}
-    function setupMRUV(){ground();track();const v0=state.params.v0,a=state.params.a,m=[];for(let i=0;i<=5;i+=1){const x=-7+v0*i+.5*a*i*i;if(x<=7.2)m.push(x)}ghosts(m,0xed8936);const c=car(0xed8936);c.position.x=-7;state.objects.car=c}
-    function updateMRUV(){const v0=state.params.v0,a=state.params.a,tt=Math.min(state.t,5.4),x=-7+v0*tt+.5*a*tt*tt,v=v0+a*tt;state.objects.car.position.x=Math.min(x,7);if(state.t>=5.4)state.t=0;setStats({time:fmt(tt,'s'),x:fmt(Math.max(0,state.objects.car.position.x+7),'m'),speed:fmt(v,'m/s'),acc:fmt(a,'m/s²')})}
-    function setupParabolic(){ground();const grid=new THREE.GridHelper(22,22,0x8ab4d4,0xb8d4e8);grid.position.set(-2,.01,-4);grid.material.transparent=true;grid.material.opacity=.22;add(grid);arrow(new THREE.Vector3(-7,.02,-4),new THREE.Vector3(2.5,.02,-4),0x3182ce);arrow(new THREE.Vector3(-7,.02,-4),new THREE.Vector3(-7,7.5,-4),0x38a169);const sx=sprite('x','#1d5d96');sx.position.set(3.1,.7,-4);add(sx);const sy=sprite('y','#2f855a');sy.position.set(-7,8.1,-4);add(sy);const speed=state.params.speed,ang=THREE.MathUtils.degToRad(state.params.angle),g=9.8,vx=speed*Math.cos(ang),vy=speed*Math.sin(ang),total=2*vy/g,scale=.42;const base=new THREE.Mesh(new THREE.BoxGeometry(1,.55,1),new THREE.MeshPhysicalMaterial({color:0x4a5568,roughness:.8,metalness:.15}));base.position.set(-6.4,.28,-4);add(base);const bGroup=new THREE.Group();bGroup.position.set(-6.4-0.65*Math.cos(ang),.55-0.65*Math.sin(ang),-4);bGroup.rotation.z=-(Math.PI/2-ang);const barrel=new THREE.Mesh(new THREE.CylinderGeometry(.1,.14,.78,14),new THREE.MeshPhysicalMaterial({color:0x2d3748,roughness:.55,metalness:.3}));barrel.position.y=.39;bGroup.add(barrel);add(bGroup);const pts=[];for(let t=0;t<=total;t+=total/60){const x=-6.4+vx*t*scale,y=.45+vy*t*scale-.5*g*t*t*scale;pts.push(new THREE.Vector3(x,Math.max(.45,y),-4))}add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:0x38a169,transparent:true,opacity:.35})));const ball=new THREE.Mesh(new THREE.SphereGeometry(.28,24,20),new THREE.MeshPhysicalMaterial({color:0x38a169,roughness:.3,metalness:.08,clearcoat:.45}));ball.position.copy(pts[0]);add(ball);const tApex=vy/g,xApex=-6.4+vx*tApex*scale,yApex=.45+vy*tApex*scale-.5*g*tApex*tApex*scale;add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-7,yApex,-4),new THREE.Vector3(xApex,yApex,-4)]),new THREE.LineBasicMaterial({color:0xf6ad55,transparent:true,opacity:.7})));const al=sprite('h máx','#c05621');al.position.set(xApex+.5,yApex+.4,-4);add(al);const xLand=-6.4+vx*total*scale;const landRing=new THREE.Mesh(new THREE.RingGeometry(.3,.5,32),new THREE.MeshBasicMaterial({color:0xe53e3e,side:THREE.DoubleSide,transparent:true,opacity:.8}));landRing.rotation.x=-Math.PI/2;landRing.position.set(xLand,.02,-4);add(landRing);const dtStep=total/6;for(let i=1;i<=6;i++){const bx=-6.4+vx*dtStep*i*scale;if(bx>xLand+.1)break;const d=new THREE.Mesh(new THREE.SphereGeometry(.08,12,10),new THREE.MeshBasicMaterial({color:0x3182ce,transparent:true,opacity:.55}));d.position.set(bx,.08,-4);add(d)}const shadow=new THREE.Mesh(new THREE.CircleGeometry(.3,24),new THREE.MeshBasicMaterial({color:0x0a2a0a,transparent:true,opacity:.28,side:THREE.DoubleSide}));shadow.rotation.x=-Math.PI/2;shadow.position.set(-6.4,.02,-4);add(shadow);const heightLine=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-6.4,.45,-4),new THREE.Vector3(-6.4,.02,-4)]),new THREE.LineBasicMaterial({color:0x9ae6b4,transparent:true,opacity:.55}));add(heightLine);const vxArrow=new THREE.ArrowHelper(new THREE.Vector3(1,0,0),new THREE.Vector3(-6.4,.45,-4),Math.max(.2,vx*scale*.55),0x3182ce,.35,.18);add(vxArrow);const vyArrow=new THREE.ArrowHelper(new THREE.Vector3(0,1,0),new THREE.Vector3(-6.4,.45,-4),Math.max(.2,vy*scale*.55),0x38a169,.35,.18);add(vyArrow);state.objects={ball,total,vx,vy,scale,g,shadow,heightLine,vxArrow,vyArrow}}
-    function updateParabolic(){const o=state.objects,tt=state.t%o.total,x=o.vx*tt,y=o.vy*tt-.5*o.g*tt*tt,bx=-6.4+x*o.scale,by=Math.max(.45,.45+y*o.scale);o.ball.position.set(bx,by,-4);const hFrac=Math.max(0,y*o.scale)/6,sScale=Math.max(.4,1-hFrac*.5);o.shadow.position.set(bx,.02,-4);o.shadow.scale.set(sScale,sScale,1);o.shadow.material.opacity=Math.max(.06,.28-hFrac*.16);const hPos=o.heightLine.geometry.attributes.position;hPos.setXYZ(0,bx,by,-4);hPos.setXYZ(1,bx,.02,-4);hPos.needsUpdate=true;const curVy=o.vy-o.g*tt,vxLen=Math.max(.2,o.vx*o.scale*.55),vyLen=Math.max(.2,Math.abs(curVy)*o.scale*.55);o.vxArrow.position.set(bx,by,-4);o.vxArrow.setLength(vxLen,Math.min(.35,vxLen*.28),.18);const vyDir=curVy>=0?new THREE.Vector3(0,1,0):new THREE.Vector3(0,-1,0);o.vyArrow.position.set(bx,by,-4);o.vyArrow.setDirection(vyDir);o.vyArrow.setLength(vyLen,Math.min(.35,vyLen*.28),.18);if(state.t>=o.total)state.t=0;setStats({time:fmt(tt,'s'),x:fmt(x,'m'),y:fmt(Math.max(0,y),'m'),vx:fmt(o.vx,'m/s'),vy:fmt(curVy,'m/s'),g:fmt(o.g,'m/s²')})}
-    function setupOrbit(){const sc=720,sp=new Float32Array(sc*3);for(let i=0;i<sc;i++){sp[i*3]=(Math.random()-.5)*90;sp[i*3+1]=Math.random()*55+2;sp[i*3+2]=(Math.random()-.5)*90}add(new THREE.Points(new THREE.BufferGeometry().setAttribute('position',new THREE.BufferAttribute(sp,3)),new THREE.PointsMaterial({color:0xffffff,size:.14,sizeAttenuation:true,transparent:true,opacity:.92})));const sun=new THREE.Mesh(new THREE.SphereGeometry(1.4,32,28),new THREE.MeshPhysicalMaterial({color:0xffd166,emissive:0xffc107,emissiveIntensity:1.3,roughness:.2,metalness:0}));sun.position.set(0,1.5,0);add(sun);[[2.1,.18],[3.0,.09],[4.5,.04]].forEach(([r,o])=>{const c=new THREE.Mesh(new THREE.SphereGeometry(r,22,18),new THREE.MeshBasicMaterial({color:0xffd166,transparent:true,opacity:o}));c.position.set(0,1.5,0);add(c)});const curve=new THREE.EllipseCurve(0,0,7.2,5.8,0,Math.PI*2),orbPts=curve.getPoints(180).map(p=>new THREE.Vector3(p.x,1.5,p.y));const loop=new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(orbPts),new THREE.LineDashedMaterial({color:0x6bb5ff,dashSize:.35,gapSize:.22,transparent:true,opacity:.5}));loop.computeLineDistances();add(loop);const earth=new THREE.Mesh(new THREE.SphereGeometry(.45,32,28),new THREE.MeshPhysicalMaterial({color:0x2a7fd4,roughness:.38,metalness:.04,emissive:0x082f6e,emissiveIntensity:.3}));earth.rotation.z=THREE.MathUtils.degToRad(23.5);earth.position.set(7.2,1.5,0);add(earth);const cMat=new THREE.MeshPhysicalMaterial({color:0x38a169,roughness:.75});[[.36,.05,.24,.17],[-.26,.12,-.34,.13],[.08,.32,-.28,.11]].forEach(([cx,cy,cz,cr])=>{const c=new THREE.Mesh(new THREE.SphereGeometry(cr,12,10),cMat);c.position.set(cx,cy,cz);earth.add(c)});const axisLine=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,-.72,0),new THREE.Vector3(0,.72,0)]),new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:.5}));earth.add(axisLine);const atmo=new THREE.Mesh(new THREE.SphereGeometry(.62,24,20),new THREE.MeshBasicMaterial({color:0x44aaff,transparent:true,opacity:.22,side:THREE.BackSide}));atmo.position.set(7.2,1.5,0);add(atmo);const moon=new THREE.Mesh(new THREE.SphereGeometry(.14,18,14),new THREE.MeshPhysicalMaterial({color:0xb8c0cc,roughness:.9,metalness:.02}));moon.position.set(8.1,1.5,0);add(moon);const label=sprite('Tierra','#aadcff');label.position.set(7.2,2.65,0);add(label);state.objects={earth,atmo,label,moon,rx:7.2,rz:5.8}}
-    function updateOrbit(dt){const o=state.objects,s=state.params.speed,ang=state.t*s*.55,x=Math.cos(ang)*o.rx,z=Math.sin(ang)*o.rz;o.earth.position.set(x,1.5,z);o.atmo.position.set(x,1.5,z);o.label.position.set(x,2.65,z);const moonAng=state.t*s*4.5;o.moon.position.set(x+Math.cos(moonAng)*.9,1.5,z+Math.sin(moonAng)*.9);o.earth.rotation.y+=dt*2.8;setStats({time:fmt(state.t*18,'días'),radius:fmt(o.rx,'u'),period:fmt(11.4/s,'s'),speed:fmt(s,'x')})}
-    function setup(mode){const simApp=document.querySelector('.sim-app');if(mode==='orbit'){scene.fog=null;simApp.style.background='radial-gradient(ellipse at 30% 35%,#152744 0%,#04080f 70%)';sunLight.intensity=2.2;sunLight.distance=55;sunLight.position.set(0,1.5,0)}else{scene.fog=new THREE.FogExp2(0xdaf2ff,.016);simApp.style.background='';sunLight.intensity=.5;sunLight.distance=80}if(mode==='mru')setupMRU();if(mode==='mruv')setupMRUV();if(mode==='parabolic')setupParabolic();if(mode==='orbit')setupOrbit()}
-    function update(dt){if(!state.paused)state.t+=dt;if(state.mode==='mru')updateMRU();if(state.mode==='mruv')updateMRUV();if(state.mode==='parabolic')updateParabolic();if(state.mode==='orbit')updateOrbit(dt)}
-    function resetModel(){state.t=0;clearGroup();setup(state.mode);center(state.mode)}
-    function setMode(mode){state.mode=mode;state.t=0;document.querySelectorAll('.mode-btn').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));buildControls(mode);buildStats(mode);panel(mode);clearGroup();setup(mode);center(mode)}
-    function resize(){const r=container.getBoundingClientRect();camera.aspect=r.width/r.height;camera.updateProjectionMatrix();renderer.setSize(r.width,r.height,false)}
-    $('#mode-grid').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(b)setMode(b.dataset.mode)});$('#btn-play').addEventListener('click',()=>{state.paused=!state.paused;$('#btn-play').textContent=state.paused?'Reanudar':'Pausar';$('#btn-play').classList.toggle('active',!state.paused)});$('#btn-reset').addEventListener('click',resetModel);$('#btn-center').addEventListener('click',()=>center(state.mode));
-    
-    // Panel toggle functionality
-    const panelLeft = document.querySelector('.panel-left');
-    const panelRight = document.querySelector('.panel-right');
-    const panelBottom = document.querySelector('.panel-bottom');
-    const toggleLeft = document.getElementById('toggle-left');
-    const toggleRight = document.getElementById('toggle-right');
-    const toggleBottom = document.getElementById('toggle-bottom');
-    let panelsVisible = false; // Start hidden on mobile
-    
-    function updatePanelVisibility() {
-      if (window.innerWidth > 768) {
-        panelLeft.classList.remove('hidden-panel');
-        panelRight.classList.remove('hidden-panel');
-        panelBottom.classList.remove('hidden-panel');
-        toggleLeft.style.display = 'none';
-        toggleRight.style.display = 'none';
-        toggleBottom.style.display = 'none';
-      } else {
-        toggleLeft.style.display = 'block';
-        toggleRight.style.display = 'block';
-        toggleBottom.style.display = 'block';
-        if (panelsVisible) {
-          panelLeft.classList.remove('hidden-panel');
-          panelRight.classList.remove('hidden-panel');
-          panelBottom.classList.remove('hidden-panel');
-          toggleLeft.textContent = '✕ Ocultar controles';
-          toggleRight.textContent = '✕ Ocultar lectura';
-          toggleBottom.textContent = '✕ Ocultar estado';
-        } else {
-          panelLeft.classList.add('hidden-panel');
-          panelRight.classList.add('hidden-panel');
-          panelBottom.classList.add('hidden-panel');
-          toggleLeft.textContent = '☰ Controles';
-          toggleRight.textContent = '📊 Lectura';
-          toggleBottom.textContent = 'ℹ️ Estado';
-        }
-      }
-    }
-    
-    toggleLeft.addEventListener('click', () => {
-      panelsVisible = !panelsVisible;
-      updatePanelVisibility();
-    });
-    
-    toggleRight.addEventListener('click', () => {
-      panelsVisible = !panelsVisible;
-      updatePanelVisibility();
-    });
-    
-    toggleBottom.addEventListener('click', () => {
-      panelsVisible = !panelsVisible;
-      updatePanelVisibility();
-    });
-    
-    window.addEventListener('resize', () => {
-      updatePanelVisibility();
-      resize();
-    });
-    
-    function animate(){requestAnimationFrame(animate);const dt=clock.getDelta();stars.rotation.y+=dt*.006;if(state.mode!=='orbit'){sunLight.position.x=Math.sin(clock.elapsedTime*.35)*4;sunLight.position.z=Math.cos(clock.elapsedTime*.3)*4}update(dt);cam.update();renderer.render(scene,camera)}
-    setMode('mru');resize();updatePanelVisibility();animate();
-  </script>
+  <footer class="site-footer">
+    <div class="container">
+      <p>Recurso interactivo de Física para modelar movimientos y trayectorias.</p>
+    </div>
+  </footer>
 </body>
 </html>

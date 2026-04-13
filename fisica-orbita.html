@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Órbita Terrestre - Sol y Tierra | Física 3D</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/main.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <style>
+    body[data-page="Órbita 3D"] main.container{padding-bottom:1.4rem}
+    .sim-note{border:1px solid var(--border);background:color-mix(in srgb,var(--surface) 96%,transparent);border-radius:1rem;box-shadow:var(--shadow);padding:1rem 1.1rem;margin-bottom:1rem}
+    .sim-app{position:relative;min-height:500px;height:min(75vh,650px);margin:1rem 0 1.5rem;overflow:hidden;border-radius:1.3rem;border:1px solid rgba(214,158,46,.3);background:radial-gradient(ellipse at 30% 35%,#152744 0%,#04080f 70%);box-shadow:0 26px 80px rgba(15,39,66,.18)}
+    .sim-app #canvas-container{position:absolute;top:0;left:0;right:0;bottom:0;z-index:0;width:100%;height:100%}
+    .sim-app #canvas-container canvas{display:block;width:100%!important;height:100%!important;position:absolute;top:0;left:0}
+    .sim-app canvas{display:block;width:100%!important;height:100%!important}
+    .sim-app .panel{position:absolute;z-index:10;border-radius:18px;box-shadow:0 16px 36px rgba(8,26,46,.16);transition:transform 0.3s ease,opacity 0.3s ease}
+    .panel-left{top:16px;left:16px;width:320px;padding:18px;max-height:calc(100% - 32px);overflow-y:auto;background:rgba(20,30,50,.92);border:2px solid rgba(214,158,46,.55);color:#e8f0ed}
+    .panel-right{top:16px;right:16px;width:290px;padding:16px;max-height:calc(100% - 32px);overflow-y:auto;background:rgba(20,30,50,.92);border:2px solid rgba(255,214,102,.5);color:#e8f0ed}
+    .panel-bottom{left:50%;bottom:16px;transform:translateX(-50%);padding:10px 20px;display:flex;align-items:center;max-width:min(84%,760px);background:rgba(21,63,106,.92);color:#f5fbff;border:1px solid rgba(255,255,255,.18)}
+    .panel-left.hidden-panel{transform:translateX(-110%) !important;opacity:0 !important;pointer-events:none !important}
+    .panel-right.hidden-panel{transform:translateX(110%) !important;opacity:0 !important;pointer-events:none !important}
+    .panel-bottom.hidden-panel{transform:translateX(-50%) translateY(100px) !important;opacity:0 !important;pointer-events:none !important}
+    .sim-app .panel-toggle{position:absolute;z-index:20;background:rgba(20,30,50,.92);border:2px solid rgba(214,158,46,.55);border-radius:12px;color:#e8f0ed;padding:8px 12px;cursor:pointer;font-size:12px;font-weight:600;display:none;transition:transform 0.2s ease}
+    .sim-app .panel-toggle:hover{transform:scale(1.05)}
+    .sim-app .panel-toggle-left{top:16px;left:16px}
+    .sim-app .panel-toggle-right{top:16px;right:16px}
+    .sim-app .panel-toggle-bottom{left:50%;bottom:16px;transform:translateX(-50%)}
+    .panel-title{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:17px;font-weight:700}.panel-title .dot{width:9px;height:9px;border-radius:50%;background:#d69e2e;box-shadow:0 0 0 5px rgba(214,158,46,.2)}
+    .section-label{margin-top:16px;margin-bottom:8px;color:#a0aec0;font-size:10px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase}
+    .control-stack{display:grid;gap:12px}.control-block,.concept-box,.reading-box{padding:12px;border:2px solid rgba(214,158,46,.35);border-radius:14px;background:rgba(20,30,50,.85)}
+    .control-head{display:flex;justify-content:space-between;gap:10px;margin-bottom:6px;font-size:12px;font-weight:700}.control-head span:last-child{color:#fbd38d;font-family:"JetBrains Mono",monospace}input[type="range"]{width:100%;accent-color:#d69e2e}
+    .stat-row{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(214,158,46,.28)}.stat-row:last-child{border-bottom:none}.stat-label{color:#a0aec0;font-size:11px}.stat-value{font-size:13px;font-weight:700;text-align:right;color:#e8f0ed}.mono{font-family:"JetBrains Mono",monospace}.hint-list{margin:.7rem 0 0;padding-left:1.1rem;color:#e2e8f0;font-size:.9rem}.hint-list li+li{margin-top:.35rem}.status-text{font-size:.9rem;margin:0}
+    .back-link{display:inline-flex;align-items:center;gap:0.5rem;color:#d69e2e;text-decoration:none;font-weight:600;margin-bottom:1rem;padding:0.5rem 1rem;border:2px solid #d69e2e;border-radius:0.5rem;transition:all 0.2s ease}
+    .back-link:hover{background:#d69e2e;color:#1a202c}
+    .mode-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 12px;border:2px solid rgba(214,158,46,.55);border-radius:12px;background:rgba(30,40,60,.9);color:#e8f0ed;cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}.mode-btn:hover{transform:translateY(-1px);border-color:#d69e2e;box-shadow:0 8px 18px rgba(214,158,46,.16)}
+    .control-block input[type="range"]{accent-color:#d69e2e}
+    @media (max-width:900px){.sim-lead{grid-template-columns:1fr}}
+    @media (max-width:768px){.sim-app{min-height:520px;height:60vh}.panel-left,.panel-right{width:calc(100% - 24px);left:12px;right:12px;max-height:none}.panel-left{top:12px;padding:14px}.panel-right{top:376px;padding:14px}.panel-bottom{left:12px;right:12px;bottom:12px;transform:translateX(-50%);max-width:none}.sim-app .panel-toggle{display:block}}
+    @media (max-width:640px){.sim-app{min-height:480px;height:55vh}.panel-left{top:50px;left:8px;width:calc(100% - 16px);max-height:60vh}.sim-app .panel-toggle-left{top:8px;left:8px}.sim-app .panel-toggle-bottom{bottom:8px}}
+  </style>
+</head>
+<body data-page="Órbita 3D" data-section="Física" data-section-href="fisica.html">
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div>
+        <p class="kicker">Ciencias Naturales · 1° año</p>
+        <h1>🌍 Órbita Terrestre - Sol y Tierra</h1>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar modo oscuro">Modo oscuro</button>
+    </div>
+    <nav class="main-nav container" aria-label="Navegación principal">
+      <a href="inicio.html">Inicio</a>
+      <a href="quimica.html">Química</a>
+      <a href="fisica.html">Física</a>
+      <a href="biologia.html">Biología</a>
+    </nav>
+  </header>
+  <div class="container"><nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav></div>
+  <main id="contenido" class="container">
+    <a href="fisica-3d.html" class="back-link">← Volver a modelos</a>
+    <section class="sim-note">
+      <h2>Movimiento orbital con aceleración centrípeta</h2>
+      <p>La Tierra gira alrededor del Sol cambiando continuamente la <strong>dirección de su velocidad</strong>. Aunque la rapidez parezca estable, el cambio de dirección implica aceleración.</p>
+    </section>
+    <section class="sim-app" aria-label="Simulación Órbita Terrestre 3D">
+      <div id="canvas-container"></div>
+      <button class="panel-toggle panel-toggle-left" id="toggle-left" aria-label="Mostrar/ocultar controles">☰ Controles</button>
+      <button class="panel-toggle panel-toggle-right" id="toggle-right" aria-label="Mostrar/ocultar lectura">📊 Lectura</button>
+      <button class="panel-toggle panel-toggle-bottom" id="toggle-bottom" aria-label="Mostrar/ocultar estado">ℹ️ Estado</button>
+      <aside class="panel panel-left hidden-panel">
+        <div class="panel-title"><span class="dot"></span>Controles de la Órbita</div>
+        <div class="section-label">Velocidad orbital</div>
+        <div class="control-stack" id="controls-panel"></div>
+        <div class="section-label">Acciones</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="mode-btn" id="btn-play" style="flex:1">Pausar</button>
+          <button class="mode-btn" id="btn-reset" style="flex:1">Reiniciar</button>
+          <button class="mode-btn" id="btn-center" style="flex:1">Centrar</button>
+        </div>
+        <div class="section-label">Idea central</div>
+        <div class="concept-box">
+          <strong>Órbita Terrestre</strong>
+          <p>La Tierra se traslada alrededor del Sol cambiando continuamente la dirección de su velocidad.</p>
+          <ul class="hint-list">
+            <li>La trayectoria es cerrada alrededor del Sol.</li>
+            <li>La rapidez visual puede parecer estable.</li>
+            <li>Aunque la rapidez se mantenga, la dirección cambia todo el tiempo.</li>
+          </ul>
+        </div>
+      </aside>
+      <aside class="panel panel-right hidden-panel">
+        <div class="section-label" style="margin-top:0;">Lectura física</div>
+        <div class="reading-box">
+          <strong>Qué observar</strong>
+          <p>La órbita permite discutir que puede haber aceleración aunque la rapidez no cambie demasiado.</p>
+        </div>
+        <div class="section-label">Variables en vivo</div>
+        <div class="reading-box" id="stats-panel"></div>
+        <div class="section-label">Interpretación docente</div>
+        <div class="concept-box">
+          <strong>Trayectoria orbital alrededor del Sol</strong>
+          <p>El cambio de dirección del vector velocidad implica aceleración centrípeta.</p>
+        </div>
+      </aside>
+      <div class="panel panel-bottom hidden-panel"><p class="status-text" id="status-text">Sol-Tierra: la Tierra no se mueve en línea recta; cambia de dirección todo el tiempo alrededor del Sol.</p></div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container"><p>Recurso interactivo de Física para modelar movimientos y trayectorias.</p></div></footer>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    const $=s=>document.querySelector(s),container=$('#canvas-container'),controlsPanel=$('#controls-panel'),statsPanel=$('#stats-panel');
+    const scene=new THREE.Scene();scene.fog=null;const camera=new THREE.PerspectiveCamera(50,1,.1,250);camera.position.set(0,17,13);const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;container.appendChild(renderer.domElement);
+    const cam=new OrbitControls(camera,renderer.domElement);cam.enableDamping=true;cam.dampingFactor=.08;cam.minDistance=4;cam.maxDistance=60;cam.target.set(0,1.5,0);
+    scene.add(new THREE.AmbientLight(0xffffff,0.3));const sunLight=new THREE.PointLight(0xffd166,2.2,55);sunLight.position.set(0,1.5,0);scene.add(sunLight);
+    const sc=720,sp=new Float32Array(sc*3);for(let i=0;i<sc;i++){sp[i*3]=(Math.random()-.5)*90;sp[i*3+1]=Math.random()*55+2;sp[i*3+2]=(Math.random()-.5)*90}scene.add(new THREE.Points(new THREE.BufferGeometry().setAttribute('position',new THREE.BufferAttribute(sp,3)),new THREE.PointsMaterial({color:0xffffff,size:.14,sizeAttenuation:true,transparent:true,opacity:.92})));
+    const group=new THREE.Group();scene.add(group);const state={paused:false,t:0,params:{speed:1},stats:{},objects:{}};const clock=new THREE.Clock();
+    const fmt=(v,u='')=>typeof v==='number'&&!Number.isNaN(v)?((Math.abs(v)>=100?v.toFixed(1):v.toFixed(2))+(u?' '+u:'')):'—';
+    const add=o=>(group.add(o),o);function clearGroup(){while(group.children.length){const c=group.children.pop();c.geometry?.dispose?.();if(Array.isArray(c.material))c.material.forEach(m=>m.dispose?.());else c.material?.dispose?.()}state.objects={}}
+    function sprite(text,color='#aadcff'){const cv=document.createElement('canvas');cv.width=256;cv.height=96;const cx=cv.getContext('2d');cx.font='bold 34px Trebuchet MS';cx.textAlign='center';cx.textBaseline='middle';cx.fillStyle=color;cx.shadowColor='rgba(0,0,0,.9)';cx.shadowBlur=10;cx.fillText(text,128,48);const tx=new THREE.CanvasTexture(cv);const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tx,transparent:true,depthTest:false}));sp.scale.set(3.2,1.2,1);return sp}
+    function buildControls(){controlsPanel.innerHTML='';const c={key:'speed',label:'Velocidad visual orbital',min:.2,max:2.5,step:.1,unit:'x',value:1};state.params[c.key]=c.value;const el=document.createElement('label');el.className='control-block';el.innerHTML='<div class="control-head"><span>'+c.label+'</span><span id="value-'+c.key+'">'+c.value+' '+c.unit+'</span></div><input type="range" min="'+c.min+'" max="'+c.max+'" step="'+c.step+'" value="'+c.value+'" data-key="'+c.key+'" data-unit="'+c.unit+'">';controlsPanel.appendChild(el);controlsPanel.querySelector('input').addEventListener('input',e=>{const k=e.target.dataset.key,u=e.target.dataset.unit,v=Number(e.target.value);state.params[k]=v;$('#value-'+k).textContent=v+' '+u})}
+    function buildStats(){statsPanel.innerHTML='';state.stats={};[['time','Tiempo simulado'],['radius','Radio orbital'],['period','Período visual'],['speed','Velocidad visual']].forEach(([k,l])=>{const row=document.createElement('div');row.className='stat-row';row.innerHTML='<span class="stat-label">'+l+'</span><span class="stat-value mono" id="stat-'+k+'">—</span>';statsPanel.appendChild(row);state.stats[k]=row.querySelector('.stat-value')})}
+    function setStats(values){Object.keys(state.stats).forEach(k=>{if(values[k]!==undefined)state.stats[k].textContent=values[k]})}
+    function center(){cam.target.set(0,1.5,0);camera.position.set(0,17,13);cam.update()}
+    function setup(){const sun=new THREE.Mesh(new THREE.SphereGeometry(1.4,32,28),new THREE.MeshPhysicalMaterial({color:0xffd166,emissive:0xffc107,emissiveIntensity:1.3,roughness:.2,metalness:0}));sun.position.set(0,1.5,0);add(sun);[[2.1,.18],[3.0,.09],[4.5,.04]].forEach(([r,o])=>{const c=new THREE.Mesh(new THREE.SphereGeometry(r,22,18),new THREE.MeshBasicMaterial({color:0xffd166,transparent:true,opacity:o}));c.position.set(0,1.5,0);add(c)});const curve=new THREE.EllipseCurve(0,0,7.2,5.8,0,Math.PI*2),orbPts=curve.getPoints(180).map(p=>new THREE.Vector3(p.x,1.5,p.y));const loop=new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(orbPts),new THREE.LineDashedMaterial({color:0x6bb5ff,dashSize:.35,gapSize:.22,transparent:true,opacity:.5}));loop.computeLineDistances();add(loop);const earth=new THREE.Mesh(new THREE.SphereGeometry(.45,32,28),new THREE.MeshPhysicalMaterial({color:0x2a7fd4,roughness:.38,metalness:.04,emissive:0x082f6e,emissiveIntensity:.3}));earth.rotation.z=THREE.MathUtils.degToRad(23.5);earth.position.set(7.2,1.5,0);add(earth);const cMat=new THREE.MeshPhysicalMaterial({color:0x38a169,roughness:.75});[[.36,.05,.24,.17],[-.26,.12,-.34,.13],[.08,.32,-.28,.11]].forEach(([cx,cy,cz,cr])=>{const c=new THREE.Mesh(new THREE.SphereGeometry(cr,12,10),cMat);c.position.set(cx,cy,cz);earth.add(c)});const axisLine=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,-.72,0),new THREE.Vector3(0,.72,0)]),new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:.5}));earth.add(axisLine);const atmo=new THREE.Mesh(new THREE.SphereGeometry(.62,24,20),new THREE.MeshBasicMaterial({color:0x44aaff,transparent:true,opacity:.22,side:THREE.BackSide}));atmo.position.set(7.2,1.5,0);add(atmo);const moon=new THREE.Mesh(new THREE.SphereGeometry(.14,18,14),new THREE.MeshPhysicalMaterial({color:0xb8c0cc,roughness:.9,metalness:.02}));moon.position.set(8.1,1.5,0);add(moon);const label=sprite('Tierra','#aadcff');label.position.set(7.2,2.65,0);add(label);state.objects={earth,atmo,label,moon,rx:7.2,rz:5.8}}
+    function update(){const o=state.objects,s=state.params.speed,ang=state.t*s*.55,x=Math.cos(ang)*o.rx,z=Math.sin(ang)*o.rz;o.earth.position.set(x,1.5,z);o.atmo.position.set(x,1.5,z);o.label.position.set(x,2.65,z);const moonAng=state.t*s*4.5;o.moon.position.set(x+Math.cos(moonAng)*.9,1.5,z+Math.sin(moonAng)*.9);o.earth.rotation.y+=0.016*2.8;setStats({time:fmt(state.t*18,'días'),radius:fmt(o.rx,'u'),period:fmt(11.4/s,'s'),speed:fmt(s,'x')})}
+    function resetModel(){state.t=0;clearGroup();setup();center()}
+    function resize(){const r=container.getBoundingClientRect();camera.aspect=r.width/r.height;camera.updateProjectionMatrix();renderer.setSize(r.width,r.height,false)}
+    $('#btn-play').addEventListener('click',()=>{state.paused=!state.paused;$('#btn-play').textContent=state.paused?'Reanudar':'Pausar'});$('#btn-reset').addEventListener('click',resetModel);$('#btn-center').addEventListener('click',center);
+    const panelLeft=document.querySelector('.panel-left'),panelRight=document.querySelector('.panel-right'),panelBottom=document.querySelector('.panel-bottom');
+    const toggleLeft=$('#toggle-left'),toggleRight=$('#toggle-right'),toggleBottom=$('#toggle-bottom');
+    let panelsVisible=false;
+    function updatePanelVisibility(){if(window.innerWidth>768){panelLeft.classList.remove('hidden-panel');panelRight.classList.remove('hidden-panel');panelBottom.classList.remove('hidden-panel');toggleLeft.style.display='none';toggleRight.style.display='none';toggleBottom.style.display='none'}else{toggleLeft.style.display='block';toggleRight.style.display='block';toggleBottom.style.display='block';if(panelsVisible){panelLeft.classList.remove('hidden-panel');panelRight.classList.remove('hidden-panel');panelBottom.classList.remove('hidden-panel');toggleLeft.textContent='✕ Ocultar controles';toggleRight.textContent='✕ Ocultar lectura';toggleBottom.textContent='✕ Ocultar estado'}else{panelLeft.classList.add('hidden-panel');panelRight.classList.add('hidden-panel');panelBottom.classList.add('hidden-panel');toggleLeft.textContent='☰ Controles';toggleRight.textContent='📊 Lectura';toggleBottom.textContent='ℹ️ Estado'}}}
+    toggleLeft.addEventListener('click',()=>{panelsVisible=!panelsVisible;updatePanelVisibility()});toggleRight.addEventListener('click',()=>{panelsVisible=!panelsVisible;updatePanelVisibility()});toggleBottom.addEventListener('click',()=>{panelsVisible=!panelsVisible;updatePanelVisibility()});
+    window.addEventListener('resize',()=>{updatePanelVisibility();resize()});
+    function animate(){requestAnimationFrame(animate);if(!state.paused)state.t+=0.016;update();cam.update();renderer.render(scene,camera)}
+    buildControls();buildStats();setup();center();resize();updatePanelVisibility();animate();
+  </script>
+</body>
+</html>

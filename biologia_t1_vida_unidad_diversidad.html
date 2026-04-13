@@ -27,6 +27,99 @@
     <nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav>
   </div>
   <main id="contenido" class="container">
+    <style>
+      .bio-models-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        max-width: 800px;
+        margin: 2rem auto;
+        justify-content: center;
+      }
+      .bio-model-card {
+        position: relative;
+        background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+        border: 2px solid var(--border);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        overflow: hidden;
+        text-decoration: none;
+        color: var(--text);
+      }
+      .bio-model-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+        border-color: var(--primary);
+      }
+      .bio-model-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary), var(--focus));
+      }
+      .bio-model-card .card-icon {
+        font-size: 3rem;
+        margin-bottom: 0.75rem;
+        display: block;
+      }
+      .bio-model-card h3 {
+        font-size: 1.25rem;
+        margin: 0 0 0.5rem;
+        color: var(--primary);
+        text-decoration: none;
+      }
+      .bio-model-card p {
+        font-size: 0.95rem;
+        color: var(--muted);
+        margin: 0 0 1rem;
+        line-height: 1.5;
+        text-decoration: none;
+      }
+      .bio-model-card .card-badge {
+        display: inline-block;
+        padding: 0.35rem 0.75rem;
+        background: var(--primary);
+        color: white;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .bio-model-card .card-arrow {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        font-size: 1.5rem;
+        color: var(--primary);
+        transition: transform 0.3s ease;
+      }
+      .bio-model-card:hover .card-arrow {
+        transform: translateX(4px);
+      }
+      @media (max-width: 768px) {
+        .bio-models-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem;
+        }
+        .bio-model-card {
+          padding: 1rem;
+        }
+        .bio-model-card .card-icon {
+          font-size: 2rem;
+        }
+        .bio-model-card h3 {
+          font-size: 1rem;
+        }
+        .bio-model-card p {
+          font-size: 0.85rem;
+        }
+      }
+    </style>
     <section class="panel">
       <h2>¿Qué hace que algo esté "vivo"?</h2>
       <p class="tag">Programa representado: composición química, organización, relación con el medio, regulación, ciclo
@@ -133,12 +226,68 @@
       <p>Clasificar a los seres vivos nos ayuda a organizar esta enorme diversidad sin perder de vista la unidad
         biológica que los conecta.</p>
     </section>
+    
     <section class="panel">
-      <h2>niveles de organización</h2>
-      <div class="diagram-switcher" data-switcher data-initial="celula">
+      <h2> Explorador 3D de Conceptos Biológicos</h2>
+      <p class="tag">Interactuá con modelos tridimensionales para entender mejor cada concepto. Tocá una card para explorar.</p>
+      
+      <div class="bio-models-grid">
+        <a href="#niveles-organizacion" class="bio-model-card" onclick="event.preventDefault(); document.getElementById('niveles-organizacion').scrollIntoView({behavior: 'smooth'});">
+          <span class="card-icon">🧬</span>
+          <h3>Niveles de Organización</h3>
+          <p>Explorá desde la célula hasta el organismo completo. Visualizá cómo se organizan los niveles biológicos.</p>
+          <span class="card-badge">Interactivo SVG</span>
+          <span class="card-arrow">→</span>
+        </a>
+        
+        <a href="#celula-3d" class="bio-model-card" onclick="event.preventDefault(); document.getElementById('celula-3d').scrollIntoView({behavior: 'smooth'});">
+          <span class="card-icon">🔬</span>
+          <h3>Célula en Detalle</h3>
+          <p>Observá una célula con todos sus organelos: núcleo, mitocondrias, membrana y más.</p>
+          <span class="card-badge">Modelo 3D</span>
+          <span class="card-arrow">→</span>
+        </a>
+        
+        <a href="#tejido-3d" class="bio-model-card" onclick="event.preventDefault(); document.getElementById('tejido-3d').scrollIntoView({behavior: 'smooth'});">
+          <span class="card-icon">🧫</span>
+          <h3>Tejido Celular</h3>
+          <p>Visualizá cómo las células se organizan formando tejidos especializados.</p>
+          <span class="card-badge">Interactivo</span>
+          <span class="card-arrow">→</span>
+        </a>
+        
+        <a href="#fotosintesis-3d" class="bio-model-card" onclick="event.preventDefault(); document.getElementById('fotosintesis-3d').scrollIntoView({behavior: 'smooth'});">
+          <span class="card-icon">🌱</span>
+          <h3>Fotosíntesis</h3>
+          <p>Mirá cómo una planta convierte luz solar en energía. Proceso animado paso a paso.</p>
+          <span class="card-badge">Animación 3D</span>
+          <span class="card-arrow">→</span>
+        </a>
+        
+        <a href="#red-trofica-3d" class="bio-model-card" onclick="event.preventDefault(); document.getElementById('red-trofica-3d').scrollIntoView({behavior: 'smooth'});">
+          <span class="card-icon">🦁</span>
+          <h3>Red Trófica</h3>
+          <p>Explorá las relaciones alimentarias en un ecosistema. Productores, consumidores y descomponedores.</p>
+          <span class="card-badge">Interactivo</span>
+          <span class="card-arrow">→</span>
+        </a>
+        
+        <a href="#clasificacion-3d" class="bio-model-card" onclick="event.preventDefault(); document.getElementById('clasificacion-3d').scrollIntoView({behavior: 'smooth'});">
+          <span class="card-icon">🗂️</span>
+          <h3>Clasificación de Seres Vivos</h3>
+          <p>Navegá el árbol de la vida. Reinos, filos, clases y más en un modelo visual.</p>
+          <span class="card-badge">Modelo 3D</span>
+          <span class="card-arrow">→</span>
+        </a>
+      </div>
+    </section>
+    
+    <section class="panel" id="niveles-organizacion">
+      <h2>Niveles de organización</h2>
+      <div class="diagram-switcher" data-switcher data-initial="celula" id="celula-3d">
         <div class="state-controls" role="group" aria-label="Nivel biológico"><button class="chip-btn" type="button"
             data-target="celula" data-description="Célula: unidad básica de vida."
-            aria-pressed="false">Célula</button><button class="chip-btn" type="button" data-target="tejido"
+            aria-pressed="false">Célula</button><button class="chip-btn" type="button" data-target="tejido" id="tejido-3d"
             data-description="Tejido: conjunto de células con función común."
             aria-pressed="false">Tejido</button><button class="chip-btn" type="button" data-target="organismo"
             data-description="Organismo: sistema completo e integrado." aria-pressed="false">Organismo</button></div>
@@ -367,6 +516,159 @@
         <li>Un ecosistema regula su clima, pero una sola planta no puede hacerlo.</li>
       </ul>
       <p>Entender los niveles nos ayuda a estudiar la vida desde diferentes escalas y perspectivas.</p>
+
+      <h2 id="fotosintesis-3d">🌱 Fotosíntesis: Cómo las plantas obtienen energía</h2>
+      
+      <div style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border: 2px solid var(--primary); border-radius: 1rem; padding: 1.5rem; margin: 1.5rem 0;">
+        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
+          <span style="font-size: 4rem;">🌞</span>
+          <div style="flex: 1; min-width: 200px;">
+            <h3 style="margin: 0 0 0.5rem; color: var(--primary);">Proceso de Fotosíntesis</h3>
+            <p style="margin: 0; color: var(--muted);">Las plantas convierten luz solar, agua y CO₂ en glucosa y oxígeno</p>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 1rem;">
+          <div style="background: white; border-radius: 0.75rem; padding: 1rem; text-align: center;">
+            <div style="font-size: 2.5rem;">☀️</div>
+            <p style="font-weight: 700; color: var(--primary); margin: 0.5rem 0;">Energía Solar</p>
+            <p style="font-size: 0.85rem; color: var(--muted); margin: 0;">Captada por la clorofila en los cloroplastos</p>
+          </div>
+          <div style="background: white; border-radius: 0.75rem; padding: 1rem; text-align: center;">
+            <div style="font-size: 2.5rem;">💧</div>
+            <p style="font-weight: 700; color: #2196f3; margin: 0.5rem 0;">Agua (H₂O)</p>
+            <p style="font-size: 0.85rem; color: var(--muted); margin: 0;">Absorbida por las raíces del suelo</p>
+          </div>
+          <div style="background: white; border-radius: 0.75rem; padding: 1rem; text-align: center;">
+            <div style="font-size: 2.5rem;">💨</div>
+            <p style="font-weight: 700; color: #607d8b; margin: 0.5rem 0;">CO₂</p>
+            <p style="font-size: 0.85rem; color: var(--muted); margin: 0;">Entrando por los estomas de las hojas</p>
+          </div>
+          <div style="background: white; border-radius: 0.75rem; padding: 1rem; text-align: center;">
+            <div style="font-size: 2.5rem;">🍬</div>
+            <p style="font-weight: 700; color: #ff9800; margin: 0.5rem 0;">Glucosa</p>
+            <p style="font-size: 0.85rem; color: var(--muted); margin: 0;">Energía almacenada para la planta</p>
+          </div>
+          <div style="background: white; border-radius: 0.75rem; padding: 1rem; text-align: center;">
+            <div style="font-size: 2.5rem;">🫧</div>
+            <p style="font-weight: 700; color: #4caf50; margin: 0.5rem 0;">Oxígeno (O₂)</p>
+            <p style="font-size: 0.85rem; color: var(--muted); margin: 0;">Liberado al ambiente</p>
+          </div>
+        </div>
+        <div style="background: var(--surface); border-radius: 0.75rem; padding: 1rem; margin-top: 1rem; border-left: 4px solid var(--primary);">
+          <p style="margin: 0; font-weight: 700; color: var(--primary);">📝 Ecuación simplificada:</p>
+          <p style="margin: 0.5rem 0 0; font-family: monospace; font-size: 1.1rem; text-align: center; color: var(--text);">
+            6CO₂ + 6H₂O + energía solar → C₆H₁₂O₆ + 6O₂
+          </p>
+        </div>
+      </div>
+
+      <h2 id="red-trofica-3d">🦁 Red Trófica: Relaciones Alimentarias</h2>
+      
+      <div style="background: linear-gradient(135deg, #fff3e0, #ffe0b2); border: 2px solid #ff9800; border-radius: 1rem; padding: 1.5rem; margin: 1.5rem 0;">
+        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
+          <span style="font-size: 4rem;">🌍</span>
+          <div style="flex: 1; min-width: 200px;">
+            <h3 style="margin: 0 0 0.5rem; color: #e65100;">Red Trófica del Pastizal Pampeano</h3>
+            <p style="margin: 0; color: var(--muted);">Cómo fluye la energía entre los seres vivos</p>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+          <div style="background: #4caf50; color: white; border-radius: 0.75rem; padding: 1rem;">
+            <p style="font-weight: 700; margin: 0 0 0.5rem; font-size: 1.1rem;">🌿 Productores</p>
+            <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.9rem;">
+              <li>Pastos</li>
+              <li>Árboles</li>
+              <li>Arbustos</li>
+            </ul>
+            <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.9;">Hacen fotosíntesis</p>
+          </div>
+          <div style="background: #2196f3; color: white; border-radius: 0.75rem; padding: 1rem;">
+            <p style="font-weight: 700; margin: 0 0 0.5rem; font-size: 1.1rem;">🐰 Consumidores Primarios</p>
+            <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.9rem;">
+              <li>Conejos</li>
+              <li>Insectos</li>
+              <li>Ratones</li>
+            </ul>
+            <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.9;">Herbívoros</p>
+          </div>
+          <div style="background: #ff9800; color: white; border-radius: 0.75rem; padding: 1rem;">
+            <p style="font-weight: 700; margin: 0 0 0.5rem; font-size: 1.1rem;">🦊 Consumidores Secundarios</p>
+            <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.9rem;">
+              <li>Zorros</li>
+              <li>Lechuzas</li>
+              <li>Serpientes</li>
+            </ul>
+            <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.9;">Carnívoros</p>
+          </div>
+          <div style="background: #9c27b0; color: white; border-radius: 0.75rem; padding: 1rem;">
+            <p style="font-weight: 700; margin: 0 0 0.5rem; font-size: 1.1rem;">🦁 Consumidores Terciarios</p>
+            <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.9rem;">
+              <li>Yaguareté</li>
+              <li>Pumas</li>
+              <li>Águilas</li>
+            </ul>
+            <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.9;">Depredadores tope</p>
+          </div>
+          <div style="background: #795548; color: white; border-radius: 0.75rem; padding: 1rem;">
+            <p style="font-weight: 700; margin: 0 0 0.5rem; font-size: 1.1rem;">🍄 Descomponedores</p>
+            <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.9rem;">
+              <li>Hongos</li>
+              <li>Bacterias</li>
+              <li>Lombrices</li>
+            </ul>
+            <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.9;">Reciclan nutrientes</p>
+          </div>
+        </div>
+        <div style="background: white; border-radius: 0.75rem; padding: 1rem; margin-top: 1rem; border-left: 4px solid #ff9800;">
+          <p style="margin: 0; font-weight: 700; color: #e65100;">💡 Dato importante:</p>
+          <p style="margin: 0.5rem 0 0; color: var(--text);">En cada nivel trófico se pierde aproximadamente el 90% de la energía. Por eso hay menos depredadores tope que herbívoros.</p>
+        </div>
+      </div>
+
+      <h2 id="clasificacion-3d">🗂️ Clasificación de Seres Vivos</h2>
+      
+      <div style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); border: 2px solid #2196f3; border-radius: 1rem; padding: 1.5rem; margin: 1.5rem 0;">
+        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
+          <span style="font-size: 4rem;">🌳</span>
+          <div style="flex: 1; min-width: 200px;">
+            <h3 style="margin: 0 0 0.5rem; color: #1565c0;">El Árbol de la Vida</h3>
+            <p style="margin: 0; color: var(--muted);">Los 5 reinos de la naturaleza</p>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+          <div style="background: white; border-radius: 0.75rem; padding: 1rem; text-align: center; border-top: 4px solid #4caf50;">
+            <div style="font-size: 3rem;">🦠</div>
+            <p style="font-weight: 700; color: #4caf50; margin: 0.5rem 0;">Monera</p>
+            <p style="font-size: 0.85rem; color: var(--muted); margin: 0;">Bacterias<br>Unicelulares<br>Procariotas</p>
+          </div>
+          <div style="background: white; border-radius: 0.75rem; padding: 1rem; text-align: center; border-top: 4px solid #2196f3;">
+            <div style="font-size: 3rem;">🧫</div>
+            <p style="font-weight: 700; color: #2196f3; margin: 0.5rem 0;">Protista</p>
+            <p style="font-size: 0.85rem; color: var(--muted); margin: 0;">Amebas, paramecios<br>Unicelulares<br>Eucariotas</p>
+          </div>
+          <div style="background: white; border-radius: 0.75rem; padding: 1rem; text-align: center; border-top: 4px solid #8bc34a;">
+            <div style="font-size: 3rem;">🍄</div>
+            <p style="font-weight: 700; color: #8bc34a; margin: 0.5rem 0;">Fungi</p>
+            <p style="font-size: 0.85rem; color: var(--muted); margin: 0;">Hongos<br>Heterótrofos<br>Absorción</p>
+          </div>
+          <div style="background: white; border-radius: 0.75rem; padding: 1rem; text-align: center; border-top: 4px solid #4caf50;">
+            <div style="font-size: 3rem;">🌿</div>
+            <p style="font-weight: 700; color: #2e7d32; margin: 0.5rem 0;">Plantae</p>
+            <p style="font-size: 0.85rem; color: var(--muted); margin: 0;">Plantas<br>Autótrofas<br>Fotosíntesis</p>
+          </div>
+          <div style="background: white; border-radius: 0.75rem; padding: 1rem; text-align: center; border-top: 4px solid #ff9800;">
+            <div style="font-size: 3rem;">🦁</div>
+            <p style="font-weight: 700; color: #ff9800; margin: 0.5rem 0;">Animalia</p>
+            <p style="font-size: 0.85rem; color: var(--muted); margin: 0;">Animales<br>Heterótrofos<br>Ingestión</p>
+          </div>
+        </div>
+        <div style="background: white; border-radius: 0.75rem; padding: 1rem; margin-top: 1rem; border-left: 4px solid #2196f3;">
+          <p style="margin: 0; font-weight: 700; color: #1565c0;">📊 Niveles de clasificación:</p>
+          <p style="margin: 0.5rem 0 0; font-family: monospace; text-align: center; color: var(--text); font-size: 0.95rem;">
+            Reino → Filo → Clase → Orden → Familia → Género → Especie
+          </p>
+        </div>
+      </div>
 
       <h2>Ejemplos cotidianos y argentinos</h2>
 
