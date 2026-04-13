@@ -17,6 +17,45 @@
   </script>
   <style>
     body[data-page="Moléculas 3D"] main.container { padding-bottom: 1.5rem; }
+    
+    /* Mobile header collapse for 3D pages */
+    @media (max-width: 768px) {
+      body[data-page="Moléculas 3D"] .site-header {
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+      body[data-page="Moléculas 3D"] .site-header.header-collapsed {
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+      }
+      body[data-page="Moléculas 3D"] main.container {
+        transition: margin-top 0.3s ease;
+      }
+      #header-toggle-btn {
+        display: block !important;
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 1000;
+        background: rgba(10,18,15,.95);
+        border: 1px solid rgba(16,185,129,.5);
+        border-radius: 10px;
+        color: #e8f0ed;
+        padding: 8px 12px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        transition: transform 0.2s ease;
+        box-shadow: 0 4px 12px rgba(0,0,0,.3);
+      }
+      #header-toggle-btn:hover {
+        transform: scale(1.05);
+      }
+    }
+    #header-toggle-btn { display: none; }
+    
     .molecule-note, .molecule-card {
       border: 1px solid var(--border);
       background: color-mix(in srgb, var(--surface) 94%, transparent);
@@ -109,20 +148,112 @@
     .molecule-app .hint-list li + li { margin-top: .35rem; }
     .molecule-app .panel-left::-webkit-scrollbar { width: 3px; }
     .molecule-app .panel-left::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    
+    /* Mobile toolbar */
+    .mobile-toolbar {
+      display: none;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 15;
+      background: rgba(10,18,15,.95);
+      border-top: 1px solid rgba(23,48,40,.9);
+      padding: 8px;
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+    }
+    .mobile-toolbar-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .mobile-tool-btn {
+      padding: 8px 12px;
+      border-radius: 10px;
+      min-width: 40px;
+      justify-content: center;
+    }
+    .mobile-tool-btn.active {
+      border-color: var(--accent);
+      background: rgba(16,185,129,.15);
+      color: var(--accent);
+    }
+    .mobile-element-selector {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .mobile-element-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 2px solid var(--border);
+      background: #111d19;
+      color: var(--fg);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      transition: all 0.15s ease;
+    }
+    .mobile-element-btn.active {
+      border-color: var(--accent);
+      background: rgba(16,185,129,.15);
+      color: var(--accent);
+    }
+    
     @media (max-width: 900px) { .molecule-lead { grid-template-columns: 1fr; } }
     @media (max-width: 768px) {
-      .molecule-app { min-height: 580px; height: auto; }
-      .molecule-app .panel-left { width: calc(100% - 24px); max-height: none; left: 12px; top: 12px; }
+      .molecule-app { min-height: 80vh; height: auto; padding-bottom: 70px; }
+      .mobile-toolbar { display: block; }
+      .molecule-app .panel-left { 
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        max-height: 100vh;
+        padding: 16px;
+        border-radius: 0;
+        border: none;
+        z-index: 100;
+        overflow-y: auto;
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+      .molecule-app .panel-left.visible {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      .molecule-app .panel-left .panel-title { display: flex; }
+      #panel-close-mobile { display: block !important; }
+      .molecule-app .panel-left .section-label { 
+        font-size: 10px; 
+        margin-top: 12px; 
+        margin-bottom: 6px;
+        text-align: left;
+      }
+      .molecule-app .panel-left .element-grid { grid-template-columns: repeat(6, 1fr); gap: 6px; }
+      .molecule-app .panel-left .preset-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
       .molecule-app .panel-right { display: none; }
-      .molecule-app .panel-bottom { left: 12px; right: 12px; transform: translateX(-50%); justify-content: center; bottom: 12px; }
+      .molecule-app .panel-bottom { display: none; }
       .molecule-app .panel-toggle { display: block; }
+      .molecule-app .panel-toggle-left { top: 10px; left: 10px; }
+      .molecule-app .panel-toggle-bottom { display: none; }
     }
     @media (max-width: 640px) {
-      .molecule-app { min-height: 520px; }
-      .molecule-app .panel-left { top: 50px; left: 8px; width: calc(100% - 16px); padding: 12px; max-height: 65vh; }
-      .molecule-app .panel-bottom { bottom: 8px; padding: 6px 12px; }
-      .molecule-app .panel-toggle-left { top: 8px; left: 8px; }
-      .molecule-app .panel-toggle-bottom { bottom: 8px; }
+      .molecule-app { min-height: 75vh; }
+      .mobile-toolbar-row { gap: 4px; }
+      .mobile-tool-btn { padding: 6px 10px; min-width: 36px; }
+      .mobile-element-btn { width: 32px; height: 32px; font-size: 12px; }
     }
   </style>
 </head>
@@ -149,6 +280,7 @@
   </div>
 
   <main id="contenido" class="container">
+    <button id="header-toggle-btn" aria-label="Mostrar/ocultar menú">☰ Menú</button>
     <section class="molecule-note">
       <h2>Sustancias simples y compuestas</h2>
       <p>Este laboratorio 3D permite construir y explorar moléculas para distinguir dos ideas clave de Química: una <strong>sustancia simple</strong> está formada por un solo tipo de elemento, mientras que una <strong>sustancia compuesta</strong> combina átomos de distintos elementos.</p>
@@ -173,10 +305,26 @@
 
     <section class="molecule-app" aria-label="Laboratorio molecular 3D">
       <div id="canvas-container"></div>
+      
+      <!-- Mobile horizontal toolbar -->
+      <div class="mobile-toolbar" id="mobile-toolbar">
+        <div class="mobile-toolbar-row">
+          <button class="tool-btn mobile-tool-btn" data-mode="add" id="btn-add-mobile"><i data-lucide="plus-circle" style="width:16px;height:16px;"></i></button>
+          <button class="tool-btn mobile-tool-btn" data-mode="bond" id="btn-bond-mobile"><i data-lucide="link" style="width:16px;height:16px;"></i></button>
+          <button class="tool-btn mobile-tool-btn" data-mode="move" id="btn-move-mobile"><i data-lucide="move" style="width:16px;height:16px;"></i></button>
+          <button class="tool-btn mobile-tool-btn danger" data-mode="delete" id="btn-delete-mobile"><i data-lucide="trash-2" style="width:16px;height:16px;"></i></button>
+          <div class="mobile-element-selector" id="mobile-element-selector"></div>
+          <button class="tool-btn mobile-tool-btn" id="btn-clear-mobile"><i data-lucide="x-circle" style="width:16px;height:16px;"></i></button>
+        </div>
+      </div>
+      
       <button class="panel-toggle panel-toggle-left" id="toggle-left" aria-label="Mostrar/ocultar controles">☰ Controles</button>
       <button class="panel-toggle panel-toggle-bottom" id="toggle-bottom" aria-label="Mostrar/ocultar ayuda">? Ayuda</button>
       <aside class="panel panel-left hidden-panel" id="panel-left">
-        <div class="panel-title"><span class="dot"></span>Laboratorio molecular</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <div class="panel-title" style="margin-bottom:0;"><span class="dot"></span>Laboratorio molecular</div>
+          <button id="panel-close-mobile" style="display:none;background:none;border:none;color:#e8f0ed;font-size:24px;cursor:pointer;padding:4px 8px;" aria-label="Cerrar panel">✕</button>
+        </div>
 
         <div class="section-label">Modo</div>
         <div style="display:flex;gap:5px;flex-wrap:wrap;">
@@ -707,8 +855,10 @@
 
     function buildElementButtons() {
       const elGrid = document.getElementById('element-grid');
+      const mobileSelector = document.getElementById('mobile-element-selector');
       Object.keys(ELEMENTS).forEach((key) => {
         const el = ELEMENTS[key];
+        // Desktop button
         const btn = document.createElement('button');
         btn.className = 'element-btn' + (key === selectedElement ? ' active' : '');
         btn.dataset.element = key;
@@ -720,9 +870,22 @@
         btn.addEventListener('click', () => {
           selectedElement = key;
           document.querySelectorAll('.element-btn').forEach((b) => b.classList.remove('active'));
+          document.querySelectorAll('.mobile-element-btn').forEach((b) => b.classList.remove('active'));
           btn.classList.add('active');
         });
         elGrid.appendChild(btn);
+        // Mobile button
+        const mBtn = document.createElement('button');
+        mBtn.className = 'mobile-element-btn' + (key === selectedElement ? ' active' : '');
+        mBtn.innerHTML = '<span style="color:' + symColor + '">' + el.symbol + '</span>';
+        mBtn.title = el.name;
+        mBtn.addEventListener('click', () => {
+          selectedElement = key;
+          document.querySelectorAll('.element-btn').forEach((b) => b.classList.remove('active'));
+          document.querySelectorAll('.mobile-element-btn').forEach((b) => b.classList.remove('active'));
+          mBtn.classList.add('active');
+        });
+        mobileSelector.appendChild(mBtn);
       });
     }
 
@@ -750,6 +913,20 @@
     });
     document.getElementById('btn-auto-bond').addEventListener('click', autoBond);
     document.querySelectorAll('[data-mode]').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
+    
+    // Mobile toolbar button sync
+    document.querySelectorAll('.mobile-tool-btn').forEach((b) => {
+      b.addEventListener('click', () => {
+        if (b.dataset.mode) {
+          setMode(b.dataset.mode);
+        } else if (b.id === 'btn-clear-mobile') {
+          if (atomsList.length) {
+            clearMolecule();
+            showToast('Molécula eliminada', 'warn');
+          }
+        }
+      });
+    });
 
     const clock = new THREE.Clock();
     function animate() {
@@ -795,34 +972,42 @@
       if (window.innerWidth > 768) {
         // Desktop: always show panels, hide toggles
         panelLeft.classList.remove('hidden-panel');
+        panelLeft.classList.remove('visible');
         panelBottom.classList.remove('hidden-panel');
         toggleLeft.style.display = 'none';
         toggleBottom.style.display = 'none';
       } else {
-        // Mobile: show toggles, respect panelsVisible state
+        // Mobile: show toggles, panel slides in/out
         toggleLeft.style.display = 'block';
-        toggleBottom.style.display = 'block';
+        toggleBottom.style.display = 'none';
         if (panelsVisible) {
           panelLeft.classList.remove('hidden-panel');
-          panelBottom.classList.remove('hidden-panel');
-          toggleLeft.textContent = '✕ Ocultar controles';
-          toggleBottom.textContent = '✕ Ocultar ayuda';
+          panelLeft.classList.add('visible');
+          toggleLeft.textContent = '✕ Cerrar';
         } else {
           panelLeft.classList.add('hidden-panel');
-          panelBottom.classList.add('hidden-panel');
+          panelLeft.classList.remove('visible');
           toggleLeft.textContent = '☰ Controles';
-          toggleBottom.textContent = '? Ayuda';
         }
       }
     }
-
+    
     toggleLeft.addEventListener('click', () => {
       panelsVisible = !panelsVisible;
       updatePanelVisibility();
     });
-
-    toggleBottom.addEventListener('click', () => {
-      panelsVisible = !panelsVisible;
+    
+    // Close panel when clicking outside on mobile
+    panelLeft.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768 && e.target === panelLeft) {
+        panelsVisible = false;
+        updatePanelVisibility();
+      }
+    });
+    
+    // Close panel with close button
+    document.getElementById('panel-close-mobile').addEventListener('click', () => {
+      panelsVisible = false;
       updatePanelVisibility();
     });
 
@@ -833,6 +1018,32 @@
 
     // Initialize visibility
     updatePanelVisibility();
+    
+    // Header toggle for mobile
+    const headerToggleBtn = document.getElementById('header-toggle-btn');
+    const siteHeader = document.querySelector('.site-header');
+    let headerVisible = true;
+    
+    if (headerToggleBtn && siteHeader) {
+      headerToggleBtn.addEventListener('click', () => {
+        headerVisible = !headerVisible;
+        if (headerVisible) {
+          siteHeader.classList.remove('header-collapsed');
+          headerToggleBtn.textContent = '✕ Ocultar menú';
+        } else {
+          siteHeader.classList.add('header-collapsed');
+          headerToggleBtn.textContent = '☰ Menú';
+        }
+      });
+      
+      // Start with header collapsed on mobile for better 3D view
+      if (window.innerWidth <= 768) {
+        headerVisible = false;
+        siteHeader.classList.add('header-collapsed');
+        headerToggleBtn.textContent = '☰ Menú';
+      }
+    }
+    
     init();
   </script>
 </body>
