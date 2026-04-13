@@ -21,10 +21,18 @@
     .sim-chips{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.8rem}.sim-chip{display:inline-flex;align-items:center;gap:.45rem;padding:.36rem .72rem;border:1px solid var(--border);border-radius:999px;background:var(--surface-2);font-size:.88rem;font-weight:700}.sim-dot{width:.72rem;height:.72rem;border-radius:50%;display:inline-block}
     .sim-app{position:relative;min-height:820px;height:min(86vh,860px);margin:1rem 0 1.5rem;overflow:hidden;border-radius:1.3rem;border:1px solid rgba(49,130,206,.22);background:radial-gradient(circle at 16% 12%,rgba(255,255,255,.12),transparent 16%),linear-gradient(180deg,#77c6ff 0%,#b9e7ff 18%,#e7f8ff 34%,#d7eefc 60%,#cae5f7 100%);box-shadow:0 26px 80px rgba(15,39,66,.18)}
     .sim-app #canvas-container{position:absolute;inset:0;z-index:0}.sim-app canvas{display:block}
-    .sim-app .panel{position:absolute;z-index:10;border-radius:18px;box-shadow:0 16px 36px rgba(8,26,46,.16)}
+    .sim-app .panel{position:absolute;z-index:10;border-radius:18px;box-shadow:0 16px 36px rgba(8,26,46,.16);transition:transform 0.3s ease,opacity 0.3s ease}
     .panel-left{top:16px;left:16px;width:320px;padding:18px;max-height:calc(100% - 32px);overflow-y:auto;background:rgba(255,255,255,.96);border:2px solid rgba(112,175,230,.55);color:#13304c}
     .panel-right{top:16px;right:16px;width:290px;padding:16px;max-height:calc(100% - 32px);overflow-y:auto;background:rgba(250,252,255,.95);border:2px solid rgba(255,214,102,.72);color:#13304c}
     .panel-bottom{left:50%;bottom:16px;transform:translateX(-50%);padding:10px 20px;display:flex;align-items:center;max-width:min(84%,760px);background:rgba(21,63,106,.92);color:#f5fbff;border:1px solid rgba(255,255,255,.18)}
+    .panel-left.hidden-panel{transform:translateX(-110%) !important;opacity:0 !important;pointer-events:none !important}
+    .panel-right.hidden-panel{transform:translateX(110%) !important;opacity:0 !important;pointer-events:none !important}
+    .panel-bottom.hidden-panel{transform:translateX(-50%) translateY(100px) !important;opacity:0 !important;pointer-events:none !important}
+    .sim-app .panel-toggle{position:absolute;z-index:20;background:rgba(255,255,255,.95);border:2px solid rgba(112,175,230,.55);border-radius:12px;color:#13304c;padding:8px 12px;cursor:pointer;font-size:12px;font-weight:600;display:none;transition:transform 0.2s ease}
+    .sim-app .panel-toggle:hover{transform:scale(1.05)}
+    .sim-app .panel-toggle-left{top:16px;left:16px}
+    .sim-app .panel-toggle-right{top:16px;right:16px}
+    .sim-app .panel-toggle-bottom{left:50%;bottom:16px;transform:translateX(-50%)}
     .panel-title{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:17px;font-weight:700}.panel-title .dot{width:9px;height:9px;border-radius:50%;background:#3182ce;box-shadow:0 0 0 5px rgba(99,179,237,.15)}
     .section-label{margin-top:16px;margin-bottom:8px;color:#365b7c;font-size:10px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase}
     .mode-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.tool-row{display:flex;flex-wrap:wrap;gap:8px}.tool-row .tool-btn{width:auto}
@@ -33,8 +41,8 @@
     .control-head{display:flex;justify-content:space-between;gap:10px;margin-bottom:6px;font-size:12px;font-weight:700}.control-head span:last-child{color:#1d5d96;font-family:"JetBrains Mono",monospace}input[type="range"]{width:100%;accent-color:#3182ce}
     .stat-row{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(116,161,207,.28)}.stat-row:last-child{border-bottom:none}.stat-label{color:#476684;font-size:11px}.stat-value{font-size:13px;font-weight:700;text-align:right;color:#143a60}.mono{font-family:"JetBrains Mono",monospace}.hint-list{margin:.7rem 0 0;padding-left:1.1rem;color:#2c4f71;font-size:.9rem}.hint-list li+li{margin-top:.35rem}.status-text{font-size:.9rem;margin:0}
     @media (max-width:900px){.sim-lead{grid-template-columns:1fr}}
-    @media (max-width:768px){.sim-app{min-height:1020px;height:auto}.panel-left,.panel-right{width:calc(100% - 24px);left:12px;right:12px;max-height:none}.panel-left{top:12px;padding:14px}.panel-right{top:376px;padding:14px}.panel-bottom{left:12px;right:12px;bottom:12px;transform:none;max-width:none}}
-    @media (max-width:640px){.sim-app{min-height:1120px}.mode-grid{grid-template-columns:1fr}.panel-right{top:458px}.tool-row .tool-btn{flex:1 1 calc(50% - 8px)}}
+    @media (max-width:768px){.sim-app{min-height:600px;height:auto}.panel-left,.panel-right{width:calc(100% - 24px);left:12px;right:12px;max-height:none}.panel-left{top:12px;padding:14px}.panel-right{top:376px;padding:14px}.panel-bottom{left:12px;right:12px;bottom:12px;transform:translateX(-50%);max-width:none}.sim-app .panel-toggle{display:block}}
+    @media (max-width:640px){.sim-app{min-height:540px}.mode-grid{grid-template-columns:1fr}.panel-right{top:458px}.tool-row .tool-btn{flex:1 1 calc(50% - 8px)}.panel-left{top:50px;left:8px;width:calc(100% - 16px);max-height:65vh}.sim-app .panel-toggle-left{top:8px;left:8px}.sim-app .panel-toggle-bottom{bottom:8px}}
   </style>
 </head>
 <body data-page="Física 3D" data-section="Física" data-section-href="fisica.html">
@@ -78,7 +86,10 @@
     </section>
     <section class="sim-app" aria-label="Laboratorio de Física 3D">
       <div id="canvas-container"></div>
-      <aside class="panel panel-left">
+      <button class="panel-toggle panel-toggle-left" id="toggle-left" aria-label="Mostrar/ocultar controles">☰ Controles</button>
+      <button class="panel-toggle panel-toggle-right" id="toggle-right" aria-label="Mostrar/ocultar lectura">📊 Lectura</button>
+      <button class="panel-toggle panel-toggle-bottom" id="toggle-bottom" aria-label="Mostrar/ocultar estado">ℹ️ Estado</button>
+      <aside class="panel panel-left hidden-panel">
         <div class="panel-title"><span class="dot"></span>Controles del laboratorio</div>
         <div class="section-label">Elegí un modelo</div>
         <div class="mode-grid" id="mode-grid">
@@ -102,7 +113,7 @@
           <ul class="hint-list" id="concept-points"></ul>
         </div>
       </aside>
-      <aside class="panel panel-right">
+      <aside class="panel panel-right hidden-panel">
         <div class="section-label" style="margin-top:0;">Lectura física</div>
         <div class="reading-box">
           <strong id="reading-title">Qué observar</strong>
@@ -116,7 +127,7 @@
           <p id="teacher-note">Si recorre distancias iguales en tiempos iguales, la velocidad permanece constante.</p>
         </div>
       </aside>
-      <div class="panel panel-bottom"><p class="status-text" id="status-text">MRU: el móvil avanza en línea recta con rapidez constante. Probá cambiar la velocidad y compará las marcas.</p></div>
+      <div class="panel panel-bottom hidden-panel"><p class="status-text" id="status-text">MRU: el móvil avanza en línea recta con rapidez constante. Probá cambiar la velocidad y compará las marcas.</p></div>
     </section>
   </main>
   <footer class="site-footer"><div class="container"><p>Recurso interactivo de Física para modelar movimientos y trayectorias.</p></div></footer>
@@ -156,9 +167,69 @@
     function resetModel(){state.t=0;clearGroup();setup(state.mode);center(state.mode)}
     function setMode(mode){state.mode=mode;state.t=0;document.querySelectorAll('.mode-btn').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));buildControls(mode);buildStats(mode);panel(mode);clearGroup();setup(mode);center(mode)}
     function resize(){const r=container.getBoundingClientRect();camera.aspect=r.width/r.height;camera.updateProjectionMatrix();renderer.setSize(r.width,r.height,false)}
-    $('#mode-grid').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(b)setMode(b.dataset.mode)});$('#btn-play').addEventListener('click',()=>{state.paused=!state.paused;$('#btn-play').textContent=state.paused?'Reanudar':'Pausar';$('#btn-play').classList.toggle('active',!state.paused)});$('#btn-reset').addEventListener('click',resetModel);$('#btn-center').addEventListener('click',()=>center(state.mode));window.addEventListener('resize',resize);
+    $('#mode-grid').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(b)setMode(b.dataset.mode)});$('#btn-play').addEventListener('click',()=>{state.paused=!state.paused;$('#btn-play').textContent=state.paused?'Reanudar':'Pausar';$('#btn-play').classList.toggle('active',!state.paused)});$('#btn-reset').addEventListener('click',resetModel);$('#btn-center').addEventListener('click',()=>center(state.mode));
+    
+    // Panel toggle functionality
+    const panelLeft = document.querySelector('.panel-left');
+    const panelRight = document.querySelector('.panel-right');
+    const panelBottom = document.querySelector('.panel-bottom');
+    const toggleLeft = document.getElementById('toggle-left');
+    const toggleRight = document.getElementById('toggle-right');
+    const toggleBottom = document.getElementById('toggle-bottom');
+    let panelsVisible = false; // Start hidden on mobile
+    
+    function updatePanelVisibility() {
+      if (window.innerWidth > 768) {
+        panelLeft.classList.remove('hidden-panel');
+        panelRight.classList.remove('hidden-panel');
+        panelBottom.classList.remove('hidden-panel');
+        toggleLeft.style.display = 'none';
+        toggleRight.style.display = 'none';
+        toggleBottom.style.display = 'none';
+      } else {
+        toggleLeft.style.display = 'block';
+        toggleRight.style.display = 'block';
+        toggleBottom.style.display = 'block';
+        if (panelsVisible) {
+          panelLeft.classList.remove('hidden-panel');
+          panelRight.classList.remove('hidden-panel');
+          panelBottom.classList.remove('hidden-panel');
+          toggleLeft.textContent = '✕ Ocultar controles';
+          toggleRight.textContent = '✕ Ocultar lectura';
+          toggleBottom.textContent = '✕ Ocultar estado';
+        } else {
+          panelLeft.classList.add('hidden-panel');
+          panelRight.classList.add('hidden-panel');
+          panelBottom.classList.add('hidden-panel');
+          toggleLeft.textContent = '☰ Controles';
+          toggleRight.textContent = '📊 Lectura';
+          toggleBottom.textContent = 'ℹ️ Estado';
+        }
+      }
+    }
+    
+    toggleLeft.addEventListener('click', () => {
+      panelsVisible = !panelsVisible;
+      updatePanelVisibility();
+    });
+    
+    toggleRight.addEventListener('click', () => {
+      panelsVisible = !panelsVisible;
+      updatePanelVisibility();
+    });
+    
+    toggleBottom.addEventListener('click', () => {
+      panelsVisible = !panelsVisible;
+      updatePanelVisibility();
+    });
+    
+    window.addEventListener('resize', () => {
+      updatePanelVisibility();
+      resize();
+    });
+    
     function animate(){requestAnimationFrame(animate);const dt=clock.getDelta();stars.rotation.y+=dt*.006;if(state.mode!=='orbit'){sunLight.position.x=Math.sin(clock.elapsedTime*.35)*4;sunLight.position.z=Math.cos(clock.elapsedTime*.3)*4}update(dt);cam.update();renderer.render(scene,camera)}
-    setMode('mru');resize();animate();
+    setMode('mru');resize();updatePanelVisibility();animate();
   </script>
 </body>
 </html>

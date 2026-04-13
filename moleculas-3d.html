@@ -45,9 +45,22 @@
       position: absolute; z-index: 10; background: rgba(10,18,15,.92); border: 1px solid rgba(23,48,40,.9);
       border-radius: 16px; color: #e8f0ed; backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
     }
-    .molecule-app .panel-left { top: 16px; left: 16px; width: 294px; padding: 18px; max-height: calc(100% - 32px); overflow-y: auto; }
-    .molecule-app .panel-right { top: 16px; right: 16px; width: 250px; padding: 16px; }
-    .molecule-app .panel-bottom { left: 50%; bottom: 16px; transform: translateX(-50%); padding: 10px 22px; display: flex; gap: 8px; align-items: center; }
+    .molecule-app .panel-left { top: 16px; left: 16px; width: 294px; padding: 18px; max-height: calc(100% - 32px); overflow-y: auto; transition: transform 0.3s ease, opacity 0.3s ease; }
+    .molecule-app .panel-right { top: 16px; right: 16px; width: 250px; padding: 16px; transition: transform 0.3s ease, opacity 0.3s ease; }
+    .molecule-app .panel-bottom { left: 50%; bottom: 16px; transform: translateX(-50%); padding: 10px 22px; display: flex; gap: 8px; align-items: center; transition: transform 0.3s ease, opacity 0.3s ease; }
+    .molecule-app .panel-left.hidden-panel { transform: translateX(-110%) !important; opacity: 0 !important; pointer-events: none !important; }
+    .molecule-app .panel-right.hidden-panel { transform: translateX(110%) !important; opacity: 0 !important; pointer-events: none !important; }
+    .molecule-app .panel-bottom.hidden-panel { transform: translateX(-50%) translateY(100px) !important; opacity: 0 !important; pointer-events: none !important; }
+    .molecule-app .panel-toggle {
+      position: absolute; z-index: 20; background: rgba(10,18,15,.92); border: 1px solid rgba(23,48,40,.9);
+      border-radius: 12px; color: #e8f0ed; backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+      padding: 8px 12px; cursor: pointer; font-size: 12px; font-weight: 600; display: none;
+      transition: transform 0.2s ease;
+    }
+    .molecule-app .panel-toggle:hover { transform: scale(1.05); }
+    .molecule-app .panel-toggle-left { top: 16px; left: 16px; }
+    .molecule-app .panel-toggle-right { top: 16px; right: 16px; }
+    .molecule-app .panel-toggle-bottom { left: 50%; bottom: 16px; transform: translateX(-50%); }
     .molecule-app .panel-title { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; font-size: 17px; font-weight: 700; }
     .molecule-app .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); animation: pulse-dot 2s ease-in-out infinite; }
     @keyframes pulse-dot { 0%,100% { box-shadow: 0 0 6px var(--accent); } 50% { box-shadow: 0 0 16px var(--accent-glow); } }
@@ -98,15 +111,18 @@
     .molecule-app .panel-left::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
     @media (max-width: 900px) { .molecule-lead { grid-template-columns: 1fr; } }
     @media (max-width: 768px) {
-      .molecule-app { min-height: 720px; height: auto; }
-      .molecule-app .panel-left { width: calc(100% - 32px); max-height: none; }
+      .molecule-app { min-height: 580px; height: auto; }
+      .molecule-app .panel-left { width: calc(100% - 24px); max-height: none; left: 12px; top: 12px; }
       .molecule-app .panel-right { display: none; }
-      .molecule-app .panel-bottom { left: 16px; right: 16px; transform: none; justify-content: center; }
+      .molecule-app .panel-bottom { left: 12px; right: 12px; transform: translateX(-50%); justify-content: center; bottom: 12px; }
+      .molecule-app .panel-toggle { display: block; }
     }
     @media (max-width: 640px) {
-      .molecule-app { min-height: 800px; }
-      .molecule-app .panel-left { top: 12px; left: 12px; width: calc(100% - 24px); padding: 12px; }
-      .molecule-app .panel-bottom { bottom: 12px; padding: 8px 14px; }
+      .molecule-app { min-height: 520px; }
+      .molecule-app .panel-left { top: 50px; left: 8px; width: calc(100% - 16px); padding: 12px; max-height: 65vh; }
+      .molecule-app .panel-bottom { bottom: 8px; padding: 6px 12px; }
+      .molecule-app .panel-toggle-left { top: 8px; left: 8px; }
+      .molecule-app .panel-toggle-bottom { bottom: 8px; }
     }
   </style>
 </head>
@@ -157,7 +173,9 @@
 
     <section class="molecule-app" aria-label="Laboratorio molecular 3D">
       <div id="canvas-container"></div>
-      <aside class="panel panel-left" id="panel-left">
+      <button class="panel-toggle panel-toggle-left" id="toggle-left" aria-label="Mostrar/ocultar controles">☰ Controles</button>
+      <button class="panel-toggle panel-toggle-bottom" id="toggle-bottom" aria-label="Mostrar/ocultar ayuda">? Ayuda</button>
+      <aside class="panel panel-left hidden-panel" id="panel-left">
         <div class="panel-title"><span class="dot"></span>Laboratorio molecular</div>
 
         <div class="section-label">Modo</div>
@@ -196,7 +214,7 @@
         <div id="selection-info" style="font-size:12px;color:var(--fg-muted);">Ningún átomo seleccionado</div>
       </aside>
 
-      <div class="panel panel-bottom" id="help-bar">
+      <div class="panel panel-bottom hidden-panel" id="help-bar">
         <span id="help-text" style="font-size:11px;color:var(--fg-muted);">Haz clic en el espacio para agregar un átomo</span>
       </div>
 
@@ -765,6 +783,56 @@
     }
 
     window.addEventListener('resize', resize);
+
+    // Panel toggle functionality
+    const panelLeft = document.getElementById('panel-left');
+    const panelBottom = document.getElementById('help-bar');
+    const toggleLeft = document.getElementById('toggle-left');
+    const toggleBottom = document.getElementById('toggle-bottom');
+    let panelsVisible = false; // Start hidden on mobile
+
+    function updatePanelVisibility() {
+      if (window.innerWidth > 768) {
+        // Desktop: always show panels, hide toggles
+        panelLeft.classList.remove('hidden-panel');
+        panelBottom.classList.remove('hidden-panel');
+        toggleLeft.style.display = 'none';
+        toggleBottom.style.display = 'none';
+      } else {
+        // Mobile: show toggles, respect panelsVisible state
+        toggleLeft.style.display = 'block';
+        toggleBottom.style.display = 'block';
+        if (panelsVisible) {
+          panelLeft.classList.remove('hidden-panel');
+          panelBottom.classList.remove('hidden-panel');
+          toggleLeft.textContent = '✕ Ocultar controles';
+          toggleBottom.textContent = '✕ Ocultar ayuda';
+        } else {
+          panelLeft.classList.add('hidden-panel');
+          panelBottom.classList.add('hidden-panel');
+          toggleLeft.textContent = '☰ Controles';
+          toggleBottom.textContent = '? Ayuda';
+        }
+      }
+    }
+
+    toggleLeft.addEventListener('click', () => {
+      panelsVisible = !panelsVisible;
+      updatePanelVisibility();
+    });
+
+    toggleBottom.addEventListener('click', () => {
+      panelsVisible = !panelsVisible;
+      updatePanelVisibility();
+    });
+
+    window.addEventListener('resize', () => {
+      updatePanelVisibility();
+      resize();
+    });
+
+    // Initialize visibility
+    updatePanelVisibility();
     init();
   </script>
 </body>
