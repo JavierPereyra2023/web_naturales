@@ -457,7 +457,7 @@
       if (points >= 150) return "Premio Oro";
       if (points >= 90) return "Premio Plata";
       if (points >= 40) return "Premio Bronce";
-      return "Sin premio aun";
+      return "Sin premio aún";
     }
 
     function isCertificateUnlocked() {
@@ -1540,6 +1540,7 @@
     const body = document.body;
     const page = body ? body.getAttribute("data-page") || "" : "";
     const section = body ? body.getAttribute("data-section") || "" : "";
+    if (body && body.hasAttribute("data-manual-activities")) return;
     if (!page || !section || !["Química", "Física", "Biología"].includes(section)) return;
     if (["Química", "Física", "Biología"].includes(page)) return;
 
@@ -1662,6 +1663,7 @@
   }
 
   function observeCards() {
+    if (document.body.classList.contains("content-unit-page")) return;
     if (!("IntersectionObserver" in window)) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
@@ -1699,6 +1701,41 @@
       panel.style.transition = "opacity 0.58s " + EASING + " " + delay + "ms, transform 0.58s " + EASING + " " + delay + "ms";
       observer.observe(panel);
       staggerIndex++;
+    });
+  }
+
+  function initContentUnitReveal() {
+    if (!document.body.classList.contains("content-unit-page")) return;
+
+const sections = document.querySelectorAll("main .panel, main .digresion");
+    if (!sections.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+      sections.forEach(function (section) {
+        section.classList.add("is-visible");
+      });
+      return;
+    }
+
+    document.body.classList.add("content-reveal-ready");
+
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.14,
+        rootMargin: "0px 0px -8% 0px"
+      }
+    );
+
+    sections.forEach(function (section, index) {
+      section.style.transitionDelay = Math.min(index * 45, 180) + "ms";
+      observer.observe(section);
     });
   }
 
@@ -1809,6 +1846,27 @@
     document.body.appendChild(btn);
   }
 
+function initContentTabs() {
+    var tabGroups = document.querySelectorAll("[data-tab-group]");
+    tabGroups.forEach(function (group) {
+      var buttons = group.querySelectorAll(".tab-btn");
+      var panels = group.querySelectorAll(".tab-panel");
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var targetTab = btn.getAttribute("data-tab");
+
+          buttons.forEach(function (b) { b.classList.remove("active"); });
+          panels.forEach(function (p) { p.classList.remove("active"); });
+
+          btn.classList.add("active");
+          var targetPanel = group.querySelector('[data-panel="' + targetTab + '"]');
+          if (targetPanel) targetPanel.classList.add("active");
+        });
+      });
+    });
+  }
+
   function initAll() {
     loadWeatherWidget();
     buildBreadcrumbs();
@@ -1821,6 +1879,8 @@
     applyFooterBranding();
     addReadingTime();
     addScrollToTop();
+    initContentUnitReveal();
+    initContentTabs();
     observeCards();
     addTooltips();
     highlightKeywords();

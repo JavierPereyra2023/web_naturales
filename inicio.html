@@ -1,74 +1,548 @@
-﻿<!doctype html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ciencias Naturales 1° año</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <script defer src="js/main.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naturales — Libro Interactivo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            nat: {
+              black: '#070A0F',
+              dark: '#0E141C',
+              panel: '#151D28',
+              line: '#263243',
+              ink: '#F2F7FB',
+              muted: '#A9B7C8',
+              amber: '#FFB020',
+              amber2: '#FF7A1A',
+              cyan: '#35C7F4',
+              green: '#6EE7A8',
+              rose: '#FF6B8A'
+            }
+          },
+          fontFamily: {
+            heading: ['Oswald', 'sans-serif'],
+            body: ['Inter', 'sans-serif']
+          },
+          boxShadow: {
+            glow: '0 22px 60px rgba(53, 199, 244, 0.16)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    ::selection { background: #FFB020; color: #070A0F; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: #F2F7FB;
+      background:
+        radial-gradient(circle at 12% 5%, rgba(53, 199, 244, 0.18), transparent 28%),
+        radial-gradient(circle at 90% 12%, rgba(110, 231, 168, 0.14), transparent 24%),
+        linear-gradient(180deg, #070A0F 0%, #0E141C 48%, #070A0F 100%);
+    }
+    .texture::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.05;
+      background-image: repeating-linear-gradient(45deg, rgba(255,255,255,.08) 0 1px, transparent 1px 9px);
+    }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #FFB020, #35C7F4); }
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 2px;
+      background: #FFB020;
+      transition: width .25s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+    .hero-img {
+      filter: saturate(0.8) contrast(1.12) brightness(0.72);
+      transition: filter .5s ease, transform .8s ease;
+    }
+    .hero-img:hover { filter: saturate(1.05) contrast(1.05) brightness(0.82); transform: scale(1.02); }
+    .chapter-card, .topic-card, .lab-card {
+      transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+      border: 1px solid rgba(255,255,255,.07);
+    }
+    .chapter-card:hover, .topic-card:hover, .lab-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 176, 32, .45);
+      box-shadow: 0 22px 50px rgba(0,0,0,.28);
+    }
+    .marquee-track { animation: marquee 28s linear infinite; }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; transform: translateY(24px); }
+    .reveal.visible { animation: fadeInUp .72s cubic-bezier(.16,1,.3,1) forwards; }
+    .mobile-menu { transform: translateX(100%); transition: transform .35s cubic-bezier(.16,1,.3,1); }
+    .mobile-menu.open { transform: translateX(0); }
+    .book-page {
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.05) 0 1px, transparent 1px 100%),
+        linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.015));
+      background-size: 42px 100%, 100% 100%;
+    }
+    /* ─── Scroll progress bar ─── */
+    #scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, #FFB020, #35C7F4, #6EE7A8);
+      z-index: 9999;
+      transition: width .1s linear;
+      pointer-events: none;
+      border-radius: 0 2px 2px 0;
+    }
+    /* ─── Custom scrollbar ─── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #070A0F; }
+    ::-webkit-scrollbar-thumb { background: #263243; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #FFB020; }
+    * { scrollbar-width: thin; scrollbar-color: #263243 #070A0F; }
+    /* ─── Stagger delays ─── */
+    .d1 { animation-delay: .10s !important; }
+    .d2 { animation-delay: .18s !important; }
+    .d3 { animation-delay: .26s !important; }
+    .d4 { animation-delay: .34s !important; }
+    .d5 { animation-delay: .42s !important; }
+    /* ─── Slide desde los lados ─── */
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .reveal-left  { opacity: 0; transform: translateX(-30px); }
+    .reveal-right { opacity: 0; transform: translateX(30px); }
+    .reveal-left.visible  { animation: fadeInLeft  .72s cubic-bezier(.16,1,.3,1) forwards; }
+    .reveal-right.visible { animation: fadeInRight .72s cubic-bezier(.16,1,.3,1) forwards; }
+  </style>
 </head>
-<body data-page="Inicio">
-  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
-  <header class="site-header">
-    <div class="container header-inner">
-      <div>
-        <p class="kicker">Nivel secundario argentino</p>
-        <h1>Ciencias Naturales · 1° año</h1>
+<body class="texture" data-page="Inicio">
+  <div id="scroll-progress"></div>
+  <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-nat-amber focus:text-nat-black focus:px-4 focus:py-3 focus:font-bold">Saltar al contenido</a>
+
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-nat-black/85 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 md:px-6">
+      <div class="h-16 md:h-20 flex items-center justify-between">
+        <a href="inicio.html" class="flex items-center gap-3">
+          <div class="w-9 h-9 bg-nat-amber text-nat-black flex items-center justify-center font-heading font-bold text-xl">N</div>
+          <div>
+            <div class="font-heading uppercase tracking-wider text-white font-bold leading-none">Naturales</div>
+            <div class="text-[10px] uppercase tracking-[0.22em] text-nat-muted">Libro interactivo</div>
+          </div>
+        </a>
+        <div class="hidden lg:flex items-center gap-8">
+          <a href="#capitulos" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Capítulos</a>
+          <a href="#quimica" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Química</a>
+          <a href="#fisica" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Física</a>
+          <a href="#biologia" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Biología</a>
+          <a href="#ruta" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Ruta</a>
+        </div>
+        <div class="flex items-center gap-3">
+          <a href="quiz.html" class="hidden md:inline-flex items-center gap-2 bg-nat-amber hover:bg-nat-amber2 text-nat-black text-xs font-black uppercase tracking-wider px-5 py-3 transition-colors">
+            <span>Practicar</span><span class="iconify" data-icon="lucide:arrow-right" data-width="15"></span>
+          </a>
+          <button id="menuToggle" class="lg:hidden w-10 h-10 flex items-center justify-center text-white" aria-label="Abrir menú">
+            <span class="iconify" data-icon="lucide:menu" data-width="25"></span>
+          </button>
+        </div>
       </div>
-      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar modo oscuro">Modo oscuro</button>
     </div>
-    <nav class="main-nav container" aria-label="Navegación principal">
-      <a href="inicio.html" aria-current="page">Inicio</a>
-      <a href="quimica.html">Química</a>
-      <a href="fisica.html">Física</a>
-      <a href="biologia.html">Biología</a>
-    </nav>
-  </header>
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-80 max-w-full h-screen bg-nat-black border-l border-white/10 z-50">
+      <div class="p-6">
+        <div class="flex justify-end mb-10">
+          <button id="menuClose" class="w-10 h-10 flex items-center justify-center text-white" aria-label="Cerrar menú">
+            <span class="iconify" data-icon="lucide:x" data-width="24"></span>
+          </button>
+        </div>
+        <div class="flex flex-col gap-6">
+          <a class="mobile-link font-heading text-2xl uppercase font-bold" href="#capitulos">Capítulos</a>
+          <a class="mobile-link font-heading text-2xl uppercase font-bold" href="#quimica">Química</a>
+          <a class="mobile-link font-heading text-2xl uppercase font-bold" href="#fisica">Física</a>
+          <a class="mobile-link font-heading text-2xl uppercase font-bold" href="#biologia">Biología</a>
+          <a class="mobile-link font-heading text-2xl uppercase font-bold" href="#ruta">Ruta de estudio</a>
+          <a class="mobile-link mt-4 bg-nat-amber text-nat-black text-center text-sm font-black uppercase tracking-wider px-6 py-4" href="quiz.html">Ir al quiz</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div id="menuOverlay" class="hidden fixed inset-0 bg-black/65 backdrop-blur-sm z-40"></div>
 
-  <div class="container">
-    <nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav>
-  </div>
-
-  <main id="contenido" class="container">
-    <section class="hero">
-      <h2>Recorrido del programa anual</h2>
-      <p>Este sitio organiza los contenidos del <strong>programa de 1° año</strong> en tres áreas: Química, Física y Biología. Cada sección presenta explicaciones claras, ejemplos cotidianos y actividades breves para practicar.</p>
+  <main id="contenido">
+    <section class="relative min-h-screen flex items-center overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <img class="hero-img w-full h-full object-cover" src="LHC.png" alt="Gran Colisionador de Hadrones">
+        <div class="absolute inset-0 bg-gradient-to-r from-nat-black via-nat-black/90 to-nat-black/40"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-nat-black via-transparent to-nat-black/45"></div>
+      </div>
+      <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pt-32 pb-20 w-full">
+        <div class="grid lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-7 reveal visible">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="accent-line"></div>
+              <span class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-nat-amber font-black">Ciencias Naturales · 1° año · Argentina</span>
+            </div>
+            <h1 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl uppercase font-bold leading-[0.9] tracking-tight text-white mb-6">
+              Leer<br>
+              la naturaleza<br>
+              <span class="text-nat-amber">como un libro</span>
+            </h1>
+            <p class="text-base md:text-lg text-nat-muted max-w-2xl leading-relaxed mb-8">
+              Una nueva portada para estudiar Química, Física y Biología con explicaciones extensas, imágenes realistas, infografías, actividades y enlaces a las unidades completas. La idea es que cada sección funcione como una doble página de libro: primero comprender, después practicar y finalmente conectar con la vida cotidiana.
+            </p>
+            <div class="grid grid-cols-3 gap-4 max-w-xl mb-9">
+              <div class="border-l border-white/10 pl-4">
+                <div class="font-heading text-3xl font-bold text-nat-amber">3</div>
+                <div class="text-[10px] uppercase tracking-[0.18em] text-nat-muted">Áreas integradas</div>
+              </div>
+              <div class="border-l border-white/10 pl-4">
+                <div class="font-heading text-3xl font-bold text-nat-cyan">19+</div>
+                <div class="text-[10px] uppercase tracking-[0.18em] text-nat-muted">Temas enlazados</div>
+              </div>
+              <div class="border-l border-white/10 pl-4">
+                <div class="font-heading text-3xl font-bold text-nat-green">Aula</div>
+                <div class="text-[10px] uppercase tracking-[0.18em] text-nat-muted">Actividades reales</div>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-4">
+              <a href="#capitulos" class="inline-flex items-center gap-2 bg-nat-amber hover:bg-nat-amber2 text-nat-black text-xs font-black uppercase tracking-wider px-8 py-4 transition-colors">
+                Comenzar recorrido <span class="iconify" data-icon="lucide:arrow-right" data-width="16"></span>
+              </a>
+              <a href="#ruta" class="inline-flex items-center gap-2 border border-white/20 hover:border-nat-cyan/70 text-white text-xs font-black uppercase tracking-wider px-8 py-4 transition-colors">
+                Ver ruta de estudio
+              </a>
+            </div>
+          </div>
+          <aside class="lg:col-span-5 reveal visible">
+            <div class="relative bg-nat-panel/80 border border-white/10 p-4 md:p-5 shadow-glow">
+              <img class="w-full h-[360px] md:h-[500px] object-cover" src="microscopio.png" alt="Microscopio">
+              <div class="absolute inset-x-5 bottom-5 bg-nat-black/85 backdrop-blur-md border border-white/10 p-5">
+                <div class="text-[10px] uppercase tracking-[0.28em] font-black text-nat-amber mb-2">Pregunta guía</div>
+                <p class="text-sm md:text-base text-white font-semibold leading-relaxed">¿Cómo se conectan las partículas invisibles, las fuerzas que mueven objetos y los seres vivos que habitan un ambiente?</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
     </section>
 
-    <section class="cards" aria-label="Áreas de estudio">
-      <article class="card">
-        <h3>Química</h3>
-        <p>Materiales y transformaciones, mezclas, métodos de separación, agua y potabilización.</p>
-        <a class="btn" href="quimica.html">Ir a Química</a>
-      </article>
-      <article class="card">
-        <h3>Física</h3>
-        <p>Movimientos, Sistema Solar, energía, calor, luz y sonido.</p>
-        <a class="btn" href="fisica.html">Ir a Física</a>
-      </article>
-      <article class="card">
-        <h3>Biología</h3>
-        <p>Seres vivos, relaciones tróficas, reinos, cuerpo humano y ESI (alimentación saludable).</p>
-        <a class="btn" href="biologia.html">Ir a Biología</a>
-      </article>
+    <div class="relative z-10 bg-nat-amber py-3 overflow-hidden">
+      <div class="marquee-track flex items-center gap-8 whitespace-nowrap w-max">
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Materia</span><span class="text-nat-amber2">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Energía</span><span class="text-nat-amber2">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Movimiento</span><span class="text-nat-amber2">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Seres vivos</span><span class="text-nat-amber2">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Sistemas materiales</span><span class="text-nat-amber2">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Ecosistemas</span><span class="text-nat-amber2">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Ondas</span><span class="text-nat-amber2">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Cuerpo humano</span><span class="text-nat-amber2">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Materia</span><span class="text-nat-amber2">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Energía</span><span class="text-nat-amber2">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Movimiento</span><span class="text-nat-amber2">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Seres vivos</span><span class="text-nat-amber2">◆</span>
+      </div>
+    </div>
+
+    <section id="capitulos" class="relative z-10 py-20 md:py-28">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+          <div>
+            <div class="flex items-center gap-3 mb-4"><div class="accent-line"></div><span class="text-[10px] uppercase tracking-[0.3em] text-nat-amber font-black">Capítulos principales</span></div>
+            <h2 class="font-heading text-4xl md:text-6xl uppercase font-bold text-white leading-none">Tres puertas<br>para investigar</h2>
+          </div>
+          <p class="text-sm md:text-base text-nat-muted max-w-lg leading-relaxed">Cada capítulo combina lectura, imágenes, conceptos clave y actividades. El formato inicial prioriza una navegación clara; luego podemos convertir cada bloque en páginas internas más profundas, con gráficos interactivos y simulaciones.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4">
+          <article class="chapter-card bg-nat-panel overflow-hidden group">
+            <div class="relative h-64 overflow-hidden">
+              <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="quimica.png" alt="Química">
+              <div class="absolute inset-0 bg-gradient-to-t from-nat-panel via-nat-panel/45 to-transparent"></div>
+              <div class="absolute top-4 left-4 bg-nat-black/75 backdrop-blur px-3 py-2 text-[9px] uppercase tracking-wider font-black text-nat-amber">Química</div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 mb-3"><span class="iconify text-nat-amber" data-icon="lucide:flask-conical" data-width="20"></span><h3 class="font-heading text-2xl uppercase font-bold">Materia y transformaciones</h3></div>
+              <p class="text-sm text-nat-muted leading-relaxed mb-5">La Química estudia de qué están hechos los materiales, cómo se organizan sus partículas y por qué cambian sus propiedades cuando mezclamos, calentamos, enfriamos o separamos sustancias.</p>
+              <a class="inline-flex items-center gap-2 text-nat-amber text-xs uppercase tracking-wider font-black" href="quimica.html">Abrir índice de Química <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span></a>
+            </div>
+          </article>
+          <article class="chapter-card bg-nat-panel overflow-hidden group">
+            <div class="relative h-64 overflow-hidden">
+              <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="fisica.png" alt="Física">
+              <div class="absolute inset-0 bg-gradient-to-t from-nat-panel via-nat-panel/45 to-transparent"></div>
+              <div class="absolute top-4 left-4 bg-nat-black/75 backdrop-blur px-3 py-2 text-[9px] uppercase tracking-wider font-black text-nat-cyan">Física</div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 mb-3"><span class="iconify text-nat-cyan" data-icon="lucide:orbit" data-width="20"></span><h3 class="font-heading text-2xl uppercase font-bold">Movimiento, energía y ondas</h3></div>
+              <p class="text-sm text-nat-muted leading-relaxed mb-5">La Física busca regularidades: describe movimientos, reconoce intercambios de energía y explica fenómenos ondulatorios como la luz y el sonido mediante modelos que podemos medir.</p>
+              <a class="inline-flex items-center gap-2 text-nat-cyan text-xs uppercase tracking-wider font-black" href="fisica.html">Abrir índice de Física <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span></a>
+            </div>
+          </article>
+          <article class="chapter-card bg-nat-panel overflow-hidden group">
+            <div class="relative h-64 overflow-hidden">
+              <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="biologia.png" alt="Biología">
+              <div class="absolute inset-0 bg-gradient-to-t from-nat-panel via-nat-panel/45 to-transparent"></div>
+              <div class="absolute top-4 left-4 bg-nat-black/75 backdrop-blur px-3 py-2 text-[9px] uppercase tracking-wider font-black text-nat-green">Biología</div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 mb-3"><span class="iconify text-nat-green" data-icon="lucide:dna" data-width="20"></span><h3 class="font-heading text-2xl uppercase font-bold">Vida, diversidad y cuerpo humano</h3></div>
+              <p class="text-sm text-nat-muted leading-relaxed mb-5">La Biología estudia a los seres vivos como sistemas: intercambian materia y energía, se relacionan con el ambiente, mantienen funciones vitales y presentan una enorme diversidad.</p>
+              <a class="inline-flex items-center gap-2 text-nat-green text-xs uppercase tracking-wider font-black" href="biologia.html">Abrir índice de Biología <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span></a>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <section aria-labelledby="mapa-curricular" class="panel">
-      <h2 id="mapa-curricular">Mapa curricular representado</h2>
-      <p><strong>Correspondencia con el programa:</strong> los contenidos se organizan según los núcleos "Los materiales y sus transformaciones", "Agua", "Los movimientos", "La Tierra y el Universo", "Energía, cambio y movimiento", "Fenómenos ondulatorios" y "La vida: unidad y diversidad" con sus subtemas.</p>
-      <ul>
-        <li>1° cuatrimestre: Química y Física inicial.</li>
-        <li>2° cuatrimestre: Biología y cuerpo humano.</li>
-        <li>Eje transversal ESI: alimentación saludable y calorías vacías.</li>
-      </ul>
+    <section id="quimica" class="relative z-10 py-20 md:py-28 bg-nat-dark border-y border-white/5">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="grid lg:grid-cols-12 gap-10 items-start">
+          <div class="lg:col-span-5">
+            <div class="flex items-center gap-3 mb-5"><div class="accent-line"></div><span class="text-[10px] uppercase tracking-[0.3em] text-nat-amber font-black">Capítulo 01</span></div>
+            <h2 class="font-heading text-4xl md:text-6xl uppercase font-bold leading-none mb-6">Química:<br>la materia en acción</h2>
+            <p class="text-nat-muted leading-relaxed mb-5">Cuando miramos un vaso de agua, una moneda, un perfume o una cucharada de sal, estamos observando materiales. La Química nos enseña a describirlos por sus propiedades, a clasificarlos como sustancias o mezclas, y a explicar sus cambios mediante el modelo corpuscular.</p>
+            <p class="text-nat-muted leading-relaxed">La idea central es poderosa: lo visible se puede explicar con partículas que no vemos. Si un sólido conserva su forma, si un líquido fluye o si un gas ocupa todo el recipiente, no es magia: es organización, movimiento y atracción entre partículas.</p>
+          </div>
+          <div class="lg:col-span-7 grid md:grid-cols-2 gap-4">
+            <article class="topic-card book-page p-5 bg-nat-panel">
+              <span class="iconify text-nat-amber mb-4" data-icon="lucide:atom" data-width="28"></span>
+              <h3 class="font-heading text-2xl uppercase font-bold mb-3">Modelo corpuscular</h3>
+              <p class="text-sm text-nat-muted leading-relaxed mb-4">Toda materia está formada por partículas. En los sólidos se encuentran muy próximas y vibran; en los líquidos se deslizan; en los gases se mueven libremente y se separan mucho más.</p>
+              <a class="text-xs uppercase tracking-wider font-black text-nat-amber" href="quimica_t3_modelo_corpuscular.html">Leer tema completo</a>
+            </article>
+            <article class="topic-card book-page p-5 bg-nat-panel">
+              <span class="iconify text-nat-amber mb-4" data-icon="lucide:layers" data-width="28"></span>
+              <h3 class="font-heading text-2xl uppercase font-bold mb-3">Sistemas materiales</h3>
+              <p class="text-sm text-nat-muted leading-relaxed mb-4">Un sistema material es una porción de materia que elegimos estudiar. Puede tener una fase o varias, y uno o más componentes. Esta mirada ayuda a ordenar mezclas reales.</p>
+              <a class="text-xs uppercase tracking-wider font-black text-nat-amber" href="quimica_t4_sistemas_materiales.html">Leer tema completo</a>
+            </article>
+            <article class="topic-card md:col-span-2 bg-nat-black/40 border border-white/10 overflow-hidden">
+              <div class="grid md:grid-cols-5">
+                <img class="md:col-span-2 h-64 md:h-full w-full object-cover" src="https://loremflickr.com/800/700/water,laboratory?lock=16" alt="Filtración de agua en laboratorio">
+                <div class="md:col-span-3 p-6">
+                  <div class="text-[10px] uppercase tracking-[0.26em] font-black text-nat-amber mb-3">Infografía base</div>
+                  <h3 class="font-heading text-3xl uppercase font-bold mb-4">Separar una mezcla es usar propiedades</h3>
+                  <div class="grid sm:grid-cols-3 gap-3 text-sm">
+                    <div class="bg-white/5 p-3"><b class="text-white block">Filtración</b><span class="text-nat-muted">tamaño de partícula</span></div>
+                    <div class="bg-white/5 p-3"><b class="text-white block">Imantación</b><span class="text-nat-muted">magnetismo</span></div>
+                    <div class="bg-white/5 p-3"><b class="text-white block">Destilación</b><span class="text-nat-muted">punto de ebullición</span></div>
+                  </div>
+                  <p class="text-sm text-nat-muted leading-relaxed mt-4">En una versión profesional, este bloque puede transformarse en una infografía ilustrada paso a paso sobre potabilización del agua.</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="fisica" class="relative z-10 py-20 md:py-28">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+          <div>
+            <div class="flex items-center gap-3 mb-4"><div class="accent-line"></div><span class="text-[10px] uppercase tracking-[0.3em] text-nat-cyan font-black">Capítulo 02</span></div>
+            <h2 class="font-heading text-4xl md:text-6xl uppercase font-bold leading-none">Física:<br>medir para explicar</h2>
+          </div>
+          <p class="text-nat-muted max-w-xl leading-relaxed">La Física convierte observaciones en modelos. Un gráfico posición-tiempo cuenta una historia de movimiento; una transferencia de calor muestra energía en tránsito; una onda permite comprender desde una guitarra hasta la luz que llega desde una estrella.</p>
+        </div>
+        <div class="grid lg:grid-cols-3 gap-4">
+          <article class="topic-card bg-nat-panel p-6">
+            <span class="iconify text-nat-cyan mb-4" data-icon="lucide:chart-no-axes-combined" data-width="28"></span>
+            <h3 class="font-heading text-2xl uppercase font-bold mb-3">Movimiento rectilíneo</h3>
+            <p class="text-sm text-nat-muted leading-relaxed mb-5">Estudiar movimiento implica elegir un sistema de referencia, medir posición y tiempo, y reconocer si la velocidad permanece constante o cambia. Los gráficos ayudan a ver lo que los números esconden.</p>
+            <a class="text-xs uppercase tracking-wider font-black text-nat-cyan" href="fisica_t1_movimientos.html">Leer movimientos</a>
+          </article>
+          <article class="topic-card bg-nat-panel p-6">
+            <span class="iconify text-nat-cyan mb-4" data-icon="lucide:sun" data-width="28"></span>
+            <h3 class="font-heading text-2xl uppercase font-bold mb-3">Tierra y Universo</h3>
+            <p class="text-sm text-nat-muted leading-relaxed mb-5">El día, la noche, las estaciones y las fases lunares pueden explicarse con movimientos relativos. El cielo deja de ser un decorado y se vuelve un sistema que podemos modelizar.</p>
+            <a class="text-xs uppercase tracking-wider font-black text-nat-cyan" href="fisica_t2_tierra_universo.html">Leer universo</a>
+          </article>
+          <article class="topic-card bg-nat-panel p-6">
+            <span class="iconify text-nat-cyan mb-4" data-icon="lucide:radio-tower" data-width="28"></span>
+            <h3 class="font-heading text-2xl uppercase font-bold mb-3">Ondas</h3>
+            <p class="text-sm text-nat-muted leading-relaxed mb-5">Una onda transporta energía sin transportar materia en conjunto. Frecuencia, amplitud y longitud de onda permiten comparar sonidos, luces y vibraciones.</p>
+            <a class="text-xs uppercase tracking-wider font-black text-nat-cyan" href="fisica_t4_ondulatorios.html">Leer ondas</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="biologia" class="relative z-10 py-20 md:py-28 bg-nat-dark border-y border-white/5">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="grid lg:grid-cols-2 gap-10 items-center">
+          <div class="relative overflow-hidden border border-white/10">
+            <img class="w-full h-[430px] object-cover" src="https://loremflickr.com/1000/900/forest,ecosystem?lock=17" alt="Ecosistema natural con vegetación">
+            <div class="absolute inset-0 bg-gradient-to-t from-nat-black via-transparent to-transparent"></div>
+            <div class="absolute left-5 right-5 bottom-5 grid grid-cols-3 gap-2">
+              <div class="bg-nat-black/80 backdrop-blur p-3"><b class="text-nat-green block font-heading text-xl">Productores</b><span class="text-[10px] text-nat-muted">fabrican materia orgánica</span></div>
+              <div class="bg-nat-black/80 backdrop-blur p-3"><b class="text-nat-amber block font-heading text-xl">Consumidores</b><span class="text-[10px] text-nat-muted">obtienen alimento</span></div>
+              <div class="bg-nat-black/80 backdrop-blur p-3"><b class="text-nat-cyan block font-heading text-xl">Descomponedores</b><span class="text-[10px] text-nat-muted">reciclan nutrientes</span></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center gap-3 mb-5"><div class="accent-line"></div><span class="text-[10px] uppercase tracking-[0.3em] text-nat-green font-black">Capítulo 03</span></div>
+            <h2 class="font-heading text-4xl md:text-6xl uppercase font-bold leading-none mb-6">Biología:<br>la vida como sistema</h2>
+            <p class="text-nat-muted leading-relaxed mb-5">Un ser vivo no es una lista de partes sueltas. Es un sistema organizado que intercambia materia y energía, responde a estímulos, crece, se reproduce y mantiene condiciones internas compatibles con la vida.</p>
+            <p class="text-nat-muted leading-relaxed mb-6">A escala de ecosistema, esa vida se conecta en redes tróficas. La energía fluye desde los productores hacia consumidores, mientras la materia se recicla gracias a descomponedores. Esta mirada permite discutir alimentación, salud, ambiente y decisiones responsables.</p>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <a class="topic-card bg-nat-panel p-4" href="biologia_t1_vida_unidad_diversidad.html"><b class="block text-white mb-1">Unidad y diversidad</b><span class="text-sm text-nat-muted">Características comunes y variedad de seres vivos.</span></a>
+              <a class="topic-card bg-nat-panel p-4" href="biologia_t2_relaciones_troficas.html"><b class="block text-white mb-1">Relaciones tróficas</b><span class="text-sm text-nat-muted">Cadenas, redes y equilibrio ecológico.</span></a>
+              <a class="topic-card bg-nat-panel p-4" href="biologia_t7_cuerpo_humano.html"><b class="block text-white mb-1">Cuerpo humano</b><span class="text-sm text-nat-muted">Sistemas de nutrición y cuidado de la salud.</span></a>
+              <a class="topic-card bg-nat-panel p-4" href="biologia_t8_esi_alimentacion.html"><b class="block text-white mb-1">ESI y alimentación</b><span class="text-sm text-nat-muted">Hábitos, calorías vacías y decisiones informadas.</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ruta" class="relative z-10 py-20 md:py-28">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="flex items-center gap-3 mb-5"><div class="accent-line"></div><span class="text-[10px] uppercase tracking-[0.3em] text-nat-amber font-black">Ruta de aprendizaje</span></div>
+        <h2 class="font-heading text-4xl md:text-6xl uppercase font-bold leading-none mb-12">Cómo usar esta página<br>como libro</h2>
+        <div class="grid md:grid-cols-4 gap-4">
+          <article class="lab-card bg-nat-panel p-6">
+            <div class="font-heading text-4xl text-nat-amber mb-3">01</div>
+            <h3 class="font-heading text-xl uppercase font-bold mb-3">Leer la idea central</h3>
+            <p class="text-sm text-nat-muted leading-relaxed">Cada sección inicia con una explicación conceptual amplia para construir vocabulario científico antes de pasar al detalle.</p>
+          </article>
+          <article class="lab-card bg-nat-panel p-6">
+            <div class="font-heading text-4xl text-nat-cyan mb-3">02</div>
+            <h3 class="font-heading text-xl uppercase font-bold mb-3">Mirar la infografía</h3>
+            <p class="text-sm text-nat-muted leading-relaxed">Las imágenes realistas y cuadros visuales permiten reconocer procesos, variables y relaciones entre conceptos.</p>
+          </article>
+          <article class="lab-card bg-nat-panel p-6">
+            <div class="font-heading text-4xl text-nat-green mb-3">03</div>
+            <h3 class="font-heading text-xl uppercase font-bold mb-3">Abrir el tema completo</h3>
+            <p class="text-sm text-nat-muted leading-relaxed">Los enlaces llevan a páginas extensas ya existentes, con explicaciones, ejemplos y actividades de cierre.</p>
+          </article>
+          <article class="lab-card bg-nat-panel p-6">
+            <div class="font-heading text-4xl text-nat-rose mb-3">04</div>
+            <h3 class="font-heading text-xl uppercase font-bold mb-3">Practicar y evaluar</h3>
+            <p class="text-sm text-nat-muted leading-relaxed">Después de leer, el quiz y las futuras actividades interactivas ayudan a revisar comprensión y preparar evaluaciones.</p>
+          </article>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>Material educativo basado en el archivo curricular <code>programa_1anio.txt</code>.</p>
+  <footer class="relative z-10 bg-nat-black border-t border-white/5 py-8">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-7 h-7 bg-nat-amber text-nat-black flex items-center justify-center font-heading font-bold">N</div>
+        <span class="text-sm text-nat-muted">Ciencias Naturales · maqueta editorial inicial · imágenes realistas provisorias</span>
+      </div>
+      <div class="flex items-center gap-5">
+        <a class="text-[10px] uppercase tracking-wider text-nat-muted hover:text-white" href="quimica.html">Química</a>
+        <a class="text-[10px] uppercase tracking-wider text-nat-muted hover:text-white" href="fisica.html">Física</a>
+        <a class="text-[10px] uppercase tracking-wider text-nat-muted hover:text-white" href="biologia.html">Biología</a>
+      </div>
     </div>
   </footer>
+
+  <script>
+    // ─── Progress bar ───
+    const bar = document.getElementById('scroll-progress');
+    function updateProgress() {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+
+    // ─── Menú mobile ───
+    const menuToggle  = document.getElementById('menuToggle');
+    const menuClose   = document.getElementById('menuClose');
+    const mobileMenu  = document.getElementById('mobileMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    function openMenu()  { mobileMenu.classList.add('open');    menuOverlay.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+    function closeMenu() { mobileMenu.classList.remove('open'); menuOverlay.classList.add('hidden');    document.body.style.overflow = ''; }
+    menuToggle.addEventListener('click', openMenu);
+    menuClose.addEventListener('click', closeMenu);
+    menuOverlay.addEventListener('click', closeMenu);
+    document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', closeMenu));
+
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.style.background = window.scrollY > 80 ? 'rgba(7,10,15,0.94)' : 'rgba(7,10,15,0.85)';
+    }, { passive: true });
+
+    // ─── Reveal on scroll ───
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    function markReveal(el, cls = 'reveal', delay = '') {
+      if (el.classList.contains('reveal') || el.classList.contains('reveal-left') || el.classList.contains('reveal-right')) return;
+      el.classList.add(cls);
+      if (delay) el.classList.add(delay);
+      revealObs.observe(el);
+    }
+
+    // Tarjetas
+    document.querySelectorAll('.chapter-card, .topic-card, .lab-card').forEach((el, i) => {
+      markReveal(el, 'reveal', i > 0 ? 'd' + Math.min(i, 5) : '');
+    });
+
+    // Secciones (excepto hero)
+    document.querySelectorAll('section').forEach(section => {
+      if (section.querySelector('.hero-img')) return;
+
+      section.querySelectorAll('h1, h2, h3').forEach(el => {
+        if (el.closest('.chapter-card, .topic-card, .lab-card')) return;
+        markReveal(el);
+      });
+
+      let pCount = 0;
+      section.querySelectorAll('p').forEach(el => {
+        if (el.closest('.chapter-card, .topic-card, .lab-card')) return;
+        markReveal(el, 'reveal', pCount > 0 ? 'd' + Math.min(pCount, 5) : '');
+        pCount++;
+      });
+
+      section.querySelectorAll('aside').forEach(el => markReveal(el, 'reveal-right'));
+
+      section.querySelectorAll('img:not(.hero-img)').forEach((el, i) => {
+        markReveal(el, 'reveal', i > 0 ? 'd' + Math.min(i, 5) : '');
+      });
+
+      section.querySelectorAll('.accent-line').forEach(el => markReveal(el));
+
+      section.querySelectorAll('[class*="border-l"]').forEach((el, i) => {
+        if (el.closest('.chapter-card, .topic-card, .lab-card')) return;
+        markReveal(el, 'reveal', 'd' + Math.min(i + 1, 5));
+      });
+    });
+  </script>
 </body>
 </html>
-

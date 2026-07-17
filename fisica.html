@@ -1,27 +1,53 @@
-﻿<!doctype html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Física | Ciencias Naturales 1° año</title>
-  <link rel="stylesheet" href="css/styles.css"><script defer src="js/main.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Física — Naturales Libro Interactivo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/book.css">
+  <script>
+    tailwind.config = { theme: { extend: { colors: { nat: { black: '#070A0F', dark: '#0E141C', panel: '#151D28', muted: '#A9B7C8', amber: '#FFB020', amber2: '#FF7A1A', cyan: '#35C7F4', green: '#6EE7A8', rose: '#FF6B8A' } }, fontFamily: { heading: ['Oswald', 'sans-serif'], body: ['Inter', 'sans-serif'] } } } }
+  </script>
 </head>
-<body data-page="Física">
-<a class="skip-link" href="#contenido">Saltar al contenido principal</a>
-<header class="site-header"><div class="container header-inner"><div><p class="kicker">Ciencias Naturales · 1° año</p><h1>Área de Física</h1></div><button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar modo oscuro">Modo oscuro</button><a class="theme-toggle header-action" href="fisica-3d.html" aria-label="Abrir simulación de Física 3D">Física 3D</a></div><nav class="main-nav container" aria-label="Navegación principal"><a href="inicio.html">Inicio</a><a href="quimica.html">Química</a><a href="fisica.html" aria-current="page">Física</a><a href="biologia.html">Biología</a></nav></header>
-<div class="container"><nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav></div>
-<main id="contenido" class="container">
-<section class="panel"><h2>Unidades temáticas de Física</h2><p class="tag">Organización curricular de 1° año. Cada tema tiene su página con desarrollo extenso, ejemplos y SVG dinámico.</p>
-<div class="unit-grid">
-<article class="unit-card"><h3>Los movimientos</h3><p>Descripción, representación, velocidad, fuerzas, escalares y vectoriales.</p><a class="btn" href="fisica_t1_movimientos.html">Abrir tema</a></article>
-<article class="unit-card"><h3>La Tierra y el Universo</h3><p>Sistema Solar, escalas, observación del cielo y cambio de modelos.</p><a class="btn" href="fisica_t2_tierra_universo.html">Abrir tema</a></article>
-<article class="unit-card"><h3>Energía Mecánica</h3><p>Energía cinética, potencial gravitatoria, potencial elástica y conservación de la energía mecánica.</p><a class="btn" href="fisica_t3_energia.html#mecanica">Abrir tema</a></article>
-<article class="unit-card"><h3>Calor y Temperatura</h3><p>Escalas de temperatura, diferencia entre calor y temperatura, conductores y aislantes térmicos.</p><a class="btn" href="fisica_t3_energia.html#calor">Abrir tema</a></article>
-<article class="unit-card"><h3>Electricidad y Magnetismo</h3><p>Cargas eléctricas, corriente eléctrica, campos magnéticos y electromagnetismo.</p><a class="btn" href="fisica_t3_energia.html#electricidad">Abrir tema</a></article>
-<article class="unit-card"><h3>Circuitos Eléctricos</h3><p>Circuitos en serie y paralelo, seguridad eléctrica y medidas de prevención en el hogar.</p><a class="btn" href="fisica_t3_energia.html#circuitos">Abrir tema</a></article>
-<article class="unit-card"><h3>Fenómenos ondulatorios</h3><p>Luz, sonido y mecanismos de intercambio de calor.</p><a class="btn" href="fisica_t4_ondulatorios.html">Abrir tema</a></article>
-</div></section>
-</main>
-<footer class="site-footer"><div class="container"><p>Área de Física basada en <code>programa_1anio.txt</code>.</p></div></footer>
-</body></html>
+<body class="area-physics" data-page="Física">
+  <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-nat-cyan focus:text-nat-black focus:px-4 focus:py-3 focus:font-bold">Saltar al contenido</a>
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-nat-black/85 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
+      <a href="inicio.html" class="flex items-center gap-3"><div class="w-9 h-9 bg-nat-cyan text-nat-black flex items-center justify-center font-heading font-bold text-xl">N</div><div><div class="font-heading uppercase tracking-wider text-white font-bold leading-none">Naturales</div><div class="text-[10px] uppercase tracking-[0.22em] text-nat-muted">Libro interactivo</div></div></a>
+      <div class="hidden lg:flex items-center gap-8"><a href="inicio.html" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Inicio</a><a href="quimica.html" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Química</a><a href="fisica.html" aria-current="page" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Física</a><a href="biologia.html" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Biología</a></div>
+      <div class="flex items-center gap-3"><a href="fisica-3d.html" class="hidden md:inline-flex items-center gap-2 bg-nat-cyan hover:bg-nat-amber text-nat-black text-xs font-black uppercase tracking-wider px-5 py-3">Física 3D <span class="iconify" data-icon="lucide:box" data-width="15"></span></a><button id="menuToggle" class="lg:hidden w-10 h-10 flex items-center justify-center text-white" aria-label="Abrir menú"><span class="iconify" data-icon="lucide:menu" data-width="25"></span></button></div>
+    </div>
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-80 max-w-full h-screen bg-nat-black border-l border-white/10 z-50"><div class="p-6"><div class="flex justify-end mb-10"><button id="menuClose" class="w-10 h-10 flex items-center justify-center text-white" aria-label="Cerrar menú"><span class="iconify" data-icon="lucide:x" data-width="24"></span></button></div><div class="flex flex-col gap-6"><a class="mobile-link font-heading text-2xl uppercase font-bold" href="inicio.html">Inicio</a><a class="mobile-link font-heading text-2xl uppercase font-bold" href="quimica.html">Química</a><a class="mobile-link font-heading text-2xl uppercase font-bold" href="fisica.html">Física</a><a class="mobile-link font-heading text-2xl uppercase font-bold" href="biologia.html">Biología</a><a class="mobile-link mt-4 bg-nat-cyan text-nat-black text-center text-sm font-black uppercase tracking-wider px-6 py-4" href="fisica-3d.html">Física 3D</a></div></div></div>
+  </nav>
+  <div id="menuOverlay" class="hidden fixed inset-0 bg-black/65 backdrop-blur-sm z-40"></div>
 
+  <main id="contenido" class="relative z-10">
+    <section class="relative min-h-[88vh] flex items-center overflow-hidden">
+      <div class="absolute inset-0"><img class="hero-img w-full h-full object-cover" src="fisica_en_accion.png" alt="Física en acción"><div class="absolute inset-0 bg-gradient-to-r from-nat-black via-nat-black/90 to-nat-black/45"></div><div class="absolute inset-0 bg-gradient-to-t from-nat-black via-transparent to-nat-black/40"></div></div>
+      <div class="relative max-w-7xl mx-auto px-4 md:px-6 pt-32 pb-20 w-full">
+        <div class="grid lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-7"><div class="flex items-center gap-3 mb-6"><div class="accent-line"></div><span class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-nat-cyan font-black">Capítulo 02 · Movimiento, energía y ondas</span></div><h1 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl uppercase font-bold leading-[0.9] text-white mb-6">Física:<br><span class="text-nat-cyan">medir</span><br>para explicar</h1><p class="text-base md:text-lg text-nat-muted max-w-2xl leading-relaxed mb-8">La Física estudia regularidades en los fenómenos naturales. Mide posiciones, tiempos, temperaturas, energías, ondas y fuerzas para construir modelos que explican desde una pelota que cae hasta la luz de una estrella.</p><div class="flex flex-wrap gap-4"><a href="#unidades" class="inline-flex items-center gap-2 bg-nat-cyan hover:bg-nat-amber text-nat-black text-xs font-black uppercase tracking-wider px-8 py-4">Ver unidades <span class="iconify" data-icon="lucide:arrow-right" data-width="16"></span></a><a href="fisica-3d.html" class="inline-flex items-center gap-2 border border-white/20 text-white text-xs font-black uppercase tracking-wider px-8 py-4">Abrir simulación</a></div></div>
+          <aside class="lg:col-span-5 bg-nat-panel/85 border border-white/10 p-5"><div class="text-[10px] uppercase tracking-[0.28em] font-black text-nat-cyan mb-4">Modelo de trabajo</div><p class="text-xl md:text-2xl font-heading uppercase leading-tight mb-5">Observar, medir, graficar, interpretar.</p><div class="space-y-3"><div class="bg-white/5 p-4 flex items-center gap-3"><span class="iconify text-nat-cyan" data-icon="lucide:ruler" data-width="24"></span><span class="text-sm text-nat-muted">Elegir variables y unidades.</span></div><div class="bg-white/5 p-4 flex items-center gap-3"><span class="iconify text-nat-cyan" data-icon="lucide:chart-line" data-width="24"></span><span class="text-sm text-nat-muted">Representar datos con gráficos.</span></div><div class="bg-white/5 p-4 flex items-center gap-3"><span class="iconify text-nat-cyan" data-icon="lucide:brain" data-width="24"></span><span class="text-sm text-nat-muted">Construir explicaciones con modelos.</span></div></div></aside>
+        </div>
+      </div>
+    </section>
 
+    <section class="py-16 md:py-24 bg-nat-dark border-y border-white/5"><div class="max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-3 gap-6"><article class="book-page bg-nat-panel p-6 topic-card"><h2 class="font-heading text-3xl uppercase mb-4">Movimiento</h2><p class="text-nat-muted leading-relaxed">Para describir un movimiento se define un sistema de referencia, se mide posición y tiempo, y se analiza si la velocidad cambia. No alcanza con decir “va rápido”: hay que comparar distancias y tiempos.</p></article><article class="book-page bg-nat-panel p-6 topic-card"><h2 class="font-heading text-3xl uppercase mb-4">Energía</h2><p class="text-nat-muted leading-relaxed">La energía se conserva, pero puede transferirse o transformarse. En una montaña rusa, en un circuito eléctrico o al calentar agua, la misma idea aparece con distintos rostros.</p></article><article class="book-page bg-nat-panel p-6 topic-card"><h2 class="font-heading text-3xl uppercase mb-4">Ondas</h2><p class="text-nat-muted leading-relaxed">El sonido, la luz y muchas vibraciones pueden estudiarse con amplitud, frecuencia y longitud de onda. Las ondas transportan energía y permiten comunicar información.</p></article></div></section>
+
+    <section id="unidades" class="py-20 md:py-28"><div class="max-w-7xl mx-auto px-4 md:px-6"><div class="flex items-center gap-3 mb-5"><div class="accent-line"></div><span class="text-[10px] uppercase tracking-[0.3em] text-nat-cyan font-black">Unidades temáticas</span></div><h2 class="font-heading text-4xl md:text-6xl uppercase font-bold leading-none mb-12">Índice de Física</h2><div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <a class="unit-card bg-nat-panel p-6" href="fisica_t1_movimientos.html"><span class="text-nat-cyan font-heading text-3xl">01</span><h3 class="font-heading text-2xl uppercase mt-3 mb-2">Los movimientos</h3><p class="text-sm text-nat-muted">Descripción, representación, velocidad, fuerzas y magnitudes.</p></a>
+      <a class="unit-card bg-nat-panel p-6" href="fisica_t2_tierra_universo.html"><span class="text-nat-cyan font-heading text-3xl">02</span><h3 class="font-heading text-2xl uppercase mt-3 mb-2">Tierra y Universo</h3><p class="text-sm text-nat-muted">Sistema Solar, escalas, observación del cielo y modelos históricos.</p></a>
+      <a class="unit-card bg-nat-panel p-6" href="fisica_t3_energia.html#mecanica"><span class="text-nat-cyan font-heading text-3xl">03</span><h3 class="font-heading text-2xl uppercase mt-3 mb-2">Energía mecánica</h3><p class="text-sm text-nat-muted">Energía cinética, potencial gravitatoria, elástica y conservación.</p></a>
+      <a class="unit-card bg-nat-panel p-6" href="fisica_t3_energia.html#calor"><span class="text-nat-cyan font-heading text-3xl">04</span><h3 class="font-heading text-2xl uppercase mt-3 mb-2">Calor y temperatura</h3><p class="text-sm text-nat-muted">Escalas, conductores, aislantes y transferencia de energía térmica.</p></a>
+      <a class="unit-card bg-nat-panel p-6" href="fisica_t3_energia.html#electricidad"><span class="text-nat-cyan font-heading text-3xl">05</span><h3 class="font-heading text-2xl uppercase mt-3 mb-2">Electricidad y magnetismo</h3><p class="text-sm text-nat-muted">Cargas, corrientes, campos magnéticos y electromagnetismo.</p></a>
+      <a class="unit-card bg-nat-panel p-6" href="fisica_t3_energia.html#circuitos"><span class="text-nat-cyan font-heading text-3xl">06</span><h3 class="font-heading text-2xl uppercase mt-3 mb-2">Circuitos eléctricos</h3><p class="text-sm text-nat-muted">Serie, paralelo, consumo y seguridad eléctrica en el hogar.</p></a>
+      <a class="unit-card bg-nat-panel p-6 lg:col-span-3" href="fisica_t4_ondulatorios.html"><span class="text-nat-cyan font-heading text-3xl">07</span><h3 class="font-heading text-2xl uppercase mt-3 mb-2">Fenómenos ondulatorios</h3><p class="text-sm text-nat-muted">Luz, sonido, vibraciones y mecanismos de intercambio de calor.</p></a>
+    </div></div></section>
+  </main>
+  <footer class="relative z-10 bg-nat-black border-t border-white/5 py-8"><div class="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between gap-4"><span class="text-sm text-nat-muted">Física · Ciencias Naturales 1° año</span><div class="flex gap-5"><a class="text-[10px] uppercase tracking-wider text-nat-muted hover:text-white" href="inicio.html">Inicio</a><a class="text-[10px] uppercase tracking-wider text-nat-muted hover:text-white" href="quimica.html">Química</a><a class="text-[10px] uppercase tracking-wider text-nat-muted hover:text-white" href="biologia.html">Biología</a></div></div></footer>
+  <script defer src="js/book.js"></script>
+</body>
+</html>

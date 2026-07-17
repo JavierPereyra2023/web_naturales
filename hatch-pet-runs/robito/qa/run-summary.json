@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "run_dir": "D:\\web_naturales\\hatch-pet-runs\\robito",
+  "spritesheet": "D:\\web_naturales\\hatch-pet-runs\\robito\\final\\spritesheet.webp",
+  "validation": "D:\\web_naturales\\hatch-pet-runs\\robito\\final\\validation.json",
+  "contact_sheet": "D:\\web_naturales\\hatch-pet-runs\\robito\\qa\\contact-sheet.png",
+  "review": "D:\\web_naturales\\hatch-pet-runs\\robito\\qa\\review.json",
+  "videos": "D:\\web_naturales\\hatch-pet-runs\\robito\\qa\\videos",
+  "package": "C:\\Users\\javie\\.codex\\pets\\robito"
+}

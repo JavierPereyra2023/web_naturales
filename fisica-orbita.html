@@ -1,201 +1,669 @@
-<!doctype html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Órbita Terrestre - Sol y Tierra | Física 3D</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <script defer src="js/main.js"></script>
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Órbita Terrestre — Física · Naturales</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/book.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            nat: {
+              black: '#070A0F', dark: '#0E141C', panel: '#151D28',
+              line: '#263243', ink: '#F2F7FB', muted: '#A9B7C8',
+              amber: '#FFB020', amber2: '#FF7A1A',
+              cyan: '#35C7F4', green: '#6EE7A8', rose: '#FF6B8A'
+            }
+          },
+          fontFamily: {
+            heading: ['Oswald', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
       }
     }
   </script>
   <style>
-    body[data-page="Órbita 3D"] main.container{padding-bottom:1.4rem}
-    
-    /* Mobile header collapse for 3D pages */
-    @media (max-width: 768px) {
-      body[data-page="Órbita 3D"] .site-header {
-        transition: transform 0.3s ease, opacity 0.3s ease;
-      }
-      body[data-page="Órbita 3D"] .site-header.header-collapsed {
-        transform: translateY(-100%);
-        opacity: 0;
-        pointer-events: none;
-      }
-      #header-toggle-btn {
-        display: block !important;
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        z-index: 1000;
-        background: rgba(10,18,15,.95);
-        border: 1px solid rgba(214,158,46,.5);
-        border-radius: 10px;
-        color: #e8f0ed;
-        padding: 8px 12px;
-        font-size: 12px;
-        font-weight: 600;
-        cursor: pointer;
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        transition: transform 0.2s ease;
-        box-shadow: 0 4px 12px rgba(0,0,0,.3);
-      }
-      #header-toggle-btn:hover {
-        transform: scale(1.05);
-      }
+    .data-value { font-family: 'JetBrains Mono', monospace; }
+    .orbit-gradient {
+      background: radial-gradient(ellipse at 20% 50%, rgba(53,199,244,0.12) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 20%, rgba(255,176,32,0.08) 0%, transparent 50%),
+                  linear-gradient(180deg, #070A0F 0%, #0E141C 50%, #070A0F 100%);
     }
-    #header-toggle-btn { display: none; }
-    
-    .sim-note{border:1px solid var(--border);background:color-mix(in srgb,var(--surface) 96%,transparent);border-radius:1rem;box-shadow:var(--shadow);padding:1rem 1.1rem;margin-bottom:1rem}
-    .sim-app{position:relative;min-height:500px;height:min(75vh,650px);margin:1rem 0 1.5rem;overflow:hidden;border-radius:1.3rem;border:1px solid rgba(214,158,46,.3);background:radial-gradient(ellipse at 30% 35%,#152744 0%,#04080f 70%);box-shadow:0 26px 80px rgba(15,39,66,.18)}
-    .sim-app #canvas-container{position:absolute;top:0;left:0;right:0;bottom:0;z-index:0;width:100%;height:100%}
-    .sim-app #canvas-container canvas{display:block;width:100%!important;height:100%!important;position:absolute;top:0;left:0}
-    .sim-app canvas{display:block;width:100%!important;height:100%!important}
-    .sim-app .panel{position:absolute;z-index:10;border-radius:18px;box-shadow:0 16px 36px rgba(8,26,46,.16);transition:transform 0.3s ease,opacity 0.3s ease}
-    .panel-left{top:16px;left:16px;width:320px;padding:18px;max-height:calc(100% - 32px);overflow-y:auto;background:rgba(20,30,50,.92);border:2px solid rgba(214,158,46,.55);color:#e8f0ed}
-    .panel-right{top:16px;right:16px;width:290px;padding:16px;max-height:calc(100% - 32px);overflow-y:auto;background:rgba(20,30,50,.92);border:2px solid rgba(255,214,102,.5);color:#e8f0ed}
-    .panel-bottom{left:50%;bottom:16px;transform:translateX(-50%);padding:10px 20px;display:flex;align-items:center;max-width:min(84%,760px);background:rgba(21,63,106,.92);color:#f5fbff;border:1px solid rgba(255,255,255,.18)}
-    .panel-left.hidden-panel{transform:translateX(-110%) !important;opacity:0 !important;pointer-events:none !important}
-    .panel-right.hidden-panel{transform:translateX(110%) !important;opacity:0 !important;pointer-events:none !important}
-    .panel-bottom.hidden-panel{transform:translateX(-50%) translateY(100px) !important;opacity:0 !important;pointer-events:none !important}
-    .sim-app .panel-toggle{position:absolute;z-index:20;background:rgba(20,30,50,.92);border:2px solid rgba(214,158,46,.55);border-radius:12px;color:#e8f0ed;padding:8px 12px;cursor:pointer;font-size:12px;font-weight:600;display:none;transition:transform 0.2s ease}
-    .sim-app .panel-toggle:hover{transform:scale(1.05)}
-    .sim-app .panel-toggle-left{top:16px;left:16px}
-    .sim-app .panel-toggle-right{top:16px;right:16px}
-    .sim-app .panel-toggle-bottom{left:50%;bottom:16px;transform:translateX(-50%)}
-    .panel-title{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:17px;font-weight:700}.panel-title .dot{width:9px;height:9px;border-radius:50%;background:#d69e2e;box-shadow:0 0 0 5px rgba(214,158,46,.2)}
-    .section-label{margin-top:16px;margin-bottom:8px;color:#a0aec0;font-size:10px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase}
-    .control-stack{display:grid;gap:12px}.control-block,.concept-box,.reading-box{padding:12px;border:2px solid rgba(214,158,46,.35);border-radius:14px;background:rgba(20,30,50,.85)}
-    .control-head{display:flex;justify-content:space-between;gap:10px;margin-bottom:6px;font-size:12px;font-weight:700}.control-head span:last-child{color:#fbd38d;font-family:"JetBrains Mono",monospace}input[type="range"]{width:100%;accent-color:#d69e2e}
-    .stat-row{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(214,158,46,.28)}.stat-row:last-child{border-bottom:none}.stat-label{color:#a0aec0;font-size:11px}.stat-value{font-size:13px;font-weight:700;text-align:right;color:#e8f0ed}.mono{font-family:"JetBrains Mono",monospace}.hint-list{margin:.7rem 0 0;padding-left:1.1rem;color:#e2e8f0;font-size:.9rem}.hint-list li+li{margin-top:.35rem}.status-text{font-size:.9rem;margin:0}
-    .back-link{display:inline-flex;align-items:center;gap:0.5rem;color:#d69e2e;text-decoration:none;font-weight:600;margin-bottom:1rem;padding:0.5rem 1rem;border:2px solid #d69e2e;border-radius:0.5rem;transition:all 0.2s ease}
-    .back-link:hover{background:#d69e2e;color:#1a202c}
-    .mode-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 12px;border:2px solid rgba(214,158,46,.55);border-radius:12px;background:rgba(30,40,60,.9);color:#e8f0ed;cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}.mode-btn:hover{transform:translateY(-1px);border-color:#d69e2e;box-shadow:0 8px 18px rgba(214,158,46,.16)}
-    .control-block input[type="range"]{accent-color:#d69e2e}
-    @media (max-width:900px){.sim-lead{grid-template-columns:1fr}}
-    @media (max-width:768px){.sim-app{min-height:520px;height:60vh}.panel-left,.panel-right{width:calc(100% - 24px);left:12px;right:12px;max-height:none}.panel-left{top:12px;padding:14px}.panel-right{top:376px;padding:14px}.panel-bottom{left:12px;right:12px;bottom:12px;transform:translateX(-50%);max-width:none}.sim-app .panel-toggle{display:block}}
-    @media (max-width:640px){.sim-app{min-height:480px;height:55vh}.panel-left{top:50px;left:8px;width:calc(100% - 16px);max-height:60vh}.sim-app .panel-toggle-left{top:8px;left:8px}.sim-app .panel-toggle-bottom{bottom:8px}}
+    .model-placeholder {
+      background: radial-gradient(ellipse at 50% 50%, rgba(53,199,244,0.08) 0%, transparent 70%),
+                  linear-gradient(135deg, #0E141C 0%, #070A0F 100%);
+      border: 1px solid rgba(53,199,244,0.2);
+    }
+    .formula-block {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(53,199,244,0.06);
+      border-left: 3px solid #35C7F4;
+    }
+    .season-card {
+      transition: transform .28s ease, border-color .28s ease;
+      border: 1px solid rgba(255,255,255,.07);
+    }
+    .season-card:hover { transform: translateY(-3px); border-color: rgba(53,199,244,.4); }
+    .concept-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 2px;
+      background: rgba(53,199,244,0.12);
+      color: #35C7F4;
+      border: 1px solid rgba(53,199,244,0.3);
+      letter-spacing: 0.05em;
+    }
   </style>
 </head>
-<body data-page="Órbita 3D" data-section="Física" data-section-href="fisica.html">
-  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
-  <header class="site-header">
-    <div class="container header-inner">
-      <div>
-        <p class="kicker">Ciencias Naturales · 1° año</p>
-        <h1>🌍 Órbita Terrestre - Sol y Tierra</h1>
+<body class="orbit-gradient area-physics" data-page="Órbita Terrestre">
+  <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-nat-cyan focus:text-nat-black focus:px-4 focus:py-3 focus:font-bold">Saltar al contenido</a>
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-nat-black/85 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
+      <a href="inicio.html" class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-nat-cyan text-nat-black flex items-center justify-center font-heading font-bold text-xl">N</div>
+        <div>
+          <div class="font-heading uppercase tracking-wider text-white font-bold leading-none">Naturales</div>
+          <div class="text-[10px] uppercase tracking-[0.22em] text-nat-muted">Libro interactivo</div>
+        </div>
+      </a>
+      <div class="hidden lg:flex items-center gap-8">
+        <a href="inicio.html" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Inicio</a>
+        <a href="quimica.html" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Química</a>
+        <a href="fisica.html" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Física</a>
+        <a href="biologia.html" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Biología</a>
       </div>
-      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar modo oscuro">Modo oscuro</button>
+      <div class="flex items-center gap-3">
+        <a href="fisica.html" class="hidden md:inline-flex items-center gap-2 border border-nat-cyan/40 hover:border-nat-cyan text-nat-cyan text-xs font-black uppercase tracking-wider px-5 py-3 transition-colors">
+          ← Física
+        </a>
+        <button id="menuToggle" class="lg:hidden w-10 h-10 flex items-center justify-center text-white" aria-label="Abrir menú">
+          <span class="iconify" data-icon="lucide:menu" data-width="25"></span>
+        </button>
+      </div>
     </div>
-    <nav class="main-nav container" aria-label="Navegación principal">
-      <a href="inicio.html">Inicio</a>
-      <a href="quimica.html">Química</a>
-      <a href="fisica.html">Física</a>
-      <a href="biologia.html">Biología</a>
-    </nav>
-  </header>
-  <div class="container"><nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav></div>
-  <main id="contenido" class="container">
-    <a href="fisica-3d.html" class="back-link">← Volver a modelos</a>
-    <button id="header-toggle-btn" aria-label="Mostrar/ocultar menú">☰ Menú</button>
-    <section class="sim-note">
-      <h2>Movimiento orbital con aceleración centrípeta</h2>
-      <p>La Tierra gira alrededor del Sol cambiando continuamente la <strong>dirección de su velocidad</strong>. Aunque la rapidez parezca estable, el cambio de dirección implica aceleración.</p>
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-80 max-w-full h-screen bg-nat-black border-l border-white/10 z-50">
+      <div class="p-6">
+        <div class="flex justify-end mb-10">
+          <button id="menuClose" class="w-10 h-10 flex items-center justify-center text-white" aria-label="Cerrar menú">
+            <span class="iconify" data-icon="lucide:x" data-width="24"></span>
+          </button>
+        </div>
+        <div class="flex flex-col gap-6">
+          <a class="mobile-link font-heading text-2xl uppercase font-bold" href="inicio.html">Inicio</a>
+          <a class="mobile-link font-heading text-2xl uppercase font-bold" href="quimica.html">Química</a>
+          <a class="mobile-link font-heading text-2xl uppercase font-bold" href="fisica.html">Física</a>
+          <a class="mobile-link font-heading text-2xl uppercase font-bold" href="biologia.html">Biología</a>
+          <a class="mobile-link mt-4 bg-nat-cyan text-nat-black text-center text-sm font-black uppercase tracking-wider px-6 py-4" href="fisica.html">← Volver a Física</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div id="menuOverlay" class="hidden fixed inset-0 bg-black/65 backdrop-blur-sm z-40"></div>
+
+  <main id="contenido" class="relative z-10">
+
+    <!-- HERO -->
+    <section class="relative min-h-[88vh] flex items-center overflow-hidden">
+      <div class="absolute inset-0">
+        <img class="hero-img w-full h-full object-cover" src="fisica_en_accion.png" alt="Física en acción — cielo y movimiento">
+        <div class="absolute inset-0 bg-gradient-to-r from-nat-black via-nat-black/92 to-nat-black/50"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-nat-black via-transparent to-nat-black/40"></div>
+      </div>
+      <div class="relative max-w-7xl mx-auto px-4 md:px-6 pt-32 pb-20 w-full">
+        <div class="grid lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-7">
+            <div class="flex items-center gap-3 mb-3">
+              <a href="fisica.html" class="text-[10px] uppercase tracking-[0.22em] text-nat-muted hover:text-nat-cyan font-bold transition-colors">Física</a>
+              <span class="text-nat-muted/40">/</span>
+              <span class="text-[10px] uppercase tracking-[0.22em] text-nat-cyan font-black">Tierra y Universo · Unidad 02</span>
+            </div>
+            <div class="flex items-center gap-3 mb-6">
+              <div class="accent-line"></div>
+              <span class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-nat-cyan font-black">Movimiento orbital · Aceleración centrípeta</span>
+            </div>
+            <h1 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl uppercase font-bold leading-[0.9] text-white mb-6">
+              Órbita<br>
+              <span class="text-nat-cyan">terrestre</span>
+            </h1>
+            <p class="text-base md:text-lg text-nat-muted max-w-2xl leading-relaxed mb-8">
+              La Tierra gira alrededor del Sol mientras cambia continuamente la dirección de su velocidad. Aunque la rapidez parezca estable, ese cambio de dirección implica aceleración. El Sol ejerce una fuerza gravitatoria que mantiene a la Tierra en su trayectoria cerrada.
+            </p>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mb-9">
+              <div class="border-l border-nat-cyan/30 pl-4">
+                <div class="data-value text-2xl font-bold text-nat-cyan">365,25</div>
+                <div class="text-[10px] uppercase tracking-[0.18em] text-nat-muted">días por año</div>
+              </div>
+              <div class="border-l border-white/10 pl-4">
+                <div class="data-value text-2xl font-bold text-nat-amber">29,8</div>
+                <div class="text-[10px] uppercase tracking-[0.18em] text-nat-muted">km/s velocidad</div>
+              </div>
+              <div class="border-l border-white/10 pl-4">
+                <div class="data-value text-2xl font-bold text-white">150</div>
+                <div class="text-[10px] uppercase tracking-[0.18em] text-nat-muted">millones km</div>
+              </div>
+              <div class="border-l border-white/10 pl-4">
+                <div class="data-value text-2xl font-bold text-nat-green">23,5°</div>
+                <div class="text-[10px] uppercase tracking-[0.18em] text-nat-muted">inclinación axial</div>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-4">
+              <a href="#traslacion" class="inline-flex items-center gap-2 bg-nat-cyan hover:bg-nat-amber text-nat-black text-xs font-black uppercase tracking-wider px-8 py-4 transition-colors">
+                Leer el tema <span class="iconify" data-icon="lucide:arrow-down" data-width="16"></span>
+              </a>
+              <a href="#estaciones" class="inline-flex items-center gap-2 border border-white/20 hover:border-nat-cyan/70 text-white text-xs font-black uppercase tracking-wider px-8 py-4 transition-colors">
+                Las estaciones
+              </a>
+            </div>
+          </div>
+          <aside class="lg:col-span-5 bg-nat-panel/85 border border-white/10 p-5">
+            <div class="text-[10px] uppercase tracking-[0.28em] font-black text-nat-cyan mb-4">Pregunta central</div>
+            <p class="text-xl md:text-2xl font-heading uppercase leading-tight mb-5">
+              ¿Puede haber aceleración si la velocidad no cambia su valor?
+            </p>
+            <div class="space-y-3">
+              <div class="bg-white/5 p-4 flex items-center gap-3">
+                <span class="iconify text-nat-cyan shrink-0" data-icon="lucide:orbit" data-width="24"></span>
+                <span class="text-sm text-nat-muted">La trayectoria orbital es cerrada y casi circular.</span>
+              </div>
+              <div class="bg-white/5 p-4 flex items-center gap-3">
+                <span class="iconify text-nat-amber shrink-0" data-icon="lucide:arrow-right-left" data-width="24"></span>
+                <span class="text-sm text-nat-muted">La dirección del vector velocidad cambia todo el tiempo.</span>
+              </div>
+              <div class="bg-white/5 p-4 flex items-center gap-3">
+                <span class="iconify text-nat-green shrink-0" data-icon="lucide:sun" data-width="24"></span>
+                <span class="text-sm text-nat-muted">La fuerza gravitatoria del Sol provoca esa aceleración.</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
     </section>
-    <section class="sim-app" aria-label="Simulación Órbita Terrestre 3D">
-      <div id="canvas-container"></div>
-      <button class="panel-toggle panel-toggle-left" id="toggle-left" aria-label="Mostrar/ocultar controles">☰ Controles</button>
-      <button class="panel-toggle panel-toggle-right" id="toggle-right" aria-label="Mostrar/ocultar lectura">📊 Lectura</button>
-      <button class="panel-toggle panel-toggle-bottom" id="toggle-bottom" aria-label="Mostrar/ocultar estado">ℹ️ Estado</button>
-      <aside class="panel panel-left hidden-panel">
-        <div class="panel-title"><span class="dot"></span>Controles de la Órbita</div>
-        <div class="section-label">Velocidad orbital</div>
-        <div class="control-stack" id="controls-panel"></div>
-        <div class="section-label">Acciones</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="mode-btn" id="btn-play" style="flex:1">Pausar</button>
-          <button class="mode-btn" id="btn-reset" style="flex:1">Reiniciar</button>
-          <button class="mode-btn" id="btn-center" style="flex:1">Centrar</button>
+
+    <!-- FRANJA TICKER -->
+    <div class="relative z-10 bg-nat-cyan py-3 overflow-hidden">
+      <div class="marquee-track flex items-center gap-8 whitespace-nowrap w-max">
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Traslación</span><span class="text-nat-black/40">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Aceleración centrípeta</span><span class="text-nat-black/40">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Órbita elíptica</span><span class="text-nat-black/40">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Estaciones</span><span class="text-nat-black/40">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Gravedad</span><span class="text-nat-black/40">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Luna</span><span class="text-nat-black/40">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Sistema Solar</span><span class="text-nat-black/40">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Traslación</span><span class="text-nat-black/40">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Aceleración centrípeta</span><span class="text-nat-black/40">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Órbita elíptica</span><span class="text-nat-black/40">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Estaciones</span><span class="text-nat-black/40">◆</span>
+        <span class="font-heading text-sm uppercase font-bold text-nat-black">Gravedad</span><span class="text-nat-black/40">◆</span>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: TRASLACIÓN -->
+    <section id="traslacion" class="py-20 md:py-28 bg-nat-dark border-y border-white/5">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="grid lg:grid-cols-12 gap-12 items-start">
+          <div class="lg:col-span-5">
+            <div class="flex items-center gap-3 mb-5">
+              <div class="accent-line"></div>
+              <span class="text-[10px] uppercase tracking-[0.3em] text-nat-cyan font-black">Movimiento de traslación</span>
+            </div>
+            <h2 class="font-heading text-4xl md:text-5xl uppercase font-bold leading-none mb-6">La Tierra viaja alrededor del Sol</h2>
+            <p class="text-nat-muted leading-relaxed mb-5">
+              El <strong class="text-white">movimiento de traslación</strong> es el desplazamiento de la Tierra alrededor del Sol. Este recorrido dura aproximadamente <span class="data-value text-nat-cyan">365,25</span> días, lo que define el año. Ese cuarto de día extra se acumula hasta que, cada cuatro años, se agrega un día al calendario: el año bisiesto.
+            </p>
+            <p class="text-nat-muted leading-relaxed mb-5">
+              La trayectoria no es un círculo perfecto sino una <strong class="text-white">elipse</strong>, como describió Johannes Kepler en el siglo XVII. El Sol ocupa uno de los focos de esa elipse. Esto significa que durante el año la distancia Tierra-Sol varía levemente: en enero la Tierra está un poco más cerca del Sol (perihelio) y en julio, un poco más lejos (afelio).
+            </p>
+            <p class="text-nat-muted leading-relaxed">
+              A pesar de ese cambio de distancia, la variación es pequeña (menos del 3 %) y no es la causa de las estaciones. Las estaciones se explican por otra razón: la inclinación del eje terrestre.
+            </p>
+          </div>
+          <div class="lg:col-span-7">
+            <div class="grid sm:grid-cols-2 gap-4 mb-6">
+              <div class="book-page bg-nat-panel p-5 topic-card">
+                <span class="concept-tag mb-3 block">Perihelio</span>
+                <div class="data-value text-3xl font-bold text-nat-amber mb-1">147,1</div>
+                <div class="text-[10px] uppercase tracking-wider text-nat-muted mb-3">millones de km · enero</div>
+                <p class="text-sm text-nat-muted">Punto de la órbita más cercano al Sol. La Tierra se encuentra aquí a principios de enero.</p>
+              </div>
+              <div class="book-page bg-nat-panel p-5 topic-card">
+                <span class="concept-tag mb-3 block">Afelio</span>
+                <div class="data-value text-3xl font-bold text-nat-cyan mb-1">152,1</div>
+                <div class="text-[10px] uppercase tracking-wider text-nat-muted mb-3">millones de km · julio</div>
+                <p class="text-sm text-nat-muted">Punto más alejado del Sol. Ocurre en julio, cuando en el hemisferio norte hace verano.</p>
+              </div>
+            </div>
+            <div class="bg-nat-black/40 border border-white/10 p-5">
+              <div class="text-[10px] uppercase tracking-[0.26em] font-black text-nat-cyan mb-3">Dato clave</div>
+              <p class="text-sm text-nat-muted leading-relaxed">
+                Que el perihelio (enero) coincida con el verano del hemisferio sur y el invierno del norte demuestra que la distancia al Sol <strong class="text-white">no determina las estaciones</strong>. Si así fuera, sería verano en todo el planeta al mismo tiempo.
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="section-label">Idea central</div>
-        <div class="concept-box">
-          <strong>Órbita Terrestre</strong>
-          <p>La Tierra se traslada alrededor del Sol cambiando continuamente la dirección de su velocidad.</p>
-          <ul class="hint-list">
-            <li>La trayectoria es cerrada alrededor del Sol.</li>
-            <li>La rapidez visual puede parecer estable.</li>
-            <li>Aunque la rapidez se mantenga, la dirección cambia todo el tiempo.</li>
-          </ul>
-        </div>
-      </aside>
-      <aside class="panel panel-right hidden-panel">
-        <div class="section-label" style="margin-top:0;">Lectura física</div>
-        <div class="reading-box">
-          <strong>Qué observar</strong>
-          <p>La órbita permite discutir que puede haber aceleración aunque la rapidez no cambie demasiado.</p>
-        </div>
-        <div class="section-label">Variables en vivo</div>
-        <div class="reading-box" id="stats-panel"></div>
-        <div class="section-label">Interpretación docente</div>
-        <div class="concept-box">
-          <strong>Trayectoria orbital alrededor del Sol</strong>
-          <p>El cambio de dirección del vector velocidad implica aceleración centrípeta.</p>
-        </div>
-      </aside>
-      <div class="panel panel-bottom hidden-panel"><p class="status-text" id="status-text">Sol-Tierra: la Tierra no se mueve en línea recta; cambia de dirección todo el tiempo alrededor del Sol.</p></div>
+      </div>
     </section>
+
+    <!-- SECCIÓN: ACELERACIÓN CENTRÍPETA -->
+    <section id="centripeta" class="py-20 md:py-28">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="accent-line"></div>
+          <span class="text-[10px] uppercase tracking-[0.3em] text-nat-cyan font-black">Dinámica orbital</span>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-12 items-start mb-14">
+          <div>
+            <h2 class="font-heading text-4xl md:text-5xl uppercase font-bold leading-none mb-6">Aceleración sin cambio de rapidez</h2>
+            <p class="text-nat-muted leading-relaxed mb-5">
+              En física, la <strong class="text-white">velocidad</strong> es un vector: tiene magnitud (rapidez) y dirección. Para que haya aceleración no es necesario que la rapidez cambie: basta con que cambie la dirección.
+            </p>
+            <p class="text-nat-muted leading-relaxed mb-5">
+              La Tierra recorre su órbita a unos <span class="data-value text-nat-cyan">29,8 km/s</span> de rapidez media. Esa rapidez se mantiene casi constante durante todo el año. Pero la dirección del movimiento cambia continuamente porque la trayectoria es curva. Ese cambio de dirección es exactamente lo que se llama <strong class="text-white">aceleración centrípeta</strong>.
+            </p>
+            <p class="text-nat-muted leading-relaxed">
+              La aceleración centrípeta apunta siempre hacia el centro de la curva, es decir, hacia el Sol. Y la fuerza que la produce es la <strong class="text-white">gravedad</strong> que el Sol ejerce sobre la Tierra.
+            </p>
+          </div>
+          <div class="space-y-4">
+            <div class="formula-block p-5 rounded-sm">
+              <div class="text-[10px] uppercase tracking-[0.22em] text-nat-cyan mb-3 font-black">Aceleración centrípeta</div>
+              <div class="data-value text-2xl md:text-3xl font-bold text-white mb-2">a = v² / r</div>
+              <div class="grid grid-cols-3 gap-3 mt-4">
+                <div>
+                  <div class="data-value text-nat-cyan font-bold">a</div>
+                  <div class="text-[10px] text-nat-muted">aceleración <span class="data-value">[m/s²]</span></div>
+                </div>
+                <div>
+                  <div class="data-value text-nat-amber font-bold">v</div>
+                  <div class="text-[10px] text-nat-muted">velocidad <span class="data-value">[m/s]</span></div>
+                </div>
+                <div>
+                  <div class="data-value text-nat-green font-bold">r</div>
+                  <div class="text-[10px] text-nat-muted">radio <span class="data-value">[m]</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="formula-block p-5 rounded-sm">
+              <div class="text-[10px] uppercase tracking-[0.22em] text-nat-cyan mb-3 font-black">Ley de gravitación universal (Newton)</div>
+              <div class="data-value text-xl md:text-2xl font-bold text-white mb-2">F = G · M · m / r²</div>
+              <p class="text-xs text-nat-muted mt-3 leading-relaxed">La fuerza gravitatoria entre dos masas es proporcional al producto de sus masas e inversamente proporcional al cuadrado de la distancia entre ellas.</p>
+            </div>
+            <div class="bg-nat-panel border border-nat-cyan/20 p-5">
+              <div class="text-[10px] uppercase tracking-[0.22em] text-nat-amber mb-3 font-black">Ejemplo cotidiano</div>
+              <p class="text-sm text-nat-muted leading-relaxed">Cuando hacemos girar una pelota atada a un hilo, la mano ejerce la fuerza centrípeta. En el caso de la Tierra, el Sol hace el papel de la mano: ejerce la gravedad que "tira" de la Tierra hacia él, manteniéndola en órbita en lugar de dejarla escapar en línea recta.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparación conceptual -->
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="book-page bg-nat-panel p-6 topic-card">
+            <span class="iconify text-nat-cyan mb-3" data-icon="lucide:move-right" data-width="28"></span>
+            <h3 class="font-heading text-xl uppercase font-bold mb-3">MRU: sin aceleración</h3>
+            <p class="text-sm text-nat-muted leading-relaxed">En el movimiento rectilíneo uniforme la velocidad (dirección y módulo) no cambia. No hay aceleración. Un objeto en el espacio sin fuerzas se movería así.</p>
+          </div>
+          <div class="book-page bg-nat-panel p-6 topic-card">
+            <span class="iconify text-nat-amber mb-3" data-icon="lucide:trending-up" data-width="28"></span>
+            <h3 class="font-heading text-xl uppercase font-bold mb-3">MRUA: rapidez cambia</h3>
+            <p class="text-sm text-nat-muted leading-relaxed">En el movimiento rectilíneo uniformemente acelerado, la dirección es fija pero la rapidez aumenta o disminuye. La aceleración es paralela a la velocidad.</p>
+          </div>
+          <div class="book-page bg-nat-panel p-6 topic-card border-nat-cyan/30" style="border-color:rgba(53,199,244,0.3)">
+            <span class="iconify text-nat-cyan mb-3" data-icon="lucide:orbit" data-width="28"></span>
+            <h3 class="font-heading text-xl uppercase font-bold mb-3 text-nat-cyan">Circular: dirección cambia</h3>
+            <p class="text-sm text-nat-muted leading-relaxed">En el movimiento circular uniforme la rapidez es constante pero la dirección cambia todo el tiempo. Hay aceleración centrípeta, perpendicular a la velocidad.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: ESTACIONES -->
+    <section id="estaciones" class="py-20 md:py-28 bg-nat-dark border-y border-white/5">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="grid lg:grid-cols-12 gap-12 items-start">
+          <div class="lg:col-span-5">
+            <div class="flex items-center gap-3 mb-5">
+              <div class="accent-line"></div>
+              <span class="text-[10px] uppercase tracking-[0.3em] text-nat-amber font-black">Fenómenos anuales</span>
+            </div>
+            <h2 class="font-heading text-4xl md:text-5xl uppercase font-bold leading-none mb-6">Las estaciones y la inclinación del eje</h2>
+            <p class="text-nat-muted leading-relaxed mb-5">
+              El eje de rotación de la Tierra no es perpendicular al plano de su órbita: está inclinado <span class="data-value text-nat-amber">23,5°</span> respecto a la vertical. Esa inclinación es constante y apunta siempre hacia la misma dirección en el espacio (hacia la estrella Polar).
+            </p>
+            <p class="text-nat-muted leading-relaxed mb-5">
+              A medida que la Tierra avanza en su órbita, el hemisferio que está inclinado hacia el Sol recibe los rayos de manera más directa y durante más horas. Eso produce el <strong class="text-white">verano</strong>. El hemisferio opuesto, que recibe rayos inclinados y tiene días más cortos, experimenta el <strong class="text-white">invierno</strong>.
+            </p>
+            <p class="text-nat-muted leading-relaxed">
+              Cuando ninguno de los dos hemisferios está más inclinado hacia el Sol que el otro, los rayos llegan de manera similar a los dos hemisferios y se producen la <strong class="text-white">primavera</strong> o el <strong class="text-white">otoño</strong>. Esos días se llaman equinoccios (del latín: noches iguales a los días).
+            </p>
+          </div>
+          <div class="lg:col-span-7">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div class="season-card bg-nat-panel p-5">
+                <div class="text-2xl mb-2">☀️</div>
+                <div class="data-value text-xs text-nat-amber font-bold mb-1 uppercase tracking-wider">Verano (hemisferio sur)</div>
+                <div class="data-value text-sm text-nat-muted mb-3">Diciembre · Eje sur → Sol</div>
+                <p class="text-xs text-nat-muted leading-relaxed">El polo sur apunta hacia el Sol. Los rayos llegan más directos y el día dura más horas en el sur. En el norte ocurre el invierno simultáneamente.</p>
+              </div>
+              <div class="season-card bg-nat-panel p-5">
+                <div class="text-2xl mb-2">❄️</div>
+                <div class="data-value text-xs text-nat-cyan font-bold mb-1 uppercase tracking-wider">Invierno (hemisferio sur)</div>
+                <div class="data-value text-sm text-nat-muted mb-3">Junio · Eje norte → Sol</div>
+                <p class="text-xs text-nat-muted leading-relaxed">El polo norte apunta hacia el Sol. El hemisferio sur recibe rayos inclinados y tiene noches más largas. Es verano boreal al mismo tiempo.</p>
+              </div>
+              <div class="season-card bg-nat-panel p-5">
+                <div class="text-2xl mb-2">🌸</div>
+                <div class="data-value text-xs text-nat-green font-bold mb-1 uppercase tracking-wider">Primavera / Otoño</div>
+                <div class="data-value text-sm text-nat-muted mb-3">Marzo y septiembre · Equinoccios</div>
+                <p class="text-xs text-nat-muted leading-relaxed">El eje terrestre no apunta ni hacia ni lejos del Sol. Los días y las noches duran aproximadamente lo mismo en ambos hemisferios.</p>
+              </div>
+              <div class="season-card bg-nat-panel p-5">
+                <div class="text-2xl mb-2">🌍</div>
+                <div class="data-value text-xs text-white font-bold mb-1 uppercase tracking-wider">Solsticios</div>
+                <div class="data-value text-sm text-nat-muted mb-3">Junio y diciembre · Máxima inclinación</div>
+                <p class="text-xs text-nat-muted leading-relaxed">Son los momentos del año donde la inclinación es máxima: el día más largo del año (solsticio de verano) o el más corto (solsticio de invierno).</p>
+              </div>
+            </div>
+            <div class="mt-4 bg-nat-black/40 border border-white/10 p-4 flex gap-4 items-start">
+              <span class="iconify text-nat-amber shrink-0 mt-1" data-icon="lucide:lightbulb" data-width="20"></span>
+              <p class="text-sm text-nat-muted leading-relaxed">
+                <strong class="text-white">En Argentina</strong> (hemisferio sur) el verano es en diciembre-febrero y el invierno en junio-agosto, al revés que en Europa o Estados Unidos.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: DÍA Y NOCHE / ROTACIÓN -->
+    <section class="py-20 md:py-28">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="accent-line"></div>
+          <span class="text-[10px] uppercase tracking-[0.3em] text-nat-cyan font-black">Movimiento de rotación</span>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 class="font-heading text-4xl md:text-5xl uppercase font-bold leading-none mb-6">El día y la noche</h2>
+            <p class="text-nat-muted leading-relaxed mb-5">
+              Mientras la Tierra se traslada alrededor del Sol, también rota sobre su propio eje. Una rotación completa dura aproximadamente <span class="data-value text-nat-cyan">24 horas</span>, lo que define el día solar. Durante esa rotación, la mitad de la Tierra que enfrenta al Sol recibe luz (día) y la otra mitad queda en la sombra (noche).
+            </p>
+            <p class="text-nat-muted leading-relaxed mb-5">
+              La rotación ocurre de oeste a este cuando se la mira desde el polo norte. Por eso vemos al Sol salir por el este y ponerse por el oeste: en realidad somos nosotros los que giramos hacia él y luego nos alejamos.
+            </p>
+            <p class="text-nat-muted leading-relaxed">
+              El eje de rotación terrestre pasa por los polos geográficos y está inclinado respecto a la vertical del plano orbital. Esa misma inclinación que produce las estaciones también hace que la duración del día varíe a lo largo del año y que las regiones polares tengan períodos de luz o de oscuridad continua durante meses.
+            </p>
+          </div>
+          <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="book-page bg-nat-panel p-5 topic-card text-center">
+                <div class="data-value text-4xl font-bold text-nat-cyan mb-2">24 h</div>
+                <div class="text-[10px] uppercase tracking-wider text-nat-muted mb-2">Día solar</div>
+                <p class="text-xs text-nat-muted">Tiempo entre dos mediodías consecutivos (Sol en el meridiano).</p>
+              </div>
+              <div class="book-page bg-nat-panel p-5 topic-card text-center">
+                <div class="data-value text-4xl font-bold text-white mb-2">23 h<span class="text-2xl"> 56'</span></div>
+                <div class="text-[10px] uppercase tracking-wider text-nat-muted mb-2">Día sidéreo</div>
+                <p class="text-xs text-nat-muted">Rotación respecto a las estrellas. Levemente más corto por la traslación.</p>
+              </div>
+            </div>
+            <div class="bg-nat-black/40 border border-white/10 p-5">
+              <div class="text-[10px] uppercase tracking-[0.26em] font-black text-nat-cyan mb-3">Dos movimientos simultáneos</div>
+              <div class="space-y-2">
+                <div class="flex items-center gap-3">
+                  <span class="iconify text-nat-cyan shrink-0" data-icon="lucide:refresh-cw" data-width="18"></span>
+                  <span class="text-sm text-nat-muted"><strong class="text-white">Rotación:</strong> sobre el eje propio · <span class="data-value">~24 h</span></span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="iconify text-nat-amber shrink-0" data-icon="lucide:orbit" data-width="18"></span>
+                  <span class="text-sm text-nat-muted"><strong class="text-white">Traslación:</strong> alrededor del Sol · <span class="data-value">~365,25 días</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: LA LUNA -->
+    <section id="luna" class="py-20 md:py-28 bg-nat-dark border-y border-white/5">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="accent-line"></div>
+          <span class="text-[10px] uppercase tracking-[0.3em] text-nat-muted font-black">Sistema Tierra–Luna</span>
+        </div>
+        <div class="grid lg:grid-cols-12 gap-12 items-start">
+          <div class="lg:col-span-4">
+            <h2 class="font-heading text-4xl md:text-5xl uppercase font-bold leading-none mb-6">La Luna: satélite natural</h2>
+            <p class="text-nat-muted leading-relaxed mb-5">
+              La Luna es el único satélite natural de la Tierra. Orbita a nuestro planeta a una distancia media de <span class="data-value text-white">384.400 km</span> y tarda aproximadamente <span class="data-value text-nat-cyan">27,3 días</span> en completar una órbita (mes sidéreo).
+            </p>
+            <p class="text-nat-muted leading-relaxed mb-5">
+              Un fenómeno llamado <strong class="text-white">rotación sincrónica</strong> hace que la Luna tarde exactamente lo mismo en girar sobre su eje que en orbitar la Tierra. Por eso siempre vemos la misma cara lunar.
+            </p>
+            <p class="text-nat-muted leading-relaxed">
+              La Luna no tiene luz propia: la que vemos es luz solar reflejada. Según la posición relativa entre Sol, Tierra y Luna, la parte iluminada que vemos cambia: son las <strong class="text-white">fases lunares</strong>.
+            </p>
+          </div>
+          <div class="lg:col-span-8 grid md:grid-cols-2 gap-4">
+            <div class="book-page bg-nat-panel p-5 topic-card">
+              <span class="iconify text-nat-muted mb-3" data-icon="lucide:moon" data-width="28"></span>
+              <h3 class="font-heading text-2xl uppercase font-bold mb-3">Fases lunares</h3>
+              <p class="text-sm text-nat-muted leading-relaxed mb-4">La Luna nueva, cuarto creciente, luna llena y cuarto menguante son las cuatro fases principales. Se deben al ángulo desde el que vemos la porción iluminada. El ciclo completo dura <span class="data-value">~29,5 días</span> (mes sinódico).</p>
+              <div class="flex gap-3 text-xl">
+                <span title="Luna nueva">🌑</span>
+                <span title="Cuarto creciente">🌓</span>
+                <span title="Luna llena">🌕</span>
+                <span title="Cuarto menguante">🌗</span>
+                <span title="Luna nueva">🌑</span>
+              </div>
+            </div>
+            <div class="book-page bg-nat-panel p-5 topic-card">
+              <span class="iconify text-nat-amber mb-3" data-icon="lucide:waves" data-width="28"></span>
+              <h3 class="font-heading text-2xl uppercase font-bold mb-3">Mareas</h3>
+              <p class="text-sm text-nat-muted leading-relaxed">La gravedad de la Luna (y en menor medida, del Sol) deforma levemente los océanos. El lado de la Tierra más cercano a la Luna experimenta una pleamar (marea alta) y el lado opuesto también. Las mareas tienen un ciclo de aproximadamente <span class="data-value">12,5 h</span>.</p>
+            </div>
+            <div class="md:col-span-2 bg-nat-black/40 border border-white/10 p-5">
+              <div class="text-[10px] uppercase tracking-[0.26em] font-black text-nat-amber mb-4">Eclipses</div>
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div class="flex gap-3 items-start">
+                  <span class="iconify text-nat-amber shrink-0 mt-1" data-icon="lucide:sun" data-width="20"></span>
+                  <div>
+                    <div class="text-sm font-bold text-white mb-1">Eclipse solar</div>
+                    <p class="text-xs text-nat-muted leading-relaxed">Ocurre cuando la Luna se interpone entre el Sol y la Tierra. La sombra de la Luna cae sobre una región de la Tierra. Solo ocurre en luna nueva.</p>
+                  </div>
+                </div>
+                <div class="flex gap-3 items-start">
+                  <span class="iconify text-nat-muted shrink-0 mt-1" data-icon="lucide:moon" data-width="20"></span>
+                  <div>
+                    <div class="text-sm font-bold text-white mb-1">Eclipse lunar</div>
+                    <p class="text-xs text-nat-muted leading-relaxed">Ocurre cuando la Tierra se interpone entre el Sol y la Luna. La sombra de la Tierra oscurece la Luna. Solo ocurre en luna llena.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: MODELOS HISTÓRICOS -->
+    <section id="modelos" class="py-20 md:py-28">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="accent-line"></div>
+          <span class="text-[10px] uppercase tracking-[0.3em] text-nat-cyan font-black">Historia de la ciencia</span>
+        </div>
+        <h2 class="font-heading text-4xl md:text-6xl uppercase font-bold leading-none mb-12">De Ptolomeo a Newton:<br>cómo cambió el modelo</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <article class="lab-card bg-nat-panel p-6">
+            <div class="data-value text-4xl text-nat-muted mb-3 font-bold">01</div>
+            <div class="text-[10px] uppercase tracking-wider text-nat-muted mb-2 font-black">Ptolomeo · Siglo II</div>
+            <h3 class="font-heading text-xl uppercase font-bold mb-3">Geocéntrico</h3>
+            <p class="text-sm text-nat-muted leading-relaxed">La Tierra está fija en el centro del Universo y todo gira alrededor de ella. El modelo era complejo (usaba epiciclos) pero predecía posiciones planetarias con cierta precisión.</p>
+          </article>
+          <article class="lab-card bg-nat-panel p-6">
+            <div class="data-value text-4xl text-nat-cyan mb-3 font-bold">02</div>
+            <div class="text-[10px] uppercase tracking-wider text-nat-muted mb-2 font-black">Copérnico · Siglo XVI</div>
+            <h3 class="font-heading text-xl uppercase font-bold mb-3">Heliocéntrico</h3>
+            <p class="text-sm text-nat-muted leading-relaxed">El Sol ocupa el centro y los planetas giran a su alrededor. Simplificó el modelo y explicó mejor los movimientos observados, aunque seguía usando órbitas circulares.</p>
+          </article>
+          <article class="lab-card bg-nat-panel p-6">
+            <div class="data-value text-4xl text-nat-amber mb-3 font-bold">03</div>
+            <div class="text-[10px] uppercase tracking-wider text-nat-muted mb-2 font-black">Kepler · Siglo XVII</div>
+            <h3 class="font-heading text-xl uppercase font-bold mb-3">Órbitas elípticas</h3>
+            <p class="text-sm text-nat-muted leading-relaxed">Las órbitas son elipses con el Sol en un foco. Los planetas no se mueven a velocidad constante: van más rápido cuando están más cerca del Sol (segunda ley).</p>
+          </article>
+          <article class="lab-card bg-nat-panel p-6">
+            <div class="data-value text-4xl text-nat-green mb-3 font-bold">04</div>
+            <div class="text-[10px] uppercase tracking-wider text-nat-muted mb-2 font-black">Newton · Siglo XVII</div>
+            <h3 class="font-heading text-xl uppercase font-bold mb-3">Gravitación universal</h3>
+            <p class="text-sm text-nat-muted leading-relaxed">La gravedad explica por qué los planetas orbitan. La fuerza entre dos masas depende de sus masas y disminuye con el cuadrado de la distancia. Las leyes de Kepler se derivan de esta teoría.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: MODELO 3D (PLACEHOLDER) -->
+    <section class="py-20 md:py-28 bg-nat-dark border-y border-white/5">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="accent-line"></div>
+          <span class="text-[10px] uppercase tracking-[0.3em] text-nat-cyan font-black">Laboratorio virtual</span>
+        </div>
+        <div class="grid lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-4">
+            <h2 class="font-heading text-4xl md:text-5xl uppercase font-bold leading-none mb-5">Simulación 3D interactiva</h2>
+            <p class="text-nat-muted leading-relaxed mb-5">Próximamente vas a poder explorar la órbita terrestre en tres dimensiones: ajustar la velocidad, observar la aceleración centrípeta en tiempo real y comprender visualmente cómo el cambio de dirección produce aceleración aunque la rapidez sea constante.</p>
+            <div class="space-y-3">
+              <div class="flex items-center gap-3">
+                <span class="iconify text-nat-cyan shrink-0" data-icon="lucide:mouse-pointer-2" data-width="18"></span>
+                <span class="text-sm text-nat-muted">Control de velocidad orbital</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="iconify text-nat-cyan shrink-0" data-icon="lucide:axis-3d" data-width="18"></span>
+                <span class="text-sm text-nat-muted">Vista 3D con rotación libre</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="iconify text-nat-cyan shrink-0" data-icon="lucide:bar-chart-2" data-width="18"></span>
+                <span class="text-sm text-nat-muted">Lectura en vivo de variables físicas</span>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-8">
+            <div class="model-placeholder rounded-lg min-h-[320px] md:min-h-[420px] flex flex-col items-center justify-center gap-6 p-8">
+              <span class="iconify text-nat-cyan/40" data-icon="lucide:orbit" data-width="80"></span>
+              <div class="text-center">
+                <div class="font-heading text-2xl uppercase text-nat-muted mb-2">Simulación 3D en desarrollo</div>
+                <p class="text-sm text-nat-muted max-w-md">Aquí se cargará el modelo interactivo de la órbita terrestre. Mientras tanto, explorá el contenido de arriba para comprender los conceptos físicos.</p>
+              </div>
+              <div class="flex flex-wrap gap-3 justify-center">
+                <span class="concept-tag">Three.js</span>
+                <span class="concept-tag">WebGL</span>
+                <span class="concept-tag">Interactivo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: RESUMEN DE CONCEPTOS -->
+    <section class="py-20 md:py-28">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="accent-line"></div>
+          <span class="text-[10px] uppercase tracking-[0.3em] text-nat-cyan font-black">Síntesis conceptual</span>
+        </div>
+        <h2 class="font-heading text-4xl md:text-6xl uppercase font-bold leading-none mb-12">Conceptos clave</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="book-page bg-nat-panel p-5 topic-card">
+            <span class="concept-tag mb-3 block">vector velocidad</span>
+            <h3 class="font-heading text-xl uppercase font-bold mb-2">Velocidad vectorial</h3>
+            <p class="text-sm text-nat-muted leading-relaxed">Tiene módulo (rapidez) y dirección. Cambiar cualquiera de los dos implica aceleración. En la órbita, el módulo casi no cambia, pero la dirección sí lo hace continuamente.</p>
+          </div>
+          <div class="book-page bg-nat-panel p-5 topic-card">
+            <span class="concept-tag mb-3 block">aceleración centrípeta</span>
+            <h3 class="font-heading text-xl uppercase font-bold mb-2">Centrípeta</h3>
+            <p class="text-sm text-nat-muted leading-relaxed">Aceleración que apunta hacia el centro de la curva en todo movimiento circular. Su fórmula es <span class="data-value">a = v²/r</span>. Proviene de la fuerza gravitatoria del Sol.</p>
+          </div>
+          <div class="book-page bg-nat-panel p-5 topic-card">
+            <span class="concept-tag mb-3 block">elipse · foco</span>
+            <h3 class="font-heading text-xl uppercase font-bold mb-2">Órbita elíptica</h3>
+            <p class="text-sm text-nat-muted leading-relaxed">Figura geométrica con dos focos. El Sol ocupa uno de los focos de la elipse que traza la Tierra. La excentricidad de la órbita terrestre es muy pequeña: parece casi circular.</p>
+          </div>
+          <div class="book-page bg-nat-panel p-5 topic-card">
+            <span class="concept-tag mb-3 block">eje · inclinación</span>
+            <h3 class="font-heading text-xl uppercase font-bold mb-2">Inclinación axial</h3>
+            <p class="text-sm text-nat-muted leading-relaxed">El eje de la Tierra está inclinado <span class="data-value">23,5°</span>. Esa inclinación es la causa directa de las estaciones y de la variación en la duración del día a lo largo del año.</p>
+          </div>
+          <div class="book-page bg-nat-panel p-5 topic-card">
+            <span class="concept-tag mb-3 block">sistema de referencia</span>
+            <h3 class="font-heading text-xl uppercase font-bold mb-2">Referencial</h3>
+            <p class="text-sm text-nat-muted leading-relaxed">El movimiento siempre se describe respecto a un observador elegido. Desde la Tierra, el Sol parece moverse. Desde el espacio, la Tierra orbita al Sol. Ambas descripciones son válidas.</p>
+          </div>
+          <div class="book-page bg-nat-panel p-5 topic-card">
+            <span class="concept-tag mb-3 block">UA · unidad astronómica</span>
+            <h3 class="font-heading text-xl uppercase font-bold mb-2">Unidad astronómica</h3>
+            <p class="text-sm text-nat-muted leading-relaxed">Es la distancia media entre la Tierra y el Sol: <span class="data-value">1 UA ≈ 150 000 000 km</span>. Se usa como unidad para medir distancias dentro del Sistema Solar. Júpiter está a ~5,2 UA del Sol.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NAVEGACIÓN ENTRE TEMAS -->
+    <section class="py-16 bg-nat-dark border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="flex flex-col sm:flex-row gap-4 items-stretch justify-between">
+          <a href="fisica_t2_tierra_universo.html" class="flex-1 topic-card bg-nat-panel p-6 flex items-center gap-4 group">
+            <span class="iconify text-nat-muted group-hover:text-nat-cyan transition-colors" data-icon="lucide:arrow-left" data-width="24"></span>
+            <div>
+              <div class="text-[10px] uppercase tracking-wider text-nat-muted mb-1">Tema anterior</div>
+              <div class="font-heading text-lg uppercase font-bold">Tierra y Universo</div>
+            </div>
+          </a>
+          <a href="fisica.html" class="flex-1 topic-card bg-nat-panel p-6 flex items-center justify-center gap-3 group">
+            <span class="iconify text-nat-muted group-hover:text-nat-cyan transition-colors" data-icon="lucide:layout-grid" data-width="20"></span>
+            <div class="font-heading text-lg uppercase font-bold">Índice de Física</div>
+          </a>
+          <a href="fisica_t1_movimientos.html" class="flex-1 topic-card bg-nat-panel p-6 flex items-center gap-4 justify-end text-right group">
+            <div>
+              <div class="text-[10px] uppercase tracking-wider text-nat-muted mb-1">Tema siguiente</div>
+              <div class="font-heading text-lg uppercase font-bold">Los movimientos</div>
+            </div>
+            <span class="iconify text-nat-muted group-hover:text-nat-cyan transition-colors" data-icon="lucide:arrow-right" data-width="24"></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
   </main>
-  <footer class="site-footer"><div class="container"><p>Recurso interactivo de Física para modelar movimientos y trayectorias.</p></div></footer>
-  <script type="module">
-    import * as THREE from 'three';
-    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-    const $=s=>document.querySelector(s),container=$('#canvas-container'),controlsPanel=$('#controls-panel'),statsPanel=$('#stats-panel');
-    const scene=new THREE.Scene();scene.fog=null;const camera=new THREE.PerspectiveCamera(50,1,.1,250);camera.position.set(0,17,13);const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;container.appendChild(renderer.domElement);
-    const cam=new OrbitControls(camera,renderer.domElement);cam.enableDamping=true;cam.dampingFactor=.08;cam.minDistance=4;cam.maxDistance=60;cam.target.set(0,1.5,0);
-    scene.add(new THREE.AmbientLight(0xffffff,0.3));const sunLight=new THREE.PointLight(0xffd166,2.2,55);sunLight.position.set(0,1.5,0);scene.add(sunLight);
-    const sc=720,sp=new Float32Array(sc*3);for(let i=0;i<sc;i++){sp[i*3]=(Math.random()-.5)*90;sp[i*3+1]=Math.random()*55+2;sp[i*3+2]=(Math.random()-.5)*90}scene.add(new THREE.Points(new THREE.BufferGeometry().setAttribute('position',new THREE.BufferAttribute(sp,3)),new THREE.PointsMaterial({color:0xffffff,size:.14,sizeAttenuation:true,transparent:true,opacity:.92})));
-    const group=new THREE.Group();scene.add(group);const state={paused:false,t:0,params:{speed:1},stats:{},objects:{}};const clock=new THREE.Clock();
-    const fmt=(v,u='')=>typeof v==='number'&&!Number.isNaN(v)?((Math.abs(v)>=100?v.toFixed(1):v.toFixed(2))+(u?' '+u:'')):'—';
-    const add=o=>(group.add(o),o);function clearGroup(){while(group.children.length){const c=group.children.pop();c.geometry?.dispose?.();if(Array.isArray(c.material))c.material.forEach(m=>m.dispose?.());else c.material?.dispose?.()}state.objects={}}
-    function sprite(text,color='#aadcff'){const cv=document.createElement('canvas');cv.width=256;cv.height=96;const cx=cv.getContext('2d');cx.font='bold 34px Trebuchet MS';cx.textAlign='center';cx.textBaseline='middle';cx.fillStyle=color;cx.shadowColor='rgba(0,0,0,.9)';cx.shadowBlur=10;cx.fillText(text,128,48);const tx=new THREE.CanvasTexture(cv);const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tx,transparent:true,depthTest:false}));sp.scale.set(3.2,1.2,1);return sp}
-    function buildControls(){controlsPanel.innerHTML='';const c={key:'speed',label:'Velocidad visual orbital',min:.2,max:2.5,step:.1,unit:'x',value:1};state.params[c.key]=c.value;const el=document.createElement('label');el.className='control-block';el.innerHTML='<div class="control-head"><span>'+c.label+'</span><span id="value-'+c.key+'">'+c.value+' '+c.unit+'</span></div><input type="range" min="'+c.min+'" max="'+c.max+'" step="'+c.step+'" value="'+c.value+'" data-key="'+c.key+'" data-unit="'+c.unit+'">';controlsPanel.appendChild(el);controlsPanel.querySelector('input').addEventListener('input',e=>{const k=e.target.dataset.key,u=e.target.dataset.unit,v=Number(e.target.value);state.params[k]=v;$('#value-'+k).textContent=v+' '+u})}
-    function buildStats(){statsPanel.innerHTML='';state.stats={};[['time','Tiempo simulado'],['radius','Radio orbital'],['period','Período visual'],['speed','Velocidad visual']].forEach(([k,l])=>{const row=document.createElement('div');row.className='stat-row';row.innerHTML='<span class="stat-label">'+l+'</span><span class="stat-value mono" id="stat-'+k+'">—</span>';statsPanel.appendChild(row);state.stats[k]=row.querySelector('.stat-value')})}
-    function setStats(values){Object.keys(state.stats).forEach(k=>{if(values[k]!==undefined)state.stats[k].textContent=values[k]})}
-    function center(){cam.target.set(0,1.5,0);camera.position.set(0,17,13);cam.update()}
-    function setup(){const sun=new THREE.Mesh(new THREE.SphereGeometry(1.4,32,28),new THREE.MeshPhysicalMaterial({color:0xffd166,emissive:0xffc107,emissiveIntensity:1.3,roughness:.2,metalness:0}));sun.position.set(0,1.5,0);add(sun);[[2.1,.18],[3.0,.09],[4.5,.04]].forEach(([r,o])=>{const c=new THREE.Mesh(new THREE.SphereGeometry(r,22,18),new THREE.MeshBasicMaterial({color:0xffd166,transparent:true,opacity:o}));c.position.set(0,1.5,0);add(c)});const curve=new THREE.EllipseCurve(0,0,7.2,5.8,0,Math.PI*2),orbPts=curve.getPoints(180).map(p=>new THREE.Vector3(p.x,1.5,p.y));const loop=new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(orbPts),new THREE.LineDashedMaterial({color:0x6bb5ff,dashSize:.35,gapSize:.22,transparent:true,opacity:.5}));loop.computeLineDistances();add(loop);const earth=new THREE.Mesh(new THREE.SphereGeometry(.45,32,28),new THREE.MeshPhysicalMaterial({color:0x2a7fd4,roughness:.38,metalness:.04,emissive:0x082f6e,emissiveIntensity:.3}));earth.rotation.z=THREE.MathUtils.degToRad(23.5);earth.position.set(7.2,1.5,0);add(earth);const cMat=new THREE.MeshPhysicalMaterial({color:0x38a169,roughness:.75});[[.36,.05,.24,.17],[-.26,.12,-.34,.13],[.08,.32,-.28,.11]].forEach(([cx,cy,cz,cr])=>{const c=new THREE.Mesh(new THREE.SphereGeometry(cr,12,10),cMat);c.position.set(cx,cy,cz);earth.add(c)});const axisLine=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,-.72,0),new THREE.Vector3(0,.72,0)]),new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:.5}));earth.add(axisLine);const atmo=new THREE.Mesh(new THREE.SphereGeometry(.62,24,20),new THREE.MeshBasicMaterial({color:0x44aaff,transparent:true,opacity:.22,side:THREE.BackSide}));atmo.position.set(7.2,1.5,0);add(atmo);const moon=new THREE.Mesh(new THREE.SphereGeometry(.14,18,14),new THREE.MeshPhysicalMaterial({color:0xb8c0cc,roughness:.9,metalness:.02}));moon.position.set(8.1,1.5,0);add(moon);const label=sprite('Tierra','#aadcff');label.position.set(7.2,2.65,0);add(label);state.objects={earth,atmo,label,moon,rx:7.2,rz:5.8}}
-    function update(){const o=state.objects,s=state.params.speed,ang=state.t*s*.55,x=Math.cos(ang)*o.rx,z=Math.sin(ang)*o.rz;o.earth.position.set(x,1.5,z);o.atmo.position.set(x,1.5,z);o.label.position.set(x,2.65,z);const moonAng=state.t*s*4.5;o.moon.position.set(x+Math.cos(moonAng)*.9,1.5,z+Math.sin(moonAng)*.9);o.earth.rotation.y+=0.016*2.8;setStats({time:fmt(state.t*18,'días'),radius:fmt(o.rx,'u'),period:fmt(11.4/s,'s'),speed:fmt(s,'x')})}
-    function resetModel(){state.t=0;clearGroup();setup();center()}
-    function resize(){const r=container.getBoundingClientRect();camera.aspect=r.width/r.height;camera.updateProjectionMatrix();renderer.setSize(r.width,r.height,false)}
-    $('#btn-play').addEventListener('click',()=>{state.paused=!state.paused;$('#btn-play').textContent=state.paused?'Reanudar':'Pausar'});$('#btn-reset').addEventListener('click',resetModel);$('#btn-center').addEventListener('click',center);
-    const panelLeft=document.querySelector('.panel-left'),panelRight=document.querySelector('.panel-right'),panelBottom=document.querySelector('.panel-bottom');
-    const toggleLeft=$('#toggle-left'),toggleRight=$('#toggle-right'),toggleBottom=$('#toggle-bottom');
-    let panelsVisible=false;
-    function updatePanelVisibility(){if(window.innerWidth>768){panelLeft.classList.remove('hidden-panel');panelRight.classList.remove('hidden-panel');panelBottom.classList.remove('hidden-panel');toggleLeft.style.display='none';toggleRight.style.display='none';toggleBottom.style.display='none'}else{toggleLeft.style.display='block';toggleRight.style.display='block';toggleBottom.style.display='block';if(panelsVisible){panelLeft.classList.remove('hidden-panel');panelRight.classList.remove('hidden-panel');panelBottom.classList.remove('hidden-panel');toggleLeft.textContent='✕ Ocultar controles';toggleRight.textContent='✕ Ocultar lectura';toggleBottom.textContent='✕ Ocultar estado'}else{panelLeft.classList.add('hidden-panel');panelRight.classList.add('hidden-panel');panelBottom.classList.add('hidden-panel');toggleLeft.textContent='☰ Controles';toggleRight.textContent='📊 Lectura';toggleBottom.textContent='ℹ️ Estado'}}}
-    toggleLeft.addEventListener('click',()=>{panelsVisible=!panelsVisible;updatePanelVisibility()});toggleRight.addEventListener('click',()=>{panelsVisible=!panelsVisible;updatePanelVisibility()});toggleBottom.addEventListener('click',()=>{panelsVisible=!panelsVisible;updatePanelVisibility()});
-    window.addEventListener('resize',()=>{updatePanelVisibility();resize()});
-    function animate(){requestAnimationFrame(animate);if(!state.paused)state.t+=0.016;update();cam.update();renderer.render(scene,camera)}
-    buildControls();buildStats();setup();center();resize();updatePanelVisibility();
-    
-    // Header toggle for mobile
-    const headerToggleBtn=document.getElementById('header-toggle-btn');
-    const siteHeader=document.querySelector('.site-header');
-    let headerVisible=true;
-    if(headerToggleBtn&&siteHeader){
-      headerToggleBtn.addEventListener('click',()=>{
-        headerVisible=!headerVisible;
-        if(headerVisible){siteHeader.classList.remove('header-collapsed');headerToggleBtn.textContent='✕ Ocultar menú'}
-        else{siteHeader.classList.add('header-collapsed');headerToggleBtn.textContent='☰ Menú'}
-      });
-      if(window.innerWidth<=768){headerVisible=false;siteHeader.classList.add('header-collapsed');headerToggleBtn.textContent='☰ Menú'}
-    }
-    
-    animate();
-  </script>
+
+  <footer class="relative z-10 bg-nat-black border-t border-white/5 py-8">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-7 h-7 bg-nat-cyan text-nat-black flex items-center justify-center font-heading font-bold">N</div>
+        <span class="text-sm text-nat-muted">Órbita Terrestre · Física · Ciencias Naturales 1° año</span>
+      </div>
+      <div class="flex items-center gap-5">
+        <a class="text-[10px] uppercase tracking-wider text-nat-muted hover:text-white" href="inicio.html">Inicio</a>
+        <a class="text-[10px] uppercase tracking-wider text-nat-muted hover:text-white" href="fisica.html">Física</a>
+        <a class="text-[10px] uppercase tracking-wider text-nat-muted hover:text-white" href="quimica.html">Química</a>
+        <a class="text-[10px] uppercase tracking-wider text-nat-muted hover:text-white" href="biologia.html">Biología</a>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="js/book.js"></script>
 </body>
 </html>

@@ -1,87 +1,86 @@
-﻿<!doctype html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Química | Ciencias Naturales 1° año</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <script defer src="js/main.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Química — Naturales Libro Interactivo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/book.css">
+  <script>
+    tailwind.config = { theme: { extend: { colors: { nat: { black: '#070A0F', dark: '#0E141C', panel: '#151D28', muted: '#A9B7C8', amber: '#FFB020', amber2: '#FF7A1A', cyan: '#35C7F4', green: '#6EE7A8', rose: '#FF6B8A' } }, fontFamily: { heading: ['Oswald', 'sans-serif'], body: ['Inter', 'sans-serif'] } } } }
+  </script>
 </head>
-<body data-page="Química">
-  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
-  <header class="site-header">
-    <div class="container header-inner">
-      <div>
-        <p class="kicker">Ciencias Naturales · 1° año</p>
-        <h1>Área de Química</h1>
+<body class="area-chem" data-page="Química">
+  <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-nat-amber focus:text-nat-black focus:px-4 focus:py-3 focus:font-bold">Saltar al contenido</a>
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-nat-black/85 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
+      <a href="inicio.html" class="flex items-center gap-3"><div class="w-9 h-9 bg-nat-amber text-nat-black flex items-center justify-center font-heading font-bold text-xl">N</div><div><div class="font-heading uppercase tracking-wider text-white font-bold leading-none">Naturales</div><div class="text-[10px] uppercase tracking-[0.22em] text-nat-muted">Libro interactivo</div></div></a>
+      <div class="hidden lg:flex items-center gap-8">
+        <a href="inicio.html" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Inicio</a>
+        <a href="quimica.html" aria-current="page" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Química</a>
+        <a href="fisica.html" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Física</a>
+        <a href="biologia.html" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Biología</a>
       </div>
-      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar modo oscuro">Modo oscuro</button>
-      <a class="theme-toggle header-action" href="moleculas-3d.html" aria-label="Abrir simulación de Moléculas 3D">Moléculas 3D</a>
+      <div class="flex items-center gap-3">
+        <a href="moleculas-3d.html" class="hidden md:inline-flex items-center gap-2 bg-nat-amber hover:bg-nat-amber2 text-nat-black text-xs font-black uppercase tracking-wider px-5 py-3">Moléculas 3D <span class="iconify" data-icon="lucide:cube" data-width="15"></span></a>
+        <button id="menuToggle" class="lg:hidden w-10 h-10 flex items-center justify-center text-white" aria-label="Abrir menú"><span class="iconify" data-icon="lucide:menu" data-width="25"></span></button>
+      </div>
     </div>
-    <nav class="main-nav container" aria-label="Navegación principal">
-      <a href="inicio.html">Inicio</a>
-      <a href="quimica.html" aria-current="page">Química</a>
-      <a href="fisica.html">Física</a>
-      <a href="biologia.html">Biología</a>
-    </nav>
-  </header>
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-80 max-w-full h-screen bg-nat-black border-l border-white/10 z-50"><div class="p-6"><div class="flex justify-end mb-10"><button id="menuClose" class="w-10 h-10 flex items-center justify-center text-white" aria-label="Cerrar menú"><span class="iconify" data-icon="lucide:x" data-width="24"></span></button></div><div class="flex flex-col gap-6"><a class="mobile-link font-heading text-2xl uppercase font-bold" href="inicio.html">Inicio</a><a class="mobile-link font-heading text-2xl uppercase font-bold" href="quimica.html">Química</a><a class="mobile-link font-heading text-2xl uppercase font-bold" href="fisica.html">Física</a><a class="mobile-link font-heading text-2xl uppercase font-bold" href="biologia.html">Biología</a><a class="mobile-link mt-4 bg-nat-amber text-nat-black text-center text-sm font-black uppercase tracking-wider px-6 py-4" href="moleculas-3d.html">Moléculas 3D</a></div></div></div>
+  </nav>
+  <div id="menuOverlay" class="hidden fixed inset-0 bg-black/65 backdrop-blur-sm z-40"></div>
 
-  <div class="container">
-    <nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav>
-  </div>
+  <main id="contenido" class="relative z-10">
+    <section class="relative min-h-[88vh] flex items-center overflow-hidden">
+      <div class="absolute inset-0"><img class="hero-img w-full h-full object-cover" src="quimica_en_accion.png" alt="Química en acción"><div class="absolute inset-0 bg-gradient-to-r from-nat-black via-nat-black/90 to-nat-black/45"></div><div class="absolute inset-0 bg-gradient-to-t from-nat-black via-transparent to-nat-black/40"></div></div>
+      <div class="relative max-w-7xl mx-auto px-4 md:px-6 pt-32 pb-20 w-full">
+        <div class="grid lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-7">
+            <div class="flex items-center gap-3 mb-6"><div class="accent-line"></div><span class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-nat-amber font-black">Capítulo 01 · Los materiales y sus transformaciones</span></div>
+            <h1 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl uppercase font-bold leading-[0.9] text-white mb-6">Química:<br><span class="text-nat-amber">la materia</span><br>en acción</h1>
+            <p class="text-base md:text-lg text-nat-muted max-w-2xl leading-relaxed mb-8">La Química permite estudiar los materiales que forman el mundo cotidiano: agua, aire, metales, alimentos, plásticos, medicamentos y rocas. En esta unidad se aprende a describir propiedades, reconocer sistemas materiales, clasificar mezclas y explicar cambios mediante modelos de partículas.</p>
+            <div class="flex flex-wrap gap-4"><a href="#unidades" class="inline-flex items-center gap-2 bg-nat-amber hover:bg-nat-amber2 text-nat-black text-xs font-black uppercase tracking-wider px-8 py-4">Ver unidades <span class="iconify" data-icon="lucide:arrow-right" data-width="16"></span></a><a href="moleculas-3d.html" class="inline-flex items-center gap-2 border border-white/20 text-white text-xs font-black uppercase tracking-wider px-8 py-4">Explorar moléculas</a></div>
+          </div>
+          <aside class="lg:col-span-5 bg-nat-panel/85 border border-white/10 p-5">
+            <div class="text-[10px] uppercase tracking-[0.28em] font-black text-nat-amber mb-4">Idea fuerza</div>
+            <p class="text-xl md:text-2xl font-heading uppercase leading-tight mb-5">Lo macroscópico se explica con partículas microscópicas.</p>
+            <div class="grid grid-cols-3 gap-2 text-center">
+              <div class="bg-white/5 p-4"><span class="iconify mx-auto text-nat-amber mb-2" data-icon="lucide:box" data-width="24"></span><b class="text-xs uppercase">Sólido</b></div>
+              <div class="bg-white/5 p-4"><span class="iconify mx-auto text-nat-cyan mb-2" data-icon="lucide:droplets" data-width="24"></span><b class="text-xs uppercase">Líquido</b></div>
+              <div class="bg-white/5 p-4"><span class="iconify mx-auto text-nat-green mb-2" data-icon="lucide:wind" data-width="24"></span><b class="text-xs uppercase">Gas</b></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
 
-  <main id="contenido" class="container">
-    <section class="panel">
-      <h2>Unidades temáticas de Química</h2>
-      <p class="tag">Organización curricular de 1° año. Cada tema está en su propia página con explicación extensa, ejemplos y una actividad de cierre.</p>
-      <div class="unit-grid">
-        <article class="unit-card">
-          <h3>La materia y sus propiedades</h3>
-          <p>Propiedades organolépticas, físicas y químicas para describir materiales.</p>
-          <a class="btn" href="quimica_t1_materia_propiedades.html">Abrir tema</a>
-        </article>
-        <article class="unit-card">
-          <h3>Estados y cambios de estado</h3>
-          <p>Estado sólido, líquido y gaseoso, y cambios de estado en situaciones reales.</p>
-          <a class="btn" href="quimica_t2_estados_cambios.html">Abrir tema</a>
-        </article>
-        <article class="unit-card">
-          <h3>Modelo corpuscular</h3>
-          <p>Explicación de la materia en términos de partículas.</p>
-          <a class="btn" href="quimica_t3_modelo_corpuscular.html">Abrir tema</a>
-        </article>
-        <article class="unit-card">
-          <h3>Sistemas materiales</h3>
-          <p>Concepto de sistema, fase y componente para describir materiales.</p>
-          <a class="btn" href="quimica_t4_sistemas_materiales.html">Abrir tema</a>
-        </article>
-        <article class="unit-card">
-          <h3>Mezclas homogéneas y heterogéneas</h3>
-          <p>Clasificación y reconocimiento de mezclas en la vida cotidiana.</p>
-          <a class="btn" href="quimica_t5_mezclas.html">Abrir tema</a>
-        </article>
-        <article class="unit-card">
-          <h3>Soluciones</h3>
-          <p>Soluto, solvente y soluciones diluidas, concentradas y saturadas.</p>
-          <a class="btn" href="quimica_t6_soluciones.html">Abrir tema</a>
-        </article>
-        <article class="unit-card">
-          <h3>Métodos de separación</h3>
-          <p>Separación de fases y componentes según propiedades de las sustancias.</p>
-          <a class="btn" href="quimica_t7_metodos_separacion.html">Abrir tema</a>
-        </article>
+    <section class="py-16 md:py-24 bg-nat-dark border-y border-white/5">
+      <div class="max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-3 gap-6">
+        <article class="book-page bg-nat-panel p-6 topic-card"><h2 class="font-heading text-3xl uppercase mb-4">Qué se estudia</h2><p class="text-nat-muted leading-relaxed">Se estudian propiedades organolépticas, físicas y químicas; estados de agregación; cambios de estado; mezclas homogéneas y heterogéneas; soluciones; métodos de separación y el uso del agua como caso integrador.</p></article>
+        <article class="book-page bg-nat-panel p-6 topic-card"><h2 class="font-heading text-3xl uppercase mb-4">Cómo pensar</h2><p class="text-nat-muted leading-relaxed">El desafío es pasar de “veo que cambia” a “puedo explicar por qué cambia”. Para eso se usan modelos: dibujos, esquemas de partículas, tablas de propiedades y experiencias controladas.</p></article>
+        <article class="book-page bg-nat-panel p-6 topic-card"><h2 class="font-heading text-3xl uppercase mb-4">Para el aula</h2><p class="text-nat-muted leading-relaxed">Comparar sal, arena, agua, aceite y limaduras de hierro permite discutir fases, componentes y métodos de separación. Es ciencia con mesa de laboratorio, pero también con cocina y patio escolar.</p></article>
+      </div>
+    </section>
+
+    <section id="unidades" class="py-20 md:py-28">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="flex items-center gap-3 mb-5"><div class="accent-line"></div><span class="text-[10px] uppercase tracking-[0.3em] text-nat-amber font-black">Unidades temáticas</span></div>
+        <h2 class="font-heading text-4xl md:text-6xl uppercase font-bold leading-none mb-12">Índice de Química</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <a class="unit-card bg-nat-panel p-6" href="quimica_t1_materia_propiedades.html"><span class="text-nat-amber font-heading text-3xl">01</span><h3 class="font-heading text-2xl uppercase mt-3 mb-2">Materia y propiedades</h3><p class="text-sm text-nat-muted">Propiedades organolépticas, físicas y químicas para describir materiales.</p></a>
+          <a class="unit-card bg-nat-panel p-6" href="quimica_t2_estados_cambios.html"><span class="text-nat-amber font-heading text-3xl">02</span><h3 class="font-heading text-2xl uppercase mt-3 mb-2">Estados y cambios</h3><p class="text-sm text-nat-muted">Sólido, líquido, gaseoso y transformaciones por intercambio de energía.</p></a>
+          <a class="unit-card bg-nat-panel p-6" href="quimica_t3_modelo_corpuscular.html"><span class="text-nat-amber font-heading text-3xl">03</span><h3 class="font-heading text-2xl uppercase mt-3 mb-2">Modelo corpuscular</h3><p class="text-sm text-nat-muted">La materia explicada mediante partículas, movimiento y atracciones.</p></a>
+          <a class="unit-card bg-nat-panel p-6" href="quimica_t4_sistemas_materiales.html"><span class="text-nat-amber font-heading text-3xl">04</span><h3 class="font-heading text-2xl uppercase mt-3 mb-2">Sistemas materiales</h3><p class="text-sm text-nat-muted">Sistema, fase y componente como herramientas de análisis.</p></a>
+          <a class="unit-card bg-nat-panel p-6" href="quimica_t5_mezclas.html"><span class="text-nat-amber font-heading text-3xl">05</span><h3 class="font-heading text-2xl uppercase mt-3 mb-2">Mezclas</h3><p class="text-sm text-nat-muted">Mezclas homogéneas y heterogéneas en materiales cotidianos.</p></a>
+          <a class="unit-card bg-nat-panel p-6" href="quimica_t6_soluciones.html"><span class="text-nat-amber font-heading text-3xl">06</span><h3 class="font-heading text-2xl uppercase mt-3 mb-2">Soluciones</h3><p class="text-sm text-nat-muted">Soluto, solvente, concentración y saturación.</p></a>
+          <a class="unit-card bg-nat-panel p-6 lg:col-span-3" href="quimica_t7_metodos_separacion.html"><span class="text-nat-amber font-heading text-3xl">07</span><h3 class="font-heading text-2xl uppercase mt-3 mb-2">Métodos de separación</h3><p class="text-sm text-nat-muted">Filtración, decantación, imantación, evaporación, destilación y cromatografía según propiedades de las sustancias.</p></a>
+        </div>
       </div>
     </section>
   </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>Área de Química basada en <code>programa_1anio.txt</code>.</p>
-    </div>
-  </footer>
+  <footer class="relative z-10 bg-nat-black border-t border-white/5 py-8"><div class="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between gap-4"><span class="text-sm text-nat-muted">Química · Ciencias Naturales 1° año</span><div class="flex gap-5"><a class="text-[10px] uppercase tracking-wider text-nat-muted hover:text-white" href="inicio.html">Inicio</a><a class="text-[10px] uppercase tracking-wider text-nat-muted hover:text-white" href="fisica.html">Física</a><a class="text-[10px] uppercase tracking-wider text-nat-muted hover:text-white" href="biologia.html">Biología</a></div></div></footer>
+  <script defer src="js/book.js"></script>
 </body>
 </html>
-
-
-
-

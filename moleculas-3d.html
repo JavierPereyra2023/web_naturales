@@ -4,8 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Moléculas 3D | Química</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <script defer src="js/main.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/book.css">
+  <script>
+    tailwind.config = { theme: { extend: { colors: { nat: { black: '#070A0F', dark: '#0E141C', panel: '#151D28', muted: '#A9B7C8', amber: '#FFB020', amber2: '#FF7A1A', cyan: '#35C7F4', green: '#6EE7A8', rose: '#FF6B8A' } }, fontFamily: { heading: ['Oswald', 'sans-serif'], body: ['Inter', 'sans-serif'] } } } }
+  </script>
   <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <script type="importmap">
     {
@@ -16,19 +21,31 @@
     }
   </script>
   <style>
-    body[data-page="Moléculas 3D"] main.container { padding-bottom: 1.5rem; }
-    
+    :root {
+      --border: rgba(23,48,40,.9);
+      --fg: #e8f0ed;
+      --fg-muted: #8aa99a;
+      --surface: #0d1c18;
+      --surface-2: #111d19;
+      --accent: #10b981;
+      --accent-glow: rgba(16,185,129,.6);
+      --danger: #f87171;
+      --shadow: 0 10px 28px rgba(0,0,0,.4);
+      --muted: #8aa99a;
+    }
+    body[data-page="Moléculas 3D"] #contenido { padding-bottom: 1.5rem; }
+
     /* Mobile header collapse for 3D pages */
     @media (max-width: 768px) {
-      body[data-page="Moléculas 3D"] .site-header {
+      body[data-page="Moléculas 3D"] #navbar {
         transition: transform 0.3s ease, opacity 0.3s ease;
       }
-      body[data-page="Moléculas 3D"] .site-header.header-collapsed {
+      body[data-page="Moléculas 3D"] #navbar.header-collapsed {
         transform: translateY(-100%);
         opacity: 0;
         pointer-events: none;
       }
-      body[data-page="Moléculas 3D"] main.container {
+      body[data-page="Moléculas 3D"] #contenido {
         transition: margin-top 0.3s ease;
       }
       #header-toggle-btn {
@@ -148,6 +165,29 @@
     .molecule-app .hint-list li + li { margin-top: .35rem; }
     .molecule-app .panel-left::-webkit-scrollbar { width: 3px; }
     .molecule-app .panel-left::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    .molecule-app .orbit-hint {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(10,18,15,.85);
+      border: 1px solid rgba(23,48,40,.9);
+      border-radius: 12px;
+      color: var(--fg-muted);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      pointer-events: none;
+      animation: fade-hint 3s ease-in-out infinite;
+    }
+    @keyframes fade-hint {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
     
     /* Mobile toolbar */
     .mobile-toolbar {
@@ -212,7 +252,15 @@
     @media (max-width: 768px) {
       .molecule-app { min-height: 80vh; height: auto; padding-bottom: 70px; }
       .mobile-toolbar { display: block; }
-      .molecule-app .panel-left { 
+      .molecule-app .orbit-hint {
+        bottom: 75px;
+        font-size: 10px;
+        padding: 6px 12px;
+      }
+      .molecule-app .orbit-hint.hidden {
+        display: none;
+      }
+      .molecule-app .panel-left {
         position: fixed;
         top: 0;
         left: 0;
@@ -235,9 +283,9 @@
       }
       .molecule-app .panel-left .panel-title { display: flex; }
       #panel-close-mobile { display: block !important; }
-      .molecule-app .panel-left .section-label { 
-        font-size: 10px; 
-        margin-top: 12px; 
+      .molecule-app .panel-left .section-label {
+        font-size: 10px;
+        margin-top: 12px;
         margin-bottom: 6px;
         text-align: left;
       }
@@ -248,6 +296,9 @@
       .molecule-app .panel-toggle { display: block; }
       .molecule-app .panel-toggle-left { top: 10px; left: 10px; }
       .molecule-app .panel-toggle-bottom { display: none; }
+      /* Improve touch targets on mobile */
+      .molecule-app .element-btn { min-height: 48px; }
+      .molecule-app .tool-btn { min-height: 44px; padding: 10px 14px; }
     }
     @media (max-width: 640px) {
       .molecule-app { min-height: 75vh; }
@@ -257,29 +308,19 @@
     }
   </style>
 </head>
-<body data-page="Moléculas 3D" data-section="Química" data-section-href="quimica.html">
-  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
-  <header class="site-header">
-    <div class="container header-inner">
-      <div>
-        <p class="kicker">Ciencias Naturales · 1° año</p>
-        <h1>Moléculas 3D</h1>
-      </div>
-      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar modo oscuro">Modo oscuro</button>
+<body data-page="Moléculas 3D">
+  <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-nat-amber focus:text-nat-black focus:px-4 focus:py-3 focus:font-bold">Saltar al contenido</a>
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-nat-black/85 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
+      <a href="inicio.html" class="flex items-center gap-3"><div class="w-9 h-9 bg-nat-amber text-nat-black flex items-center justify-center font-heading font-bold text-xl">N</div><div><div class="font-heading uppercase tracking-wider text-white font-bold leading-none">Naturales</div><div class="text-[10px] uppercase tracking-[0.22em] text-nat-muted">Libro interactivo</div></div></a>
+      <div class="hidden lg:flex items-center gap-8"><a href="inicio.html" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Inicio</a><a href="quimica.html" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Química</a><a href="fisica.html" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Física</a><a href="biologia.html" class="nav-link text-[11px] uppercase tracking-[0.22em] text-nat-muted hover:text-white font-bold">Biología</a></div>
+      <div class="flex items-center gap-3"><a href="quimica.html" class="hidden md:inline-flex items-center gap-2 bg-nat-amber hover:bg-nat-amber2 text-nat-black text-xs font-black uppercase tracking-wider px-5 py-3 transition-colors">Ver Química <span class="iconify" data-icon="lucide:arrow-right" data-width="15"></span></a><button id="menuToggle" class="lg:hidden w-10 h-10 flex items-center justify-center text-white" aria-label="Abrir menú"><span class="iconify" data-icon="lucide:menu" data-width="25"></span></button></div>
     </div>
-    <nav class="main-nav container" aria-label="Navegación principal">
-      <a href="inicio.html">Inicio</a>
-      <a href="quimica.html">Química</a>
-      <a href="fisica.html">Física</a>
-      <a href="biologia.html">Biología</a>
-    </nav>
-  </header>
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-80 max-w-full h-screen bg-nat-black border-l border-white/10 z-50"><div class="p-6"><div class="flex justify-end mb-10"><button id="menuClose" class="w-10 h-10 flex items-center justify-center text-white" aria-label="Cerrar menú"><span class="iconify" data-icon="lucide:x" data-width="24"></span></button></div><div class="flex flex-col gap-6"><a class="mobile-link font-heading text-2xl uppercase font-bold" href="inicio.html">Inicio</a><a class="mobile-link font-heading text-2xl uppercase font-bold" href="quimica.html">Química</a><a class="mobile-link font-heading text-2xl uppercase font-bold" href="fisica.html">Física</a><a class="mobile-link font-heading text-2xl uppercase font-bold" href="biologia.html">Biología</a><a class="mobile-link mt-4 bg-nat-amber text-nat-black text-center text-sm font-black uppercase tracking-wider px-6 py-4" href="quimica.html">Ver Química</a></div></div></div>
+  </nav>
+  <div id="menuOverlay" class="hidden fixed inset-0 bg-black/65 backdrop-blur-sm z-40"></div>
 
-  <div class="container">
-    <nav id="breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav>
-  </div>
-
-  <main id="contenido" class="container">
+  <main id="contenido" class="max-w-7xl mx-auto px-4 md:px-6 pt-24 pb-8">
     <button id="header-toggle-btn" aria-label="Mostrar/ocultar menú">☰ Menú</button>
     <section class="molecule-note">
       <h2>Sustancias simples y compuestas</h2>
@@ -366,15 +407,20 @@
         <span id="help-text" style="font-size:11px;color:var(--fg-muted);">Haz clic en el espacio para agregar un átomo</span>
       </div>
 
+      <div class="orbit-hint" id="orbit-hint">
+        <figure class="image-explainer">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Plastic_molecular_model.jpg" alt="Imagen explicativa del tema">
+          <figcaption><strong>Imagen explicativa.</strong> Imagen explicativa: los modelos moleculares ayudan a visualizar la estructura espacial de las sustancias.</figcaption>
+        </figure>
+        <span style="font-size:11px;">Arrastra para rotar • Scroll para zoom • Doble toque para enfocar</span>
+      </div>
+
       <div class="toast" id="toast"></div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>Recurso interactivo de Química para reconocer sustancias simples y compuestas.</p>
-    </div>
-  </footer>
+  <footer class="relative z-10 bg-nat-black border-t border-white/5 py-8"><div class="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between gap-4"><span class="text-sm text-nat-muted">Moléculas 3D · Química · Ciencias Naturales 1° año</span><div class="flex gap-5"><a class="text-[10px] uppercase tracking-wider text-nat-muted hover:text-white" href="inicio.html">Inicio</a><a class="text-[10px] uppercase tracking-wider text-nat-muted hover:text-white" href="quimica.html">Química</a><a class="text-[10px] uppercase tracking-wider text-nat-muted hover:text-white" href="fisica.html">Física</a><a class="text-[10px] uppercase tracking-wider text-nat-muted hover:text-white" href="biologia.html">Biología</a></div></div></footer>
+  <script defer src="js/book.js"></script>
   <script type="module">
     import * as THREE from 'three';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -429,6 +475,19 @@
     controls.minDistance = 2;
     controls.maxDistance = 50;
     controls.target.set(0, 1, 0);
+    controls.enablePan = true;
+    controls.enableZoom = true;
+    controls.enableRotate = true;
+    controls.mouseButtons = {
+      LEFT: THREE.MOUSE.ROTATE,
+      MIDDLE: THREE.MOUSE.DOLLY,
+      RIGHT: THREE.MOUSE.PAN
+    };
+    controls.touches = {
+      ONE: THREE.TOUCH.ROTATE,
+      TWO: THREE.TOUCH.DOLLY_PAN
+    };
+    controls.enabled = true;
 
     scene.add(new THREE.AmbientLight(0x334433, 0.5));
     const dir1 = new THREE.DirectionalLight(0xffffff, 1.3);
@@ -686,6 +745,42 @@
       camera.position.set(c.x + cd * 0.6, c.y + cd * 0.5, c.z + cd * 0.8);
     }
 
+    // Smoothly focus camera on a specific atom with animation
+    function focusOnAtom(atom) {
+      const targetPos = atom.mesh.position.clone();
+      const startPos = controls.target.clone();
+      const startCamPos = camera.position.clone();
+      
+      // Calculate ideal camera distance based on atom size
+      const idealDist = Math.max(3, atom.scale * 8);
+      const endCamPos = new THREE.Vector3(
+        targetPos.x + idealDist * 0.6,
+        targetPos.y + idealDist * 0.5,
+        targetPos.z + idealDist * 0.8
+      );
+      
+      const duration = 400; // ms
+      const startTime = Date.now();
+      
+      function animateFocus() {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        
+        controls.target.lerpVectors(startPos, targetPos, eased);
+        camera.position.lerpVectors(startCamPos, endCamPos, eased);
+        
+        if (progress < 1) {
+          requestAnimationFrame(animateFocus);
+        }
+      }
+      
+      animateFocus();
+      selectAtom(atom);
+      showToast('Enfocado en ' + ELEMENTS[atom.element].name, 'info');
+    }
+
     function autoBond() {
       if (atomsList.length < 2) {
         showToast('Se necesitan al menos 2 átomos', 'warn');
@@ -712,9 +807,9 @@
       bondFirstAtom = null;
       document.querySelectorAll('[data-mode]').forEach((b) => b.classList.toggle('active', b.dataset.mode === mode));
       const texts = {
-        add: 'Haz clic en el espacio para agregar un átomo. Atajos: 1-4, Supr, Esc',
-        bond: 'Haz clic en un átomo, luego en otro para crear un enlace',
-        move: 'Arrastra un átomo para reposicionarlo',
+        add: 'Haz clic en el espacio para agregar un átomo. Doble toque en un átomo para enfocarlo. Atajos: 1-4, Supr, Esc',
+        bond: 'Haz clic en un átomo, luego en otro para crear un enlace. Doble toque para enfocar.',
+        move: 'Arrastra un átomo para reposicionarlo. Doble toque para enfocar.',
         delete: 'Haz clic en un átomo para eliminarlo y sus enlaces'
       };
       document.getElementById('help-text').textContent = texts[mode] || '';
@@ -729,6 +824,7 @@
 
     const mdPos = { x: 0, y: 0 };
     let mdTime = 0;
+    let lastTapTime = 0;
     renderer.domElement.addEventListener('pointerdown', (e) => {
       mdPos.x = e.clientX;
       mdPos.y = e.clientY;
@@ -736,19 +832,21 @@
       if (currentMode === 'move') {
         const a = atomUnderMouse(e);
         if (a) {
+          e.preventDefault();
           draggedAtom = a;
           isDragging = false;
           controls.enabled = false;
           renderer.domElement.style.cursor = 'grabbing';
         }
       }
-    });
+    }, { passive: false });
     renderer.domElement.addEventListener('pointermove', (e) => {
       if (!draggedAtom) {
         const h = atomUnderMouse(e);
         renderer.domElement.style.cursor = h ? 'pointer' : currentMode === 'add' ? 'crosshair' : currentMode === 'move' ? 'grab' : 'default';
       }
       if (draggedAtom && currentMode === 'move') {
+        e.preventDefault();
         isDragging = true;
         setMouse(e);
         raycaster.setFromCamera(mouse, camera);
@@ -763,12 +861,14 @@
           bondsList.filter((b) => b.a === draggedAtom.id || b.b === draggedAtom.id).forEach(refreshBond);
         }
       }
-    });
+    }, { passive: false });
     renderer.domElement.addEventListener('pointerup', (e) => {
       const dx = e.clientX - mdPos.x;
       const dy = e.clientY - mdPos.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      const isClick = dist < 6 && (Date.now() - mdTime) < 350;
+      const isClick = dist < 12 && (Date.now() - mdTime) < 400;
+      const isDoubleTap = isClick && (Date.now() - lastTapTime) < 300;
+      lastTapTime = Date.now();
 
       if (draggedAtom) {
         draggedAtom = null;
@@ -779,9 +879,18 @@
           return;
         }
       }
-      if (!isClick) return;
 
       const clicked = atomUnderMouse(e);
+
+      // Double tap / double click on atom: center camera on it
+      if (isDoubleTap && clicked) {
+        e.preventDefault();
+        focusOnAtom(clicked);
+        return;
+      }
+
+      if (!isClick) return;
+
       switch (currentMode) {
         case 'add':
           if (!clicked) {
@@ -821,8 +930,16 @@
           }
           break;
         case 'move':
-          if (clicked) selectAtom(clicked);
-          else {
+          if (clicked) {
+            selectAtom(clicked);
+            // On mobile, a single tap on an atom in move mode starts dragging
+            if (window.innerWidth <= 768) {
+              draggedAtom = clicked;
+              isDragging = false;
+              controls.enabled = false;
+              renderer.domElement.style.cursor = 'grabbing';
+            }
+          } else {
             selectedAtom = null;
             hlSphere.visible = false;
             updateSelInfo();
@@ -929,6 +1046,43 @@
     });
 
     const clock = new THREE.Clock();
+    let hintVisible = true;
+    let hintTimeout = null;
+
+    function hideOrbitHint() {
+      const hint = document.getElementById('orbit-hint');
+      if (hint && hintVisible) {
+        hint.classList.add('hidden');
+        hintVisible = false;
+      }
+    }
+
+    function showOrbitHint() {
+      const hint = document.getElementById('orbit-hint');
+      if (hint && !hintVisible) {
+        hint.classList.remove('hidden');
+        hintVisible = true;
+      }
+    }
+
+    function scheduleHintShow() {
+      clearTimeout(hintTimeout);
+      hintTimeout = setTimeout(() => {
+        showOrbitHint();
+      }, 5000);
+    }
+
+    // Hide hint when user interacts with canvas
+    renderer.domElement.addEventListener('pointerdown', () => {
+      hideOrbitHint();
+      scheduleHintShow();
+    }, { passive: true });
+
+    renderer.domElement.addEventListener('wheel', () => {
+      hideOrbitHint();
+      scheduleHintShow();
+    }, { passive: true });
+
     function animate() {
       requestAnimationFrame(animate);
       const t = clock.getElapsedTime();
@@ -1021,7 +1175,7 @@
     
     // Header toggle for mobile
     const headerToggleBtn = document.getElementById('header-toggle-btn');
-    const siteHeader = document.querySelector('.site-header');
+    const siteHeader = document.querySelector('#navbar');
     let headerVisible = true;
     
     if (headerToggleBtn && siteHeader) {

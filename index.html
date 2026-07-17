@@ -1,44 +1,26 @@
-﻿<!doctype html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ciencias Naturales</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="0; url=inicio.html">
+  <title>Naturales — Libro Interactivo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/book.css">
+  <script>
+    tailwind.config = { theme: { extend: { colors: { nat: { black: '#070A0F', muted: '#A9B7C8', amber: '#FFB020', cyan: '#35C7F4', green: '#6EE7A8' } }, fontFamily: { heading: ['Oswald', 'sans-serif'], body: ['Inter', 'sans-serif'] } } } }
+  </script>
 </head>
-<body class="welcome-page" data-page="Bienvenida">
-  <main class="welcome-main" aria-label="Portada de Ciencias Naturales">
-    <div class="starfield" id="starfield" aria-hidden="true"></div>
-    <section class="welcome-content">
-      <p class="welcome-kicker">Portal educativo</p>
-      <h1>Ciencias Naturales</h1>
-      <p class="welcome-subtitle">Un lugar para el aprendizaje cientifico escolar</p>
-      <a class="welcome-btn" href="inicio.html">Entrar al contenido</a>
+<body>
+  <main class="relative z-10 min-h-screen flex items-center justify-center px-4 text-center">
+    <section class="max-w-3xl">
+      <div class="mx-auto mb-6 w-14 h-14 bg-nat-amber text-nat-black flex items-center justify-center font-heading font-bold text-3xl">N</div>
+      <p class="text-[10px] uppercase tracking-[0.3em] text-nat-amber font-black mb-4">Ciencias Naturales · 1° año</p>
+      <h1 class="font-heading text-5xl md:text-7xl uppercase leading-none mb-6">Naturales<br><span class="text-nat-amber">Libro Interactivo</span></h1>
+      <p class="text-nat-muted text-lg leading-relaxed mb-8">Redirigiendo a la nueva portada. Si no avanza automáticamente, entrá desde el botón.</p>
+      <a href="inicio.html" class="inline-flex bg-nat-amber text-nat-black px-8 py-4 uppercase tracking-wider text-xs font-black">Entrar al contenido</a>
     </section>
   </main>
-
-  <script>
-    (function () {
-      requestAnimationFrame(function () {
-        document.body.classList.add('welcome-animate');
-      });
-
-      const root = document.getElementById('starfield');
-      if (!root) return;
-
-      const count = 85;
-      for (let i = 0; i < count; i += 1) {
-        const star = document.createElement('span');
-        star.className = 'star';
-        star.style.left = Math.random() * 100 + '%';
-        star.style.top = Math.random() * 100 + '%';
-        star.style.width = (Math.random() * 2.6 + 1) + 'px';
-        star.style.height = star.style.width;
-        star.style.animationDelay = (Math.random() * 6) + 's';
-        star.style.animationDuration = (Math.random() * 5 + 3.5) + 's';
-        root.appendChild(star);
-      }
-    })();
-  </script>
 </body>
 </html>
